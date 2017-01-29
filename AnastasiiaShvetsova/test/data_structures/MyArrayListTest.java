@@ -33,12 +33,69 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testRemoveByObject(){
-        list.add("12");
-        list.add("13");
-        int old = list.size();
-        list.remove(1);
-        assertEquals(old - 1, list.size());
+    public void testIsIndex(){
+        list.add("black");
+        list.add("white");
+        assertTrue(list.isIndex(1));
     }
 
+    @Test
+    public void testGet(){
+        list.add("black");
+        list.add("white");
+        assertEquals("white", list.get(1));
+    }
+
+    @Test
+    public void testRemoveByIndex(){
+        list.add("12");
+        list.add("13");
+        int oldSize = list.size();
+        assertTrue(list.remove(1));
+        assertEquals(oldSize - 1, list.size());
+    }
+
+    @Test
+    public void testRemoveByObject(){
+        list.add("black");
+        list.add("white");
+        assertTrue(list.remove("black"));
+    }
+
+    @Test
+    public void testSet(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        assertEquals("pink", list.set(1, "pink"));
+    }
+
+    @Test
+    public  void testContains(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        assertTrue(list.contains("blue"));
+    }
+
+    @Test
+    public  void testSize(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        assertEquals(4,list.size());
+    }
+
+    @Test
+    public  void testIsEmpty(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        int size = list.size();
+        assertEquals(false, list.isEmpty());
+    }
 }

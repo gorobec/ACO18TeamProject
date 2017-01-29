@@ -53,34 +53,32 @@ public class MyArrayList {
         return objects[index];
     }
 
-    public Object remove(int index) {
+    public boolean remove(int index) {
         if (!isIndex(index)) return false;
         int numMoved = objects.length - index - 1;
         System.arraycopy(objects, index + 1, objects, index, numMoved);
         objects[--size] = null;
-        return objects[index];
+        return true;
     }
 
-    public Object remove(Object object) {
-        int index = 0;
+    public boolean remove(Object object) {
         if (object == null) {
             for (int i = 0; i < objects.length; i++)
                 if (objects[i] == null) {
                     remove(i);
-                    return objects[i];
+                    return true;
                 }
         }
 
         for (int i = 0; i < objects.length; i++) {
             if(objects[i] != null) {
                 if (objects[i].equals(object)) {
-                    index = i;
                     remove(i);
+                    return true;
                 }
             }
         }
-
-        return objects[index];
+        return false;
     }
 
     public Object set(int index, Object object) {
@@ -114,17 +112,12 @@ public class MyArrayList {
     }
 
     public int size(){
-        int count = 0;
-        for (int i = 0; i < objects.length; i++) {
-            if(objects[i] != null){
-                count++;
-            }
-        }
-        return count;
+        return size;
     }
 
     public boolean isEmpty(){
-        return size == 0;
+        if(size != 0 ) return false;
+        return true;
     }
 
     public void printList(){
