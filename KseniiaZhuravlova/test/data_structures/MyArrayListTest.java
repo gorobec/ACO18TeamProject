@@ -39,7 +39,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testRemoveWhenElemetPresent(){
+    public void testRemoveWhenElementPresent(){
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("1"));
@@ -48,7 +48,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testRemoveWhenNoElemetPresent(){
+    public void testRemoveWhenNoElementPresent(){
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("1"));
