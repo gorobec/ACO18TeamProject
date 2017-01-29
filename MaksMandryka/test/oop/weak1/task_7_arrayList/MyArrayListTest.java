@@ -1,6 +1,5 @@
 package oop.weak1.task_7_arrayList;
 
-import oop.weak1.task_7_arrayList.MyArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
