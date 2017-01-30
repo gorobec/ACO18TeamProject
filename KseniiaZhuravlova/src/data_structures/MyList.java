@@ -5,4 +5,17 @@ package data_structures;
  */
 public interface MyList {
 
+    boolean add(Object object);
+    boolean add(int index, Object object);
+    Object get(int index);
+    Object remove(int index);
+    boolean remove(Object object);
+    void trimToSize();
+    Object set(int index, Object object);
+    int size();
+    boolean isEmpty();
+    boolean contains(Object object);
+    void clear();
+
+
 }
