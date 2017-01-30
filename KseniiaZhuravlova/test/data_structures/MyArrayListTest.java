@@ -40,11 +40,27 @@ public class MyArrayListTest {
     }
 
     @Test
+    public void testAddElementByWrongIndex() {
+        assertTrue(list.add(1, "2"));
+        assertEquals(0, list.size());
+    }
+
+    @Test
     public void testGetObject() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
         Object expected = "1";
+        Object actual = list.get(1);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetNullObject() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add(null));
+        assertTrue(list.add("2"));
+        Object expected = null;
         Object actual = list.get(1);
         assertEquals(expected, actual);
     }
@@ -101,7 +117,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testContainsWhenElementPresent(){
+    public void testContainsWhenElementPresent() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
@@ -110,7 +126,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testContainsWhenElementNoPresent(){
+    public void testContainsWhenElementNoPresent() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
@@ -118,7 +134,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testContainsNullElement(){
+    public void testContainsNullElement() {
         assertTrue(list.add("0"));
         assertTrue(list.add(null));
         assertTrue(list.add("2"));
@@ -126,7 +142,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testContainsNullElementWhenNoNull(){
+    public void testContainsNullElementWhenNoNull() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
@@ -134,7 +150,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testSize(){
+    public void testSize() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
@@ -145,14 +161,34 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testIsEmptyTrue(){
+    public void testIsEmptyTrue() {
         assertTrue(list.isEmpty());
     }
+
     @Test
-    public void testIsEmptyFalse(){
+    public void testIsEmptyFalse() {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
         assertTrue(!list.isEmpty());
+    }
+
+    @Test
+    public void testTrimToSize() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        list.trimToSize();
+        assertTrue(3 == list.size());
+    }
+
+    @Test
+    public void testClear() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        list.clear();
+        list.trimToSize();
+        assertTrue(list.isEmpty());
     }
 }
