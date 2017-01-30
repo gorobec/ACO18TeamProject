@@ -9,7 +9,7 @@ public class MyArrayList implements MyList {
     private Object[] objects;
     private int size;
 
-    public static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 10;
 
     public MyArrayList(Object[] objects) {
         this.objects = objects;
