@@ -3,9 +3,9 @@ package week1.homework.arrayList;
 /**
  * Created by serhiim on 27-Jan-17.
  */
-public class MyArrayList {
-    public int size;
-    public static final int DEFAULT_SIZE = 10;
+public class MyArrayList implements MyList{
+    private int size;
+    private static final int DEFAULT_SIZE = 10;
     private Object[] objectArr;
 
     public MyArrayList() {
@@ -17,9 +17,16 @@ public class MyArrayList {
         this.size = 0;
     }
 
+    public Object[] getObjectArr() {
+        return objectArr;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
 
     public boolean add(Object obj) {
-
         if (size >= objectArr.length) {
             ensureCapacity(5);
         }
@@ -33,18 +40,13 @@ public class MyArrayList {
         return true;
     }
 
-    public void add(int index, Object obj) {
+    public boolean add(int index, Object obj) {
         if (index >= objectArr.length) {
             ensureCapacity(index);
         }
         objectArr[index] = obj;
         size++;
-    }
-
-    private void ensureCapacity(int index) {
-        Object[] temp = new Object[objectArr.length + index];
-        System.arraycopy(objectArr, 0, temp, 0, objectArr.length);
-        objectArr = temp;
+        return true;
     }
 
 
@@ -54,17 +56,21 @@ public class MyArrayList {
     }
 
     public boolean remove(int index) {
+        if (index < 0 && index < size) return false;
         objectArr[index] = null;
+        System.arraycopy(objectArr, index + 1, objectArr, index, size - index - 1);
         size--;
         return true;
     }
 
 
-
     public boolean remove(Object object) {
+        int index;
         for (int i = 0; i < objectArr.length; i++) {
             if (objectArr[i] != null && objectArr[i].equals(object)) {
                 objectArr[i] = null;
+                index = i;
+                System.arraycopy(objectArr, index + 1, objectArr, index, size - index - 1);
                 size--;
                 return true;
             }
@@ -72,39 +78,45 @@ public class MyArrayList {
         return false;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void set(int index, Object obj) {
-
+    public boolean set(int index, Object obj) {
+        if (index < 0 && index > objectArr.length) return false;
+        objectArr[index] = obj;
+        return true;
     }
 
     public boolean clear() {
         for (int i = 0; i < objectArr.length; i++) {
-            objectArr[i] = 0;
+            objectArr[i] = null;
         }
         size = 0;
         return true;
     }
 
-    public int size() {
-        return size;
-    }
-
-    public Object[] getObjectArr() {
-        return objectArr;
-    }
-
     public boolean contains(Object object) {
-        for (int i = 0; i < objectArr.length; i++) {
-            if (objectArr[i] != null && objectArr[i].equals(object))
+        for (Object anObjectArr : objectArr) {
+            if (anObjectArr != null && anObjectArr.equals(object))
                 return true;
         }
         return false;
     }
 
-    public void throwException(){
+    public int size() {
+        int count = 0;
+        for (int i = 0; i < objectArr.length; i++) {
+            if (objectArr[i] != null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private void ensureCapacity(int index) {
+        Object[] temp = new Object[objectArr.length + index];
+        System.arraycopy(objectArr, 0, temp, 0, objectArr.length);
+        objectArr = temp;
+    }
+
+    public void throwException() {
         throw new ArrayIndexOutOfBoundsException();
     }
 
@@ -118,25 +130,39 @@ public class MyArrayList {
         System.out.println(arr.size());
 
         arr.add(obj);
-        System.out.println(arr.size());
-        System.out.println(arr.getObjectArr()[0]);
-        System.out.println(arr.getObjectArr()[1]);
+//        System.out.println(arr.size());
+//        System.out.println(arr.getObjectArr()[0]);
+//        System.out.println(arr.getObjectArr()[1]);
 
 
         arr.add(obj2);
         System.out.println(arr.size());
+//        System.out.println(arr.getObjectArr()[0]);
+//        System.out.println(arr.getObjectArr()[1]);
+        arr.add(5, obj3);
+        System.out.println(arr.size());
+//        System.out.println(arr.getObjectArr()[0]);
+//        System.out.println(arr.getObjectArr()[1]);
+//        System.out.println(arr.getObjectArr()[2]);
+//        System.out.println(arr.getObjectArr()[4]);
+//        System.out.println(arr.getObjectArr()[5]);
+//        System.out.println();
+//        System.out.println(arr.getObject(3));
+        arr.add(2, obj3);
         System.out.println(arr.getObjectArr()[0]);
         System.out.println(arr.getObjectArr()[1]);
-        arr.add(5, obj3);
+        System.out.println(arr.getObjectArr()[2]);
+        System.out.println();
+        arr.remove(1);
         System.out.println(arr.size());
         System.out.println(arr.getObjectArr()[0]);
         System.out.println(arr.getObjectArr()[1]);
         System.out.println(arr.getObjectArr()[2]);
-        System.out.println(arr.getObjectArr()[4]);
-        System.out.println(arr.getObjectArr()[5]);
         System.out.println();
-        System.out.println(arr.getObject(3));
-
+        arr.remove(obj3);
+        System.out.println(arr.getObjectArr()[0]);
+        System.out.println(arr.getObjectArr()[1]);
+        System.out.println(arr.getObjectArr()[2]);
 
     }
 }
