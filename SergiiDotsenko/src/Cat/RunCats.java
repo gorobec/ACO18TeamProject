@@ -15,6 +15,6 @@ public class RunCats {
 
         Cat.printAllCats();
         System.out.println(Arrays.toString(Cat.catStore.toArray()));//нада ещё как-то имя поля вытащить, как я не знаю )
-        Cat.catStore.forEach(currenCat -> System.out.println(currenCat.getName()));
+        Cat.catStore.forEach(currentCat -> System.out.println(currentCat));
     }
 }
