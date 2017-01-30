@@ -30,6 +30,8 @@ public class ArrList {
     }
 
     public void set(int i, Object object){
+        if (i >= count || i < 0)
+            throw new IllegalArgumentException();
         arr[i] = object;
     }
 
@@ -49,7 +51,7 @@ public class ArrList {
 
     public boolean remove(int i){
 
-        if (i > count) return false;
+        if (i > count || i < 0) return false;
         Object[] ar = new Object[arr.length - 1];
         System.arraycopy(arr, 0, ar, 0, i);
         System.arraycopy(arr, i + 1, ar, i,arr.length - i -1);
@@ -59,6 +61,11 @@ public class ArrList {
 
     public boolean remove(Object object){
         for (int i = 0; i < arr.length  /* Возможно сюда можно поставить метод size()*/; i++) {
+
+            if (arr[i] == null){
+                System.out.println("Пойман null в ячейке" + i);
+                return false;
+            }
             if (arr[i].equals(object)){
                 remove(i);
                 return true;
@@ -69,6 +76,11 @@ public class ArrList {
 
     public boolean contains(Object object){
         for (int i = 0; i < arr.length  /* Возможно сюда можно поставить метод size()*/; i++) {
+            if (arr[i] == null) {
+                System.out.println("Пойман null в ячейке" + i);
+                return false;
+            }
+
             if (arr[i].equals(object)){
                 return true;
             }
