@@ -125,4 +125,8 @@ public class MyArrayList {
        System.out.println(Arrays.toString(objects));
     }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(objects);
+    }
 }
