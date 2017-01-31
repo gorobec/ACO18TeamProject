@@ -7,6 +7,6 @@ public class Reader {
     String name;
     String surname;
     int age;
-    int conutBooks;
+    int countBooks;
     PrintEdition[] readerPrintEditions;
 }
