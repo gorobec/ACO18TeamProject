@@ -1,4 +1,4 @@
-package Cat;
+package cat;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ public class RunCats {
         Cat cat5 = new Cat("cat5");
 
         Cat.printAllCats();
-        System.out.println(Arrays.toString(Cat.catStore.toArray()));//нада ещё как-то имя поля вытащить, как я не знаю )
+        System.out.println(Arrays.toString(Cat.catStore.toArray()));
         Cat.catStore.forEach(currentCat -> System.out.println(currentCat));
     }
 }

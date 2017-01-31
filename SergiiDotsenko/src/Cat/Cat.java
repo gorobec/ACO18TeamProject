@@ -1,4 +1,4 @@
-package Cat;
+package cat;
 
 import java.util.ArrayList;
 
