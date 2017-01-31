@@ -1,6 +1,6 @@
 package data_structures;
-
 import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by Nastia on 28.01.17.
@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class MyArrayList {
     private int size = 0;
     private Object[] objects;
-    public static  final int DEFAULT_SIZE = 10;
+    public static  final int DEFAULT_SIZE = 0;
 
     public MyArrayList(int size){
         this.objects = new Object[size];
@@ -19,7 +19,7 @@ public class MyArrayList {
     }
 
     public boolean add(Object object) {
-        ensureCapacity(size + 1);
+        ensureCapacity(size + objects.length/2 + 1);
         objects[size] = object;
         size++;
         return true;
@@ -37,62 +37,62 @@ public class MyArrayList {
         }
     }
 
-    public void add(int index, Object object) {
-        ensureCapacity(size + 1);
+    public boolean add(int index, Object object) {
+        ensureCapacity(size + objects.length*(3/2) +1);
         objects[index] = object;
         size++;
-    }
-
-    public boolean isIndex(int index) {
-        if ((index < 0 || index >= objects.length)) return false;
         return true;
     }
 
+    public boolean wrongIndex(int index) {
+        return index < 0 || index >= objects.length;
+    }
+
     public Object get(int index) {
-        if (!isIndex(index)) return false;
+        if (wrongIndex(index)) return false;
         return objects[index];
     }
 
-    public Object remove(int index) {
-        if (!isIndex(index)) return false;
+    public boolean remove(int index) {
+        if (wrongIndex(index)) return false;
         int numMoved = objects.length - index - 1;
         System.arraycopy(objects, index + 1, objects, index, numMoved);
         objects[--size] = null;
-        return objects[index];
+        return true;
     }
 
-    public Object remove(Object object) {
-        int index = 0;
+    public boolean remove(Object object) {
         if (object == null) {
             for (int i = 0; i < objects.length; i++)
                 if (objects[i] == null) {
                     remove(i);
-                    return objects[i];
+                    return true;
                 }
         }
 
         for (int i = 0; i < objects.length; i++) {
             if(objects[i] != null) {
                 if (objects[i].equals(object)) {
-                    index = i;
                     remove(i);
+                    return true;
                 }
             }
         }
-
-        return objects[index];
+        return false;
     }
 
-    public Object set(int index, Object object) {
-        if (!isIndex(index)) return false;
-        return objects[index] = object;
+    public boolean set(int index, Object object) {
+        if (wrongIndex(index)) return false;
+        objects[index] = object;
+        return true;
     }
 
-    public void clear() {
+    public boolean clear() {
         for (int i = 0; i < objects.length; i++){
             objects[i] = null;
         }
         size = 0;
+        return size == 0;
     }
 
     public boolean contains(Object object){
@@ -114,13 +114,7 @@ public class MyArrayList {
     }
 
     public int size(){
-        int count = 0;
-        for (int i = 0; i < objects.length; i++) {
-            if(objects[i] != null){
-                count++;
-            }
-        }
-        return count;
+        return size;
     }
 
     public boolean isEmpty(){
@@ -128,7 +122,7 @@ public class MyArrayList {
     }
 
     public void printList(){
-        System.out.println(Arrays.toString(objects));
+       System.out.println(Arrays.toString(objects));
     }
 
 }
