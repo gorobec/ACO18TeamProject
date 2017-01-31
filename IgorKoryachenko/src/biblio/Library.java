@@ -6,14 +6,15 @@ import week1.homeWork.implementAL.ArrList;
  * Created by Мастер on 29.01.2017.
  */
 public class Library {
-    private ArrList books;
-    private ArrList editions;
+    /*private ArrList books;
+    ArrList editions;*/
+
     private ArrList readers;
 
-    /*ArrList books = new ArrList();
-    ArrList journals = new ArrList();*/
+    ArrList books = new ArrList();
+    ArrList editions = new ArrList();
 
-    public StringBuilder showReaders(){
+    public StringBuilder showReaders() {
         Reader reader = new Reader();
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < readers.size(); i++) {
@@ -22,10 +23,12 @@ public class Library {
         return str;
     }
 
-    public boolean addReader(Reader reader){
+    public boolean addReader(Reader reader) {
         readers.add(reader);
         return true;
-    }public boolean addEditions(Edition edition){
+    }
+
+    public boolean addEditions(Edition edition) {
         editions.add(edition);
         return true;
     }
@@ -41,6 +44,24 @@ public class Library {
             }
         }
         return false;
+    }
+
+    public void showEdition() {
+        for (int i = 0; i < editions.size(); i++) {
+            System.out.println(editions.get(i));
+        }
+    }
+
+    public StringBuilder availableEdition(String name) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < editions.size(); i++) {
+
+
+            //if ((Edition) editions.get(i).get );
+
+        }
+            return str;
+
     }
 
 

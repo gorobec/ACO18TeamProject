@@ -13,15 +13,15 @@ public class Main {
         ArrList publishers1 = new ArrList();
 
 
-        Book book1 = new Book("Zori",  "Voina i mir", "Tolstoy");
-        Book book2 = new Book("Pearson",  "Idiot", "Dostoevskiy");
-        Book book3 = new Book("Wolters Kluwer",  "Palata №6", "Chehov");
-        Book book4 = new Book("Wolters Kluwer",  "Voina i mir", "Tolstoi");
+        Book book1 = new Book("Voina i mir",  "Tolstoy", 10);
+        Book book2 = new Book("Idiot",  "Dostoevskiy", 15);
+        Book book3 = new Book("Palata №6",  "Chehov", 5);
+        Book book4 = new Book("Ovod",  "Voinich", 12);
 
-        Journal journal1 = new Journal("Burda", "Burda", 3, 2012);
-        Journal journal2 = new Journal("Burda", "Playboy", 5, 2016);
-        Journal journal3 = new Journal("France Editions", "Elle", 11, 2014);
-        Journal journal4 = new Journal("Pravda", "Doyarka", 10, 1969);
+        Journal journal1 = new Journal("Burda", 3, 2013, 20);
+        Journal journal2 = new Journal("Playboby", 5, 2015, 16);
+        Journal journal3 = new Journal("Elle", 11, 2011, 14);
+        Journal journal4 = new Journal("Doyarka", 6, 1960, 2);
 
         books.add(book1);
         books.add(book2);
@@ -39,6 +39,15 @@ public class Main {
 
         System.out.println(reader1.showReader());
 
+        Library library = new Library();
+        library.addEditions(journal2);
+        library.addEditions(journal4);
+        library.addEditions(book4);
+        library.addEditions(book2);
+        library.showEdition();
+
+
+        System.out.println(library.editions.get(0).getClass().getName());
 
 
     }

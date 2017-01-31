@@ -5,22 +5,19 @@ package biblio;
  */
 public class Book extends Edition {
 
-    String name;
-    String author;
-    boolean isHave;
+    private String author;
+    private int kolvo;
 
-    public Book(String namePublisher, String name, String author) {
-        super(namePublisher);
-        this.name = name;
+    public Book(String name, String author, int kolvo) {
+        super(name);
         this.author = author;
+        this.kolvo = kolvo;
     }
-
 
     @Override
     public String toString() {
-        return "Book{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
+        return super.toString() + "Book{" +
+                "author='" + author + '\'' +
                 '}';
     }
 }
