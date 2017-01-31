@@ -8,7 +8,7 @@ import java.util.*;
 public class MyArrayList {
     private int size = 0;
     private Object[] objects;
-    public static  final int DEFAULT_SIZE = 10;
+    public static  final int DEFAULT_SIZE = 0;
 
     public MyArrayList(int size){
         this.objects = new Object[size];
@@ -19,7 +19,7 @@ public class MyArrayList {
     }
 
     public boolean add(Object object) {
-        ensureCapacity(size + objects.length*(3/2) +1);
+        ensureCapacity(size + objects.length/2 + 1);
         objects[size] = object;
         size++;
         return true;
@@ -87,11 +87,12 @@ public class MyArrayList {
         return true;
     }
 
-    public void clear() {
+    public boolean clear() {
         for (int i = 0; i < objects.length; i++){
             objects[i] = null;
         }
         size = 0;
+        return size == 0;
     }
 
     public boolean contains(Object object){

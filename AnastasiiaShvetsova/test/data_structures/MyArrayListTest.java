@@ -5,7 +5,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertFalse;
+import java.util.Arrays;
 /**
  * Created by anastasiia.shvetsova on 1/31/2017.
  */
@@ -37,16 +38,18 @@ public class MyArrayListTest {
         assertEquals(4, list.size());
     }
 
-    //@Test
-    /*public void testAddByIndex(){
+    @Test
+    public void testAddByIndex(){
         assertTrue(list.add(0,2));
         assertTrue(list.add(1,6));
-    }*/
+    }
+
     @Test
     public void testWrongIndex(){
         list.add("black");
         list.add("white");
-        assertTrue(list.wrongIndex(1));
+        assertTrue(list.wrongIndex(4));
+
     }
 
     @Test
@@ -76,11 +79,17 @@ public class MyArrayListTest {
     public void testSet(){
         list.add("black");
         list.add("white");
-        list.add("blue");
-        list.add("red");
-        assertEquals("pink", list.set(1, "pink"));
-        assertEquals("grey", list.set(2, "grey"));
-        assertEquals("green", list.set(1, "green"));
+        list.printList();
+        assertTrue(list.set(1, "pink"));
+    }
+
+    @Test
+    public void testClear(){
+        list.printList();
+        list.add("black");
+        list.add("white");
+        list.printList();
+        assertTrue(list.clear());
     }
 
     @Test
@@ -103,11 +112,6 @@ public class MyArrayListTest {
 
     @Test
     public  void testIsEmpty(){
-        list.add("black");
-        list.add("white");
-        list.add("blue");
-        list.add("red");
-        int size = list.size();
         assertTrue(list.isEmpty());
     }
 }
