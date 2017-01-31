@@ -1,6 +1,6 @@
 package data_structures;
-
 import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by Nastia on 28.01.17.
@@ -19,7 +19,7 @@ public class MyArrayList {
     }
 
     public boolean add(Object object) {
-        ensureCapacity(size + 1);
+        ensureCapacity(size + objects.length*(3/2) +1);
         objects[size] = object;
         size++;
         return true;
@@ -37,24 +37,24 @@ public class MyArrayList {
         }
     }
 
-    public void add(int index, Object object) {
-        ensureCapacity(size + 1);
+    public boolean add(int index, Object object) {
+        ensureCapacity(size + objects.length*(3/2) +1);
         objects[index] = object;
         size++;
-    }
-
-    public boolean isIndex(int index) {
-        if ((index < 0 || index >= objects.length)) return false;
         return true;
     }
 
+    public boolean wrongIndex(int index) {
+        return index < 0 || index >= objects.length;
+    }
+
     public Object get(int index) {
-        if (!isIndex(index)) return false;
+        if (wrongIndex(index)) return false;
         return objects[index];
     }
 
     public boolean remove(int index) {
-        if (!isIndex(index)) return false;
+        if (wrongIndex(index)) return false;
         int numMoved = objects.length - index - 1;
         System.arraycopy(objects, index + 1, objects, index, numMoved);
         objects[--size] = null;
@@ -81,9 +81,10 @@ public class MyArrayList {
         return false;
     }
 
-    public Object set(int index, Object object) {
-        if (!isIndex(index)) return false;
-        return objects[index] = object;
+    public boolean set(int index, Object object) {
+        if (wrongIndex(index)) return false;
+        objects[index] = object;
+        return true;
     }
 
     public void clear() {
@@ -116,12 +117,11 @@ public class MyArrayList {
     }
 
     public boolean isEmpty(){
-        if(size != 0 ) return false;
-        return true;
+        return size == 0;
     }
 
     public void printList(){
-        System.out.println(Arrays.toString(objects));
+       System.out.println(Arrays.toString(objects));
     }
 
 }

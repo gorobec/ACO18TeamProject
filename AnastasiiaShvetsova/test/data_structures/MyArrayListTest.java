@@ -33,10 +33,15 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testIsIndex(){
+    public void testAddByIndex(){
+        assertTrue(list.add(0,2));
+        assertTrue(list.add(1,6));
+    }
+    @Test
+    public void testWrongIndex(){
         list.add("black");
         list.add("white");
-        assertTrue(list.isIndex(1));
+        assertTrue(list.wrongIndex(1));
     }
 
     @Test
@@ -69,6 +74,8 @@ public class MyArrayListTest {
         list.add("blue");
         list.add("red");
         assertEquals("pink", list.set(1, "pink"));
+        assertEquals("grey", list.set(2, "grey"));
+        assertEquals("green", list.set(1, "green"));
     }
 
     @Test
@@ -96,6 +103,6 @@ public class MyArrayListTest {
         list.add("blue");
         list.add("red");
         int size = list.size();
-        assertEquals(false, list.isEmpty());
+        assertTrue(list.isEmpty());
     }
 }
