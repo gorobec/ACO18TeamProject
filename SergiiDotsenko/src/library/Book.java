@@ -1,14 +1,15 @@
-package library.common.publication;
+package library;
 
 public abstract class Book implements Publication {
     private PublicationType publicationType;
     private String author;
     private int year;
-    private boolean onHands = false;
     private static int totalBooks = 0;
     private int bookID;
+    private int readerID = 0;//reader thar reads this book, 0 - nobody reads
 
-    public Book(){}
+    public Book() {
+    }
 
     public Book(PublicationType publicationType, String author, int year) {
         this.publicationType = publicationType;
@@ -33,4 +34,16 @@ public abstract class Book implements Publication {
     public void printFullInfo() {
         System.out.println(String.format("the bookID is %d, author is %s, year is %d, book kind is \'%s\'", bookID, author, year, getStringPublicationType()));
     }
+    public boolean give(int readerID){
+        if(this.readerID == readerID || this.readerID >0){
+            return false;
+        }
+        this.readerID= readerID;
+        return true;
+    }
+
+//    @Override
+//    public void serReaderID(int readerID) {
+//
+//    }
 }

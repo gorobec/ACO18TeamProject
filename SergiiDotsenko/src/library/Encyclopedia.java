@@ -1,4 +1,4 @@
-package library.common.publication;
+package library;
 
 public class Encyclopedia extends Book {
 
