@@ -19,7 +19,7 @@ public class Library {
         blackList = new MyArrayList();
     }
 
-    private Reader getReaderById(int id) {
+    public Reader getReaderById(int id) {
         Reader reader;
         for (int i = 0; i < readers.size(); i++) {
             reader = (Reader) readers.get(i);

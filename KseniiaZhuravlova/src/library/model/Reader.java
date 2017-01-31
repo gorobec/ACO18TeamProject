@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by Kseniya on 30.01.2017.
  */
-public class Reader implements Comparable{
+public class Reader {
     private int id;
     private String name;
     private String surname;
@@ -45,12 +45,6 @@ public class Reader implements Comparable{
 
     public int getId(){ return id; }
 
-    @Override
-    public int compareTo(Object student) {
-        if (student == null || !(student instanceof Reader)) return -1;
-        Reader temp = (Reader) student;
-        return surname.compareTo(temp.surname);
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -73,7 +67,7 @@ public class Reader implements Comparable{
         return true;
     }
 
-    public int getNumberOfEdition(){
+    public int getNumberOfEditions(){
         return editions.size();
     }
 
