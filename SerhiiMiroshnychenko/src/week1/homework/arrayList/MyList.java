@@ -1,21 +1,17 @@
-package data_structures;
+package week1.homework.arrayList;
 
 /**
- * Created by ksyashka on 28.01.2017.
+ * Created by serhiim on 30-Jan-17.
  */
 public interface MyList {
 
     boolean add(Object object);
     boolean add(int index, Object object);
-    Object get(int index);
+    Object getObject(int index);
     Object remove(int index);
     boolean remove(Object object);
-    void trimToSize();
-    Object set(int index, Object object);
-    int size();
-    boolean isEmpty();
+    boolean set(int index, Object object);
+    boolean clear();
     boolean contains(Object object);
-    void clear();
-
-
+    int size();
 }

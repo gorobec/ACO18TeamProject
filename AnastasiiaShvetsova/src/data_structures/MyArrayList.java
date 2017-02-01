@@ -1,5 +1,5 @@
 package data_structures;
-
+import java.util.Arrays;
 import java.util.*;
 
 /**
@@ -8,7 +8,7 @@ import java.util.*;
 public class MyArrayList {
     private int size = 0;
     private Object[] objects;
-    public static  final int DEFAULT_SIZE = 10;
+    public static  final int DEFAULT_SIZE = 0;
 
     public MyArrayList(int size){
         this.objects = new Object[size];
@@ -19,7 +19,7 @@ public class MyArrayList {
     }
 
     public boolean add(Object object) {
-        ensureCapacity(size + 1);
+        ensureCapacity(size + objects.length/2 + 1);
         objects[size] = object;
         size++;
         return true;
@@ -37,10 +37,11 @@ public class MyArrayList {
         }
     }
 
-    public void add(int index, Object object) {
-        ensureCapacity(size + 1);
+    public boolean add(int index, Object object) {
+        ensureCapacity(size + objects.length*(3/2) +1);
         objects[index] = object;
         size++;
+        return true;
     }
 
     public boolean wrongIndex(int index) {
@@ -80,16 +81,18 @@ public class MyArrayList {
         return false;
     }
 
-    public Object set(int index, Object object) {
+    public boolean set(int index, Object object) {
         if (wrongIndex(index)) return false;
-        return objects[index] = object;
+        objects[index] = object;
+        return true;
     }
 
-    public void clear() {
+    public boolean clear() {
         for (int i = 0; i < objects.length; i++){
             objects[i] = null;
         }
         size = 0;
+        return size == 0;
     }
 
     public boolean contains(Object object){
@@ -115,12 +118,15 @@ public class MyArrayList {
     }
 
     public boolean isEmpty(){
-        if(size != 0 ) return false;
-        return true;
+        return size == 0;
     }
 
     public void printList(){
-        System.out.println(Arrays.toString(objects));
+       System.out.println(Arrays.toString(objects));
     }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(objects);
+    }
 }
