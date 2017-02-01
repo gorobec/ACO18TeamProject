@@ -7,7 +7,7 @@ public class Readers {
         readers = new Array_List<>();
     }
 
-    public boolean addReader() {
+    public boolean addReader() {//4) добавить читателя в список читателей
         return readers.add(new Reader());
     }
 

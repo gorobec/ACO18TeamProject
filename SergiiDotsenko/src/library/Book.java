@@ -6,7 +6,7 @@ public abstract class Book implements Publication {
     private int year;
     private static int totalBooks = 0;
     private int bookID;
-    private int readerID = 0;//reader thar reads this book, 0 - nobody reads
+    private int readerID = 0;//reader that reads this book, 0 - nobody reads
 
     public Book() {
     }
@@ -34,16 +34,24 @@ public abstract class Book implements Publication {
     public void printFullInfo() {
         System.out.println(String.format("the bookID is %d, author is %s, year is %d, book kind is \'%s\'", bookID, author, year, getStringPublicationType()));
     }
-    public boolean give(int readerID){
-        if(this.readerID == readerID || this.readerID >0){
+
+    public boolean give(int readerID) {
+        if (this.readerID == readerID || this.readerID > 0) {
             return false;
         }
-        this.readerID= readerID;
+        this.readerID = readerID;
         return true;
     }
 
-//    @Override
-//    public void serReaderID(int readerID) {
-//
-//    }
+    public int getReaderID() {
+        return readerID;
+    }
+
+    public boolean onHands() {
+        return readerID > 0;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
 }

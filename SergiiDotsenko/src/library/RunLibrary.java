@@ -9,7 +9,12 @@ public class RunLibrary {
         testReaders();
         testLibrary();
         testGiveAbook();
-        readers.printAllReaders();
+//        library.printBooksByAuthor("a1");
+        library.printBooksByPatternAuthor("f");
+//        readers.printAllReaders();
+//        library.printBooksOnHands(2);
+//        library.printBooksOnHands(1);
+//        library.printAvailableBooks();
     }
 
     private static void testReaders() {
@@ -22,7 +27,7 @@ public class RunLibrary {
 
     private static void testLibrary() {
         library.addBook(new Encyclopedia("a1", 1999));
-        library.addBook(new Directory("a2", 2222));
+        library.addBook(new Directory("ff", 2222));
         library.printAllBooks();
     }
 
