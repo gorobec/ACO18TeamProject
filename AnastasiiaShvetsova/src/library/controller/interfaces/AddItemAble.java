@@ -1,4 +1,7 @@
-package library.model;
+package library.controller.interfaces;
+
+import library.model.PrintEdition;
+import library.model.Reader;
 
 /**
  * Created by Nastia on 31.01.17.

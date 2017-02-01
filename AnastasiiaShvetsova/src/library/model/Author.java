@@ -6,5 +6,32 @@ package library.model;
 public class Author {
     String name;
     String surname;
-    int age;
+
+    public Author(String name, String surname){
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+
+    @Override
+    public String toString() {
+        return  name + surname;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Author)) return false;
+        Author tmp = (Author) obj;
+        return (this.name.equals(tmp.name) && (this.surname.equals(tmp.surname)));
+
+    }
 }
