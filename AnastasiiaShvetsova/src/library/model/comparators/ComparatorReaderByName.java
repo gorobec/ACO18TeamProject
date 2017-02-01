@@ -9,9 +9,9 @@ import java.util.Comparator;
  */
 public class ComparatorReaderByName implements Comparator {
     @Override
-    public int compare(Object o1, Object o2) {
-        Reader reader1 = (Reader) o1;
-        Reader reader2 = (Reader) o2;
+    public int compare(Object obj1, Object obj2) {
+        Reader reader1 = (Reader) obj1;
+        Reader reader2 = (Reader) obj2;
 
         return reader1.getName().compareTo(reader2.getName());
     }

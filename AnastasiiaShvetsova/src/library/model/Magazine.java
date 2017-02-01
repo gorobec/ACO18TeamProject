@@ -8,13 +8,6 @@ public class Magazine extends PrintEdition {
     Page[] pages;
 
     public Magazine(Author author, int year, String name) {
-        super(author, year);
-        this.name = name;
-    }
-    @Override
-    public String toString() {
-        return
-                "{" + author.toString() + ", " + year + ", " + name +
-                        '}';
+        super(author, year, name);
     }
 }

@@ -1,6 +1,7 @@
 package library.controller;
 
 import library.model.*;
+import library.model.comparators.ComparatorPrintEditionByName;
 import library.model.comparators.ComparatorReaderByName;
 
 import java.util.Comparator;
@@ -38,7 +39,7 @@ public class Run {
         newLibray.addPrintEdition(book3);
         newLibray.addPrintEdition(newspaper);
         newLibray.addPrintEdition(magazine);
-       // newLibray.sortReaders(comparatorByName);
+        newLibray.sortReaders(comparatorByName);
         System.out.println(newLibray.showPrinEdtitions());
         System.out.println(newLibray.showReaders());
 
@@ -48,8 +49,6 @@ public class Run {
         System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader1));
         System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader2));
         System.out.println(newLibray.showReadersPrinEdtitions());
-        //reader1.showReaderPrintEditions();
-
         newLibray.addReaderToBlackList(reader3);
         System.out.println("Black list " + newLibray.blackLists.toString());
         newLibray.givePrintEditionForReader(book1, reader3);
@@ -58,5 +57,8 @@ public class Run {
         newLibray.showPrintEditionCurrentAuthor(author1);
 
         System.out.println(newLibray.showPrintEditionCurrentAuthor(author1));
+        System.out.println(newLibray.findPrintEdition("vin"));
+        System.out.println(newLibray.findPrintEdition("van"));
+
     }
 }

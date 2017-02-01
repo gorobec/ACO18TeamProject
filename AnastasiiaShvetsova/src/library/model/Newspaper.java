@@ -7,14 +7,7 @@ public class Newspaper extends PrintEdition {
     String name;
 
     public Newspaper(Author author, int year, String name) {
-        super(author, year);
-        this.name = name;
+        super(author, year, name);
     }
 
-    @Override
-    public String toString() {
-        return
-                "{" + author.toString() + ", " + year + ", " + name +
-                        '}';
-    }
 }

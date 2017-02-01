@@ -8,11 +8,13 @@ import library.model.Author;
 public class PrintEdition {
     Author author;
     int year;
+    String name;
 
-    public PrintEdition(Author author, int year) {
+    public PrintEdition(Author author, int year, String name) {
 
         this.author = author;
         this.year = year;
+        this.name = name;
     }
 
     public Author getAuthor() {
@@ -23,10 +25,15 @@ public class PrintEdition {
         return year;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return
-                "{" + author.toString() + ", " + year +
+                "{" + author.toString() + ", " + year + ", " + name +
                         '}';
     }
 }

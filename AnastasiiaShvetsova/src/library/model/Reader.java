@@ -43,6 +43,10 @@ public class Reader {
         return age;
     }
 
+    public int getCountPrintEditions(){
+        return  countPrintEditions;
+    }
+
     public String showReaderPrintEditions() {
         return readerPrintEditions.toString();
     }
@@ -54,5 +58,6 @@ public class Reader {
                         ", surname='" + surname + '\'' +
                         ", age=" + age + "}";
     }
+
 
 }
