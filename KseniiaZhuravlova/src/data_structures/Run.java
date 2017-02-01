@@ -26,11 +26,13 @@ public class Run {
         myArrayList.remove(4);
         myArrayList.printArrayList();
         myArrayList.trimToSize();
+        System.out.println(myArrayList.isEmpty());
         myArrayList.printArrayList();
         myArrayList.clear();
         myArrayList.printArrayList();
         myArrayList.trimToSize();
         myArrayList.printArrayList();
+        System.out.println(myArrayList.isEmpty());
 
     }
 
