@@ -1,4 +1,4 @@
-package week2.homework;
+package week2.staticCats;
 
 public class Run {
     public static void main(String[] args) {

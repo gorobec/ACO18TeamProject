@@ -1,4 +1,4 @@
-package week2.homework;
+package week2.staticCats;
 
 import java.util.ArrayList;
 
