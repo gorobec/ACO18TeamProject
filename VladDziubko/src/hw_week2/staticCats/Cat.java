@@ -1,4 +1,4 @@
-package week2.staticCats;
+package hw_week2.staticCats;
 
 import java.util.ArrayList;
 
