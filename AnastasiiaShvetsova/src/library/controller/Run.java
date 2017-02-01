@@ -34,31 +34,32 @@ public class Run {
         newLibray.addReader(reader2);
         newLibray.addReader(reader3);
         newLibray.addReader(reader4);
-        newLibray.addPrintEdition(book1);
+
         newLibray.addPrintEdition(book2);
         newLibray.addPrintEdition(book3);
         newLibray.addPrintEdition(newspaper);
         newLibray.addPrintEdition(magazine);
-        newLibray.sortReaders(comparatorByName);
-        System.out.println(newLibray.showPrinEdtitions());
-        System.out.println(newLibray.showReaders());
+        newLibray.addPrintEdition(book1);
+       // newLibray.sortReaders(comparatorByName);
+//        System.out.println(newLibray.showPrinEdtitions());
+//        System.out.println(newLibray.showReaders());
 
         newLibray.givePrintEditionForReader(book1, reader1);
         newLibray.givePrintEditionForReader(book2, reader1);
         newLibray.givePrintEditionForReader(book1, reader2);
         System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader1));
         System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader2));
-        System.out.println(newLibray.showReadersPrinEdtitions());
-        newLibray.addReaderToBlackList(reader3);
-        System.out.println("Black list " + newLibray.blackLists.toString());
-        newLibray.givePrintEditionForReader(book1, reader3);
-        System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader3));
-
-        newLibray.showPrintEditionCurrentAuthor(author1);
-
-        System.out.println(newLibray.showPrintEditionCurrentAuthor(author1));
-        System.out.println(newLibray.findPrintEdition("vin"));
-        System.out.println(newLibray.findPrintEdition("van"));
+        System.out.println("showReadersPrinEdtitions " +newLibray.showReadersPrinEdtitions());
+//        newLibray.addReaderToBlackList(reader3);
+//        System.out.println("Black list " + newLibray.blackLists.toString());
+//        newLibray.givePrintEditionForReader(book1, reader3);
+//        System.out.println(newLibray.showCurrentReaderPrinEdtitions(reader3));
+//
+//        newLibray.showPrintEditionCurrentAuthor(author1);
+//
+//        System.out.println(newLibray.showPrintEditionCurrentAuthor(author1));
+//        System.out.println(newLibray.findPrintEdition("vin"));
+//        System.out.println(newLibray.findPrintEdition("van"));
 
     }
 }
