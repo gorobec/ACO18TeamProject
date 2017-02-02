@@ -25,7 +25,6 @@ public class PrintEdition {
         return year;
     }
 
-
     public String getName() {
         return name;
     }

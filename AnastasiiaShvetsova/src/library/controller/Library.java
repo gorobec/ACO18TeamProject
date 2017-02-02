@@ -7,6 +7,7 @@ import library.model.Author;
 import library.model.PrintEdition;
 import library.model.Reader;
 import library.model.comparators.ComparatorPrintEditionByName;
+import library.model.comparators.ComparatorReaderByName;
 
 import java.util.Comparator;
 
@@ -27,6 +28,7 @@ public class Library implements AddItemAble, Showable {
     int countReaders = 0;
 
     Comparator comparatorPrintEditionsByName = new ComparatorPrintEditionByName();
+    Comparator comparatorByName  = new ComparatorReaderByName();
 
     public Library() {
         this.readers = new MyArrayList();
@@ -50,12 +52,13 @@ public class Library implements AddItemAble, Showable {
     }
 
     public String showReaders() {
+        sortReaders(comparatorByName);
         System.out.println("Readers:");
         return readers.toString();
     }
 
     public String showPrinEdtitions() {
-        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions);
+        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions, printEditions);
         System.out.println("Print Editions:");
         return printEditions.toString();
     }
@@ -79,25 +82,27 @@ public class Library implements AddItemAble, Showable {
             }
 
         }
-
         return false;
     }
 
     public String showReadersPrinEdtitions() {
-        sortPrintEditions(comparatorPrintEditionsByName, counReaderPrintEditions);
+        sortPrintEditions(comparatorPrintEditionsByName, counReaderPrintEditions, printEditionsHasReaders);
         System.out.println("Reader's print editions:");
         return printEditionsHasReaders.toString();
     }
 
     public String showCurrentReaderPrinEdtitions(Reader reader) {
-        sortPrintEditions(comparatorPrintEditionsByName, reader.getCountPrintEditions());
+        sortPrintEditions(comparatorPrintEditionsByName, reader.getCountPrintEditions(), reader.getReaderPrintEditions());
         System.out.println(reader.getName() + "'s print editions:");
         return reader.showReaderPrintEditions();
     }
 
     public boolean addReaderToBlackList(Reader reader) {
-        if (!checkReader(reader)) blackLists.add(reader);
-        return true;
+        if (!checkReader(reader)){
+            blackLists.add(reader);
+            return true;
+        }
+       return false;
     }
 
     public boolean checkReader(Reader reader) {
@@ -105,7 +110,7 @@ public class Library implements AddItemAble, Showable {
     }
 
     public String showPrintEditionCurrentAuthor(Author author) {
-        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions);
+        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions, printEditions);
         for (int i = 0; i < printEditions.size(); i++) {
             PrintEdition tmp = (PrintEdition) printEditions.get(i);
             if (tmp.getAuthor().equals(author)) {
@@ -117,10 +122,10 @@ public class Library implements AddItemAble, Showable {
     }
 
     public String showPrintEditionCurrentYear(int year) {
-        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions);
+        sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions, printEditions);
         for (int i = 0; i < printEditions.size(); i++) {
             PrintEdition tmp = (PrintEdition) printEditions.get(i);
-            if (tmp.getYear() == year) {
+            if (tmp.getYear() == year )  {
                 printEditionsCurrentYear.add(tmp);
             }
 
@@ -141,14 +146,14 @@ public class Library implements AddItemAble, Showable {
         }
     }
 
-    public void sortPrintEditions(Comparator comparator, int counter) {
+    public void sortPrintEditions(Comparator comparator, int counter, MyArrayList myArrayList) {
         for (int i = counter - 1; i >= 0; i--) {
             for (int j = 0; j < i; j++) {
-                int res = comparator.compare(printEditions.get(j), printEditions.get(j + 1));
+                int res = comparator.compare(myArrayList.get(j), myArrayList.get(j + 1));
                 if (res > 0) {
-                    PrintEdition tmp = (PrintEdition) printEditions.get(j);
-                    printEditions.set(j, printEditions.get(j + 1));
-                    printEditions.set(j + 1, tmp);
+                    PrintEdition tmp = (PrintEdition) myArrayList.get(j);
+                    myArrayList.set(j, myArrayList.get(j + 1));
+                    myArrayList.set(j + 1, tmp);
                 }
             }
         }
@@ -165,9 +170,4 @@ public class Library implements AddItemAble, Showable {
         return false;
     }
 
-    //cmd + N
-    @Override
-    public String toString() {
-        return readers.toString() + printEditions.toString();
-    }
 }
