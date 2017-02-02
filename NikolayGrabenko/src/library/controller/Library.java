@@ -1,6 +1,5 @@
 package library.controller;
 
-import library.model.Editions;
 import library.model.PrintedEditions;
 import library.model.Reader;
 import library.utils.ArrayListMy;
@@ -9,44 +8,23 @@ import java.util.Comparator;
 
 public class Library {
 
-    Reader reader;
-    Editions edition;
-
     private ArrayListMy printedEditionsBase;
-    private ArrayListMy printedEditionsAvailable;
-    private ArrayListMy printedEditionsAtReaders;
 
     private ArrayListMy registeredReaders;
-    private ArrayListMy blackListOfReaders;
 
 
     public ArrayListMy getPrintedEditionsBase() {
         return printedEditionsBase;
     }
 
-    public ArrayListMy getPrintedEditionsAtReaders() {
-        return printedEditionsAtReaders;
-    }
-
-    public ArrayListMy getPrintedEditionsAvailable() {
-        return printedEditionsAvailable;
-    }
-
     public ArrayListMy getRegisteredReaders() {
         return registeredReaders;
     }
 
-    public ArrayListMy getBlackListOfReaders() {
-        return blackListOfReaders;
-    }
 
     public Library() {
         printedEditionsBase = new ArrayListMy();
-        printedEditionsAvailable = new ArrayListMy();
-        printedEditionsAtReaders = new ArrayListMy();
         registeredReaders = new ArrayListMy();
-        blackListOfReaders = new ArrayListMy();
-
     }
 
     public boolean isRegistered(Reader someReader) {
@@ -60,25 +38,11 @@ public class Library {
         return isRegistered;
     }
 
-    public boolean isInBlackList(Reader reader) {
-        boolean isInBlackList = false;
-        if (reader != null) {
-            for (int i = 0; i < blackListOfReaders.size(); i++) {
-                Reader readerTemp = (Reader) blackListOfReaders.get(i);
-                if (readerTemp.equals(reader)) {
-                    isInBlackList = true;
-                    break;
-                }
-            }
-        }
-        return isInBlackList;
-    }
-
     public boolean isAvailablePrintEds(PrintedEditions edition) {
         boolean isAvailablePrintEds = false;
         if (edition != null) {
-            for (int i = 0; i < printedEditionsAvailable.size(); i++) {
-                PrintedEditions editionTemp = (PrintedEditions) printedEditionsAvailable.get(i);
+            for (int i = 0; i < printedEditionsBase.size(); i++) {
+                PrintedEditions editionTemp = (PrintedEditions) printedEditionsBase.get(i);
                 if (editionTemp.getNumberOfCopiesAvailable() > 0) {
                     isAvailablePrintEds = true;
                     break;
@@ -105,7 +69,7 @@ public class Library {
                 }
             }
         }
-        wasSorted = changesCount != 0 ? true : false;
+        wasSorted = (changesCount != 0);
         return wasSorted;
     }
 
@@ -126,14 +90,14 @@ public class Library {
                 }
             }
         }
-        wasSorted = changesCount != 0 ? true : false;
+        wasSorted = (changesCount != 0);
         return wasSorted;
     }
 
     // 1)посмотреть список читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showAllRegisteredReaders(Comparator comparator) {
-       sortReadersByComparator(registeredReaders, comparator);
+        sortReadersByComparator(registeredReaders, comparator);
         for (int i = 0; i < registeredReaders.size(); i++) {
             if (registeredReaders.get(i) != null) {
                 Reader reader = (Reader) registeredReaders.get(i);
@@ -151,7 +115,7 @@ public class Library {
             if (list.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) list.get(i);
                 System.out.println(String.format("Издание - %s, количество в библиотеке - %d, у читателей - %d",
-                        edition.showEdition(), edition.getNumberOfCopiesAvailable(), edition.getNumderOfCopiesAtReader()));
+                        edition.showEdition(), edition.getNumberOfCopiesAvailable(), edition.getNumberOfCopiesAtReader()));
             }
         }
     }
@@ -159,12 +123,14 @@ public class Library {
     // 2)посмотреть список доступных конкретных печатных изданий
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showPrintedEditionsAvailable(Comparator comparator) {
-        sortPrintedEditionByComparator(printedEditionsAvailable, comparator);
-        for (int i = 0; i < printedEditionsAvailable.size(); i++) {
-            if (printedEditionsAvailable.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) printedEditionsAvailable.get(i);
-                System.out.println(String.format("Издание - %s, количество доступно - %d",
-                        edition.showEdition(), edition.getNumberOfCopiesAvailable()));
+        sortPrintedEditionByComparator(printedEditionsBase, comparator);
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
+                if (edition.getNumberOfCopiesAvailable() > 0) {
+                    System.out.println(String.format("Издание - %s, количество доступно - %d",
+                            edition.showEdition(), edition.getNumberOfCopiesAvailable()));
+                }
             }
         }
     }
@@ -174,7 +140,6 @@ public class Library {
         boolean wasAdded = false;
         if (edition != null) {
             printedEditionsBase.add(edition);
-            printedEditionsAvailable.add(edition);
             wasAdded = true;
         }
         return wasAdded;
@@ -195,11 +160,11 @@ public class Library {
     public boolean loanPrintedEdition(Reader reader, PrintedEditions edition) {
         boolean canLoan = false;
         if (edition != null && reader.getCounterOfPrintEds() < 3 &&
-                !isInBlackList(reader) && isAvailablePrintEds(edition)) {
-            printedEditionsAtReaders.add(edition);
+                !reader.isInBlackList() && isAvailablePrintEds(edition )&&
+                reader.isEditionInReaderList(edition)==false) {
             reader.addPrintedEditionToList(edition);
             edition.setNumberOfCopiesAvailable(edition.getNumberOfCopiesAvailable() - 1);
-            edition.setNumderOfCopiesAtReader(edition.getNumderOfCopiesAtReader() + 1);
+            edition.setNumberOfCopiesAtReader(edition.getNumberOfCopiesAtReader() + 1);
             canLoan = true;
         }
         return canLoan;
@@ -208,12 +173,14 @@ public class Library {
     // 6)посмотреть список печатных изданий,которые находятся у читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showPrintedEditionsAtReaders(Comparator comparator) {
-        sortPrintedEditionByComparator(printedEditionsAtReaders, comparator);
-        for (int i = 0; i < printedEditionsAtReaders.size(); i++) {
-            if (printedEditionsAtReaders.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) printedEditionsAtReaders.get(i);
-                System.out.println(String.format("Издание - %s, количество у читатилей - %d",
-                        edition.showEdition(), edition.getNumderOfCopiesAtReader()));
+        sortPrintedEditionByComparator(printedEditionsBase, comparator);
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
+                if (edition.getNumberOfCopiesAtReader() > 0) {
+                    System.out.println(String.format("Издание - %s, количество у читатилей - %d",
+                            edition.showEdition(), edition.getNumberOfCopiesAtReader()));
+                }
             }
         }
     }
@@ -234,8 +201,8 @@ public class Library {
     // 8)добавить читателя в черный список(ему нельзя выдавать печатные издания)
     public boolean addToBlackList(Reader reader) {
         boolean wasAdded = false;
-        if (reader != null && isInBlackList(reader) == false) {
-            blackListOfReaders.add(reader);
+        if (reader != null && !reader.isInBlackList()) {
+            reader.setInBlackList(true);
             wasAdded = true;
         }
         return wasAdded;
@@ -258,7 +225,7 @@ public class Library {
 
     // 11)посмотреть печатные издания конкретного года
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditionsOfYear(ArrayListMy list, int year,Comparator comparator) {
+    public void showPrintedEditionsOfYear(ArrayListMy list, int year, Comparator comparator) {
         sortPrintedEditionByComparator(list, comparator);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) != null) {
@@ -273,7 +240,7 @@ public class Library {
     // 12)найти печатное издание по названию(ключевым словам)
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
 
-    public PrintedEditions findPrintedEditionByKeyWord(ArrayListMy list, String keyWord,Comparator comparator) {
+    public PrintedEditions findPrintedEditionByKeyWord(ArrayListMy list, String keyWord, Comparator comparator) {
         sortPrintedEditionByComparator(list, comparator);
         PrintedEditions foundEdition = null;
         for (int i = 0; i < list.size(); i++) {

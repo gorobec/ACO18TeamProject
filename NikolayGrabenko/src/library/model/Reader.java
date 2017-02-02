@@ -2,24 +2,16 @@ package library.model;
 
 import library.utils.ArrayListMy;
 
-/**
- * Created by User on 29.01.2017.
- */
 public class Reader {
 
     private String name;
     private String surName;
     private int age;
     private String homeAddress;
-
+    private boolean isInBlackList = false;
     private int counterOfPrintEds;
 
-    PrintedEditions edition;
     ArrayListMy readerEditions = new ArrayListMy();
-
-    public ArrayListMy getReaderEditions() {
-        return readerEditions;
-    }
 
     public Reader(String name, String surName, int age, String homeAddress) {
         this.name = name;
@@ -50,6 +42,18 @@ public class Reader {
 
     public void setCounterOfPrintEds(int counterOfPrintEds) {
         this.counterOfPrintEds = counterOfPrintEds;
+    }
+
+    public boolean isInBlackList() {
+        return isInBlackList;
+    }
+
+    public void setInBlackList(boolean inBlackList) {
+        isInBlackList = inBlackList;
+    }
+
+    public ArrayListMy getReaderEditions() {
+        return readerEditions;
     }
 
     public String showReader() {

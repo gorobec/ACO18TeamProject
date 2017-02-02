@@ -40,6 +40,7 @@ public class Run {
         System.out.println("Добавлено 3 читателя (отсортировано по имени):");
         library.showAllRegisteredReaders(new ReaderNameComparator());
         System.out.println();
+
         // 2) посмотреть список доступных конкретных печатных изданий
         System.out.println("Добавлено 3 печатных издания (отсортировано по году издания):");
         library.showPrintedEditions(library.getPrintedEditionsBase(), new PrintedEditionComparatorByPublishYear());
@@ -52,25 +53,30 @@ public class Run {
         System.out.println("Добавлено 4-ое печатное издание :");
         System.out.println(library.addPrintedEdition(goneWithTheWind));
         System.out.println();
-        // 4) добавить читателя в список читателейSystem.out.println("Добавлено 3 читателя :");
+
+        // 4) добавить читателя в список читателей
         System.out.println("Добавлено 4-ого читателя :");
         System.out.println(library.addReader(reader4));
         System.out.println();
+
         // 6) посмотреть список печатных изданий, которые находятся у читателей
         System.out.println("Смотрим список изданий, которые находятся у читателей (отсортировано по названию книги):");
-        library.showPrintedEditions(library.getPrintedEditionsAtReaders(), new PrintedEditionComparatorByName());
+        library.showPrintedEditionsAtReaders(new PrintedEditionComparatorByName());
         System.out.println();
+
         // 5) выдать печатное издание читателю (если книга есть в наличии).
         // Читателю запрещается брать больше 3-х печатных изданий.
         System.out.println("Выдаем книги 4-му,  1-му читателю и 2-му читателю:");
-        System.out.println( library.loanPrintedEdition(reader4, goneWithTheWind));
+        System.out.println(library.loanPrintedEdition(reader4, goneWithTheWind));
         System.out.println(library.loanPrintedEdition(reader1, effectiveJava));
-        System.out.println(library.loanPrintedEdition(reader2,thinkingInJava));
+        System.out.println(library.loanPrintedEdition(reader2, thinkingInJava));
         System.out.println();
+
         // 6) посмотреть список печатных изданий, которые находятся у читателей
         System.out.println("Смотрим список изданий, которые находятся у читателей (отсортировано по названию книги):");
-        library.showPrintedEditions(library.getPrintedEditionsAtReaders(),new PrintedEditionComparatorByName());
+        library.showPrintedEditionsAtReaders(new PrintedEditionComparatorByName());
         System.out.println();
+
         // 7) посмотреть список печатных изданий, которые находятся у конкретного читателя
         System.out.println("Смотрим список печатных изданий, которые находятся у 4-го читателя :");
         System.out.println(library.showPrintedEditionsAtOneReader(reader4));
@@ -80,7 +86,7 @@ public class Run {
         System.out.println("Добавляем 2-го читателя  в черный список :");
         System.out.println(library.addToBlackList(reader2));
         System.out.println("Пытаемся выдать 2-му читателю  книгу: ");
-        System.out.println(library.loanPrintedEdition(reader2,thinkingInJava));
+        System.out.println(library.loanPrintedEdition(reader2, thinkingInJava));
         System.out.println("Смотрим список печатных изданий, которые находятся у 2-го читателя :");
         System.out.println(library.showPrintedEditionsAtOneReader(reader2));
         System.out.println();
@@ -88,19 +94,31 @@ public class Run {
         // 9) посмотреть печатные издания конкретного автора
         // 10) посмотреть печатные издания конкретного автора
         System.out.println("Смотрим список печатных изданий конкреного автора :");
-        library.showPrintedEditionsOfAuthor(library.getPrintedEditionsBase(),"Joshua Bloch"
-                ,new PrintedEditionComparatorByName());
+        library.showPrintedEditionsOfAuthor(library.getPrintedEditionsBase(), "Joshua Bloch"
+                , new PrintedEditionComparatorByName());
+        System.out.println();
+
+        // 9) посмотреть печатные издания конкретного автора
+        // 10) посмотреть печатные издания конкретного автора
+        System.out.println("Смотрим список печатных изданий конкреного автора :");
+        library.showPrintedEditionsOfAuthor(library.getPrintedEditionsBase(), "Bruce Eckel"
+                , new PrintedEditionComparatorByName());
         System.out.println();
 
         // 11) посмотреть печатные издания конкретного года
         System.out.println("Смотрим список печатных изданий конкреного года :");
-        library.showPrintedEditionsOfYear(library.getPrintedEditionsBase(),2006
+        library.showPrintedEditionsOfYear(library.getPrintedEditionsBase(), 2006
                 , new PrintedEditionComparatorByName());
         System.out.println();
 
         // 12) найти печатное издание по названию (ключевым словам)
         System.out.println("Ищем печатное издание по названию (ключевым словам)");
         library.findPrintedEditionByKeyWord(library.getPrintedEditionsBase(), "Java"
+                , new PrintedEditionComparatorByPublishYear());
+
+        // 12) найти печатное издание по названию (ключевым словам)
+        System.out.println("Ищем печатное издание по названию (ключевым словам,игнорируя регистр)");
+        library.findPrintedEditionByKeyWord(library.getPrintedEditionsBase(), "WIND"
                 , new PrintedEditionComparatorByPublishYear());
 
     }

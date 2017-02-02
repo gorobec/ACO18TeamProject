@@ -1,7 +1,5 @@
 package library.model;
 
-import java.util.GregorianCalendar;
-
 /**
  * Created by User on 30.01.2017.
  */
@@ -9,11 +7,8 @@ public class PrintedEditions extends Editions {
 
 
     private int numberOfCopiesAvailable;
-    private int numderOfCopiesAtReader =0;
-    private int daysOfLoan;
+    private int numberOfCopiesAtReader;
     private int numberOfPages;
-    private GregorianCalendar dateOfLoan;
-    private GregorianCalendar dateOfReturn;
 
     public PrintedEditions(String name, String author, int publicationYear, int numberOfCopiesAvailable, int numberOfPages) {
         super(name, author, publicationYear);
@@ -29,12 +24,12 @@ public class PrintedEditions extends Editions {
         this.numberOfCopiesAvailable = numberOfCopiesAvailable;
     }
 
-    public int getNumderOfCopiesAtReader() {
-        return numderOfCopiesAtReader;
+    public int getNumberOfCopiesAtReader() {
+        return numberOfCopiesAtReader;
     }
 
-    public void setNumderOfCopiesAtReader(int numderOfCopiesAtReader) {
-        this.numderOfCopiesAtReader = numderOfCopiesAtReader;
+    public void setNumberOfCopiesAtReader(int numberOfCopiesAtReader) {
+        this.numberOfCopiesAtReader = numberOfCopiesAtReader;
     }
 
     public String showEdition() {
@@ -51,8 +46,8 @@ public class PrintedEditions extends Editions {
         if (obj.getClass() == this.getClass()) {
             PrintedEditions edition = (PrintedEditions) obj;
             if (edition.getName().equals(this.getName()) && edition.getAuthor().equals(this.getAuthor())
-                    && edition.getPublicationYear() == this.getPublicationYear());
-                return true;
+                    && edition.getPublicationYear() == this.getPublicationYear()) ;
+            return true;
         }
         return false;
     }
