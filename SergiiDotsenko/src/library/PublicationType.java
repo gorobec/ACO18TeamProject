@@ -3,5 +3,5 @@ package library;
 // (например в классе "Книга" - детектив, фантастика, роман, проза и т.д.).
 // В качестве жанра использовать enum.
 public enum PublicationType {
-    Directory, Encyclopedia, Book, Magazine
+    DIRECTORY, ENCYCLOPEDIA, BOOK, MAGAZINE
 }

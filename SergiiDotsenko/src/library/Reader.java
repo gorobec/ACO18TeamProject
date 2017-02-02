@@ -3,7 +3,7 @@ package library;
 public class Reader {
     private int readerID;
     private static int totalReaders = 0;
-    private final static int maxBooksOnHands = 3;//Подумать какие константы можно добавить в вашу программу "Библиотека", при наличии таких - реализуйте вашу задумку.
+    private final static int MAX_BOOKS_ON_HANDS = 3;//Подумать какие константы можно добавить в вашу программу "Библиотека", при наличии таких - реализуйте вашу задумку.
     private int booksOnHands = 0;
     private boolean blackList = false;
 
@@ -24,11 +24,11 @@ public class Reader {
     }
 
     public void printFullInfo() {
-        System.out.println(String.format("reader id is %d, books on hands are %d", readerID, booksOnHands));
+        System.out.printf("reader id is %d, books on hands are %d\n", readerID, booksOnHands);
     }
 
     public boolean canTakeBook() {//Читателю запрещается брать больше 3-х печатных изданий(либо другого количества печатных изданий).
-        return maxBooksOnHands > booksOnHands && !blackList;
+        return MAX_BOOKS_ON_HANDS > booksOnHands && !blackList;
     }
 
     public boolean takeBook() {//5) выдать печатное издание читателю (если книга есть в наличии).

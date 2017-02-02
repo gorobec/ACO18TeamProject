@@ -1,5 +1,7 @@
 package library;
 
+import static library.PublicationType.*;
+
 public class RunLibrary {
 
     static Readers readers = new Readers();
@@ -7,10 +9,10 @@ public class RunLibrary {
 
     public static void main(String[] args) {
         testReaders();
-        testLibrary();
-        testGiveAbook();
+//        testLibrary();
+//        testGiveAbook();
 //        library.printBooksByAuthor("a1");
-        library.printBooksByPatternAuthor("f");
+//        library.printBooksByPatternAuthor("f");
 //        readers.printAllReaders();
 //        library.printBooksOnHands(2);
 //        library.printBooksOnHands(1);
@@ -26,8 +28,8 @@ public class RunLibrary {
     }
 
     private static void testLibrary() {
-        library.addBook(new Encyclopedia("a1", 1999));
-        library.addBook(new Directory("ff", 2222));
+        library.addBook(new Book(DIRECTORY, "a1", 1999));
+        library.addBook(new Book(ENCYCLOPEDIA, "ff", 2222));
         library.printAllBooks();
     }
 

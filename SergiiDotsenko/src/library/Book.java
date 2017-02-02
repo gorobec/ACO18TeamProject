@@ -1,6 +1,6 @@
 package library;
 
-public abstract class Book implements Publication {
+public class Book implements Publication {
     private PublicationType publicationType;
     private String author;
     private int year;
@@ -16,6 +16,7 @@ public abstract class Book implements Publication {
         this.author = author;
         this.year = year;
         bookID = ++totalBooks;
+
     }
 
     public PublicationType getPublicationType() {
