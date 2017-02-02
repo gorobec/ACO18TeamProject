@@ -13,6 +13,7 @@ public class Library {
 
 
     //1) посмотреть список читателей
+    //7) посмотреть список печатных изданий, которые находятся у конкретного читателя
     public StringBuilder showReaders() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < readers.size(); i++) {
@@ -22,10 +23,18 @@ public class Library {
         return str;
     }
 
-    //4) добавить читателя в список читателей
-    public boolean addReader(Reader reader) {
-        readers.add(reader);
-        return true;
+    //2) посмотреть список доступных конкретных печатных изданий
+    public StringBuilder availableEdition(String name) {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < editions.size(); i++) {
+            Edition temp = (Edition) editions.get(i);
+
+            if ( temp.name.equals(name) && temp.kolvo > 0 ){
+                str.append(temp).append("\n");
+            }
+        }
+        return str;
     }
 
     //3) добавить печатное издание в библиотеку
@@ -34,6 +43,14 @@ public class Library {
         return true;
     }
 
+    //4) добавить читателя в список читателей
+    public boolean addReader(Reader reader) {
+        readers.add(reader);
+        return true;
+    }
+
+    //5) выдать печатное издание читателю (если книга есть в наличии).
+    //Читателю запрещается брать больше 3-х печатных изданий.
     public boolean issueEdition(Reader reader, Edition edition) {
         if (editions.contains(edition)) {
             if (reader.editions.size() >= 3 || blackList.contains(reader)) {
@@ -48,25 +65,7 @@ public class Library {
         return false;
     }
 
-    public void showEdition() {
-        for (int i = 0; i < editions.size(); i++) {
-            System.out.println(editions.get(i));
-        }
-    }
-
-    public StringBuilder availableEdition(String name) {
-        StringBuilder str = new StringBuilder();
-
-        for (int i = 0; i < editions.size(); i++) {
-            Edition temp = (Edition) editions.get(i);
-
-            if ( temp.name.equals(name) && temp.kolvo > 0 ){
-                str.append(temp).append("\n");
-            }
-        }
-        return str;
-    }
-
+    //6) посмотреть список печатных изданий, которые находятся у читателей
     public StringBuilder showEditionsOfReaders(){
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < readers.size(); i++) {
@@ -80,6 +79,7 @@ public class Library {
         return str;
     }
 
+    //8) добавить читателя в черный список (ему нельзя выдавать печатные издания)
     public boolean addReaderToBlackList(Reader reader){
         if (!readers.contains(reader)){
             System.out.println("Такого читателя нет");
@@ -89,6 +89,7 @@ public class Library {
         return true;
     }
 
+    //9) посмотреть печатные издания конкретного автора
     public StringBuilder showEditionsByAuthor(String author){
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < editions.size(); i++) {
@@ -103,7 +104,7 @@ public class Library {
         return str;
     }
 
-
+    //11) посмотреть печатные издания конкретного года
     public StringBuilder showEditionsByYear(int year){
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < editions.size(); i++) {
@@ -118,7 +119,16 @@ public class Library {
         return str;
     }
 
+
+    //для отладки
     void showBlackList(){
+        for (int i = 0; i < editions.size(); i++) {
+            System.out.println(editions.get(i));
+        }
+    }
+
+    //для отладки
+    public void showEdition() {
         for (int i = 0; i < editions.size(); i++) {
             System.out.println(editions.get(i));
         }
