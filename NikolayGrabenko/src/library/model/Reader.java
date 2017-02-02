@@ -40,10 +40,6 @@ public class Reader {
         return counterOfPrintEds;
     }
 
-    public void setCounterOfPrintEds(int counterOfPrintEds) {
-        this.counterOfPrintEds = counterOfPrintEds;
-    }
-
     public boolean isInBlackList() {
         return isInBlackList;
     }
