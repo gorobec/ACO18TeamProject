@@ -109,7 +109,7 @@ public class Reader {
         return true;
     }
 
-    public boolean returnBook(Magazine magazine) {
+    public boolean returnMagazine(Magazine magazine) {
         takenMagazines.remove(magazine);
         currentItemsInHands--;
         return true;
