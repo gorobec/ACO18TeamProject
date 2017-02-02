@@ -13,12 +13,14 @@ public class Reader {
     private int age;
     private int countPrintEditions = 0;
     private MyArrayList readerPrintEditions;
+    private boolean isInBlackList = false;
 
     public Reader(String name, String surname, int age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.readerPrintEditions = new MyArrayList();
+        this.isInBlackList = false;
     }
 
     public boolean addPrintEditionForReader(PrintEdition printEdition) {
@@ -45,6 +47,14 @@ public class Reader {
 
     public int getCountPrintEditions(){
         return  countPrintEditions;
+    }
+
+    public boolean getIsInBlackList() {
+        return isInBlackList;
+    }
+
+    public void setInBlackList(boolean inBlackList) {
+        isInBlackList = inBlackList;
     }
 
     public String showReaderPrintEditions() {

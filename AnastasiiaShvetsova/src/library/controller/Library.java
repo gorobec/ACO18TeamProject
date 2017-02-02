@@ -15,28 +15,26 @@ import java.util.Comparator;
  * Created by anastasiia.shvetsova on 1/30/2017.
  */
 public class Library implements AddItemAble, Showable {
-    MyArrayList readers;
-    MyArrayList books;
-    MyArrayList printEditions;
-    MyArrayList printEditionsHasReaders;
-    MyArrayList printEditionsCurrentAuthor;
-    MyArrayList printEditionsCurrentYear;
-    MyArrayList blackLists;
-    int countBooks = 0;
-    int countPrintEditions = 0;
-    int counReaderPrintEditions;
-    int countReaders = 0;
+    private MyArrayList readers;
+    private MyArrayList printEditions;
+    private MyArrayList printEditionsHasReaders;
+    private MyArrayList blackLists;
+    private  int countPrintEditions = 0;
+    private  int counReaderPrintEditions;
+    private  int countReaders = 0;
 
     Comparator comparatorPrintEditionsByName = new ComparatorPrintEditionByName();
-    Comparator comparatorByName  = new ComparatorReaderByName();
+    Comparator comparatorByName = new ComparatorReaderByName();
 
     public Library() {
         this.readers = new MyArrayList();
         this.printEditions = new MyArrayList();
         this.printEditionsHasReaders = new MyArrayList();
         this.blackLists = new MyArrayList();
-        this.printEditionsCurrentAuthor = new MyArrayList();
-        this.printEditionsCurrentYear = new MyArrayList();
+    }
+
+    public MyArrayList getBlackLists() {
+        return blackLists;
     }
 
     public boolean addReader(Reader reader) {
@@ -73,10 +71,19 @@ public class Library implements AddItemAble, Showable {
         if (counReaderPrintEditions == 3 || counReaderPrintEditions > 3) return false;
         printEditionsHasReaders.add(printEdition);
         counReaderPrintEditions++;
+        PrintEdition tmpPrintEdition = null;
+        for (int i = 0; i < printEditions.size(); i++) {
+            if ((printEditions.get(i) != null)) {
+                if (printEditions.get(i).equals(printEdition)) {
+                    tmpPrintEdition = (PrintEdition) printEditions.get(i);
+                }
+            }
+        }
         for (int i = 0; i < readers.size(); i++) {
             if ((readers.get(i) != null)) {
                 if (readers.get(i).equals(reader)) {
-                    reader.addPrintEditionForReader(printEdition);
+                    Reader tmpReader = (Reader) readers.get(i);
+                    tmpReader.addPrintEditionForReader(tmpPrintEdition);
                     return true;
                 }
             }
@@ -98,18 +105,20 @@ public class Library implements AddItemAble, Showable {
     }
 
     public boolean addReaderToBlackList(Reader reader) {
-        if (!checkReader(reader)){
+        if (!checkReader(reader)) {
+            reader.setInBlackList(true);
             blackLists.add(reader);
             return true;
         }
-       return false;
+        return false;
     }
 
     public boolean checkReader(Reader reader) {
-        return blackLists.contains(reader);
+        return reader.getIsInBlackList();
     }
 
     public String showPrintEditionCurrentAuthor(Author author) {
+        MyArrayList printEditionsCurrentAuthor = new MyArrayList();
         sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions, printEditions);
         for (int i = 0; i < printEditions.size(); i++) {
             PrintEdition tmp = (PrintEdition) printEditions.get(i);
@@ -122,10 +131,11 @@ public class Library implements AddItemAble, Showable {
     }
 
     public String showPrintEditionCurrentYear(int year) {
+        MyArrayList printEditionsCurrentYear = new MyArrayList();
         sortPrintEditions(comparatorPrintEditionsByName, countPrintEditions, printEditions);
         for (int i = 0; i < printEditions.size(); i++) {
             PrintEdition tmp = (PrintEdition) printEditions.get(i);
-            if (tmp.getYear() == year )  {
+            if (tmp.getYear() == year) {
                 printEditionsCurrentYear.add(tmp);
             }
 
@@ -163,7 +173,7 @@ public class Library implements AddItemAble, Showable {
         if (str.equals("")) return false;
         for (int i = 0; i < countPrintEditions; i++) {
             PrintEdition tmp = (PrintEdition) printEditions.get(i);
-            if(tmp.getName().toLowerCase().contains(str.toLowerCase())){
+            if (tmp.getName().toLowerCase().contains(str.toLowerCase())) {
                 return true;
             }
         }
