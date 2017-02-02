@@ -14,19 +14,19 @@ public class Run {
         colors.add("yellow");
         colors.printList();
 
-        colors.add(1,"orange");
+      //  colors.add(1,"orange");
+       // colors.printList();
+       // System.out.println(colors.get(5));
+        //System.out.println(colors.remove(2));
+        //colors.printList();
+        System.out.println(colors.remove("blue"));
         colors.printList();
-        System.out.println(colors.get(5));
-        colors.remove(2);
-        colors.printList();
-        colors.remove("black");
-        colors.printList();
-        colors.set(0, "green");
-        colors.printList();
-        System.out.println(colors.contains("white"));
-        System.out.println(colors.contains("red"));
+       // colors.set(0, "green");
+       // colors.printList();
+       // System.out.println(colors.contains("white"));
+        //System.out.println(colors.contains("red"));
 
-        System.out.println(colors.size());
+        //System.out.println(colors.size());
 
 
     }
