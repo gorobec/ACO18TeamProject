@@ -1,11 +1,9 @@
 package ACO.week2.homework.library.view;
 
-import ACO.week2.homework.library.controller.LibraryPEController;
-import ACO.week2.homework.library.controller.LibraryReaderController;
+import ACO.week2.homework.library.controller.*;
 import ACO.week2.homework.library.model.Library;
 import ACO.week2.homework.library.utils.Utils;
-import ACO.week2.homework.library.view.menu.MenuPrintedEditions;
-import ACO.week2.homework.library.view.menu.MenuReader;
+import ACO.week2.homework.library.view.menu.*;
 
 import java.util.Scanner;
 

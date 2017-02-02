@@ -2,10 +2,8 @@ package ACO.week2.homework.library.controller;
 
 import ACO.data_structures.MyArrayList;
 import ACO.week2.homework.library.controller.interfaces.ILibraryPEController;
-import ACO.week2.homework.library.model.Library;
-import ACO.week2.homework.library.model.Reader;
-import ACO.week2.homework.library.model.printed_editions.Genre;
-import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
+import ACO.week2.homework.library.model.*;
+import ACO.week2.homework.library.model.printed_editions.*;
 import ACO.week2.homework.library.utils.Utils;
 
 import java.util.Comparator;
@@ -88,7 +86,7 @@ public class LibraryPEController implements ILibraryPEController {
     }
 
     public boolean givePrintedEditionToReader(Reader reader, PrintedEdition printedEdition) {
-        if (library.getBlackList().contains(reader)) {
+        if (reader.isInBlackList()) {
             System.out.println("Reader in blacklist");
             return false;
         }

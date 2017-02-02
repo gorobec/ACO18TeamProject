@@ -1,7 +1,7 @@
 package ACO.week2.homework.library.model;
 
 import ACO.data_structures.MyArrayList;
-import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
+import ACO.week2.homework.library.model.printed_editions.*;
 
 /**
  * Created by v21k on 31.01.17.
@@ -10,7 +10,8 @@ public class Reader {
     private String name;
     private MyArrayList printedEditions = new MyArrayList();
     private int currentPrintedEditionsNumber = 0;
-    private int maxPrintedEditionsPerReader = 3;
+    private final int MAX_PRINTED_EDITIONS_PER_READER = 3;
+    private boolean inBlackList;
 
     public Reader(String name, int currentPrintedEditionsNumber) {
         this.name = name;
@@ -25,32 +26,28 @@ public class Reader {
         return name;
     }
 
-    public int getCurrentPrintedEditionsNumber() {
-        return currentPrintedEditionsNumber;
+    public MyArrayList getPrintedEditions() {
+        return printedEditions;
+    }
+
+    public void setInBlackList(boolean inBlackList) {
+        this.inBlackList = inBlackList;
     }
 
     public void setCurrentPrintedEditionsNumber(int currentPrintedEditionsNumber) {
         this.currentPrintedEditionsNumber = currentPrintedEditionsNumber;
     }
 
-    public MyArrayList getPrintedEditions() {
-        return printedEditions;
-    }
-
-    public void setMaxPrintedEditionsPerReader(int maxPrintedEditionsPerReader) {
-        this.maxPrintedEditionsPerReader = maxPrintedEditionsPerReader;
+    public boolean isInBlackList() {
+        return inBlackList;
     }
 
     public boolean addPrintedEdition(PrintedEdition printedEdition) {
-        if (currentPrintedEditionsNumber < maxPrintedEditionsPerReader) {
+        if (currentPrintedEditionsNumber < MAX_PRINTED_EDITIONS_PER_READER) {
             currentPrintedEditionsNumber++;
             return printedEditions.add(printedEdition);
         }
         return false;
-    }
-
-    public void removePrintedEdition(PrintedEdition printedEdition) {
-        printedEditions.remove(printedEdition);
     }
 
     @Override

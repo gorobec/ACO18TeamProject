@@ -1,7 +1,7 @@
 package ACO.week2.homework.library.model;
 
 import ACO.data_structures.MyArrayList;
-import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
+import ACO.week2.homework.library.model.printed_editions.*;
 
 /**
  * Created by v21k on 31.01.17.
@@ -10,7 +10,6 @@ public class Library {
     private String name;
     private String city;
     private MyArrayList readers = new MyArrayList();
-    private MyArrayList blackList = new MyArrayList();
     private MyArrayList printedEditionsInLibrary = new MyArrayList();
 
     public Library() {
@@ -43,10 +42,6 @@ public class Library {
         return readers;
     }
 
-    public MyArrayList getBlackList() {
-        return blackList;
-    }
-
     public MyArrayList getPrintedEditionsInLibrary() {
         return printedEditionsInLibrary;
     }
@@ -54,14 +49,6 @@ public class Library {
     public boolean addReader(Reader reader) {
         if (reader != null) {
             return readers.add(reader);
-        }
-        return false;
-    }
-
-    public boolean addReaderToBlackList(Reader reader) {
-        if (!blackList.contains(reader) && readers.contains(reader) && reader != null) {
-            blackList.add(reader);
-            return true;
         }
         return false;
     }

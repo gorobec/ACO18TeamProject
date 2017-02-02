@@ -2,8 +2,7 @@ package ACO.week2.homework.library.controller;
 
 import ACO.week2.homework.library.comparators.ReaderByNameComparator;
 import ACO.week2.homework.library.controller.interfaces.ILibraryReaderController;
-import ACO.week2.homework.library.model.Library;
-import ACO.week2.homework.library.model.Reader;
+import ACO.week2.homework.library.model.*;
 import ACO.week2.homework.library.utils.Utils;
 
 import java.util.Arrays;
@@ -33,7 +32,8 @@ public class LibraryReaderController implements ILibraryReaderController {
     }
 
     public boolean addReaderToBlackList(Reader reader) {
-        return library.addReaderToBlackList(reader);
+        reader.setInBlackList(true);
+        return true;
     }
 
     public String showAllReaders() {
