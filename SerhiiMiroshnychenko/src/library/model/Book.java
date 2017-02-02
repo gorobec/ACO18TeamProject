@@ -28,6 +28,8 @@ public class Book extends PrintedEdition {
         return String.format("%s, %s, %s, %s", author, bookName, super.getEditionName(), super.getDate());
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

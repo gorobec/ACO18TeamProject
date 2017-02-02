@@ -29,7 +29,8 @@ public class Library {
     public int findBook(PrintedEdition book){
         for (int i = 0; i < printedEditions.size(); i++) {
             if (printedEditions.get(i).equals(book)){
-                return i;
+                if(printedEditions.get(i).getCopiesCount() > 0)
+                    return i;
             }
         }
         return -1;
@@ -39,13 +40,21 @@ public class Library {
         Book temp = (Book) book;
         int readerIndex = findReader(reader);
         int bookIndex = findBook(book);
-        int itemsInHands = readers.get(readerIndex).getCurrentItemsInHands();
-        if (readerIndex == -1) return false;
-        if (bookIndex == -1) return false;
-        readers.get(readerIndex).getTakenBooks().add(temp);
-        itemsInHands++;
-        readers.get(readerIndex).setCurrentItemsInHands(itemsInHands);
+        int bookCopies = book.getCopiesCount();
+
+        if (readerIndex == -1 || bookIndex == -1) return false;
+        readers.get(readerIndex).takeBook(temp);
         return true;
     }
 
+    public boolean takeBook (Reader reader, PrintedEdition book){
+        Book temp = (Book) book;
+        int copies = book.getCopiesCount();
+        int readerIndex = findReader(reader);
+        int bookIndex = findBook(book);
+        int bookCopies = book.getCopiesCount();
+        readers.get(readerIndex).returnBook(temp);
+        book.setCopiesCount(copies + 1);
+        return true;
+    }
 }

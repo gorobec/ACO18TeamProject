@@ -69,6 +69,8 @@ public class Reader {
 
     public void setTakenBooks(ArrayList<Book> takenBooks) {
         this.takenBooks = takenBooks;
+
+
     }
 
     public ArrayList<Magazine> getTakenMagazines() {
@@ -86,4 +88,32 @@ public class Reader {
     public void setCurrentItemsInHands(int currentItemsInHands) {
         this.currentItemsInHands = currentItemsInHands;
     }
+
+    public boolean takeBook(Book book) {
+        if (book == null || currentItemsInHands == MAX_ITEMS_IN_HANDS) return false;
+        takenBooks.add(book);
+        currentItemsInHands++;
+        return true;
+    }
+
+    public boolean takeMagazine(Magazine magazine) {
+        if (magazine == null || currentItemsInHands == MAX_ITEMS_IN_HANDS) return false;
+        takenMagazines.add(magazine);
+        currentItemsInHands++;
+        return true;
+    }
+
+    public boolean returnBook(Book book) {
+        takenBooks.remove(book);
+        currentItemsInHands--;
+        return true;
+    }
+
+    public boolean returnBook(Magazine magazine) {
+        takenMagazines.remove(magazine);
+        currentItemsInHands--;
+        return true;
+    }
+
+
 }

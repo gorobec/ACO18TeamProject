@@ -31,4 +31,7 @@ public class PrintedEdition extends Edition{
         return copiesCount;
     }
 
+    public void setCopiesCount(int copiesCount) {
+        this.copiesCount = copiesCount;
+    }
 }

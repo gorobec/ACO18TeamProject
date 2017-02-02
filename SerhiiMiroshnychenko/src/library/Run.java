@@ -48,6 +48,9 @@ public class Run {
 
         System.out.println(reader3.getTakenBooks().toString());
 
+        lib.takeBook(reader1, book1);
+        System.out.println(reader1.getTakenBooks().toString());
+
 
     }
 }
