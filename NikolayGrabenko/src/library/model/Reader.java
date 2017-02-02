@@ -11,7 +11,7 @@ public class Reader {
     private boolean isInBlackList = false;
     private int counterOfPrintEds;
 
-    ArrayListMy readerEditions = new ArrayListMy();
+   private ArrayListMy readerEditions = new ArrayListMy();
 
     public Reader(String name, String surName, int age, String homeAddress) {
         this.name = name;

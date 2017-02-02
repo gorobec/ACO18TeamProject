@@ -17,11 +17,6 @@ public class Library {
         return printedEditionsBase;
     }
 
-    public ArrayListMy getRegisteredReaders() {
-        return registeredReaders;
-    }
-
-
     public Library() {
         printedEditionsBase = new ArrayListMy();
         registeredReaders = new ArrayListMy();
@@ -148,7 +143,7 @@ public class Library {
     // 4)добавить читателя в список читателей
     public boolean addReader(Reader reader) {
         boolean wasAdded = false;
-        if (!isRegistered(reader) && reader != null) {
+        if ( !isRegistered(reader) && reader != null) {
             registeredReaders.add(reader);
             wasAdded = true;
         }
@@ -161,7 +156,7 @@ public class Library {
         boolean canLoan = false;
         if (edition != null && reader.getCounterOfPrintEds() < 3 &&
                 !reader.isInBlackList() && isAvailablePrintEds(edition )&&
-                reader.isEditionInReaderList(edition)==false) {
+                !reader.isEditionInReaderList(edition)) {
             reader.addPrintedEditionToList(edition);
             edition.setNumberOfCopiesAvailable(edition.getNumberOfCopiesAvailable() - 1);
             edition.setNumberOfCopiesAtReader(edition.getNumberOfCopiesAtReader() + 1);

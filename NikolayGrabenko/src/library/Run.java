@@ -35,7 +35,6 @@ public class Run {
         library.addReader(reader2);
         library.addReader(reader3);
 
-
         // 1) посмотреть список читателей
         System.out.println("Добавлено 3 читателя (отсортировано по имени):");
         library.showAllRegisteredReaders(new ReaderNameComparator());
