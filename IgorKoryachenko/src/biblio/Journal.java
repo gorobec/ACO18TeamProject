@@ -6,13 +6,15 @@ package biblio;
 public class Journal extends Edition {
     private int number;
     private int year;
-    private int kolvo;
 
-    public Journal(String name, int number, int year, int kolvo) {
-        super(name);
+    public Journal(String name, int kolvo, int number, int year) {
+        super(name, kolvo);
         this.number = number;
         this.year = year;
-        this.kolvo = kolvo;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     @Override

@@ -6,12 +6,15 @@ package biblio;
 public class Book extends Edition {
 
     private String author;
-    private int kolvo;
 
-    public Book(String name, String author, int kolvo) {
-        super(name);
+
+    public Book(String name, int kolvo, String author) {
+        super(name, kolvo);
         this.author = author;
-        this.kolvo = kolvo;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     @Override

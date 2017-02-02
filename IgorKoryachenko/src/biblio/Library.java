@@ -6,28 +6,29 @@ import week1.homeWork.implementAL.ArrList;
  * Created by Мастер on 29.01.2017.
  */
 public class Library {
-    /*private ArrList books;
-    ArrList editions;*/
-
-    private ArrList readers;
-
-    ArrList books = new ArrList();
+    ArrList readers = new ArrList();
+    ArrList blackList = new ArrList();
+    ArrList journals  = new ArrList();
     ArrList editions = new ArrList();
 
+
+    //1) посмотреть список читателей
     public StringBuilder showReaders() {
-        Reader reader = new Reader();
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < readers.size(); i++) {
+            Reader reader = (Reader) readers.get(i);
             str.append(reader.showReader());
         }
         return str;
     }
 
+    //4) добавить читателя в список читателей
     public boolean addReader(Reader reader) {
         readers.add(reader);
         return true;
     }
 
+    //3) добавить печатное издание в библиотеку
     public boolean addEditions(Edition edition) {
         editions.add(edition);
         return true;
@@ -35,11 +36,12 @@ public class Library {
 
     public boolean issueEdition(Reader reader, Edition edition) {
         if (editions.contains(edition)) {
-            if (reader.editions.size() >= 3) {
+            if (reader.editions.size() >= 3 || blackList.contains(reader)) {
                 System.out.println("Достаточно. Читай что взял");
                 return false;
             } else {
                 reader.editions.add(edition);
+                edition.kolvo--;
                 return true;
             }
         }
@@ -54,15 +56,74 @@ public class Library {
 
     public StringBuilder availableEdition(String name) {
         StringBuilder str = new StringBuilder();
+
         for (int i = 0; i < editions.size(); i++) {
+            Edition temp = (Edition) editions.get(i);
 
-
-            //if ((Edition) editions.get(i).get );
-
+            if ( temp.name.equals(name) && temp.kolvo > 0 ){
+                str.append(temp).append("\n");
+            }
         }
-            return str;
-
+        return str;
     }
+
+    public StringBuilder showEditionsOfReaders(){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < readers.size(); i++) {
+            Reader reader = (Reader) readers.get(i);
+
+            for (int j = 0; j < reader.editions.size(); j++) {
+                Edition temp = (Edition) reader.editions.get(j);
+                str.append(temp).append("\n");
+            }
+        }
+        return str;
+    }
+
+    public boolean addReaderToBlackList(Reader reader){
+        if (!readers.contains(reader)){
+            System.out.println("Такого читателя нет");
+            return false;
+        }
+        blackList.add(reader);
+        return true;
+    }
+
+    public StringBuilder showEditionsByAuthor(String author){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < editions.size(); i++) {
+            Edition temp = (Edition) editions.get(i);
+            if (temp.getClass().getName().equals("biblio.Book")){
+                Book book = (Book) editions.get(i);
+                if (book.getAuthor().equals(author)){
+                    str.append(temp).append("\n");
+                }
+            }
+        }
+        return str;
+    }
+
+
+    public StringBuilder showEditionsByYear(int year){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < editions.size(); i++) {
+            Edition temp = (Edition) editions.get(i);
+            if (temp.getClass().getName().equals("biblio.Journal")){
+                Journal journal = (Journal) editions.get(i);
+                if (journal.getYear() == year){
+                    str.append(temp).append("\n");
+                }
+            }
+        }
+        return str;
+    }
+
+    void showBlackList(){
+        for (int i = 0; i < editions.size(); i++) {
+            System.out.println(editions.get(i));
+        }
+    }
+
 
 
 }
