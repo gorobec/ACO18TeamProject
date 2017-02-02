@@ -13,7 +13,7 @@ public class MyArrayList {
     private int count = 0;
 
     public MyArrayList() {
-        this.objects = DEFAULT;
+        this.objects = new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
     }
 
@@ -48,7 +48,9 @@ public class MyArrayList {
     public void add(int index, Object o){
         indexCheckForAdd(index);
 
-        ensureCapacity(1);
+        if (count == size) {
+            ensureCapacity(5);
+        }
         System.arraycopy(objects,index,objects, index+1,size - index-1);
         objects[index] = o;
         count++;
