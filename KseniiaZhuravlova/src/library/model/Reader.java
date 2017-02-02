@@ -17,6 +17,8 @@ public class Reader {
     private String surname;
     private GregorianCalendar birthday;
     private MyArrayList editions;
+    private boolean isInBlackList;
+    private static final int MAX_BOOK_TO_HAVE = 3;
 
 
     public Reader(int id, String name, String surname, int year, int month, int day) {
@@ -45,26 +47,33 @@ public class Reader {
 
     public int getId(){ return id; }
 
+    public boolean isInBlackList() { return isInBlackList; }
+
+    public void setInBlackList(boolean inBlackList) {
+        isInBlackList = inBlackList;
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Reader reader = (Reader) o;
+        Reader reader = (Reader) object;
 
         if (name != null ? !name.equals(reader.name) : reader.name != null) return false;
         if (surname != null ? !surname.equals(reader.surname) : reader.surname != null) return false;
-        if (birthday != null ? !birthday.equals(reader.birthday) : reader.birthday != null) return false;
-        return editions != null ? editions.equals(reader.editions) : reader.editions == null;
+        return birthday != null ? birthday.equals(reader.birthday) : reader.birthday == null;
 
     }
 
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 
-    public boolean addEdition(Edition edition){
-        if(editions.size()>=3) return false;
-        editions.add(edition);
-        return true;
+    public boolean addEdition(Edition edition) {
+        if (isInBlackList || editions.size() >= MAX_BOOK_TO_HAVE) {return false;}
+        return editions.add(edition);
     }
 
     public int getNumberOfEditions(){

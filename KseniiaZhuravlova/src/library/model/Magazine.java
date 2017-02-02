@@ -3,52 +3,34 @@ package library.model;
 /**
  * Created by ksyashka on 31.01.2017.
  */
-public class Magazine implements Edition {
-    private String name;
-    private int year;
+public class Magazine extends Edition {
     private int month;
-    private int number;
-    private String redactor;
 
     public Magazine(String name, String redactor, int year, int month, int number) {
-        this.name = name;
-        this.redactor = redactor;
-        this.year = year;
+        super(name, redactor, year, number);
         this.month = month;
-        this.number = number;
-    }
-    @Override
-    public String getAuthor(){
-        return redactor;
-    }
-    @Override
-    public String getName() {
-        return name;
     }
 
-    @Override
-    public int getYear() {
-        return year;
-    }
-
-    @Override
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    @Override
-    public int getNumber() {
-        return number;
-    }
-
-    @Override
-    public boolean isAvaible() {
-        return number > 0;
+    public int getMonth() {
+        return month;
     }
 
     @Override
     public String toString() {
-        return String.format("Magazine: name - %20s, redactor - %10s, year - %5d, number - %3d", name, redactor, year, number);
+        return String.format("Magazine: name - %20s, redactor - %10s, year - %5d, month - %3d, number - %3d", getName(), getAuthor(),
+                getYear(),month, getNumber());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Magazine magazine = (Magazine) o;
+
+        if (month == magazine.month) return super.equals(o);
+        return false;
+
     }
 
 }

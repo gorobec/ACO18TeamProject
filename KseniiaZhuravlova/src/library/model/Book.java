@@ -3,51 +3,27 @@ package library.model;
 /**
  * Created by ksyashka on 31.01.2017.
  */
-public class Book implements Edition{
-    private String name;
-    private String author;
-    private int year;
-    private int number;
+public class Book extends Edition {
+    private Genre genre;
 
-    public Book(String name, String author, int year, int number) {
-        this.name = name;
-        this.author = author;
-        this.year = year;
-        this.number = number;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public String getAuthor(){
-        return author;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    @Override
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    @Override
-    public int getNumber() {
-        return number;
-    }
-
-
-    @Override
-    public boolean isAvaible() {
-        return number>0;
+    public Book(String name, String author, int year, int number, Genre genre) {
+        super(name, author, year, number);
+        this.genre = genre;
     }
 
     @Override
     public String toString() {
-        return String.format("Book: name - %30s, author - %20s, year - %5d, number - %3d", name, author, year, number);
+        return String.format("Book: name - %30s, author - %20s, year - %5d, genre - %8s, number - %3d", getName(),
+                getAuthor(), getYear(), genre, getNumber());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        if (genre == book.genre) return super.equals(o);
+        return false;
     }
 
 }
