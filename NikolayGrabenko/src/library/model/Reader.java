@@ -11,7 +11,7 @@ public class Reader {
     private boolean isNotInBlackList = true;
     private int counterOfPrintEds;
 
-   private ArrayListMy readerEditions = new ArrayListMy();
+    private ArrayListMy readerEditions = new ArrayListMy();
 
     public Reader(String name, String surName, int age, String homeAddress) {
         this.name = name;
@@ -73,9 +73,9 @@ public class Reader {
 
     public boolean addPrintedEditionToList(PrintedEditions edition) {
         boolean wasAdded = false;
-        if (edition != null ) {
+        if (edition != null) {
             readerEditions.add(edition);
-            counterOfPrintEds ++;
+            counterOfPrintEds++;
             wasAdded = true;
         }
         return wasAdded;

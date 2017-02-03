@@ -1,30 +1,37 @@
 package library.comparators;
 
 import library.model.Reader;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
+
 public class TestReaderAgeComparator {
 
-    private Object o1;
-    private Object o2;
+    private Reader reader1;
+    private Reader reader2;
+    private ReaderAgeComparator comp;
 
     @Before
     public void setUp() {
-        o1 = new Object();
-        o2 = new Object();
+        reader1 = new Reader("Will", "Smith", 40, "Kiev, Kreschatyk 17");
+        reader2 = new Reader("Jared", "Smith", 18, "Kiev, Kreschatyk 17");
+        comp = new ReaderAgeComparator();
     }
 
     @After
-    public void tearDown(){
-        o1 = null;
-        o1 = null;
+    public void tearDown() {
+        reader1 = null;
+        reader2 = null;
+        comp = null;
     }
 
     @Test
-    public void testCompareTo() {
+    public void testCompareAge() {
+        assertFalse((comp.compare(reader1, reader2)) == 0);
+    }
 
+    @Test(expected = NullPointerException.class)
+    public void testCompareAgeNull() {
+        assertFalse((comp.compare(reader1, null)) == 0);
     }
 }

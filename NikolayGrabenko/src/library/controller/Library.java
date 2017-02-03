@@ -94,43 +94,58 @@ public class Library {
 
     // 1)посмотреть список читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showAllRegisteredReaders(Comparator comparator) {
+    public boolean showAllRegisteredReaders(Comparator comparator) {
         sortReadersByComparator(comparator);
+        boolean canShow = false;
+        int readerCounter = 0;
         for (int i = 0; i < registeredReaders.size(); i++) {
             if (registeredReaders.get(i) != null) {
                 Reader reader = (Reader) registeredReaders.get(i);
+                readerCounter++;
+                canShow = true;
                 System.out.println(reader.showReader());
             }
         }
+        return canShow = readerCounter > 0;
     }
 
     // 2)посмотреть список доступных конкретных печатных изданий(универсальный метод )
     // 6)посмотреть список печатных изданий,которые находятся у читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditions(Comparator comparator) {
+    public boolean showPrintedEditions(Comparator comparator) {
         sortPrintedEditionByComparator(comparator);
+        boolean canShow = false;
+        int editionCounter = 0;
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
+                editionCounter++;
+                canShow = true;
                 System.out.println(String.format("Издание - %s, количество в библиотеке - %d, у читателей - %d",
                         edition.showEdition(), edition.getNumberOfCopiesAvailable(), edition.getNumberOfCopiesAtReader()));
             }
         }
+        return canShow = editionCounter > 0;
     }
 
     // 2)посмотреть список доступных конкретных печатных изданий
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditionsAvailable(Comparator comparator) {
+    public boolean showPrintedEditionsAvailable(Comparator comparator) {
         sortPrintedEditionByComparator(comparator);
+        boolean canShow = false;
+        int editionCounter = 0;
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 if (edition.getNumberOfCopiesAvailable() > 0) {
+                    canShow = true;
+                    editionCounter++;
                     System.out.println(String.format("Издание - %s, количество доступно - %d",
                             edition.showEdition(), edition.getNumberOfCopiesAvailable()));
                 }
             }
         }
+        return canShow = editionCounter > 0;
     }
 
     // 3)добавить печатное издание в библиотеку
@@ -170,17 +185,22 @@ public class Library {
 
     // 6)посмотреть список печатных изданий,которые находятся у читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditionsAtReaders(Comparator comparator) {
+    public boolean showPrintedEditionsAtReaders(Comparator comparator) {
         sortPrintedEditionByComparator(comparator);
+        int editionCounter = 0;
+        boolean canShow = false;
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 if (edition.getNumberOfCopiesAtReader() > 0) {
+                    editionCounter++;
+                    canShow = true;
                     System.out.println(String.format("Издание - %s, количество у читатилей - %d",
                             edition.showEdition(), edition.getNumberOfCopiesAtReader()));
                 }
             }
         }
+        return canShow = editionCounter > 0;
     }
 
     // 7)посмотреть список печатных изданий,которые находятся у конкретного читателя
@@ -251,8 +271,9 @@ public class Library {
         PrintedEditions foundEdition = null;
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
-                foundEdition = (PrintedEditions) printedEditionsBase.get(i);
-                if (findStringByKeyWord(foundEdition.getName(), keyWord)) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
+                if (findStringByKeyWord(edition.getName(), keyWord)) {
+                    foundEdition=edition;
                     System.out.println(foundEdition.showEdition());
                 }
             }
