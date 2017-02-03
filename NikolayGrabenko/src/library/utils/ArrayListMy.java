@@ -15,7 +15,7 @@ public class ArrayListMy implements ListMy {
 
     private int capacity = 10;
     private int size = 0;
-    Object[] arrayListBody;
+    private Object[] arrayListBody;
 
     public ArrayListMy() {
         arrayListBody = new Object[capacity];
@@ -75,7 +75,7 @@ public class ArrayListMy implements ListMy {
     }
 
     public boolean add(int index, Object o) {
-        if (size < arrayListBody.length - 1) {
+        if (index < arrayListBody.length - 1) {
             System.arraycopy(arrayListBody, index, arrayListBody, index + 1, arrayListBody.length - 1 - index);
             arrayListBody[index] = o;
             size++;
