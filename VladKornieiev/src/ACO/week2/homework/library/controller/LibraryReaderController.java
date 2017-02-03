@@ -6,6 +6,7 @@ import ACO.week2.homework.library.model.*;
 import ACO.week2.homework.library.utils.Utils;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by v21k on 31.01.17.
@@ -42,12 +43,11 @@ public class LibraryReaderController implements ILibraryReaderController {
             return "No readers";
         }
 
-        Reader[] readers = Utils.readersToArray(library.getReaders());
-        Arrays.sort(readers, new ReaderByNameComparator());
+        Collections.sort(library.getReaders(), new ReaderByNameComparator());
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < readers.length; i++) {
-            sb.append(i + 1).append(": ").append(readers[i].toString()).append("\n");
+        for (int i = 0; i < library.getReaders().size(); i++) {
+            sb.append(i + 1).append(": ").append(library.getReaders().get(i).toString()).append("\n");
         }
         return sb.toString();
     }

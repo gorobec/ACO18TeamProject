@@ -1,14 +1,16 @@
 package ACO.week2.homework.library.model;
 
-import ACO.data_structures.MyArrayList;
+import java.util.ArrayList;
+import java.util.List;
 import ACO.week2.homework.library.model.printed_editions.*;
+
 
 /**
  * Created by v21k on 31.01.17.
  */
 public class Reader {
     private String name;
-    private MyArrayList printedEditions = new MyArrayList();
+    private List<PrintedEdition> printedEditions = new ArrayList<>();
     private int currentPrintedEditionsNumber = 0;
     private final int MAX_PRINTED_EDITIONS_PER_READER = 3;
     private boolean inBlackList;
@@ -26,20 +28,32 @@ public class Reader {
         return name;
     }
 
-    public MyArrayList getPrintedEditions() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List getPrintedEditions() {
         return printedEditions;
+    }
+
+    public void setPrintedEditions(List<PrintedEdition> printedEditions) {
+        this.printedEditions = printedEditions;
     }
 
     public void setInBlackList(boolean inBlackList) {
         this.inBlackList = inBlackList;
     }
 
-    public void setCurrentPrintedEditionsNumber(int currentPrintedEditionsNumber) {
-        this.currentPrintedEditionsNumber = currentPrintedEditionsNumber;
-    }
-
     public boolean isInBlackList() {
         return inBlackList;
+    }
+
+    public int getCurrentPrintedEditionsNumber() {
+        return currentPrintedEditionsNumber;
+    }
+
+    public void setCurrentPrintedEditionsNumber(int currentPrintedEditionsNumber) {
+        this.currentPrintedEditionsNumber = currentPrintedEditionsNumber;
     }
 
     public boolean addPrintedEdition(PrintedEdition printedEdition) {

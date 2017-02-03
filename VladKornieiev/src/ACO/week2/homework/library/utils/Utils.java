@@ -1,10 +1,10 @@
 package ACO.week2.homework.library.utils;
 
-import ACO.data_structures.MyArrayList;
 import ACO.week2.homework.library.model.*;
 import ACO.week2.homework.library.model.printed_editions.*;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -33,25 +33,24 @@ public class Utils {
         return true;
     }
 
-    public static String showPrintedEditions(MyArrayList al, Comparator comparator) {
+    public static String showPrintedEditions(List<PrintedEdition> al, Comparator comparator) {
 
         if (al.size() == 0) {
             return "No printed editions.";
         }
 
-        PrintedEdition[] printedEditions = printedEditionsToArray(al);
-        Arrays.sort(printedEditions, comparator);
+        Collections.sort(al, comparator);
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < printedEditions.length; i++) {
-            if (printedEditions[i] != null) {
-                sb.append(i + 1).append(": ").append(printedEditions[i].toString()).append("\n");
+        for (int i = 0; i < al.size(); i++) {
+            if (al.get(i) != null) {
+                sb.append(i + 1).append(": ").append(al.get(i).toString()).append("\n");
             }
         }
         return sb.toString();
     }
 
-    public static String showPrintedEditions(MyArrayList al) {
+    public static String showPrintedEditions(List<PrintedEdition> al) {
 
         if (al.size() == 0) {
             return "No printed editions.";
@@ -64,18 +63,18 @@ public class Utils {
         return sb.toString();
     }
 
-    public static Reader[] readersToArray(MyArrayList myArrayList) {
-        Reader[] readers = new Reader[myArrayList.size()];
-        for (int i = 0; i < myArrayList.size(); i++) {
-            readers[i] = (Reader) myArrayList.get(i);
+    public static Reader[] readersToArray(List<Reader> al) {
+        Reader[] readers = new Reader[al.size()];
+        for (int i = 0; i < al.size(); i++) {
+            readers[i] = al.get(i);
         }
         return readers;
     }
 
-    public static PrintedEdition[] printedEditionsToArray(MyArrayList myArrayList) {
-        PrintedEdition[] printedEditions = new PrintedEdition[myArrayList.size()];
-        for (int i = 0; i < myArrayList.size(); i++) {
-            printedEditions[i] = (PrintedEdition) myArrayList.get(i);
+    public static PrintedEdition[] printedEditionsToArray(List<PrintedEdition> al) {
+        PrintedEdition[] printedEditions = new PrintedEdition[al.size()];
+        for (int i = 0; i < al.size(); i++) {
+            printedEditions[i] = al.get(i);
         }
         return printedEditions;
     }
