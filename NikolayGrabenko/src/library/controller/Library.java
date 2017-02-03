@@ -12,9 +12,12 @@ public class Library {
 
     private ArrayListMy registeredReaders;
 
-
     public ArrayListMy getPrintedEditionsBase() {
         return printedEditionsBase;
+    }
+
+    public ArrayListMy getRegisteredReaders() {
+        return registeredReaders;
     }
 
     public Library() {
@@ -47,18 +50,18 @@ public class Library {
         return isAvailablePrintEds;
     }
 
-    public boolean sortPrintedEditionByComparator(ArrayListMy list, Comparator comparator) {
+    public boolean sortPrintedEditionByComparator(Comparator comparator) {
         boolean wasSorted = false;
         int changesCount = 0;
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = list.size() - 1; j > i; j--) {
-                if (list.get(j) != null) {
-                    if (comparator.compare(list.get(j), list.get(j - 1)) < 0) {
-                        PrintedEditions edition1 = (PrintedEditions) list.get(j);
-                        PrintedEditions edition2 = (PrintedEditions) list.get(j - 1);
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            for (int j = printedEditionsBase.size() - 1; j > i; j--) {
+                if (printedEditionsBase.get(j) != null) {
+                    if (comparator.compare(printedEditionsBase.get(j), printedEditionsBase.get(j - 1)) < 0) {
+                        PrintedEditions edition1 = (PrintedEditions) printedEditionsBase.get(j);
+                        PrintedEditions edition2 = (PrintedEditions) printedEditionsBase.get(j - 1);
                         PrintedEditions editionTemp = edition1;
-                        list.set(j, edition2);
-                        list.set(j - 1, editionTemp);
+                        printedEditionsBase.set(j, edition2);
+                        printedEditionsBase.set(j - 1, editionTemp);
                         changesCount++;
                     }
                 }
@@ -68,18 +71,18 @@ public class Library {
         return wasSorted;
     }
 
-    public boolean sortReadersByComparator(ArrayListMy list, Comparator comparator) {
+    public boolean sortReadersByComparator(Comparator comparator) {
         boolean wasSorted = false;
         int changesCount = 0;
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = list.size() - 1; j > i; j--) {
-                if (list.get(j) != null) {
-                    if (comparator.compare(list.get(j), list.get(j - 1)) < 0) {
-                        Reader reader1 = (Reader) list.get(j);
-                        Reader reader2 = (Reader) list.get(j - 1);
+        for (int i = 0; i < registeredReaders.size(); i++) {
+            for (int j = registeredReaders.size() - 1; j > i; j--) {
+                if (registeredReaders.get(j) != null) {
+                    if (comparator.compare(registeredReaders.get(j), registeredReaders.get(j - 1)) < 0) {
+                        Reader reader1 = (Reader) registeredReaders.get(j);
+                        Reader reader2 = (Reader) registeredReaders.get(j - 1);
                         Reader readerTemp = reader1;
-                        list.set(j, reader2);
-                        list.set(j - 1, readerTemp);
+                        registeredReaders.set(j, reader2);
+                        registeredReaders.set(j - 1, readerTemp);
                         changesCount++;
                     }
                 }
@@ -92,7 +95,7 @@ public class Library {
     // 1)посмотреть список читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showAllRegisteredReaders(Comparator comparator) {
-        sortReadersByComparator(registeredReaders, comparator);
+        sortReadersByComparator(comparator);
         for (int i = 0; i < registeredReaders.size(); i++) {
             if (registeredReaders.get(i) != null) {
                 Reader reader = (Reader) registeredReaders.get(i);
@@ -104,11 +107,11 @@ public class Library {
     // 2)посмотреть список доступных конкретных печатных изданий(универсальный метод )
     // 6)посмотреть список печатных изданий,которые находятся у читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditions(ArrayListMy list, Comparator comparator) {
-        sortPrintedEditionByComparator(list, comparator);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) list.get(i);
+    public void showPrintedEditions(Comparator comparator) {
+        sortPrintedEditionByComparator(comparator);
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 System.out.println(String.format("Издание - %s, количество в библиотеке - %d, у читателей - %d",
                         edition.showEdition(), edition.getNumberOfCopiesAvailable(), edition.getNumberOfCopiesAtReader()));
             }
@@ -118,7 +121,7 @@ public class Library {
     // 2)посмотреть список доступных конкретных печатных изданий
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showPrintedEditionsAvailable(Comparator comparator) {
-        sortPrintedEditionByComparator(printedEditionsBase, comparator);
+        sortPrintedEditionByComparator(comparator);
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
@@ -143,7 +146,7 @@ public class Library {
     // 4)добавить читателя в список читателей
     public boolean addReader(Reader reader) {
         boolean wasAdded = false;
-        if ( !isRegistered(reader) && reader != null) {
+        if (!isRegistered(reader) && reader != null) {
             registeredReaders.add(reader);
             wasAdded = true;
         }
@@ -155,7 +158,7 @@ public class Library {
     public boolean loanPrintedEdition(Reader reader, PrintedEditions edition) {
         boolean canLoan = false;
         if (edition != null && reader.getCounterOfPrintEds() < 3 &&
-                !reader.isInBlackList() && isAvailablePrintEds(edition )&&
+                reader.isNotInBlackList() && isAvailablePrintEds(edition) &&
                 !reader.isEditionInReaderList(edition)) {
             reader.addPrintedEditionToList(edition);
             edition.setNumberOfCopiesAvailable(edition.getNumberOfCopiesAvailable() - 1);
@@ -168,7 +171,7 @@ public class Library {
     // 6)посмотреть список печатных изданий,которые находятся у читателей
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public void showPrintedEditionsAtReaders(Comparator comparator) {
-        sortPrintedEditionByComparator(printedEditionsBase, comparator);
+        sortPrintedEditionByComparator(comparator);
         for (int i = 0; i < printedEditionsBase.size(); i++) {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
@@ -196,8 +199,8 @@ public class Library {
     // 8)добавить читателя в черный список(ему нельзя выдавать печатные издания)
     public boolean addToBlackList(Reader reader) {
         boolean wasAdded = false;
-        if (reader != null && !reader.isInBlackList()) {
-            reader.setInBlackList(true);
+        if (reader != null && reader.isNotInBlackList()) {
+            reader.setNotInBlackList(false);
             wasAdded = true;
         }
         return wasAdded;
@@ -206,44 +209,51 @@ public class Library {
     // 9)посмотреть печатные издания конкретного автора
     // 10)посмотреть печатные издания конкретного автора
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditionsOfAuthor(ArrayListMy list, String author, Comparator comparator) {
-        sortPrintedEditionByComparator(list, comparator);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) list.get(i);
+    public boolean showPrintedEditionsOfAuthor(String author, Comparator comparator) {
+        sortPrintedEditionByComparator(comparator);
+        int editionsCounter = 0;
+        boolean hasEdition = false;
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 if (edition.getAuthor().compareToIgnoreCase(author) == 0) {
+                    editionsCounter++;
                     System.out.println(edition.showEdition());
                 }
             }
         }
+        return hasEdition = editionsCounter > 0;
     }
 
     // 11)посмотреть печатные издания конкретного года
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
-    public void showPrintedEditionsOfYear(ArrayListMy list, int year, Comparator comparator) {
-        sortPrintedEditionByComparator(list, comparator);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) list.get(i);
+    public boolean showPrintedEditionsOfYear(int year, Comparator comparator) {
+        sortPrintedEditionByComparator(comparator);
+        int editionsCounter = 0;
+        boolean hasEdition = false;
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 if (edition.getPublicationYear() == year) {
+                    editionsCounter++;
                     System.out.println(edition.showEdition());
                 }
             }
         }
+        return hasEdition = editionsCounter > 0;
     }
 
     // 12)найти печатное издание по названию(ключевым словам)
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
 
-    public PrintedEditions findPrintedEditionByKeyWord(ArrayListMy list, String keyWord, Comparator comparator) {
-        sortPrintedEditionByComparator(list, comparator);
+    public PrintedEditions findPrintedEditionByKeyWord(String keyWord, Comparator comparator) {
+        sortPrintedEditionByComparator(comparator);
         PrintedEditions foundEdition = null;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) != null) {
-                PrintedEditions edition = (PrintedEditions) list.get(i);
-                if (findStringByKeyWord(edition.getName(), keyWord) == true) {
-                    System.out.println(edition.showEdition());
-                    continue;
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (printedEditionsBase.get(i) != null) {
+                foundEdition = (PrintedEditions) printedEditionsBase.get(i);
+                if (findStringByKeyWord(foundEdition.getName(), keyWord)) {
+                    System.out.println(foundEdition.showEdition());
                 }
             }
         }

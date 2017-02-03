@@ -8,7 +8,7 @@ public class Reader {
     private String surName;
     private int age;
     private String homeAddress;
-    private boolean isInBlackList = false;
+    private boolean isNotInBlackList = true;
     private int counterOfPrintEds;
 
    private ArrayListMy readerEditions = new ArrayListMy();
@@ -40,12 +40,12 @@ public class Reader {
         return counterOfPrintEds;
     }
 
-    public boolean isInBlackList() {
-        return isInBlackList;
+    public boolean isNotInBlackList() {
+        return isNotInBlackList;
     }
 
-    public void setInBlackList(boolean inBlackList) {
-        isInBlackList = inBlackList;
+    public void setNotInBlackList(boolean notInBlackList) {
+        isNotInBlackList = notInBlackList;
     }
 
     public ArrayListMy getReaderEditions() {

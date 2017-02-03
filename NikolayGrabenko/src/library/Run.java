@@ -2,7 +2,6 @@ package library;
 
 import library.comparators.*;
 import library.controller.Library;
-import library.model.PrintedEditions;
 import library.model.Book;
 import library.model.Reader;
 
@@ -42,7 +41,7 @@ public class Run {
 
         // 2) посмотреть список доступных конкретных печатных изданий
         System.out.println("Добавлено 3 печатных издания (отсортировано по году издания):");
-        library.showPrintedEditions(library.getPrintedEditionsBase(), new PrintedEditionComparatorByPublishYear());
+        library.showPrintedEditions(new PrintedEditionComparatorByPublishYear());
         System.out.println();
         System.out.println("Вывод предыдушего другим методом (отсортировано по имени автора) :");
         library.showPrintedEditionsAvailable(new PrintedEditionComparatorByAuthor());
@@ -93,32 +92,27 @@ public class Run {
         // 9) посмотреть печатные издания конкретного автора
         // 10) посмотреть печатные издания конкретного автора
         System.out.println("Смотрим список печатных изданий конкреного автора :");
-        library.showPrintedEditionsOfAuthor(library.getPrintedEditionsBase(), "Joshua Bloch"
-                , new PrintedEditionComparatorByName());
+        library.showPrintedEditionsOfAuthor("Joshua Bloch", new PrintedEditionComparatorByName());
         System.out.println();
 
         // 9) посмотреть печатные издания конкретного автора
         // 10) посмотреть печатные издания конкретного автора
         System.out.println("Смотрим список печатных изданий конкреного автора :");
-        library.showPrintedEditionsOfAuthor(library.getPrintedEditionsBase(), "Bruce Eckel"
-                , new PrintedEditionComparatorByName());
+        library.showPrintedEditionsOfAuthor( "Bruce Eckel", new PrintedEditionComparatorByName());
         System.out.println();
 
         // 11) посмотреть печатные издания конкретного года
         System.out.println("Смотрим список печатных изданий конкреного года :");
-        library.showPrintedEditionsOfYear(library.getPrintedEditionsBase(), 2006
-                , new PrintedEditionComparatorByName());
+        library.showPrintedEditionsOfYear(2006, new PrintedEditionComparatorByName());
         System.out.println();
 
         // 12) найти печатное издание по названию (ключевым словам)
         System.out.println("Ищем печатное издание по названию (ключевым словам)");
-        library.findPrintedEditionByKeyWord(library.getPrintedEditionsBase(), "Java"
-                , new PrintedEditionComparatorByPublishYear());
+        library.findPrintedEditionByKeyWord("Java", new PrintedEditionComparatorByPublishYear());
 
         // 12) найти печатное издание по названию (ключевым словам)
         System.out.println("Ищем печатное издание по названию (ключевым словам,игнорируя регистр)");
-        library.findPrintedEditionByKeyWord(library.getPrintedEditionsBase(), "WIND"
-                , new PrintedEditionComparatorByPublishYear());
+        library.findPrintedEditionByKeyWord("WIND", new PrintedEditionComparatorByPublishYear());
 
     }
 }
