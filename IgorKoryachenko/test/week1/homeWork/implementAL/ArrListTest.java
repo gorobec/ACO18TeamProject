@@ -8,7 +8,8 @@ import week1.homeWork.implementAL.ArrList;
 /**
  * Created by Игорь on 29.01.2017.
  */
-public class ArrListTest {
+public class
+ArrListTest {
     private ArrList list;
 
     @Before
