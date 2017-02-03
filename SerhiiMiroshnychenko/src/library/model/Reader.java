@@ -12,22 +12,20 @@ public class Reader {
     private String lastName;
     private int age;
     private int libraryCardNumber;
-    private ArrayList<Book> takenBooks = new ArrayList<>();
-    private ArrayList<Magazine> takenMagazines = new ArrayList<>();
+    private ArrayList<PrintedEdition> takenItems = new ArrayList<>();
     private int currentItemsInHands;
     private static final int MAX_ITEMS_IN_HANDS = 10;
 
     public Reader() {
     }
 
-    public Reader(String firstName, String lastName, int age, int libraryCardNumber, ArrayList<Book> takenBooks,
-                  ArrayList<Magazine> takenMagazines, int currentItemsInHands) {
+    public Reader(String firstName, String lastName, int age, int libraryCardNumber, ArrayList<PrintedEdition> takenItems,
+                  int currentItemsInHands) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.libraryCardNumber = libraryCardNumber;
-        this.takenBooks = takenBooks;
-        this.takenMagazines = takenMagazines;
+        this.takenItems = takenItems;
         this.currentItemsInHands = currentItemsInHands;
     }
 
@@ -63,22 +61,12 @@ public class Reader {
         this.libraryCardNumber = libraryCardNumber;
     }
 
-    public ArrayList<Book> getTakenBooks() {
-        return takenBooks;
+    public ArrayList<PrintedEdition> getTakenItems() {
+        return takenItems;
     }
 
-    public void setTakenBooks(ArrayList<Book> takenBooks) {
-        this.takenBooks = takenBooks;
-
-
-    }
-
-    public ArrayList<Magazine> getTakenMagazines() {
-        return takenMagazines;
-    }
-
-    public void setTakenMagazines(ArrayList<Magazine> takenMagazines) {
-        this.takenMagazines = takenMagazines;
+    public void setTakenBooks(ArrayList<PrintedEdition> takenItems) {
+        this.takenItems = takenItems;
     }
 
     public int getCurrentItemsInHands() {
@@ -89,31 +77,16 @@ public class Reader {
         this.currentItemsInHands = currentItemsInHands;
     }
 
-    public boolean takeBook(Book book) {
-        if (book == null || currentItemsInHands == MAX_ITEMS_IN_HANDS) return false;
-        takenBooks.add(book);
+    public boolean takeItem(PrintedEdition item) {
+        if (item == null || currentItemsInHands == MAX_ITEMS_IN_HANDS) return false;
+        takenItems.add(item);
         currentItemsInHands++;
         return true;
     }
 
-    public boolean takeMagazine(Magazine magazine) {
-        if (magazine == null || currentItemsInHands == MAX_ITEMS_IN_HANDS) return false;
-        takenMagazines.add(magazine);
-        currentItemsInHands++;
-        return true;
-    }
-
-    public boolean returnBook(Book book) {
-        takenBooks.remove(book);
+    public boolean returnItem(PrintedEdition item) {
+        takenItems.remove(item);
         currentItemsInHands--;
         return true;
     }
-
-    public boolean returnMagazine(Magazine magazine) {
-        takenMagazines.remove(magazine);
-        currentItemsInHands--;
-        return true;
-    }
-
-
 }

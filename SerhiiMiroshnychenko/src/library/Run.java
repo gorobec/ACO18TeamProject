@@ -39,17 +39,17 @@ public class Run {
         printedEditions.add(book2);
         printedEditions.add(book3);
         Library lib = new Library(printedEditions, readers);
-        lib.giveBook(reader1, book1);
-        lib.giveBook(reader1, book3);
-        lib.giveBook(reader1, book4);
-        System.out.println(reader1.getTakenBooks().toString());
+        lib.giveItem(reader1, book1);
+        lib.giveItem(reader1, book3);
+        lib.giveItem(reader1, book4);
+        System.out.println(reader1.getTakenItems().toString());
 
-        lib.giveBook(reader3, book1);
+        lib.giveItem(reader3, book1);
 
-        System.out.println(reader3.getTakenBooks().toString());
+        System.out.println(reader3.getTakenItems().toString());
 
-        lib.takeBook(reader1, book1);
-        System.out.println(reader1.getTakenBooks().toString());
+        lib.takeItem(reader1, book1);
+        System.out.println(reader1.getTakenItems().toString());
 
 
     }
