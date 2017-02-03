@@ -9,6 +9,7 @@ public class Reader {
 
     public Reader() {
         readerID = ++totalReaders;
+//        System.out.println(readerID);
     }
 
     public int getReaderID() {

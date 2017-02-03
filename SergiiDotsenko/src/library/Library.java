@@ -10,8 +10,9 @@ public class Library {
         books = new Publication[10];
     }
 
-    public void addBook(Publication book) {//3) добавить печатное издание в библиотеку
+    public int addBook(Publication book) {//3) добавить печатное издание в библиотеку
         books[index++] = book;
+        return index;
     }
 
     public void printAllBooks() {
