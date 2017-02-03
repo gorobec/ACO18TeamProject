@@ -1,11 +1,13 @@
 package ACO.week2.homework.library.utils;
 
-import ACO.week2.homework.library.model.*;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
+import ACO.week2.homework.library.model.printed_editions.Genre;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
 
-import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by v21k on 31.01.17.
@@ -61,21 +63,5 @@ public class Utils {
             sb.append(i + 1).append(": ").append(al.get(i).toString()).append("\n");
         }
         return sb.toString();
-    }
-
-    public static Reader[] readersToArray(List<Reader> al) {
-        Reader[] readers = new Reader[al.size()];
-        for (int i = 0; i < al.size(); i++) {
-            readers[i] = al.get(i);
-        }
-        return readers;
-    }
-
-    public static PrintedEdition[] printedEditionsToArray(List<PrintedEdition> al) {
-        PrintedEdition[] printedEditions = new PrintedEdition[al.size()];
-        for (int i = 0; i < al.size(); i++) {
-            printedEditions[i] = al.get(i);
-        }
-        return printedEditions;
     }
 }

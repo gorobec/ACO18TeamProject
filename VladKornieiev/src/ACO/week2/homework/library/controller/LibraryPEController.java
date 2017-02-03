@@ -1,13 +1,16 @@
 package ACO.week2.homework.library.controller;
 
 import ACO.week2.homework.library.controller.interfaces.ILibraryPEController;
-import ACO.week2.homework.library.model.*;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
+import ACO.week2.homework.library.model.printed_editions.Genre;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
 import ACO.week2.homework.library.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by v21k on 31.01.17.
@@ -42,42 +45,30 @@ public class LibraryPEController implements ILibraryPEController {
     }
 
     public String showCertainAuthorPrintedEditions(String author, Comparator comparator) {
-        List<PrintedEdition> authorList = new ArrayList<>();
+        List<PrintedEdition> authorList = library.getPrintedEditionsInLibrary()
+                .stream()
+                .filter(s -> s.getAuthor().equalsIgnoreCase(author))
+                .collect(Collectors.toList());
 
-        // adding only PE of certain author
-        for (int i = 0; i < library.getPrintedEditionsInLibrary().size(); i++) {
-            PrintedEdition printedEdition = library.getPrintedEditionsInLibrary().get(i);
-            if (printedEdition.getAuthor().equalsIgnoreCase(author)) {
-                authorList.add(printedEdition);
-            }
-        }
         return Utils.showPrintedEditions(authorList, comparator);
     }
 
     public String showCertainYearPrintedEditions(int year, Comparator comparator) {
-        List<PrintedEdition> yearList = new ArrayList<>();
-
-        // adding only PE of certain year
-        for (int i = 0; i < library.getPrintedEditionsInLibrary().size(); i++) {
-            PrintedEdition printedEdition = library.getPrintedEditionsInLibrary().get(i);
-            if (printedEdition.getYear() == (year)) {
-                yearList.add(printedEdition);
-            }
-        }
+        List<PrintedEdition> yearList = library.getPrintedEditionsInLibrary()
+                .stream()
+                .filter(s -> s.getYear() == year)
+                .collect(Collectors.toList());
 
         return Utils.showPrintedEditions(yearList, comparator);
     }
 
     public String showPrintedEditionAllReaders(Comparator comparator) {
-        List<PrintedEdition> readersEditions = new ArrayList<>();
 
-        // looking for PEs and add all to readersEditions AL
-        for (int i = 0; i < library.getReaders().size(); i++) {
-            Reader reader = library.getReaders().get(i);
-            for (int j = 0; j < reader.getPrintedEditions().size(); j++) {
-                readersEditions.add((PrintedEdition) reader.getPrintedEditions().get(j));
-            }
-        }
+        List<PrintedEdition> readersEditions = library.getReaders()
+                .stream()
+                .flatMap(reader -> reader.getPrintedEditions().stream())
+                .collect(Collectors.toList());
+
         return Utils.showPrintedEditions(readersEditions, comparator);
     }
 
@@ -97,26 +88,15 @@ public class LibraryPEController implements ILibraryPEController {
     }
 
     public String findPrintedEditionByKeywords(String keywords, Comparator comparator) {
-
         String[] keywordsArray = keywords.toLowerCase().split(", ");
-        List<PrintedEdition> foundEditions = new ArrayList<>();
-        findMatches(keywordsArray, library.getPrintedEditionsInLibrary(), foundEditions);
+        List<PrintedEdition> foundEditions = Arrays.stream(keywordsArray)
+                .flatMap(keyword -> library.getPrintedEditionsInLibrary()
+                        .stream().filter(
+                                pe -> pe.getAuthor().toLowerCase().contains(keyword)
+                                        || pe.getName().toLowerCase().contains(keyword)
+                                        || pe.getGenre().toString().toLowerCase().contains(keyword)))
+                .collect(Collectors.toList());
 
         return foundEditions.size() == 0 ? "Not found" : "Found :\n" + Utils.showPrintedEditions(foundEditions, comparator);
-    }
-
-    private void findMatches(String[] keywordsArray,
-                             List<PrintedEdition> printedEditions,
-                             List<PrintedEdition> foundEditions) {
-        for (PrintedEdition pe : printedEditions) {
-            for (String keyword : keywordsArray) {
-                if (pe.getAuthor().toLowerCase().contains(keyword)
-                        || pe.getName().toLowerCase().contains(keyword)
-                        || pe.getGenre().toString().toLowerCase().contains(keyword)) {
-                    foundEditions.add(pe);
-                    break;
-                }
-            }
-        }
     }
 }

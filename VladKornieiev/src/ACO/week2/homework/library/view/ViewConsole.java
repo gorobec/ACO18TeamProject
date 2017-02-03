@@ -1,10 +1,13 @@
 package ACO.week2.homework.library.view;
 
-import ACO.week2.homework.library.controller.*;
+import ACO.week2.homework.library.controller.LibraryPEController;
+import ACO.week2.homework.library.controller.LibraryReaderController;
 import ACO.week2.homework.library.model.Library;
-import ACO.week2.homework.library.utils.Utils;
-import ACO.week2.homework.library.view.menu.*;
+import ACO.week2.homework.library.view.menu.MenuPrintedEditions;
+import ACO.week2.homework.library.view.menu.MenuReader;
+import ACO.week2.homework.library.view.menu.MenuUtils;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -14,11 +17,9 @@ public class ViewConsole {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Library library = new Library();
-        Utils.initLibrary(library);
-
+        Library library = MenuUtils.loadLibrary();
         LibraryReaderController lr = new LibraryReaderController(library);
         LibraryPEController lp = new LibraryPEController(library);
 
@@ -62,6 +63,14 @@ public class ViewConsole {
                 case "11":
                     MenuPrintedEditions.findPEByKeywords(lp);
                     break;
+                case "12":
+                    MenuUtils.saveLibrary(library);
+                    break;
+                case "13":
+                    // todo something wrong here
+                    MenuUtils.clearLibrary();
+                    library = MenuUtils.loadLibrary();
+                    break;
                 case "0":
                     System.out.println("Bye!");
                     exit = true;
@@ -87,6 +96,8 @@ public class ViewConsole {
         System.out.println("9. Show certain author PEs");
         System.out.println("10. Show ceretain year PEs");
         System.out.println("11. Find PE by keyword(s)");
+        System.out.println("12. Save library status");
+        System.out.println("13. Delete(clear) library");
         System.out.println("0. EXIT");
         System.out.println("Please, enter a number.");
         return sc.nextLine();

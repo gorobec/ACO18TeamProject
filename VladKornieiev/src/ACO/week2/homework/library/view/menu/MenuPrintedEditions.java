@@ -1,9 +1,14 @@
 package ACO.week2.homework.library.view.menu;
 
-import ACO.week2.homework.library.comparators.*;
-import ACO.week2.homework.library.controller.interfaces.*;
-import ACO.week2.homework.library.model.*;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.comparators.PEByAuthorComparator;
+import ACO.week2.homework.library.comparators.PEByNameComparator;
+import ACO.week2.homework.library.comparators.PEByYearComparator;
+import ACO.week2.homework.library.controller.interfaces.ILibraryPEController;
+import ACO.week2.homework.library.controller.interfaces.ILibraryReaderController;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
+import ACO.week2.homework.library.model.printed_editions.Genre;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
 import ACO.week2.homework.library.utils.Utils;
 
 import java.util.Comparator;

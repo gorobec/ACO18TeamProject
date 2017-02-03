@@ -1,7 +1,8 @@
 package ACO.week2.homework.library.view.menu;
 
 import ACO.week2.homework.library.controller.interfaces.ILibraryReaderController;
-import ACO.week2.homework.library.model.*;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
 
 import java.util.Scanner;
 

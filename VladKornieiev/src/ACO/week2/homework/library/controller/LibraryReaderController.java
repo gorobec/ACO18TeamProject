@@ -2,10 +2,9 @@ package ACO.week2.homework.library.controller;
 
 import ACO.week2.homework.library.comparators.ReaderByNameComparator;
 import ACO.week2.homework.library.controller.interfaces.ILibraryReaderController;
-import ACO.week2.homework.library.model.*;
-import ACO.week2.homework.library.utils.Utils;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
