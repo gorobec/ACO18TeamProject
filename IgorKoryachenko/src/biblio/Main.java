@@ -66,11 +66,11 @@ public class Main {
         library.issueEdition(reader1, book2);
         library.issueEdition(reader1, journal2);
         library.issueEdition(reader1, journal3);
-        System.out.println(reader1.showReader());
+        //System.out.println(reader1.showReader());
 
         //System.out.println(reader1.showReader());
-        System.out.println();
-        System.out.println(library.showEditionsByYear(2012));
+        //System.out.println();
+        //System.out.println(library.showEditionsByYear(2012));
 
         library.showBlackList();
 

@@ -8,7 +8,6 @@ import week1.homeWork.implementAL.ArrList;
 public class Library {
     ArrList readers = new ArrList();
     ArrList blackList = new ArrList();
-    ArrList journals  = new ArrList();
     ArrList editions = new ArrList();
 
 
@@ -122,8 +121,8 @@ public class Library {
 
     //для отладки
     void showBlackList(){
-        for (int i = 0; i < editions.size(); i++) {
-            System.out.println(editions.get(i));
+        for (int i = 0; i < blackList.size(); i++) {
+            System.out.println(blackList.get(i));
         }
     }
 
