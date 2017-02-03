@@ -7,16 +7,16 @@ import static arrayListCat.Cat.cats;
  */
 public class Run {
     public static void main(String[] args) {
-        Cat cat1 = new Cat("Bella");
-        Cat cat2 = new Cat("Chloe");
-        Cat cat3 = new Cat("Luna");
-        Cat cat4 = new Cat("Oliver");
-        Cat cat5 = new Cat("Lucy");
-        Cat cat6 = new Cat("Jasper");
-        Cat cat7 = new Cat("Tiger");
-        Cat cat8 = new Cat("Lily");
-        Cat cat9 = new Cat("Kitty");
-        Cat cat10 = new Cat("Simba");
+        Cat cat1 = new Cat("Bella", 11);
+        Cat cat2 = new Cat("Chloe", 12);
+        Cat cat3 = new Cat("Luna", 1);
+        Cat cat4 = new Cat("Oliver",2);
+        Cat cat5 = new Cat("Lucy",3);
+        Cat cat6 = new Cat("Jasper",4);
+        Cat cat7 = new Cat("Tiger",6);
+        Cat cat8 = new Cat("Lily",7);
+        Cat cat9 = new Cat("Kitty",7);
+        Cat cat10 = new Cat("Simba",9);
 
         cats.add(cat1);
         cats.add(cat2);
