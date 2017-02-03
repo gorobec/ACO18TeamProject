@@ -6,8 +6,10 @@ package oop.library.model;
 public class Edition {
 
     private String name;
-    private String authorName;
+    private String[] authorName;
     private String publisherName;
     private String editionDate;
+    private String lang;
+    private String country;
 
 }

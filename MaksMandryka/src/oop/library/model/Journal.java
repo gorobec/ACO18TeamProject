@@ -6,4 +6,5 @@ package oop.library.model;
 public class Journal extends PrintedEdition{
 
     String period;
+    String subject;
 }

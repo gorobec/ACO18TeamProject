@@ -7,4 +7,5 @@ public class Magazine extends PrintedEdition {
 
     String period;
 
+
 }
