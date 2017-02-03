@@ -15,5 +15,6 @@ public class RunCats {
         cat.addCat(new Cat("Ludovik", 4));
 
         System.out.println(cat.printCats());
+        System.out.println();
     }
 }
