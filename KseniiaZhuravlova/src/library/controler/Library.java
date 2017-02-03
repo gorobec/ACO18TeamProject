@@ -52,7 +52,7 @@ public class Library {
     }
 
     public boolean giveEditionToReader(Edition edition, int id) {
-        if (getReaderById(id) == null || !edition.isAvailable()) return false;
+        if (getReaderById(id) == null || !edition.isAvailable() || !editions.contains(edition)) return false;
         boolean result = getReaderById(id).addEdition(edition);
         if (result) edition.setNumber(edition.getNumber() - 1);
         return result;
