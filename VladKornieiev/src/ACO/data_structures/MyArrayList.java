@@ -34,8 +34,8 @@ public class MyArrayList<E> implements MyList<E> {
         }
     }
 
-    public boolean add(Object o){
-        if(count == size){
+    public boolean add(Object o) {
+        if (count == size) {
             ensureCapacity(5);
             elements[count++] = o;
         } else {
@@ -44,73 +44,73 @@ public class MyArrayList<E> implements MyList<E> {
         return true;
     }
 
-    public void add(int index, E o){
+    public void add(int index, E o) {
         indexCheckForAdd(index);
 
         if (count == size) {
             ensureCapacity(5);
         }
-        System.arraycopy(elements,index, elements, index+1,size - index-1);
+        System.arraycopy(elements, index, elements, index + 1, size - index - 1);
         elements[index] = o;
         count++;
     }
 
-    public E remove(int index){
+    public E remove(int index) {
         checkIndex(index);
         Object tmp = elements[index];
-        System.arraycopy(elements, index+1, elements, index,size - index - 1);
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
         elements[count--] = null;
         return (E) tmp;
     }
 
-    public boolean remove(Object o){
-        if (indexOf(o) >= 0){
+    public boolean remove(Object o) {
+        if (indexOf(o) >= 0) {
             remove(indexOf(o));
             return true;
         }
         return false;
     }
 
-    public int size(){
+    public int size() {
         return count;
     }
 
-    public E get(int index){
+    public E get(int index) {
         checkIndex(index);
         return (E) elements[index];
     }
 
-    public E set(int index, Object o){
+    public E set(int index, Object o) {
         checkIndex(index);
         Object tmp = elements[index];
         elements[index] = o;
         return (E) tmp;
     }
 
-    public void clear(){
+    public void clear() {
         for (int i = 0; i < count; i++) {
             elements[i] = null;
         }
         count = 0;
     }
 
-    public boolean contains(Object o){
-        if (indexOf(o) >= 0){
+    public boolean contains(Object o) {
+        if (indexOf(o) >= 0) {
             return true;
         }
         return false;
     }
 
-    public int indexOf(Object o){
+    public int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < count; i++) {
-                if (elements[i] == null){
+                if (elements[i] == null) {
                     return i;
                 }
             }
         } else {
             for (int i = 0; i < count; i++) {
-                if (elements[i].equals(o)){
+                if (elements[i].equals(o)) {
                     return i;
                 }
             }
@@ -118,30 +118,22 @@ public class MyArrayList<E> implements MyList<E> {
         return -1;
     }
 
-    private void ensureCapacity(int number){
+    private void ensureCapacity(int number) {
         Object[] tmp = new Object[size + number];
-        System.arraycopy(elements,0,tmp,0,size);
+        System.arraycopy(elements, 0, tmp, 0, size);
         elements = tmp;
         size += number;
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index >= size()){
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
     }
 
-    private void indexCheckForAdd(int index){
-        if(index < 0 || index > size()){
+    private void indexCheckForAdd(int index) {
+        if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    // for test purposes
-    public void showAll() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(elements[i]);
-        }
-        System.out.println();
     }
 }
