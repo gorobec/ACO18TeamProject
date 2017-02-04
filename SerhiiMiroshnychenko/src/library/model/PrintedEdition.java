@@ -3,7 +3,7 @@ package library.model;
 /**
  * Created by serhiim on 29-Jan-17.
  */
-public class PrintedEdition extends Edition{
+public class PrintedEdition extends Edition {
     private String name;
     private String date;
     private Genre genre;
@@ -24,9 +24,11 @@ public class PrintedEdition extends Edition{
     public String getDate() {
         return date;
     }
+
     public String getName() {
         return name;
     }
+
     public Genre getGenre() {
         return genre;
     }
@@ -39,7 +41,7 @@ public class PrintedEdition extends Edition{
         this.copiesCount = copiesCount;
     }
 
-    public final String info(){
+    public final String info() {
         return String.format("Name: %s, Genre: %s, Copies: %d, Edition name: %s, Publish Date: %s", name, genre, copiesCount, super.getEditionName(), date);
     }
 }

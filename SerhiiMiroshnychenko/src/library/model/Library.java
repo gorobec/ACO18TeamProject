@@ -17,26 +17,26 @@ public class Library {
         this.readers = readers;
     }
 
-    public int findReader(Reader reader){
+    public int findReader(Reader reader) {
         for (int i = 0; i < readers.size(); i++) {
-            if (readers.get(i).equals(reader)){
+            if (readers.get(i).equals(reader)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public int findItem(PrintedEdition item){
+    public int findItem(PrintedEdition item) {
         for (int i = 0; i < printedEditions.size(); i++) {
-            if (printedEditions.get(i).equals(item)){
-                if(printedEditions.get(i).getCopiesCount() > 0)
+            if (printedEditions.get(i).equals(item)) {
+                if (printedEditions.get(i).getCopiesCount() > 0)
                     return i;
             }
         }
         return -1;
     }
 
-    public boolean giveItem(Reader reader, PrintedEdition item){
+    public boolean giveItem(Reader reader, PrintedEdition item) {
         int readerIndex = findReader(reader);
         int bookIndex = findItem(item);
         int bookCopies = item.getCopiesCount();
@@ -46,7 +46,7 @@ public class Library {
         return true;
     }
 
-    public boolean takeItem(Reader reader, PrintedEdition book){
+    public boolean takeItem(Reader reader, PrintedEdition book) {
         int copies = book.getCopiesCount();
         int readerIndex = findReader(reader);
         int bookIndex = findItem(book);
