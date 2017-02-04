@@ -77,14 +77,30 @@ public class LibraryPEController implements ILibraryPEController {
     }
 
     public boolean givePrintedEditionToReader(Reader reader, PrintedEdition printedEdition) {
-        if (reader.isInBlackList()) {
-            System.out.println("Reader in blacklist");
-            return false;
-        }
 
-        return library.getPrintedEditionsInLibrary().contains(printedEdition)
-                && reader.addPrintedEdition(printedEdition)
-                && library.removePrintedEdition(printedEdition);
+        // check if reader exists in our library
+        // then compare links (if they are exactly the same)
+        // so we use "==" instead of equals()
+        if (library.getReaders().contains(reader)
+
+                && reader == library.getReaders()
+                .get(library.getReaders().indexOf(reader))
+
+                && library.getPrintedEditionsInLibrary().contains(printedEdition)
+
+                && printedEdition == library.getPrintedEditionsInLibrary()
+                .get(library.getPrintedEditionsInLibrary().indexOf(printedEdition))) {
+
+            if (reader.isInBlackList()) {
+                System.out.println("Reader in blacklist");
+                return false;
+            }
+
+            return library.getPrintedEditionsInLibrary().contains(printedEdition)
+                    && reader.addPrintedEdition(printedEdition)
+                    && library.removePrintedEdition(printedEdition);
+        }
+        return false;
     }
 
     public String findPrintedEditionByKeywords(String keywords, Comparator comparator) {
