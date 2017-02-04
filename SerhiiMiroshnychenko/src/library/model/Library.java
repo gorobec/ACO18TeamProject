@@ -54,4 +54,12 @@ public class Library {
         printedEditions.get(bookIndex).setCopiesCount(copies + 1);
         return true;
     }
+
+    public ArrayList<PrintedEdition> getPrintedEditions() {
+        return printedEditions;
+    }
+
+    public ArrayList<Reader> getReaders() {
+        return readers;
+    }
 }

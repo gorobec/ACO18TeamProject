@@ -37,8 +37,8 @@ public class LibraryTest {
     public void testGiveBook(){
         assertTrue(lib.giveItem(reader1, printedEdition1));
         assertEquals(1, printedEdition1.getCopiesCount());
-        assertEquals(1, reader1.getCurrentItemsInHands());
-        assertTrue(reader1.getTakenItems().contains(printedEdition1));
+        assertEquals(1, lib.getReaders().get(0).getCurrentItemsInHands());
+        assertTrue(lib.getReaders().get(0).getTakenItems().contains(printedEdition1));
 
     }
 
@@ -47,8 +47,8 @@ public class LibraryTest {
         assertTrue(lib.giveItem(reader1, printedEdition1));
         assertTrue(lib.takeItem(reader1, printedEdition1));
         assertEquals(2, printedEdition1.getCopiesCount());
-        assertEquals(0, reader1.getCurrentItemsInHands());
-        assertFalse(reader1.getTakenItems().contains(printedEdition1));
+        assertEquals(0, lib.getReaders().get(0).getCurrentItemsInHands());
+        assertFalse(lib.getReaders().get(0).getTakenItems().contains(printedEdition1));
     }
 
     @Test
