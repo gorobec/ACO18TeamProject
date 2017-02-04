@@ -12,5 +12,6 @@ public interface MyList<E> {
     E get(int index);
     E set(int index, E element);
     int indexOf(Object o);
-
+    int size();
+    boolean contains(Object o);
 }
