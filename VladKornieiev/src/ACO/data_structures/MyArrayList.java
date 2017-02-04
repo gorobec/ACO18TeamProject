@@ -3,30 +3,30 @@ package ACO.data_structures;
 /**
  * Created by v21k on 25.01.17.
  */
-public class MyArrayList {
+public class MyArrayList<E> implements MyList<E> {
     // for default constructor
     private static final int DEFAULT_SIZE = 5;
 
-    private Object[] objects;
+    private Object[] elements;
     private int size = 0;
     private int count = 0;
 
     public MyArrayList() {
-        this.objects = new Object[DEFAULT_SIZE];
+        this.elements = new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
     }
 
-    public MyArrayList(Object[] objects) {
-        this.objects = objects;
-        size = objects.length;
+    public MyArrayList(E[] elements) {
+        this.elements = elements;
+        size = elements.length;
     }
 
     public MyArrayList(int size) {
         if (size > 0) {
-            objects = new Object[size];
+            elements = new Object[size];
             this.size = size;
         } else if (size == 0) {
-            this.objects = new Object[DEFAULT_SIZE];
+            this.elements = new Object[DEFAULT_SIZE];
             size = DEFAULT_SIZE;
         } else {
             System.out.println("Wrong input, index must be positive number.");
@@ -37,30 +37,30 @@ public class MyArrayList {
     public boolean add(Object o){
         if(count == size){
             ensureCapacity(5);
-            objects[count++] = o;
+            elements[count++] = o;
         } else {
-            objects[count++] = o;
+            elements[count++] = o;
         }
         return true;
     }
 
-    public void add(int index, Object o){
+    public void add(int index, E o){
         indexCheckForAdd(index);
 
         if (count == size) {
             ensureCapacity(5);
         }
-        System.arraycopy(objects,index,objects, index+1,size - index-1);
-        objects[index] = o;
+        System.arraycopy(elements,index, elements, index+1,size - index-1);
+        elements[index] = o;
         count++;
     }
 
-    public Object remove(int index){
+    public E remove(int index){
         checkIndex(index);
-        Object tmp = objects[index];
-        System.arraycopy(objects, index+1, objects, index,size - index - 1);
-        objects[count--] = null;
-        return tmp;
+        Object tmp = elements[index];
+        System.arraycopy(elements, index+1, elements, index,size - index - 1);
+        elements[count--] = null;
+        return (E) tmp;
     }
 
     public boolean remove(Object o){
@@ -75,21 +75,21 @@ public class MyArrayList {
         return count;
     }
 
-    public Object get(int index){
+    public E get(int index){
         checkIndex(index);
-        return objects[index];
+        return (E) elements[index];
     }
 
-    public Object set(int index, Object o){
+    public E set(int index, Object o){
         checkIndex(index);
-        Object tmp = objects[index];
-        objects[index] = o;
-        return tmp;
+        Object tmp = elements[index];
+        elements[index] = o;
+        return (E) tmp;
     }
 
     public void clear(){
         for (int i = 0; i < count; i++) {
-            objects[i] = null;
+            elements[i] = null;
         }
         count = 0;
     }
@@ -104,13 +104,13 @@ public class MyArrayList {
     public int indexOf(Object o){
         if (o == null) {
             for (int i = 0; i < count; i++) {
-                if (objects[i] == null){
+                if (elements[i] == null){
                     return i;
                 }
             }
         } else {
             for (int i = 0; i < count; i++) {
-                if (objects[i].equals(o)){
+                if (elements[i].equals(o)){
                     return i;
                 }
             }
@@ -120,8 +120,8 @@ public class MyArrayList {
 
     private void ensureCapacity(int number){
         Object[] tmp = new Object[size + number];
-        System.arraycopy(objects,0,tmp,0,size);
-        objects = tmp;
+        System.arraycopy(elements,0,tmp,0,size);
+        elements = tmp;
         size += number;
     }
 
@@ -140,7 +140,7 @@ public class MyArrayList {
     // for test purposes
     public void showAll() {
         for (int i = 0; i < size; i++) {
-            System.out.println(objects[i]);
+            System.out.println(elements[i]);
         }
         System.out.println();
     }
