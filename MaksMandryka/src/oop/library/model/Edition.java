@@ -12,4 +12,6 @@ public class Edition {
     private String lang;
     private String country;
 
+    int id;
+
 }

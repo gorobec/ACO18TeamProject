@@ -11,6 +11,8 @@ public class Reader {
     String surname;
     Date dateOfBirth;
 
+    int id;
+
     private static int BOOKS_LIMIT = 3;
 
     private Edition[] booksTaken;
