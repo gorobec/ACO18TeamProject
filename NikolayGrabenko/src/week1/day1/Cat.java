@@ -1,20 +1,29 @@
 package week1.day1;
 
-/**
- * Created by User on 21.01.2017.
- */
+import java.util.ArrayList;
+
+/*Статические коты
+1. В классе Cat добавь public статическую переменную cats (ArrayList<Cat>).
+2. Пусть при каждом создании кота (нового объекта Cat) в переменную cats добавляется этот новый кот. Создать 10 объектов Cat.
+3. Метод printCats должен выводить всех котов на экран. Нужно использовать переменную cats.
+*/
 public class Cat {
 
     private String name;
-    private int age;
     private String color;
-
-    public Cat() {
-    }
+    public static ArrayList <Cat> cats = new ArrayList<>();
 
     public Cat(String name, String color) {
         this.name = name;
         this.color = color;
+        cats.add(this);
+    }
+
+    public static boolean printCats (ArrayList <Cat> cats) {
+        for (Cat cat : cats){
+            System.out.println(String.format("Name - %10s, color - %10s", cat.name, cat.color));
+        }
+    return  true;
     }
 
     public String asString() {
