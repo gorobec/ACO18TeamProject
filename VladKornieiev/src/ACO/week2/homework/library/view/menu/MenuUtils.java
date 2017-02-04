@@ -2,7 +2,6 @@ package ACO.week2.homework.library.view.menu;
 
 import ACO.week2.homework.library.controller.interfaces.ILibraryReaderController;
 import ACO.week2.homework.library.model.Library;
-import ACO.week2.homework.library.utils.Utils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
