@@ -67,7 +67,7 @@ public class Reader {
 
     @Override
     public String toString() {
-        return String.format("Name - %s, current number of printed editions - %d",
+        return String.format("Name - %-10s, current number of printed editions - %d",
                 name, currentPrintedEditionsNumber);
     }
 }

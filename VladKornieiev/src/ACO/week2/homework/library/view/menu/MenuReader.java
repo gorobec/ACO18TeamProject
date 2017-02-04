@@ -34,10 +34,10 @@ public class MenuReader {
     public static boolean addReaderToBlackList(Library library, ILibraryReaderController lr) {
         int choice = MenuUtils.getReaderChoice(lr);
         if (choice >= 1 && choice <= library.getReaders().size()) {
-            System.out.println("Done!");
+            System.out.println("Done!\n");
             return lr.addReaderToBlackList(((Reader) library.getReaders().get(choice - 1)));
         }
-        System.out.println("Wrong input!");
+        System.out.println("Wrong input\n");
         return false;
     }
 }

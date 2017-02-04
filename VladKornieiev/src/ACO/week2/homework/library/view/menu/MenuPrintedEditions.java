@@ -53,7 +53,7 @@ public class MenuPrintedEditions {
             System.out.println("Done!\n");
             return true;
         }
-        System.out.println("Wrong input.\n");
+        System.out.println("Wrong input!\n");
         return false;
     }
 
@@ -72,7 +72,7 @@ public class MenuPrintedEditions {
             return lp.givePrintedEditionToReader((Reader) library.getReaders().get(choiceReader - 1),
                     (PrintedEdition) library.getPrintedEditionsInLibrary().get(choicePE - 1));
         }
-        System.out.println("Wrong input!");
+        System.out.println("Wrong input!\n");
         return false;
     }
 

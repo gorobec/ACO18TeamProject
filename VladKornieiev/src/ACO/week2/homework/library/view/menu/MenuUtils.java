@@ -33,8 +33,8 @@ public class MenuUtils {
     }
 
     public static void clearLibrary() throws IOException {
+        Files.delete(PATH);
         Library library = new Library();
-        Utils.initLibrary(library);
         saveLibrary(library);
     }
 

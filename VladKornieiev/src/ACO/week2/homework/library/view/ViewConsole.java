@@ -3,6 +3,7 @@ package ACO.week2.homework.library.view;
 import ACO.week2.homework.library.controller.LibraryPEController;
 import ACO.week2.homework.library.controller.LibraryReaderController;
 import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.utils.Utils;
 import ACO.week2.homework.library.view.menu.MenuPrintedEditions;
 import ACO.week2.homework.library.view.menu.MenuReader;
 import ACO.week2.homework.library.view.menu.MenuUtils;
@@ -19,7 +20,8 @@ public class ViewConsole {
 
     public static void main(String[] args) throws IOException {
 
-        Library library = MenuUtils.loadLibrary();
+        Library library = new Library();
+        Utils.initLibrary(library);
         LibraryReaderController lr = new LibraryReaderController(library);
         LibraryPEController lp = new LibraryPEController(library);
 
@@ -64,19 +66,28 @@ public class ViewConsole {
                     MenuPrintedEditions.findPEByKeywords(lp);
                     break;
                 case "12":
-                    MenuUtils.saveLibrary(library);
+                    library = MenuUtils.loadLibrary();
+                    lr = new LibraryReaderController(library);
+                    lp = new LibraryPEController(library);
+                    System.out.println("---loading---\n");
                     break;
                 case "13":
-                    // todo something wrong here
+                    MenuUtils.saveLibrary(library);
+                    System.out.println("---Done saving---\n");
+                    break;
+                case "14":
                     MenuUtils.clearLibrary();
                     library = MenuUtils.loadLibrary();
+                    lr = new LibraryReaderController(library);
+                    lp = new LibraryPEController(library);
+                    System.out.println("---Done deleting---\n");
                     break;
                 case "0":
                     System.out.println("Bye!");
                     exit = true;
                     break;
                 default:
-                    System.out.println("Wrong input!");
+                    System.out.println("Wrong input!\n");
             }
 
         }
@@ -84,6 +95,7 @@ public class ViewConsole {
     }
 
     private static String startMenu() {
+        System.out.println("================================================");
         System.out.println("Welcome to our library! What do you want to do?");
         System.out.println("1. Show all readers in Library");
         System.out.println("2. Show available printed editions");
@@ -96,9 +108,11 @@ public class ViewConsole {
         System.out.println("9. Show certain author PEs");
         System.out.println("10. Show ceretain year PEs");
         System.out.println("11. Find PE by keyword(s)");
-        System.out.println("12. Save library status");
-        System.out.println("13. Delete(clear) library");
+        System.out.println("12. Load library");
+        System.out.println("13. Save library");
+        System.out.println("14. Delete(clear) library");
         System.out.println("0. EXIT");
+        System.out.println("================================================");
         System.out.println("Please, enter a number.");
         return sc.nextLine();
     }
