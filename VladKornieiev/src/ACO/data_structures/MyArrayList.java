@@ -6,14 +6,13 @@ package ACO.data_structures;
 public class MyArrayList {
     // for default constructor
     private static final int DEFAULT_SIZE = 5;
-    private static final Object[] DEFAULT = new Object[DEFAULT_SIZE];
 
     private Object[] objects;
     private int size = 0;
     private int count = 0;
 
     public MyArrayList() {
-        this.objects = DEFAULT;
+        this.objects = new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
     }
 
@@ -27,7 +26,7 @@ public class MyArrayList {
             objects = new Object[size];
             this.size = size;
         } else if (size == 0) {
-            this.objects = DEFAULT;
+            this.objects = new Object[DEFAULT_SIZE];
             size = DEFAULT_SIZE;
         } else {
             System.out.println("Wrong input, index must be positive number.");
@@ -48,7 +47,9 @@ public class MyArrayList {
     public void add(int index, Object o){
         indexCheckForAdd(index);
 
-        ensureCapacity(1);
+        if (count == size) {
+            ensureCapacity(5);
+        }
         System.arraycopy(objects,index,objects, index+1,size - index-1);
         objects[index] = o;
         count++;

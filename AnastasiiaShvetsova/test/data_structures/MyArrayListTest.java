@@ -1,8 +1,14 @@
 package data_structures;
-import org.junit.*;
-import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import java.util.Arrays;
 /**
- * Created by Nastia on 29.01.17.
+ * Created by anastasiia.shvetsova on 1/31/2017.
  */
 public class MyArrayListTest {
     private MyArrayList list;
@@ -33,12 +39,79 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void testRemoveByObject(){
-        list.add("12");
-        list.add("13");
-        int old = list.size();
-        list.remove(1);
-        assertEquals(old - 1, list.size());
+    public void testAddByIndex(){
+        assertTrue(list.add(0,2));
+        assertTrue(list.add(1,6));
     }
 
+    @Test
+    public void testWrongIndex(){
+        list.add("black");
+        list.add("white");
+        assertTrue(list.wrongIndex(4));
+
+    }
+
+    @Test
+    public void testGet(){
+        list.add("black");
+        list.add("white");
+        assertEquals("white", list.get(1));
+    }
+
+    @Test
+    public void testRemoveByIndex(){
+        list.add("12");
+        list.add("13");
+        int oldSize = list.size();
+        assertTrue(list.remove(1));
+        assertEquals(oldSize - 1, list.size());
+    }
+
+    @Test
+    public void testRemoveByObject(){
+        list.add("black");
+        list.add("white");
+        assertTrue(list.remove("black"));
+    }
+
+    @Test
+    public void testSet(){
+        list.add("black");
+        list.add("white");
+        list.printList();
+        assertTrue(list.set(1, "pink"));
+    }
+
+    @Test
+    public void testClear(){
+        list.printList();
+        list.add("black");
+        list.add("white");
+        list.printList();
+        assertTrue(list.clear());
+    }
+
+    @Test
+    public  void testContains(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        assertTrue(list.contains("blue"));
+    }
+
+    @Test
+    public  void testSize(){
+        list.add("black");
+        list.add("white");
+        list.add("blue");
+        list.add("red");
+        assertEquals(4,list.size());
+    }
+
+    @Test
+    public  void testIsEmpty(){
+        assertTrue(list.isEmpty());
+    }
 }
