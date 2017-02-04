@@ -10,7 +10,7 @@ public class Book extends PrintedEdition {
 
     }
 
-    public Book(String name, String author, String editionName, String editionAddress, String date, String genre, int copiesCount ) {
+    public Book(String name, String author, String editionName, String editionAddress, String date, Genre genre, int copiesCount ) {
         super(editionName, editionAddress, name, date, genre, copiesCount);
         this.author = author;
     }

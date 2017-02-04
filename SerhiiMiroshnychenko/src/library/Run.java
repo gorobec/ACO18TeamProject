@@ -1,9 +1,6 @@
 package library;
 
-import library.model.Book;
-import library.model.Library;
-import library.model.PrintedEdition;
-import library.model.Reader;
+import library.model.*;
 
 import java.util.ArrayList;
 
@@ -13,13 +10,13 @@ import java.util.ArrayList;
 public class Run {
     public static void main(String[] args) {
         PrintedEdition book1 = new Book("qwe", "Qweasd", "Edition name1", "Address",
-                "01-01-1980", "Fantastic", 200);
-        PrintedEdition book2 = new Book("asd", "Asdfgh",  "Edition name1", "Address",
-                "01-01-1980", "Fantastic", 200);
-        PrintedEdition book3 = new Book("zxc", "Zxcvbn",  "Edition name1", "Address",
-                "01-01-1980", "Fantastic", 200);
-        PrintedEdition book4 = new Book("Cxz", "Nbvcxz",  "Edition name2", "Address1",
-                "01-01-1980", "Fantastic", 200);
+                "01-01-1980", Genre.FANTASY, 200);
+        PrintedEdition book2 = new Book("asd", "Asdfgh", "Edition name1", "Address",
+                "01-01-1980", Genre.ADVENTURE, 200);
+        PrintedEdition book3 = new Book("zxc", "Zxcvbn", "Edition name1", "Address",
+                "01-01-1980", Genre.BIOGRAPHIES, 200);
+        PrintedEdition book4 = new Book("Cxz", "Nbvcxz", "Edition name2", "Address1",
+                "01-01-1980", Genre.ENCYCLOPEDIAS, 200);
 
         Reader reader1 = new Reader();
         Reader reader2 = new Reader();
@@ -27,7 +24,6 @@ public class Run {
         ArrayList<Reader> readers = new ArrayList<>();
         readers.add(reader1);
         readers.add(reader2);
-
 
 
         System.out.println(book1.equals(book2));
@@ -53,4 +49,5 @@ public class Run {
 
 
     }
+
 }
