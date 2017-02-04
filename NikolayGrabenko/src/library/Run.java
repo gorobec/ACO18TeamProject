@@ -3,6 +3,7 @@ package library;
 import library.comparators.*;
 import library.controller.Library;
 import library.model.Book;
+import library.model.BookGenre;
 import library.model.Magazine;
 import library.model.Reader;
 
@@ -122,5 +123,11 @@ public class Run {
         System.out.println("Создаем журнал, вызываем final info()");
         Magazine playBoy = new Magazine("Play boy", 1983, 11);
         System.out.println(playBoy.info());
+
+        //разширить функционал добавив в классы наследники поле жанр
+        // (например в классе "Книга" - детектив, фантастика, роман, проза и т.д.).
+        // В качестве жанра использовать enum.
+
+        Book book = new Book("Gone With The Wind",1946, "hard cover", BookGenre.NOVEL);
     }
 }
