@@ -13,6 +13,11 @@ public class PrintedEditions extends Editions {
         this.numberOfPages = numberOfPages;
     }
 
+    public PrintedEditions(String name, int publicationYear) {
+        super(name, publicationYear);
+
+    }
+
     public int getNumberOfCopiesAvailable() {
         return numberOfCopiesAvailable;
     }

@@ -15,6 +15,11 @@ public abstract class Editions {
         this.publicationYear = publicationYear;
     }
 
+    public Editions(String name, int publicationYear) {
+        this.name = name;
+        this.publicationYear = publicationYear;
+    }
+
 //    public abstract String showEdition ();
 
 

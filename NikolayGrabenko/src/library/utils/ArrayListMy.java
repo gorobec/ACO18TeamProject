@@ -11,7 +11,7 @@ package library.utils;
  * contains(Object)
  * size()
  */
-public class ArrayListMy implements ListMy {
+public class ArrayListMy<T> implements ListMy {
 
     private int capacity = 10;
     private int size = 0;
@@ -48,7 +48,7 @@ public class ArrayListMy implements ListMy {
         return o;
     }
 
-    public void increaseCapacity() {
+    private void increaseCapacity() {
 
         capacity = capacity * 3 / 2 + 1;
         Object[] temp = new Object[capacity];
@@ -136,8 +136,10 @@ public class ArrayListMy implements ListMy {
     public boolean contains(Object obj) {
         boolean flag = false;
         for (int i = 0; i < arrayListBody.length; i++) {
-            if (obj.equals(arrayListBody[i]))
+            if (obj.equals(arrayListBody[i])) {
                 flag = true;
+                break;
+            }
         }
         return flag;
     }

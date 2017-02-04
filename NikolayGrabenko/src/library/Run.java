@@ -3,7 +3,10 @@ package library;
 import library.comparators.*;
 import library.controller.Library;
 import library.model.Book;
+import library.model.Magazine;
 import library.model.Reader;
+
+import javax.sound.midi.Soundbank;
 
 public class Run {
     public static void main(String[] args) {
@@ -114,5 +117,10 @@ public class Run {
         System.out.println("Ищем печатное издание по названию (ключевым словам,игнорируя регистр)");
         library.findPrintedEditionByKeyWord("WIND", new PrintedEditionComparatorByPublishYear());
 
+        //В класс ПереодическоеИздание добавить final метод, который будет возвращать String
+        // с базовой информацией об переодическом издании (info()).
+        System.out.println("Создаем журнал, вызываем final info()");
+        Magazine playBoy = new Magazine("Play boy", 1983, 11);
+        System.out.println(playBoy.info());
     }
 }

@@ -174,7 +174,7 @@ public class Library {
         boolean canLoan = false;
         if (edition != null && reader.getCounterOfPrintEds() < 3 &&
                 reader.isNotInBlackList() && isAvailablePrintEds(edition) &&
-                !reader.isEditionInReaderList(edition)) {
+                !reader.isEditionInReaderList(edition)&& isRegistered(reader)) {
             reader.addPrintedEditionToList(edition);
             edition.setNumberOfCopiesAvailable(edition.getNumberOfCopiesAvailable() - 1);
             edition.setNumberOfCopiesAtReader(edition.getNumberOfCopiesAtReader() + 1);
@@ -207,7 +207,7 @@ public class Library {
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public String showPrintedEditionsAtOneReader(Reader reader) {
         String result = "";
-        if (reader.getReaderEditions().size() > 0) {
+        if (reader.getReaderEditions().size() > 0 ) {
             for (int i = 0; i < reader.getReaderEditions().size(); i++) {
                 PrintedEditions edition = (PrintedEditions) reader.getReaderEditions().get(i);
                 result = edition.showEdition() + "\n";
