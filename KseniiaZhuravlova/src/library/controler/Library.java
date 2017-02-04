@@ -9,7 +9,7 @@ import java.util.Comparator;
  * Created by ksyashka on 30.01.2017.
  */
 public class Library {
-    MyArrayList editions;
+    MyArrayList<Edition> editions;
     MyArrayList readers;
 
     public Library() {
@@ -27,7 +27,7 @@ public class Library {
     }
 
     public boolean addEdition(Edition edition) {
-        int index = DuplicateEdition(edition);
+        int index = duplicateEdition(edition);
         if (index == -1) editions.add(edition);
         else {
             Edition tempEdition = (Edition) editions.get(index);
@@ -36,7 +36,7 @@ public class Library {
         return true;
     }
 
-    public int DuplicateEdition(Edition edition){
+    public int duplicateEdition(Edition edition){
         for (int i = 0; i < editions.size(); i++)
             if( editions.get(i).equals(edition)) {
                 return i;
@@ -51,13 +51,23 @@ public class Library {
         return true;
     }
 
-    public boolean giveEditionToReader(Edition edition, int id) {
-        if (getReaderById(id) == null || !edition.isAvailable() || !editions.contains(edition)) return false;
-        boolean result = getReaderById(id).addEdition(edition);
+    public boolean giveEditionToReader(Edition e, int id) {
+        Reader reader = getReaderById(id);
+        Edition edition = findEdition(e);
+        if (reader == null || edition == null || !edition.isAvailable()) return false;
+        boolean result = reader.addEdition(edition);
         if (result) edition.setNumber(edition.getNumber() - 1);
         return result;
     }
 
+    public Edition findEdition(Edition edition){
+        Edition findEdition;
+        for (int i = 0; i < editions.size(); i++) {
+             findEdition = (Edition) editions.get(i);
+            if (edition.equals(findEdition)) return findEdition;
+        }
+        return null;
+    }
 
     public boolean addReaderToBlackList(int id) {
         getReaderById(id).setInBlackList(true);
