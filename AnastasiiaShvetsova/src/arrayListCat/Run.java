@@ -18,17 +18,18 @@ public class Run {
         Cat cat9 = new Cat("Kitty",7);
         Cat cat10 = new Cat("Simba",9);
 
-        cats.add(cat1);
-        cats.add(cat2);
-        cats.add(cat3);
-        cats.add(cat4);
-        cats.add(cat5);
-        cats.add(cat6);
-        cats.add(cat7);
-        cats.add(cat8);
-        cats.add(cat9);
-        cats.add(cat10);
+//        cats.add(cat1);
+//        cats.add(cat2);
+//        cats.add(cat3);
+//        cats.add(cat4);
+//        cats.add(cat5);
+//        cats.add(cat6);
+//        cats.add(cat7);
+//        cats.add(cat8);
+//        cats.add(cat9);
+//        cats.add(cat10);
 
-        System.out.println(cats.toString());
+        System.out.println(cat10.printCats());
+        //System.out.println(cats.toString());
     }
 }
