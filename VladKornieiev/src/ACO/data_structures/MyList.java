@@ -3,7 +3,7 @@ package ACO.data_structures;
 /**
  * Created by v21k on 04.02.17.
  */
-public interface MyList<E> {
+public interface MyList<E> extends Iterable<E> {
     boolean add(E element);
 
     void add(int index, E element);

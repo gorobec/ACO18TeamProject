@@ -1,5 +1,7 @@
 package ACO.data_structures;
 
+import java.util.Iterator;
+
 /**
  * Created by v21k on 25.01.17.
  */
@@ -34,7 +36,7 @@ public class MyArrayList<E> implements MyList<E> {
         }
     }
 
-    public boolean add(Object o) {
+    public boolean add(E o) {
         if (count == size) {
             ensureCapacity(5);
             elements[count++] = o;
@@ -80,7 +82,7 @@ public class MyArrayList<E> implements MyList<E> {
         return (E) elements[index];
     }
 
-    public E set(int index, Object o) {
+    public E set(int index, E o) {
         checkIndex(index);
         Object tmp = elements[index];
         elements[index] = o;
@@ -119,7 +121,7 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     private void ensureCapacity(int number) {
-        Object[] tmp = new Object[size + number];
+        E[] tmp = (E[]) new Object[size + number];
         System.arraycopy(elements, 0, tmp, 0, size);
         elements = tmp;
         size += number;
@@ -135,5 +137,22 @@ public class MyArrayList<E> implements MyList<E> {
         if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            int currentPosition = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentPosition < size();
+            }
+
+            @Override
+            public E next() {
+                return (E) elements[currentPosition++];
+            }
+        };
     }
 }
