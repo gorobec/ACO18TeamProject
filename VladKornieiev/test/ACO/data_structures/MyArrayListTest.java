@@ -3,6 +3,7 @@ package ACO.data_structures;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -58,7 +59,7 @@ public class MyArrayListTest {
         assertTrue(list.add("2"));
         assertTrue(list.add("3"));
         assertTrue(list.remove("1"));
-        assertEquals("2",list.remove(0));
+        assertEquals("2", list.remove(0));
         assertEquals(1, list.size());
     }
 
@@ -104,12 +105,12 @@ public class MyArrayListTest {
     // GET TESTS
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testGetWrongIndex(){
+    public void testGetWrongIndex() {
         list.get(2);
     }
 
     @Test
-    public void testGetNullWhenElementPresent(){
+    public void testGetNullWhenElementPresent() {
         list.add(null);
         assertEquals(null, list.get(0));
     }
@@ -117,14 +118,14 @@ public class MyArrayListTest {
     // SET TESTS
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testSetWrongIndex(){
+    public void testSetWrongIndex() {
         list.add("1");
         list.add("2");
         list.set(2, "3");
     }
 
     @Test
-    public void testSet(){
+    public void testSet() {
         list.add("1");
         list.set(0, "2");
         assertEquals("2", list.get(0));
@@ -133,13 +134,13 @@ public class MyArrayListTest {
     // contains test
 
     @Test
-    public void testContainsWhenElementPresent(){
+    public void testContainsWhenElementPresent() {
         list.add("1");
         assertTrue(list.contains("1"));
     }
 
     @Test
-    public void testContainsWhenNoElement(){
+    public void testContainsWhenNoElement() {
         list.add("1");
         assertFalse(list.contains("2"));
     }
@@ -147,7 +148,7 @@ public class MyArrayListTest {
     // indexOf test
 
     @Test
-    public void testIndexOf(){
+    public void testIndexOf() {
         list.add("abc");
         assertEquals(0, list.indexOf("abc"));
         assertEquals(-1, list.indexOf("dbc"));
