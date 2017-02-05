@@ -7,9 +7,9 @@ import java.util.Comparator;
 /**
  * Created by ksyashka on 31.01.2017.
  */
-public class TypeEditionsComparator implements Comparator {
+public class TypeEditionsComparator<T> implements Comparator<T> {
     @Override
-    public int compare(Object o1, Object o2) {
+    public int compare(T o1, T o2) {
         Edition e1 = (Edition) o1;
         Edition e2 = (Edition) o2;
         return e1.getClass().getName().compareTo(e2.getClass().getName());
