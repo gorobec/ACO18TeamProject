@@ -18,8 +18,8 @@ public class Run {
         PrintedEdition book4 = new Book("Cxz", "Nbvcxz", "Edition name2", "Address1",
                 "01-01-1980", Genre.ENCYCLOPEDIAS, 200);
 
-        Reader reader1 = new Reader();
-        Reader reader2 = new Reader();
+        Reader reader1 = new Reader("Vasia", "Petrov", 20);
+        Reader reader2 = new Reader("Petia", "Vasiliev", 22);
         Reader reader3 = new Reader();
         ArrayList<Reader> readers = new ArrayList<>();
         readers.add(reader1);
@@ -46,6 +46,10 @@ public class Run {
 
         lib.takeItem(reader1, book1);
         System.out.println(reader1.getTakenItems().toString());
+
+        System.out.println(reader1.getLibraryCardNumber());
+        System.out.println(reader2.getLibraryCardNumber());
+        System.out.println(reader3.getLibraryCardNumber());
 
 
     }

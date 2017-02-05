@@ -13,20 +13,18 @@ public class Reader {
     private int age;
     private int libraryCardNumber;
     private ArrayList<PrintedEdition> takenItems = new ArrayList<>();
-    private int currentItemsInHands;
+    private int currentItemsInHands = 0;
     private static final int MAX_ITEMS_IN_HANDS = 10;
-
+    private static int counter = 1;
     public Reader() {
+        libraryCardNumber = counter++;
     }
 
-    public Reader(String firstName, String lastName, int age, int libraryCardNumber, ArrayList<PrintedEdition> takenItems,
-                  int currentItemsInHands) {
+    public Reader(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.libraryCardNumber = libraryCardNumber;
-        this.takenItems = takenItems;
-        this.currentItemsInHands = currentItemsInHands;
+        libraryCardNumber = counter ++;
     }
 
     public String getFirstName() {
