@@ -1,22 +1,19 @@
-package week1.homework.arrayList;
-
-import static org.junit.Assert.*;
+package week3.day1;
 
 import org.junit.Before;
 import org.junit.Test;
-import week3.day1.MyListTest;
 
+import static org.junit.Assert.*;
 
 /**
- * Created by serhiim on 29-Jan-17.
+ * Created by serhiim on 04-Feb-17.
  */
-public class MyArrayListTest{
-    private MyArrayList list;
+public interface MyListTest {
+
+ /*   private MyLinkedList list;
 
     @Before
-    public void setUP() {
-        list = new MyArrayList();
-    }
+    public abstract void setUP();
 
     @Test
     public void testAddOneElement() {
@@ -103,5 +100,7 @@ public class MyArrayListTest{
         }
 
     }
-
+*/
 }
+
+
