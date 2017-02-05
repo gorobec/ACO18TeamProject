@@ -1,6 +1,5 @@
-package week3.day1.generics.product;
+package week3.generics.product;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,8 @@ public class Rozetka<T extends Product> {
         return false;
     }
 
-    public static<E> void copy(List src, List dest){
-        for (Object o : src) {
+    public static<E> void copy(List<? extends E> src, List<? super E> dest){
+        for (E o : src) {
             dest.add(o);
         }
     }

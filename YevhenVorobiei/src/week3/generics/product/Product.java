@@ -1,4 +1,4 @@
-package week3.day1.generics.product;
+package week3.generics.product;
 
 /**
  * Created by gorobec on 05.02.17.

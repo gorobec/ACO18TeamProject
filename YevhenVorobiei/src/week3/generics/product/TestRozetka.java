@@ -1,4 +1,4 @@
-package week3.day1.generics.product;
+package week3.generics.product;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +19,10 @@ public class TestRozetka {
         Rozetka.find(phones, new Phone());
 //        Rozetka.find(strings, new String());
 
+//                      src    dest
+        Rozetka.copy(phones, products);
+        Rozetka.copy(pcs, pcs);
+//        Rozetka.copy(products, pcs);
 
 
     }

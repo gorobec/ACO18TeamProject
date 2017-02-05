@@ -1,4 +1,4 @@
-package week3.day1.generics;
+package week3.generics;
 
 import java.util.LinkedList;
 import java.util.List;
