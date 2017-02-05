@@ -32,9 +32,9 @@ public class Run {
         PrintEdition book1 = new Book(author1, 2006, "The Book Thief");
         PrintEdition book2 = new Book(pauloCoelho, 2006, "The Alchemist");
         PrintEdition book3 = new Book(dan, 2006, "The Da Vinci Code");
-        PrintEdition newspaper = new Newspaper(mohamad, 1995, "Kyiv Post", Commercial );
-        PrintEdition magazine = new Magazine(anna, 1892, "Vogue", Fashion);
-        PrintEdition book4 = new Book(dan, 2000, "Angels & Demons", Mystery);
+        PrintEdition newspaper = new Newspaper(mohamad, 1995, "Kyiv Post", COMMERCIAL);
+        PrintEdition magazine = new Magazine(anna, 1892, "Vogue", FASHION);
+        PrintEdition book4 = new Book(dan, 2000, "Angels & Demons", MYSTERY);
 
 
         Library newLibray = new Library();
