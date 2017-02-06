@@ -6,6 +6,21 @@ public class Library {
     private ArrList<Reader> readers = new ArrList<>();
     private ArrList<Edition> editions = new ArrList<>();
 
+    public ArrList<Reader> getReaders() {
+        return readers;
+    }
+
+    public void setReaders(ArrList<Reader> readers) {
+        this.readers = readers;
+    }
+
+    public ArrList<Edition> getEditions() {
+        return editions;
+    }
+
+    public void setEditions(ArrList<Edition> editions) {
+        this.editions = editions;
+    }
 
     //1) посмотреть список читателей
     //7) посмотреть список печатных изданий, которые находятся у конкретного читателя
@@ -46,17 +61,24 @@ public class Library {
 
     //5) выдать печатное издание читателю (если книга есть в наличии).
     //Читателю запрещается брать больше 3-х печатных изданий.
-    public boolean issueEdition(String surname, String name) {
-        Reader reader = findReader(surname);
-        Edition edition = findEdition(name);
-        if (editions.contains(edition)) {
-            assert reader != null;
-            if (reader.getEditions().size() >= 3 || reader.isInBlacklist()) {
+    public boolean issueEdition(Reader reader, Edition edition) {
+        Reader readerReal = findReader(reader);
+        Edition editionReal = findEdition(edition);
+        if (readerReal == null){
+            System.out.println("Такого читателя не найдено");
+            return false;
+        }
+        if (editionReal == null){
+            System.out.println("Такого издания не найдено");
+            return false;
+        }
+        if (editions.contains(editionReal)) {
+            if (readerReal.getEditions().size() >= 3 || readerReal.isInBlacklist()) {
                 System.out.println("Достаточно. Читай что взял");
                 return false;
             } else {
-                reader.getEditions().add(edition);
-                edition.setKolvo(edition.getKolvo() - 1);
+                readerReal.getEditions().add(editionReal);
+                editionReal.setKolvo(editionReal.getKolvo() - 1);
                 return true;
             }
         }
@@ -78,13 +100,13 @@ public class Library {
     }
 
     //8) добавить читателя в черный список (ему нельзя выдавать печатные издания)
-    public boolean addReaderToBlackList(String surname){
-        Reader reader = findReader(surname);
-        if (reader == null){
+    public boolean addReaderToBlackList(Reader reader){
+        Reader readerReal = findReader(reader);
+        if (readerReal == null){
             System.out.println("Такого читателя нет");
             return false;
         }
-        reader.setInBlacklist(true);
+        readerReal.setInBlacklist(true);
         return true;
     }
 

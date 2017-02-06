@@ -61,18 +61,19 @@ public class Main {
         //System.out.println(library.availableEdition("Doyarka"));
 
         Reader reader1 = new Reader("Ivanov", new ArrList());
+        Reader reader2 = new Reader("Petrov", new ArrList());
         library.addReader(reader1);
-        library.issueEdition(reader1, book3);
+        library.issueEdition(reader2, book3);
         library.issueEdition(reader1, book2);
         library.issueEdition(reader1, journal2);
         library.issueEdition(reader1, journal3);
-        //System.out.println(reader1.showReader());
+        System.out.println(reader1.showReader());
 
         //System.out.println(reader1.showReader());
         //System.out.println();
         //System.out.println(library.showEditionsByYear(2012));
 
-        library.showBlackList();
+
 
 
     }

@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class NameComparator implements Comparator<Edition> {
     @Override
     public int compare(Edition o1, Edition o2) {
-        return o1.name.compareTo(o2.name);
+        return o1.getName().compareTo(o2.getName());
     }
 }
