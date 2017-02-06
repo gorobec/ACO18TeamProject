@@ -11,11 +11,11 @@ import java.util.Arrays;
  * Created by anastasiia.shvetsova on 1/31/2017.
  */
 public class MyArrayListTest {
-    private MyArrayList list;
+    private MyArrayList<String> list;
 
     @Before
     public void setUp(){
-        list = new MyArrayList();
+        list = new MyArrayList<>();
     }
 
     @Test
@@ -40,8 +40,8 @@ public class MyArrayListTest {
 
     @Test
     public void testAddByIndex(){
-        assertTrue(list.add(0,2));
-        assertTrue(list.add(1,6));
+        assertTrue(list.add(0,"2"));
+        assertTrue(list.add(1,"6"));
     }
 
     @Test
