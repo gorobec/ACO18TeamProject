@@ -1,18 +1,17 @@
-import library.common.MyArrayList;
+import library.ArrayLict;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * Created by SDotsenko on 29.01.2017.
  */
-public class MyArrayListTest {
-    private MyArrayList list;
+public class ArrayLictTest {
+    private ArrayLict list;
 
     @Before
     public void setUp() {
-        list = new MyArrayList();
+        list = new ArrayLict();
     }
 
     @Test
@@ -32,4 +31,5 @@ public class MyArrayListTest {
         int expected = 3;
         Assert.assertEquals(actual,expected);
     }
+
 }

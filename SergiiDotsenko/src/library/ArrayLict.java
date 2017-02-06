@@ -1,18 +1,15 @@
-package library.common;
+package library;
 
-//Write your own ArrayList!
-//First look the structure and methods of Java ArrayList!!!
-//https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html
-public class MyArrayList<E> {
+public class ArrayLict<E>  {
     private E[] theData;
     private int size = 0;
     private int capacity = 0;
 
-    public MyArrayList() {
+    public ArrayLict() {
         this(10);
     }
 
-    public MyArrayList(int initCapacity) {
+    public ArrayLict(int initCapacity) {
         capacity = initCapacity;
         theData = (E[]) new Object[capacity];
     }
@@ -67,7 +64,7 @@ public class MyArrayList<E> {
             return false;
         }
 
-        MyArrayList<E> otherO = (MyArrayList<E>) o;
+        ArrayLict<E> otherO = (ArrayLict<E>) o;
 
         if (size != otherO.size) {
             return false;
