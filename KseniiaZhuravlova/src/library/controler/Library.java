@@ -9,8 +9,8 @@ import java.util.Comparator;
  * Created by ksyashka on 30.01.2017.
  */
 public class Library {
-    MyArrayList editions;
-    MyArrayList readers;
+    MyArrayList<Edition> editions;
+    MyArrayList<Reader> readers;
 
     public Library() {
         editions = new MyArrayList();
@@ -20,23 +20,23 @@ public class Library {
     private Reader getReaderById(int id) {
         Reader reader;
         for (int i = 0; i < readers.size(); i++) {
-            reader = (Reader) readers.get(i);
+            reader = readers.get(i);
             if (reader.getId() == id) return reader;
         }
         return null;
     }
 
     public boolean addEdition(Edition edition) {
-        int index = DuplicateEdition(edition);
+        int index = duplicateEdition(edition);
         if (index == -1) editions.add(edition);
         else {
-            Edition tempEdition = (Edition) editions.get(index);
+            Edition tempEdition = editions.get(index);
             tempEdition.setNumber(tempEdition.getNumber()+edition.getNumber());
         }
         return true;
     }
 
-    public int DuplicateEdition(Edition edition){
+    public int duplicateEdition(Edition edition){
         for (int i = 0; i < editions.size(); i++)
             if( editions.get(i).equals(edition)) {
                 return i;
@@ -51,13 +51,23 @@ public class Library {
         return true;
     }
 
-    public boolean giveEditionToReader(Edition edition, int id) {
-        if (getReaderById(id) == null || !edition.isAvailable() || !editions.contains(edition)) return false;
-        boolean result = getReaderById(id).addEdition(edition);
+    public boolean giveEditionToReader(Edition e, int id) {
+        Reader reader = getReaderById(id);
+        Edition edition = findEdition(e);
+        if (reader == null || edition == null || !edition.isAvailable()) return false;
+        boolean result = reader.addEdition(edition);
         if (result) edition.setNumber(edition.getNumber() - 1);
         return result;
     }
 
+    public Edition findEdition(Edition edition){
+        Edition findEdition;
+        for (int i = 0; i < editions.size(); i++) {
+             findEdition = editions.get(i);
+            if (edition.equals(findEdition)) return findEdition;
+        }
+        return null;
+    }
 
     public boolean addReaderToBlackList(int id) {
         getReaderById(id).setInBlackList(true);
@@ -73,7 +83,7 @@ public class Library {
     public void showEditions() {
         sortEditions();
         for (int i = 0; i < editions.size(); i++) {
-            Edition edition = (Edition) editions.get(i);
+            Edition edition = editions.get(i);
             if (edition.isAvailable())
                 System.out.println(editions.get(i));
         }
@@ -81,7 +91,7 @@ public class Library {
 
     public void showEditions(int year) {
         for (int i = 0; i < editions.size(); i++) {
-            Edition edition = (Edition) editions.get(i);
+            Edition edition = editions.get(i);
             if (edition.getYear() == year)
                 System.out.println(editions.get(i));
         }
@@ -90,7 +100,7 @@ public class Library {
     public void showEditions(String name) {
         sortEditions();
         for (int i = 0; i < editions.size(); i++) {
-            Edition edition = (Edition) editions.get(i);
+            Edition edition = editions.get(i);
             if (edition.getName().contains(name))
                 System.out.println(editions.get(i));
         }
@@ -100,7 +110,7 @@ public class Library {
         sortReaders();
         for (int i = 0; i < readers.size(); i++) {
             System.out.println(readers.get(i));
-            Reader currentReader = (Reader) readers.get(i);
+            Reader currentReader = readers.get(i);
             currentReader.showEditions();
         }
     }
@@ -111,33 +121,33 @@ public class Library {
     }
 
     public void sortReaders() {
-        sortReadersByComparator(new NameReadersComparator());
-        sortReadersByComparator(new SurnameComparator());
+        sortReadersByComparator(new NameReadersComparator<Reader>());
+        sortReadersByComparator(new SurnameComparator<Reader>());
     }
 
-    public void sortReadersByComparator(Comparator comparator) {
+    public void sortReadersByComparator(Comparator<Reader> comparator) {
         Reader temp;
         for (int i = readers.size() - 1; i > 0; i--)
             for (int j = 0; j < i; j++)
                 if ((comparator.compare(readers.get(j), readers.get(j + 1)) > 0)) {
-                    temp = (Reader) readers.get(j + 1);
+                    temp = readers.get(j + 1);
                     readers.set(j + 1, readers.get(j));
                     readers.set(j, temp);
                 }
     }
 
     public void sortEditions() {
-        sortEditionsByComparator(new NameEditionsComparator());
-        sortEditionsByComparator(new AuthorComparator());
-        sortEditionsByComparator(new TypeEditionsComparator());
+        sortEditionsByComparator(new NameEditionsComparator<Edition>());
+        sortEditionsByComparator(new AuthorComparator<Edition>());
+        sortEditionsByComparator(new TypeEditionsComparator<Edition>());
     }
 
-    public void sortEditionsByComparator(Comparator comparator) {
+    public void sortEditionsByComparator(Comparator<Edition> comparator) {
         Edition temp;
         for (int i = editions.size() - 1; i > 0; i--)
             for (int j = 0; j < i; j++)
                 if ((comparator.compare(editions.get(j), editions.get(j + 1)) > 0)) {
-                    temp = (Edition) editions.get(j + 1);
+                    temp = editions.get(j + 1);
                     editions.set(j + 1, editions.get(j));
                     editions.set(j, temp);
                 }
