@@ -20,5 +20,11 @@ public class TestRozetka {
         Rozetka.find(products, new Phone());
         Rozetka.find(products, new PC());
         //Rozetka.find(products, "22"); cant search String in products
+
+        Rozetka.copy(phones, products);
+        Rozetka.copy(pcs, products);
+        //Rozetka.copy(products, phones);
+        //Rozetka.copy(pcs, phones);
+
     }
 }

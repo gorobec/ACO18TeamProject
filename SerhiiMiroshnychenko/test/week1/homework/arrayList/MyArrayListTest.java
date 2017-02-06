@@ -2,9 +2,9 @@ package week1.homework.arrayList;
 
 import static org.junit.Assert.*;
 
+import data_structures.MyArrayList;
 import org.junit.Before;
 import org.junit.Test;
-import week3.day1.MyListTest;
 
 
 /**
