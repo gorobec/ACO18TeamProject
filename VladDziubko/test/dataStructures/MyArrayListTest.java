@@ -27,9 +27,9 @@ public class MyArrayListTest {
 
     @Test
     public void testGetElement() {
-        boolean actual = list.add("1");
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
-        Assert.assertTrue(expected);
+        Assert.assertEquals("1", true, list.add("1"));
+        Assert.assertTrue(true);
+        Assert.assertEquals("2", true, list.add("2"));
+        Assert.assertTrue(true);
     }
 }
