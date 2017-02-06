@@ -1,24 +1,25 @@
 package data_structures;
 import java.util.Arrays;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Nastia on 28.01.17.
  */
-public class MyArrayList {
+public class MyArrayList<T> implements MyList<T>{
     private int size = 0;
-    private Object[] objects;
+    private T[] objects;
     public static  final int DEFAULT_SIZE = 0;
 
     public MyArrayList(int size){
-        this.objects = new Object[size];
+        this.objects = (T[])new Object[size];
     }
 
     public MyArrayList(){
         this(DEFAULT_SIZE);
     }
 
-    public boolean add(Object object) {
+    public boolean add(T object) {
         ensureCapacity(size + objects.length/2 + 1);
         objects[size] = object;
         size++;
@@ -30,15 +31,15 @@ public class MyArrayList {
 
         int arraylength = objects.length;
         if (minEnsureCapacity > arraylength) {
-            Object[] tmp = new Object[minEnsureCapacity];
+            T[] tmp = new T[minEnsureCapacity];
             System.arraycopy(objects, 0, tmp, 0, size);
-            objects = new Object[minEnsureCapacity];
+            objects = (T[]) new Object[minEnsureCapacity];
             objects = tmp;
         }
     }
 
-    public boolean add(int index, Object object) {
-        ensureCapacity(size + objects.length*(3/2) +1);
+    public boolean add(int index, T object) {
+        ensureCapacity(size + ((objects.length*3)/2 +1));
         objects[index] = object;
         size++;
         return true;
@@ -48,7 +49,7 @@ public class MyArrayList {
         return index < 0 || index >= objects.length;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         if (wrongIndex(index)) return false;
         return objects[index];
     }
