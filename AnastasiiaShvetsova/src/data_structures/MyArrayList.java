@@ -125,4 +125,21 @@ public class MyArrayList {
        System.out.println(Arrays.toString(objects));
     }
 
+    @Override
+    public String toString() {
+        int count = 0;
+        for (int i = 0; i < objects.length; i++) {
+
+            if (objects[i] != null) {
+                count++;
+
+            }
+
+        }
+        Object[] tmp = new Object[count];
+        for (int i = 0; i < count; i++){
+            tmp[i] = objects[i];
+        }
+        return Arrays.toString(tmp);
+    }
 }
