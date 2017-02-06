@@ -5,7 +5,7 @@ package oop.library.model;
  */
 public class PrintedEdition extends Edition{
 
-    private String format;
-    private int pages;
-    private int circulation;
+    protected String format;
+    protected int pages;
+    protected int circulation;
 }

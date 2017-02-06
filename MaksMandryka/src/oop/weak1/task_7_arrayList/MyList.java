@@ -1,6 +1,8 @@
 package oop.weak1.task_7_arrayList;
 
 
+import java.util.Comparator;
+
 /**
  * Created by fmandryka on 04.02.2017.
  */
@@ -27,4 +29,6 @@ public interface MyList<T>{
     int indexOf(Object o);
 
     boolean isEmpty();
+
+    public void sort(Comparator<? super T> c);
 }

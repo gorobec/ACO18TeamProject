@@ -1,24 +1,28 @@
 package oop.library.model;
 
-import java.util.Date;
+import oop.weak1.task_7_arrayList.MyArrayList;
+import oop.weak1.task_7_arrayList.MyList;
+
+import java.util.Calendar;
+import java.util.Comparator;
 
 /**
  * Created by fmandryka on 31.01.2017.
  */
-public class Reader {
+public class Reader implements Comparable<Object>{
 
-    private static int BOOKS_LIMIT = 3;
+    public static int BOOKS_LIMIT = 3;
 
-    private Edition[] booksTaken;
+    protected MyList<PrintedEdition> booksTaken = new MyArrayList<>(BOOKS_LIMIT);
 
-    String name;
-    String surname;
-    Date dateOfBirth;
+    protected String name;
+    protected String surname;
+    Calendar dateOfBirth;
 
     int id;
     boolean blackListed;
 
-    public Reader(String name, String surname, Date dateOfBirth) {
+    public Reader(String name, String surname, Calendar dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -54,4 +58,51 @@ public class Reader {
 
     }
 
+    public MyList<PrintedEdition> getBooksTaken() {
+        return booksTaken;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+
+        Reader rd = (Reader) o;
+
+        if (surname.compareTo(rd.getSurname()) != 0) {
+
+            return surname.compareTo(rd.getSurname());
+
+        } else {
+
+            if (name.compareTo(rd.getName()) != 0) {
+                return name.compareTo(rd.getName());
+            } else {
+                return dateOfBirth.compareTo(rd.getDateOfBirth());
+            }
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Calendar getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public static class ReaderCompar implements Comparator<Object> {
+
+        @Override
+        public int compare(Object o1, Object o2) {
+
+            Reader r1 = (Reader) o1;
+            Reader r2 = (Reader) o2;
+
+            return r1.compareTo(r2);
+        }
+    }
 }

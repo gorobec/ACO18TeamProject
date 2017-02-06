@@ -1,5 +1,8 @@
 package oop.weak1.task_7_arrayList;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * Created by Администратор on 27.01.2017.
  */
@@ -207,5 +210,9 @@ public class MyArrayList<T> implements MyList<T> {
 
     }
 
+    @Override
+    public void sort(Comparator<? super T> c) {
+        Arrays.sort(array, 0, size, c);
+    }
 
 }
