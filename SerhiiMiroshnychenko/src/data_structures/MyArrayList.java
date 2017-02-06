@@ -125,27 +125,26 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new ALIterator<T>(this);
+        return new ALIterator();
     }
-    private class ALIterator<T> implements Iterator<T> {
 
-        private MyArrayList<T> list;
-        private T currentElement;
+    private class ALIterator implements Iterator<T> {
+
         private int currentPosition;
 
-        public ALIterator(MyArrayList<T> list){
-            this.list = list;
+        public ALIterator(){
             currentPosition = 0;
         }
 
         @Override
         public boolean hasNext() {
-            return currentPosition < list.size();
+            return currentPosition < size;
         }
 
         @Override
         public T next() {
-            return list.getObjectArr()[currentPosition++];
+
+            return objectArr[currentPosition++];
         }
     }
 }

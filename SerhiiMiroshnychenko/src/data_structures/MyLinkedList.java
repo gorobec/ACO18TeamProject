@@ -108,14 +108,4 @@ public class MyLinkedList<T> implements MyList<T> {
     public Iterator<T> iterator() {
         return null;
     }
-
-    @Override
-    public void forEach(Consumer<? super T> action) {
-
-    }
-
-    @Override
-    public Spliterator<T> spliterator() {
-        return null;
-    }
 }
