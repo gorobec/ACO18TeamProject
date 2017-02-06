@@ -26,6 +26,13 @@ public class Library {
         return -1;
     }
 
+    public boolean addReaderToBlackList(Reader reader){
+        int readerIndex = findReader(reader);
+        if (readerIndex == -1) return false;
+        readers.get(readerIndex).setInBlackList(true);
+        return true;
+    }
+
     public int findItem(PrintedEdition item) {
         for (int i = 0; i < printedEditions.size(); i++) {
             if (printedEditions.get(i).equals(item)) {
@@ -40,7 +47,7 @@ public class Library {
         int readerIndex = findReader(reader);
         int bookIndex = findItem(item);
         int bookCopies = item.getCopiesCount();
-        if (readerIndex == -1 || bookIndex == -1) return false;
+        if (readerIndex == -1 || bookIndex == -1 || readers.get(readerIndex).getInBlackList()) return false;
         readers.get(readerIndex).takeItem(printedEditions.get(bookIndex));
         item.setCopiesCount(bookCopies - 1);
         return true;
@@ -61,5 +68,21 @@ public class Library {
 
     public ArrayList<Reader> getReaders() {
         return readers;
+    }
+
+    public String getAllTakenItems(){
+        StringBuilder builder = new StringBuilder();
+        for (Reader aReader : readers){
+            for (int i = 0; i < aReader.getTakenItems().size() ; i++) {
+               builder.append(aReader.getTakenItems().get(i).toString()).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    public String getTakenItemsByReader(Reader reader){
+        int readerIndex = findReader(reader);
+        if (readerIndex == -1) return "";
+        return reader.getTakenItems().toString();
     }
 }

@@ -25,11 +25,6 @@ public class Run {
         readers.add(reader1);
         readers.add(reader2);
 
-
-        System.out.println(book1.equals(book2));
-        System.out.println(book1.equals(book1));
-        System.out.println(book1.toString());
-
         ArrayList<PrintedEdition> printedEditions = new ArrayList<>();
         printedEditions.add(book1);
         printedEditions.add(book2);
@@ -50,7 +45,19 @@ public class Run {
         System.out.println(reader1.getLibraryCardNumber());
         System.out.println(reader2.getLibraryCardNumber());
         System.out.println(reader3.getLibraryCardNumber());
+        lib.giveItem(reader2, book1);
+        lib.giveItem(reader2, book2);
+        System.out.println("***************************");
+        System.out.println(reader1.getTakenItems());
+        System.out.println(reader2.getTakenItems());
 
+        System.out.println("***************************");
+
+        System.out.println(lib.getAllTakenItems());
+
+        System.out.println("***************************");
+
+        System.out.println(lib.getTakenItemsByReader(reader2));
 
     }
 

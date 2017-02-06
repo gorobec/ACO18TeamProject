@@ -1,7 +1,5 @@
 package library.model;
 
-import week1.homework.arrayList.MyArrayList;
-
 import java.util.ArrayList;
 
 /**
@@ -14,8 +12,9 @@ public class Reader {
     private int libraryCardNumber;
     private ArrayList<PrintedEdition> takenItems = new ArrayList<>();
     private int currentItemsInHands = 0;
-    private static final int MAX_ITEMS_IN_HANDS = 10;
+    private static final int MAX_ITEMS_IN_HANDS = 3;
     private static int counter = 1;
+    private boolean inBlackList = false;
     public Reader() {
         libraryCardNumber = counter++;
     }
@@ -73,6 +72,14 @@ public class Reader {
 
     public void setCurrentItemsInHands(int currentItemsInHands) {
         this.currentItemsInHands = currentItemsInHands;
+    }
+
+    public boolean getInBlackList() {
+        return inBlackList;
+    }
+
+    public void setInBlackList(boolean inBlackList) {
+        inBlackList = inBlackList;
     }
 
     public boolean takeItem(PrintedEdition item) {
