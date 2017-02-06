@@ -13,5 +13,24 @@ public class Edition {
     private String country;
 
     int id;
+    int readerId;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getReaderId() {
+        return readerId;
+    }
+
+    public boolean isAvailable(){
+        if (readerId == 0) {
+            return true;
+        }
+        return false;
+    }
 }

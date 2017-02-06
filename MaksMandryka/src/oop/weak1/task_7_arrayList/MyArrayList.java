@@ -1,12 +1,9 @@
 package oop.weak1.task_7_arrayList;
 
-import java.util.Collection;
-import java.util.Objects;
-
 /**
  * Created by Администратор on 27.01.2017.
  */
-public class MyArrayList<T> implements myList<T>{
+public class MyArrayList<T> implements MyList<T> {
 
     int size = 0;
     T[] array = (T[]) new Object[0];

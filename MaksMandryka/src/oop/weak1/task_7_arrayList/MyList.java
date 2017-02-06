@@ -4,7 +4,7 @@ package oop.weak1.task_7_arrayList;
 /**
  * Created by fmandryka on 04.02.2017.
  */
-public interface myList<T>{
+public interface MyList<T>{
 
     int size();
 
