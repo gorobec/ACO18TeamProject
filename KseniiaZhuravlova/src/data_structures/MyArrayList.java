@@ -24,8 +24,8 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public MyArrayList() {
-        this(DEFAULT_SIZE);
-    }
+            this(DEFAULT_SIZE);
+        }
 
     private boolean rangeCheck(int index) {
         if (index >= size || index < 0) {
