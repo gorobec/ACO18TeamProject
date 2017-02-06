@@ -97,10 +97,7 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     public boolean contains(Object o) {
-        if (indexOf(o) >= 0) {
-            return true;
-        }
-        return false;
+        return indexOf(o) >= 0;
     }
 
     public int indexOf(Object o) {
