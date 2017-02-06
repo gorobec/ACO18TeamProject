@@ -73,8 +73,9 @@ public class Library {
     }
 
     public boolean addReaderToBlackList(int id) {
-        if (getReaderById(id) == null) return false;
-        getReaderById(id).setInBlackList(true);
+        Reader reader = getReaderById(id);
+        if (reader == null) return false;
+        reader.setInBlackList(true);
         return true;
     }
 
