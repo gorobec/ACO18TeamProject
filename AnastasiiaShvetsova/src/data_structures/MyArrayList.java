@@ -12,6 +12,7 @@ public class MyArrayList<T> implements MyList<T> {
     private T[] objects;
     public static final int DEFAULT_SIZE = 0;
 
+    @SuppressWarnings("unchecked")
     public MyArrayList(int size) {
         this.objects = (T[]) new Object[size];
     }
@@ -27,9 +28,8 @@ public class MyArrayList<T> implements MyList<T> {
         return true;
     }
 
-
+    @SuppressWarnings("unchecked")
     public void ensureCapacity(int minEnsureCapacity) {
-
         int arraylength = objects.length;
         if (minEnsureCapacity > arraylength) {
             T[] tmp = (T[]) new Object[minEnsureCapacity];
@@ -126,6 +126,7 @@ public class MyArrayList<T> implements MyList<T> {
         System.out.println(Arrays.toString(objects));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String toString() {
         int count = 0;
@@ -134,9 +135,9 @@ public class MyArrayList<T> implements MyList<T> {
                 count++;
             }
         }
+
         T[] tmp = (T[]) new Object[count];
         for (int i = 0; i < count; i++) {
-            //tmp[i] = objects[i];
             System.arraycopy(objects, i, tmp, i, count);
         }
 
