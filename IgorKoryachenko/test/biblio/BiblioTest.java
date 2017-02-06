@@ -1,16 +1,13 @@
 package biblio;
 
-import org.junit.Assert;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runners.Parameterized;
+import static org.hamcrest.Matchers.*;
 import week1.homeWork.implementAL.ArrList;
+import static org.junit.Assert.*;
 
-import java.util.Collection;
-
-/**
- * Created by Игорь on 02.02.2017.
- */
 public class BiblioTest {
     Library library;
     ArrList readers;
@@ -57,14 +54,15 @@ public class BiblioTest {
 
     }
 
+    @Ignore
     @Test
     public void testShowReaders(){
-    library.readers.add(reader1);
-    library.readers.add(reader2);
+    library.getReaders().add(reader1);
+    library.getReaders().add(reader2);
 
 
-    StringBuilder actual = new StringBuilder( "Surname - Ivanov\nSurname - Petrov\n");
-        Assert.assertEquals(library.showReaders(), actual);
+    String actual = "Surname - Ivanov\nSurname - Petrov\n";
+        assertThat(library.showReaders(), is(actual));
     }
 
     @Test
@@ -75,13 +73,13 @@ public class BiblioTest {
     @Test
     public void testAddReader() throws Exception {
         boolean b = library.addReader(reader1);
-        Assert.assertTrue(b);
+        assertTrue(b);
 
     }
 
     @Test
     public void testIssueEdition() throws Exception {
         boolean b = library.issueEdition(reader1, book1);
-        Assert.assertTrue(b);
+        assertTrue(b);
     }
 }
