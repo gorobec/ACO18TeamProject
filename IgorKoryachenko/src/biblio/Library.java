@@ -49,12 +49,20 @@ public class Library {
 
     //3) добавить печатное издание в библиотеку
     public boolean addEditions(Edition edition) {
+        if (edition == null){
+            System.out.println("Что-то не то");
+            return false;
+        }
         editions.add(edition);
         return true;
     }
 
     //4) добавить читателя в список читателей
     public boolean addReader(Reader reader) {
+        if (reader == null){
+            System.out.println("Что-то не то");
+            return false;
+        }
         readers.add(reader);
         return true;
     }
