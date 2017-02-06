@@ -5,6 +5,10 @@ import library.model.comparators.ComparatorReaderByName;
 
 import java.util.Comparator;
 
+import static library.model.enums.MagazineGenre.*;
+import static library.model.enums.BookGenre.*;
+import static library.model.enums.NewspaperGenre.*;
+
 /**
  * Created by Nastia on 31.01.17.
  */
@@ -28,9 +32,9 @@ public class Run {
         PrintEdition book1 = new Book(author1, 2006, "The Book Thief");
         PrintEdition book2 = new Book(pauloCoelho, 2006, "The Alchemist");
         PrintEdition book3 = new Book(dan, 2006, "The Da Vinci Code");
-        PrintEdition newspaper = new Newspaper(mohamad, 1995, "Kyiv Post");
-        PrintEdition magazine = new Magazine(anna, 1892, "Vogue");
-        PrintEdition book4 = new Magazine(dan, 2000, "Angels & Demons");
+        PrintEdition newspaper = new Newspaper(mohamad, 1995, "Kyiv Post", COMMERCIAL);
+        PrintEdition magazine = new Magazine(anna, 1892, "Vogue", FASHION);
+        PrintEdition book4 = new Book(dan, 2000, "Angels & Demons", MYSTERY);
 
 
         Library newLibray = new Library();
@@ -52,8 +56,8 @@ public class Run {
         newLibray.addPrintEdition(book4);
 
 
-//        System.out.println(newLibray.showPrinEdtitions());
-        System.out.println(newLibray.showReaders());
+        System.out.println(newLibray.showPrinEdtitions());
+//        System.out.println(newLibray.showReaders());
 
 //        newLibray.givePrintEditionForReader(book1, reader1);
 //        newLibray.givePrintEditionForReader(book2, reader1);

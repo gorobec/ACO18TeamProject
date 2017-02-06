@@ -1,11 +1,13 @@
 package ACO.week2.homework.library.utils;
 
-import ACO.data_structures.MyArrayList;
-import ACO.week2.homework.library.model.*;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.model.Library;
+import ACO.week2.homework.library.model.Reader;
+import ACO.week2.homework.library.model.printed_editions.Genre;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by v21k on 31.01.17.
@@ -33,25 +35,24 @@ public class Utils {
         return true;
     }
 
-    public static String showPrintedEditions(MyArrayList al, Comparator comparator) {
+    public static String showPrintedEditions(List<PrintedEdition> al, Comparator comparator) {
 
         if (al.size() == 0) {
             return "No printed editions.";
         }
 
-        PrintedEdition[] printedEditions = printedEditionsToArray(al);
-        Arrays.sort(printedEditions, comparator);
+        Collections.sort(al, comparator);
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < printedEditions.length; i++) {
-            if (printedEditions[i] != null) {
-                sb.append(i + 1).append(": ").append(printedEditions[i].toString()).append("\n");
+        for (int i = 0; i < al.size(); i++) {
+            if (al.get(i) != null) {
+                sb.append(i + 1).append(": ").append(al.get(i).toString()).append("\n");
             }
         }
         return sb.toString();
     }
 
-    public static String showPrintedEditions(MyArrayList al) {
+    public static String showPrintedEditions(List<PrintedEdition> al) {
 
         if (al.size() == 0) {
             return "No printed editions.";
@@ -62,21 +63,5 @@ public class Utils {
             sb.append(i + 1).append(": ").append(al.get(i).toString()).append("\n");
         }
         return sb.toString();
-    }
-
-    public static Reader[] readersToArray(MyArrayList myArrayList) {
-        Reader[] readers = new Reader[myArrayList.size()];
-        for (int i = 0; i < myArrayList.size(); i++) {
-            readers[i] = (Reader) myArrayList.get(i);
-        }
-        return readers;
-    }
-
-    public static PrintedEdition[] printedEditionsToArray(MyArrayList myArrayList) {
-        PrintedEdition[] printedEditions = new PrintedEdition[myArrayList.size()];
-        for (int i = 0; i < myArrayList.size(); i++) {
-            printedEditions[i] = (PrintedEdition) myArrayList.get(i);
-        }
-        return printedEditions;
     }
 }
