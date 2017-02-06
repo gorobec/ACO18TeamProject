@@ -19,12 +19,6 @@ public class Cat {
     public String printCats(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < cats.size(); i++) {
-
-//            concat with String create new object at every iteration and it's very slowly
-//            String str = "";
-//            str = str +cats.get(i).toString();
-
-//            String Builder create object only one time and addes values to current object
             stringBuilder.append(cats.get(i).toString() + "\n");
         }
         return stringBuilder.toString();
