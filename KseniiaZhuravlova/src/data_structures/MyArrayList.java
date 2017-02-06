@@ -18,7 +18,7 @@ public class MyArrayList<T> implements MyList<T> {
         }
 
     }
-
+    @SuppressWarnings({"unchecked","unused"})
     public MyArrayList(int size) {
         this.objects = (T[]) new Object[size];
     }
@@ -35,6 +35,7 @@ public class MyArrayList<T> implements MyList<T> {
         return true;
     }
 
+    @SuppressWarnings({"unchecked","unused"})
     private void ensureCapacity(int minCapacity) {
         if (objects.length < minCapacity) {
             minCapacity = 3 * size / 2 + 1;
