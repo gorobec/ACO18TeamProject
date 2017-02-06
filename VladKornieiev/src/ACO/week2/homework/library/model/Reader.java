@@ -1,16 +1,19 @@
 package ACO.week2.homework.library.model;
 
-import ACO.data_structures.MyArrayList;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by v21k on 31.01.17.
  */
 public class Reader {
-    private String name;
-    private MyArrayList printedEditions = new MyArrayList();
-    private int currentPrintedEditionsNumber = 0;
     private final int MAX_PRINTED_EDITIONS_PER_READER = 3;
+    private String name;
+    private List<PrintedEdition> printedEditions = new ArrayList<>();
+    private int currentPrintedEditionsNumber = 0;
     private boolean inBlackList;
 
     public Reader(String name, int currentPrintedEditionsNumber) {
@@ -26,20 +29,32 @@ public class Reader {
         return name;
     }
 
-    public MyArrayList getPrintedEditions() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<PrintedEdition> getPrintedEditions() {
         return printedEditions;
+    }
+
+    public void setPrintedEditions(List<PrintedEdition> printedEditions) {
+        this.printedEditions = printedEditions;
+    }
+
+    public boolean isInBlackList() {
+        return inBlackList;
     }
 
     public void setInBlackList(boolean inBlackList) {
         this.inBlackList = inBlackList;
     }
 
-    public void setCurrentPrintedEditionsNumber(int currentPrintedEditionsNumber) {
-        this.currentPrintedEditionsNumber = currentPrintedEditionsNumber;
+    public int getCurrentPrintedEditionsNumber() {
+        return currentPrintedEditionsNumber;
     }
 
-    public boolean isInBlackList() {
-        return inBlackList;
+    public void setCurrentPrintedEditionsNumber(int currentPrintedEditionsNumber) {
+        this.currentPrintedEditionsNumber = currentPrintedEditionsNumber;
     }
 
     public boolean addPrintedEdition(PrintedEdition printedEdition) {
@@ -52,7 +67,7 @@ public class Reader {
 
     @Override
     public String toString() {
-        return String.format("Name - %s, current number of printed editions - %d",
+        return String.format("Name - %-10s, current number of printed editions - %d",
                 name, currentPrintedEditionsNumber);
     }
 }

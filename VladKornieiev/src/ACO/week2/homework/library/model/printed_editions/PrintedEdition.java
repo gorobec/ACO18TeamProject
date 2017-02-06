@@ -38,7 +38,7 @@ public class PrintedEdition {
 
     @Override
     public String toString() {
-        return String.format("Name : %s, genre : %s, author : %s, year : %d",
+        return String.format("Name : %-15s genre : %-10s author : %-20s year : %4d",
                 name, genre, author, year);
     }
 
