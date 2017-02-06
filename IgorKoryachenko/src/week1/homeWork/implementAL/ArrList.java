@@ -1,6 +1,6 @@
 package week1.homeWork.implementAL;
 
-public class ArrList {
+public class ArrList<T> {
     int size = 4;
     int count = 0;
     Object[] arr = new Object[size];

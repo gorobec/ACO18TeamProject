@@ -6,8 +6,9 @@ import week1.homeWork.implementAL.ArrList;
  * Created by Мастер on 29.01.2017.
  */
 public class Reader {
-    String surname;
-    ArrList editions;
+    private String surname;
+    private ArrList editions;
+    private boolean isInBlacklist;
 
     public Reader() {
     }
@@ -27,6 +28,22 @@ public class Reader {
             str.append(editions.get(i)).append("\n");
         }
         return str;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public ArrList getEditions() {
+        return editions;
+    }
+
+    public boolean isInBlacklist() {
+        return isInBlacklist;
+    }
+
+    public void setInBlacklist(boolean inBlacklist) {
+        isInBlacklist = inBlacklist;
     }
 
     @Override
