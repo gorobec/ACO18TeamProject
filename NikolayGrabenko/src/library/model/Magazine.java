@@ -19,8 +19,4 @@ public class Magazine extends PrintedEditions {
         this.monthOfPublishing = monthOfPublishing;
     }
 
-    public final String info () {
-        return String.format("Журнал - %15s, год издания - %6d  месяц издания  - %4d",this.getName(),
-                this.getPublicationYear(),this.monthOfPublishing);
-    }
 }

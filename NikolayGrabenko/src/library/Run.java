@@ -84,6 +84,14 @@ public class Run {
         System.out.println(library.showPrintedEditionsAtOneReader(reader4));
         System.out.println();
 
+        // 7) посмотреть список печатных изданий, которые находятся у конкретного читателя
+        System.out.println("Смотрим список печатных изданий, которые находятся у 2-го читателя" +
+                "\n Читателя вытаскиваем со списка регистрированых читатилей библиотеки");
+        Reader tempReader = (Reader) library.getRegisteredReaders().get(0);
+        System.out.println(tempReader.showReader());
+        System.out.println(library.showPrintedEditionsAtOneReader(tempReader));
+        System.out.println();
+
         // 8) добавить читателя в черный список (ему нельзя выдавать печатные издания)
         System.out.println("Добавляем 2-го читателя  в черный список :");
         System.out.println(library.addToBlackList(reader2));
@@ -102,7 +110,7 @@ public class Run {
         // 9) посмотреть печатные издания конкретного автора
         // 10) посмотреть печатные издания конкретного автора
         System.out.println("Смотрим список печатных изданий конкреного автора :");
-        library.showPrintedEditionsOfAuthor( "Bruce Eckel", new PrintedEditionComparatorByName());
+        library.showPrintedEditionsOfAuthor("Bruce Eckel", new PrintedEditionComparatorByName());
         System.out.println();
 
         // 11) посмотреть печатные издания конкретного года
@@ -128,6 +136,6 @@ public class Run {
         // (например в классе "Книга" - детектив, фантастика, роман, проза и т.д.).
         // В качестве жанра использовать enum.
 
-        Book book = new Book("Gone With The Wind",1946, "hard cover", BookGenre.NOVEL);
+        Book book = new Book("Gone With The Wind", 1946, "hard cover", BookGenre.NOVEL);
     }
 }

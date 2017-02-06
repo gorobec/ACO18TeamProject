@@ -34,6 +34,11 @@ public class PrintedEditions extends Editions {
         this.numberOfCopiesAtReader = numberOfCopiesAtReader;
     }
 
+    public final String info () {
+        return String.format("Печатное издание - %15s, год издания - %6d ",this.getName(),
+                this.getPublicationYear());
+    }
+
     public String showEdition() {
         return String.format("Name - %25s, Author - %25s, year of  publication - %6d",
                 this.getName(), this.getAuthor(), this.getPublicationYear());
