@@ -6,7 +6,9 @@ package data_structures;
 public interface MyList<T> {
     boolean add(T object);
     boolean add(int index, T object);
+    boolean wrongIndex(int index);
     T get(int index);
+    boolean remove(int index);
     boolean remove(T object);
     boolean set(int index, T object);
     boolean clear();
