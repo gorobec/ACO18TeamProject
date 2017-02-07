@@ -20,11 +20,10 @@ public class ListUtils {
     }
 
     public static <T> A<T> reversion(A<T> head) {
-        Node<T> prevNode = null;
-        Node<T> currentNode = (Node<T>) head;
-        Node<T> nextNode = null;
+        A<T> prevNode = null;
+        A<T> currentNode = head;
         while (currentNode != null) {
-            nextNode = (Node<T>) currentNode.getNext();
+            A<T> nextNode = currentNode.getNext();
             currentNode.setNext(prevNode);
             prevNode = currentNode;
             currentNode = nextNode;
