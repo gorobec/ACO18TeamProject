@@ -105,4 +105,18 @@ public class MyLinkedList<T> {
     public void clear() {
 
     }
+
+    public class Iter<T> implements Iterator<T>{
+         Node<T> iterator;
+
+        @Override
+        public boolean hasNext() {
+            return iterator.next == null;
+        }
+
+        @Override
+        public T next() {
+            return null;
+        }
+    }
 }
