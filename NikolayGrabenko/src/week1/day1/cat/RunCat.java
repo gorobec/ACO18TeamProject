@@ -1,4 +1,4 @@
-package week1.day1;
+package week1.day1.cat;
 
 public class RunCat {
 
@@ -15,7 +15,7 @@ public class RunCat {
         Cat cat9 = new Cat("Fox", "Red");
         Cat cat10 = new Cat("Vasya", "Grey-White");
 
-        Cat.printCats(Cat.cats);
+        Cat.printCats();
 
     }
 }

@@ -1,4 +1,4 @@
-package week1.day1;
+package week1.day1.cat;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Cat {
 
     private String name;
     private String color;
-    public static ArrayList <Cat> cats = new ArrayList<>();
+    public static ArrayList<Cat> cats = new ArrayList<>();
 
     public Cat(String name, String color) {
         this.name = name;
@@ -19,11 +19,16 @@ public class Cat {
         cats.add(this);
     }
 
-    public static boolean printCats (ArrayList <Cat> cats) {
-        for (Cat cat : cats){
-            System.out.println(String.format("Name - %10s, color - %10s", cat.name, cat.color));
+    public static boolean printCats() {
+        StringBuilder sb = new StringBuilder();
+        for (Cat cat : cats) {
+            if (cat != null) {
+                String tempCat = sb.append("Name - ").append(cat.name).append(" color - ").append(cat.color).toString();
+                System.out.println(tempCat);
+                sb.delete(0,sb.length());
+            }
         }
-    return  true;
+        return true;
     }
 
     public String asString() {
