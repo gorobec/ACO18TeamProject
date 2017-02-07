@@ -5,27 +5,27 @@ import java.util.*;
 /**
  * Created by ksyashka on 26.01.2017.
  */
-public class MyArrayList implements MyList {
-    private Object[] objects;
+public class MyArrayList<T> implements MyList<T> {
+    private T[] objects;
     private int size;
 
     private static final int DEFAULT_SIZE = 10;
 
-    public MyArrayList(Object[] objects) {
+    public MyArrayList(T[] objects) {
         this.objects = objects;
         while (!(objects[size] == null)) {
             size++;
         }
 
     }
-
+    @SuppressWarnings({"unchecked","unused"})
     public MyArrayList(int size) {
-        this.objects = new Object[size];
+        this.objects = (T[]) new Object[size];
     }
 
     public MyArrayList() {
-        this(DEFAULT_SIZE);
-    }
+            this(DEFAULT_SIZE);
+        }
 
     private boolean rangeCheck(int index) {
         if (index >= size || index < 0) {
@@ -35,12 +35,13 @@ public class MyArrayList implements MyList {
         return true;
     }
 
+    @SuppressWarnings({"unchecked","unused"})
     private void ensureCapacity(int minCapacity) {
         if (objects.length < minCapacity) {
             minCapacity = 3 * size / 2 + 1;
-            Object[] temp = new Object[minCapacity];
+            T[] temp = (T[]) new Object[minCapacity];
             System.arraycopy(objects, 0, temp, 0, size);
-            objects = new Object[minCapacity];
+            objects = (T[]) new Object[minCapacity];
             objects = temp;
         }
     }
@@ -60,13 +61,13 @@ public class MyArrayList implements MyList {
         System.out.println(Arrays.toString(objects));
     }
 
-    public boolean add(Object object) {
+    public boolean add(T object) {
         ensureCapacity(size + 1);
         objects[size++] = object;
         return true;
     }
 
-    public boolean add(int index, Object object) {
+    public boolean add(int index, T object) {
         if (index > size || index < 0) System.exit(-1);
         ensureCapacity(size + 1);
         System.arraycopy(objects, index, objects, index + 1, size++ - index);
@@ -74,27 +75,27 @@ public class MyArrayList implements MyList {
         return true;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         if (!rangeCheck(index)) System.exit(-1);
         return objects[index];
     }
 
-    public Object set(int index, Object object) {
-        if (!rangeCheck(index)) return false;
-        Object result = objects[index];
+    public T set(int index, T object) {
+        if (!rangeCheck(index)) System.exit(-1);
+        T result = objects[index];
         objects[index] = object;
         return result;
     }
 
-    public Object remove(int index) {
-        if (!rangeCheck(index)) return false;
-        Object result = objects[index];
+    public T remove(int index) {
+        if (!rangeCheck(index)) System.exit(-1);
+        T result = objects[index];
         System.arraycopy(objects, index + 1, objects, index, objects.length - index - 1);
         objects[--size] = null;
         return result;
     }
 
-    public boolean remove(Object object) {
+    public boolean remove(T object) {
         int index = 0;
         if (object == null) while (index != size && !(objects[index] == null)) index++;
         else while (index != size && !(object.equals(objects[index]))) index++;
