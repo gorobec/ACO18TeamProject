@@ -18,7 +18,7 @@ public class Run {
         Reader r3 = new Reader("Alex", "Porter", new GregorianCalendar(2001,4,20));
         Reader r4 = new Reader("Serhii", "Koval", new GregorianCalendar(2000,6,20));
         Reader r5 = new Reader("Max", "Mandryka", new GregorianCalendar(2006,10,20));
-
+        Reader r6 = new Reader("Maks", "Mandryka", new GregorianCalendar(2006,10,20));
 
         Library lib = Library.getInstance();
 
@@ -27,6 +27,7 @@ public class Run {
         lib.addReader(r3);
         lib.addReader(r4);
         lib.addReader(r5);
+        lib.addReader(r6);
 
         lib.getReaders();
 

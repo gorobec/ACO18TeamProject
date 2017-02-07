@@ -19,6 +19,15 @@ public class Edition implements Comparable<Object>{
     protected int id;
     protected int readerId;
 
+    public Edition(String name, String[] authorName, String publisherName, Calendar editionDate, String lang, String country) {
+        this.name = name;
+        this.authorName = authorName;
+        this.publisherName = publisherName;
+        this.editionDate = editionDate;
+        this.lang = lang;
+        this.country = country;
+    }
+
     public int getId() {
         return id;
     }
@@ -73,7 +82,7 @@ public class Edition implements Comparable<Object>{
         }
     }
 
-    public class EditionCompar implements Comparator<Object> {
+    public static class EditionCompar implements Comparator<Object> {
         @Override
         public int compare(Object o1, Object o2) {
 

@@ -1,6 +1,7 @@
 package oop.library.controller;
 
 import com.sun.org.apache.xpath.internal.operations.String;
+import oop.library.model.Edition;
 import oop.library.model.PrintedEdition;
 import oop.library.model.Reader;
 import oop.weak1.task_7_arrayList.MyArrayList;
@@ -44,7 +45,7 @@ public class Library {
         return printEditions;
     }
 
-    //добавить читателя в список читателей
+    //4. добавить читателя в список читателей
     public boolean addReader(Reader reader) {
         if (reader != null && !readers.contains(reader)) {
             reader.setId(++lastReaderId);
@@ -53,7 +54,7 @@ public class Library {
         return false;
     }
 
-    //добавить печатное издание в библиотеку
+    //3. добавить печатное издание в библиотеку
     public boolean addPrintedEdition(PrintedEdition printEdit) {
         if (printEdit != null) {
             printEdit.setId(++lastEditId);
@@ -62,7 +63,7 @@ public class Library {
         return false;
     }
 
-    //посмотреть список доступных конкретных печатных изданий
+    //2. посмотреть список доступных конкретных печатных изданий
     public MyList<PrintedEdition> getAvailablePrintEditList() {
 
         MyList<PrintedEdition> availablePrEd = new MyArrayList<>();
@@ -73,11 +74,14 @@ public class Library {
             }
         }
 
+        Comparator<? super Edition> c = new Edition.EditionCompar();
+        availablePrEd.sort(c);
+
         return availablePrEd;
     }
 
-    //    выдать печатное издание читателю (если книга есть в наличии).
-//    Читателю запрещается брать больше 3-х печатных изданий.
+    //5. выдать печатное издание читателю (если книга есть в наличии).
+    //Читателю запрещается брать больше 3-х печатных изданий.
     public boolean givePrintEdit(Reader reader, PrintedEdition printEdit) {
 
         if (readers.contains(reader) && printEditions.contains(printEdit)) {
@@ -121,7 +125,7 @@ public class Library {
     }
 
 
-    //добавить читателя в черный список (ему нельзя выдавать печатные издания)
+    //8. добавить читателя в черный список (ему нельзя выдавать печатные издания)
     public boolean addReaderToBlackL(Reader reader) {
         if (reader != null && !readers.contains(reader)) {
 
@@ -132,7 +136,7 @@ public class Library {
         return false;
     }
 
-    //посмотреть список печатных изданий, которые находятся у читателей
+    //6. посмотреть список печатных изданий, которые находятся у читателей
     public MyList<PrintedEdition> getTakenPrintEditList() {
 
         MyList<PrintedEdition> TakenPrEd = new MyArrayList<>();
@@ -143,20 +147,25 @@ public class Library {
             }
         }
 
+        Comparator<? super Edition> c = new Edition.EditionCompar();
+        TakenPrEd.sort(c);
+
         return TakenPrEd;
     }
 
-    //посмотреть список печатных изданий, которые находятся у конкретного читателя
+    //7. посмотреть список печатных изданий, которые находятся у конкретного читателя
     public MyList<PrintedEdition> getTakenPrintEditList(Reader reader) {
 
         if (readers.contains(reader)) {
+            Comparator<? super Edition> c = new Edition.EditionCompar();
+            readers.get(readers.indexOf(reader)).getBooksTaken().sort(c);
             return readers.get(readers.indexOf(reader)).getBooksTaken();
         }
 
         throw new IllegalArgumentException("No such user!");
     }
 
-    //посмотреть печатные издания конкретного года
+    //11. посмотреть печатные издания конкретного года
     public MyList<PrintedEdition> getPrintEditOfYear(int year) {
 
         MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
@@ -167,11 +176,14 @@ public class Library {
             }
         }
 
+        Comparator<? super Edition> c = new Edition.EditionCompar();
+        PrEdFound.sort(c);
+
         return PrEdFound;
     }
 
 
-    //найти печатное издание по названию (ключевым словам)
+    //12. найти печатное издание по названию (ключевым словам)
     public MyList<PrintedEdition> getPrintEditByMatch(String... keywords) {
 
         MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
@@ -190,11 +202,14 @@ public class Library {
 
         }
 
+        Comparator<? super Edition> c = new Edition.EditionCompar();
+        PrEdFound.sort(c);
+
         return PrEdFound;
     }
 
 
-    //посмотреть печатные издания конкретного автора
+    //9. посмотреть печатные издания конкретного автора
     public MyList<PrintedEdition> getPrintEditByMatch(String author) {
 
         MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
@@ -212,6 +227,9 @@ public class Library {
             }
 
         }
+
+        Comparator<? super Edition> c = new Edition.EditionCompar();
+        PrEdFound.sort(c);
 
         return PrEdFound;
     }
