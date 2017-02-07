@@ -1,14 +1,22 @@
 package week1.dynamicArray;
 
-import java.awt.print.Book;
-import java.util.ArrayList;
-
 public class Run {
     public static void main(String[] args) {
-        NewArrayList<User> ar = new NewArrayList<>();
-        //ar.add(new User("Ivan", "Vodyanov"));
-        //ar.add(1, new User("Dmitriy", "Sergeev"));
-        System.out.println(ar.size());
+        NewArrayList list = new NewArrayList();
+        list.add("cat");
+        list.add(1, "dog");
+
+        System.out.println(list.size());
+
+        list.remove(0);
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+
+        System.out.println();
+        System.out.println(list.get(0));
+
     }
 }
 
