@@ -1,7 +1,5 @@
 package week2.library.editions;
 
-import java.util.ArrayList;
-
 public class PrintEdition {
     private String name;
     private String author;
@@ -41,9 +39,12 @@ public class PrintEdition {
         if (this == o) {
             return true;
         }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
         PrintEdition printEdition = (PrintEdition) o;
-        return name == printEdition.name && author == printEdition.author
-                && genre == printEdition.genre && year == printEdition.year;
+        return name.equals(printEdition.name) && author.equals(printEdition.author)
+                && genre.equals(printEdition.genre) && year == printEdition.year;
     }
 
     // В класс ПереодическоеИздание добавить final метод,

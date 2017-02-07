@@ -12,25 +12,34 @@ public class Run {
         Reader reader3 = new Reader("Lola", "Rush");
 
         Library lib = new Library();
-        lib.addReaderToList(reader);
-        lib.addReaderToList(reader1);
-        lib.addReaderToList(reader2);
-        lib.addReaderToList(reader3);
+        lib.addReaderToLibrary(reader);
+        lib.addReaderToLibrary(reader1);
+        lib.addReaderToLibrary(reader2);
+        lib.addReaderToLibrary(reader3);
         lib.readersList();
 
         System.out.println();
 
         PrintEdition edition = new PrintEdition("Java 8", "Schildt", "programming", 2015);
-        PrintEdition edition1 = new PrintEdition("The Lord of the rings", "Tolkien", "fantasy", 1954);
-        PrintEdition edition2 = new PrintEdition("C++: The Complete Reference", "Schildt", "programming", 2008);
+        PrintEdition edition1 = new PrintEdition("The Lord of the rings", "Tolkien",
+                "fantasy", 1954);
+        PrintEdition edition2 = new PrintEdition("C++: The Complete Reference", "Schildt",
+                "programming", 2008);
+        PrintEdition edition3 = new PrintEdition("Java 7", "Schildt", "programming", 2013);
 
-        lib.addPrintEdition(edition);
-        lib.addPrintEdition(edition1);
-        lib.addPrintEdition(edition2);
+        lib.addPrintEditionToLibrary(edition);
+        lib.addPrintEditionToLibrary(edition1);
+        lib.addPrintEditionToLibrary(edition2);
+        lib.addPrintEditionToLibrary(edition3);
 
-        lib.showBooksByYear(2015);
+        reader.takePrintEdition(edition3);
+        reader.takePrintEdition(edition);
+        reader.showTakenBooks();
 
-        //lib.showAuthorBooks("schildt");
+        //lib.showBooksByYear(2015);
+
+        //lib.concreteEditionInLibrary("the lord of the rings");
+
     }
 
 }

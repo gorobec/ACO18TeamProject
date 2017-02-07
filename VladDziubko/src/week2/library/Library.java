@@ -1,8 +1,8 @@
 package week2.library;
 
 
-import week2.library.comparators.EditionsByName;
-import week2.library.comparators.ReaderNameSorting;
+import week2.library.comparators.PEByName;
+import week2.library.comparators.ReaderByName;
 import week2.library.editions.PrintEdition;
 import week2.library.readers.Reader;
 
@@ -12,7 +12,6 @@ import java.util.Comparator;
 public class Library {
     private String libName;
     private String location;
-
     private ArrayList<PrintEdition> editions = new ArrayList<>();
     private ArrayList<Reader> readers = new ArrayList<>();
 
@@ -26,8 +25,9 @@ public class Library {
         this.location = location;
     }
 
+
     // sorting list
-    public ArrayList sortList(ArrayList list, Comparator comparator) {
+    private void sortList(ArrayList list, Comparator comparator) {
         for (int i = 0; i < list.size(); i++) {
             for (int j = i + 1; j < list.size(); j++) {
                 if (comparator.compare(list.get(i), list.get(j)) > 0) {
@@ -37,12 +37,11 @@ public class Library {
                 }
             }
         }
-        return list;
     }
 
     // 1) посмотреть список читателей (в отсортированном виде)
     public ArrayList readersList() {
-        sortList(readers, new ReaderNameSorting());
+        sortList(readers, new ReaderByName());
         for (int i = 0; i < readers.size(); i++) {
             System.out.printf("%s %s\n", readers.get(i).getName(),
                     readers.get(i).getSurname());
@@ -51,17 +50,19 @@ public class Library {
     }
 
     // 2) посмотреть список доступных конкретных печатных изданий (в отсортированном виде)
-    public ArrayList editionsInLibrary() {
-        sortList(editions, new EditionsByName());
+    public ArrayList concreteEditionInLibrary(String edition) {
+        sortList(editions, new PEByName());
         for (int i = 0; i < editions.size(); i++) {
-            System.out.printf("\"%s\", author -> %s\n",
-                    editions.get(i).getName(), editions.get(i).getAuthor());
+            if (editions.get(i).getName().equalsIgnoreCase(edition)) {
+                System.out.printf("Match is found : %s, author --> %s",
+                        editions.get(i).getName(), editions.get(i).getAuthor());
+            }
         }
         return editions;
     }
 
     // 3) добавить печатное издание в библиотеку
-    public boolean addPrintEdition(PrintEdition edition) {
+    public boolean addPrintEditionToLibrary(PrintEdition edition) {
         if (edition == null) {
             return false;
         }
@@ -69,7 +70,7 @@ public class Library {
     }
 
     // 4) добавить читателя в список читателей
-    public boolean addReaderToList(Reader reader) {
+    public boolean addReaderToLibrary(Reader reader) {
         if (reader == null) {
             return false;
         }
@@ -78,7 +79,7 @@ public class Library {
 
     // 9) посмотреть печатные издания конкретного автора
     public ArrayList showAuthorBooks(String author) {
-        sortList(editions, new EditionsByName());
+        sortList(editions, new PEByName());
         for (int i = 0; i < editions.size(); i++) {
             if (editions.get(i).getAuthor().equalsIgnoreCase(author)) {
                 System.out.printf("%s --> \"%s\"\n", editions.get(i).getAuthor(), editions.get(i).getName());
@@ -89,7 +90,7 @@ public class Library {
 
     // 11) посмотреть печатные издания конкретного года
     public ArrayList showBooksByYear(int year) {
-        sortList(editions, new EditionsByName());
+        sortList(editions, new PEByName());
         for (int i = 0; i < editions.size(); i++) {
             if (editions.get(i).getYear() == year) {
                 System.out.printf("%d --> \"%s\" %s\n", editions.get(i).getYear(),
