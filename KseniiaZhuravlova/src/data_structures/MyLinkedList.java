@@ -118,7 +118,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
         @Override
         public boolean hasNext() {
-            return currentNode.next != null;
+            return currentNode != null;
         }
 
         @Override
