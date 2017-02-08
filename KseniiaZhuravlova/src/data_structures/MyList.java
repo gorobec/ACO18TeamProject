@@ -3,15 +3,15 @@ package data_structures;
 /**
  * Created by ksyashka on 28.01.2017.
  */
-public interface MyList {
+public interface MyList<T> extends Iterable<T> {
 
-    boolean add(Object object);
-    boolean add(int index, Object object);
+    boolean add(T object);
+    boolean add(int index, T object);
     Object get(int index);
     Object remove(int index);
-    boolean remove(Object object);
+    boolean remove(T object);
     void trimToSize();
-    Object set(int index, Object object);
+    Object set(int index, T object);
     int size();
     boolean isEmpty();
     boolean contains(Object object);

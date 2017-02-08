@@ -1,5 +1,7 @@
 package data_structures;
 
+import java.util.Iterator;
+
 /**
  * Created by gorobec on 04.02.17.
  */
@@ -106,5 +108,22 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public void clear() {
 
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LLIterator();
+    }
+
+    private class LLIterator implements Iterator<T> {
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public T next() {
+            return null;
+        }
     }
 }

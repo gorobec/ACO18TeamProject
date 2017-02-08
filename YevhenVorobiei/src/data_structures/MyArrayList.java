@@ -1,15 +1,19 @@
 package data_structures;
 
+import java.util.Iterator;
+
 /**
  * Created by gorobec on 29.01.17.
  */
 public class MyArrayList<T> implements MyList<T>{
 
 
-    public static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 10;
     private T[] elementData;
     private int size;
 
+
+    @SuppressWarnings(value = "unchecked")
     public MyArrayList(int size) {
         elementData = (T[])new Object[size];
     }
@@ -19,7 +23,9 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     public boolean add(T o){
-        return false;
+        elementData[size] = o;
+        size++;
+        return true;
     }
 
     @Override
@@ -42,11 +48,13 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
-    public Object set(int index, Object object) {
+    public T set(int index, T object) {
         return null;
     }
 
     public T remove(int index){
+        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+        elementData[size--] = null;
         return null;
     }
 
@@ -69,5 +77,28 @@ public class MyArrayList<T> implements MyList<T>{
         return elementData[index];
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new ALIterator();
+    }
 
+    private class ALIterator implements Iterator<T>{
+
+        private int currentPosition;
+
+        private ALIterator() {
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+
+            return elementData[currentPosition++];
+        }
+    }
 }
