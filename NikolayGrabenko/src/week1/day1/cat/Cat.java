@@ -19,15 +19,14 @@ public class Cat {
         cats.add(this);
     }
 
-    public static boolean printCats() {
+    public static String printCats() {
         StringBuilder sb = new StringBuilder();
         for (Cat cat : cats) {
             if (cat != null) {
                 sb.append(cat.asString()).append("\n");
             }
         }
-        System.out.println(sb.toString());
-        return true;
+        return sb.toString();
     }
 
     public String asString() {

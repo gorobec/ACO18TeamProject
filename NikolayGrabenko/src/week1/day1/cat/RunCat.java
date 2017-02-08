@@ -15,7 +15,7 @@ public class RunCat {
         Cat cat9 = new Cat("Fox", "Red");
         Cat cat10 = new Cat("Vasya", "Grey-White");
 
-        Cat.printCats();
+        System.out.println( Cat.printCats());
 
     }
 }
