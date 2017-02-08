@@ -23,8 +23,7 @@ public class Cat {
         StringBuilder sb = new StringBuilder();
         for (Cat cat : cats) {
             if (cat != null) {
-                String tempCat = sb.append("Name - ").append(cat.name).append(" color - ").append(cat.color).toString();
-                System.out.println(tempCat);
+                System.out.println(sb.append(cat.asString()).toString());
                 sb.delete(0,sb.length());
             }
         }
