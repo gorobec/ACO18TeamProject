@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public abstract class MyListTest {
 
-    protected MyList<String> list;
+    MyList<String> list;
 
     @Before
     public abstract void setUp();
@@ -50,8 +50,16 @@ public abstract class MyListTest {
 
     @Test
     public void testAddElementByIndex() {
-        assertTrue(list.add(0, "2"));
+        assertTrue(list.add(0, "A"));
         assertEquals(1, list.size());
+        assertTrue(list.add(0, "D"));
+        assertEquals(2, list.size());
+        assertTrue(list.add(1, "B"));
+        assertEquals(3, list.size());
+        assertTrue(list.add(2, "C"));
+        assertEquals(4, list.size());
+        assertTrue(list.add(2, "D"));
+        assertEquals(5, list.size());
     }
 
 
@@ -102,7 +110,7 @@ public abstract class MyListTest {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("1"));
-        assertTrue(list.remove("2"));
+        assertTrue(!list.remove("2"));
         assertEquals(3, list.size());
     }
 
@@ -183,14 +191,6 @@ public abstract class MyListTest {
         assertTrue(!list.isEmpty());
     }
 
-    @Test
-    public void testTrimToSize() {
-        assertTrue(list.add("0"));
-        assertTrue(list.add("1"));
-        assertTrue(list.add("2"));
-        list.trimToSize();
-        assertTrue(3 == list.size());
-    }
 
     @Test
     public void testClear() {
@@ -198,7 +198,6 @@ public abstract class MyListTest {
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
         list.clear();
-        list.trimToSize();
         assertTrue(list.isEmpty());
     }
 

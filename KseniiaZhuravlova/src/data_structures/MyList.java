@@ -7,11 +7,10 @@ public interface MyList<T> extends Iterable<T> {
 
     boolean add(T object);
     boolean add(int index, T object);
-    Object get(int index);
-    Object remove(int index);
+    T get(int index);
+    T remove(int index);
     boolean remove(T object);
-    void trimToSize();
-    Object set(int index, T object);
+    T set(int index, T object);
     int size();
     boolean isEmpty();
     boolean contains(Object object);

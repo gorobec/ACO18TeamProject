@@ -17,30 +17,73 @@ public class MyLinkedList<T> implements MyList<T> {
             head = tail = new Node<>(object);
         } else {
             tail.next = new Node<>(object, tail);
-            //tail.next.previous = tail;
             tail = tail.next;
         }
         size++;
         return true;
     }
 
+    private boolean rangeCheck(int index) {
+        if (index >= size || index < 0) {
+            System.out.printf("Index - %d, size: - %d\n", index, size);
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean add(int index, T object) {
-        return false;
+        if (index > size || index < 0) System.exit(-1);
+        if (index == size) add(object);
+        else {
+            if (index == 0) {
+                head.previous = new Node<>(object, null, head);
+                head = head.previous;
+            } else {
+                Node<T> currentNode = head;
+                for (int i = 0; i < index; i++)
+                    currentNode = currentNode.next;
+                currentNode.previous.next = new Node<>(object, currentNode.previous, currentNode);
+                currentNode.previous = currentNode.previous.next;
+            }
+            size++;
+        }
+        return true;
     }
 
     @Override
-    public Object get(int index) {
-        return null;
+    public T get(int index) {
+        if (!rangeCheck(index)) System.exit(-1);
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++)
+            currentNode = currentNode.next;
+        return currentNode.value;
     }
 
     @Override
-    public Object remove(int index) {
-        return null;
+    public T remove(int index) {
+        if (!rangeCheck(index)) System.exit(-1);
+        Node<T> currentNode = head;
+        if (index == 0) {
+            head = head.next;
+        } else {
+            for (int i = 0; i < index; i++)
+                currentNode = currentNode.next;
+            currentNode.previous.next = currentNode.next;
+            currentNode.next.previous = currentNode.previous;
+        }
+        size--;
+        return currentNode.value;
     }
 
     @Override
-    public boolean remove(T object) {
+    public boolean remove (T object){
+        int index = indexOf(object);
+        if (index == -1) return false;
+        remove(index);
+        return true;
+    }
+ /*   public boolean remove(T object) {
         Node<T> forDelete = findNode(object);
         if (forDelete == null) return false;
         if (forDelete != head) {
@@ -53,8 +96,6 @@ public class MyLinkedList<T> implements MyList<T> {
         } else {
             tail = forDelete.previous;
         }
-        /*forDelete.next = null;
-        forDelete.next = null;*/
         size--;
         return true;
     }
@@ -76,16 +117,17 @@ public class MyLinkedList<T> implements MyList<T> {
             }
         }
         return null;
-    }
+    }*/
 
     @Override
-    public void trimToSize() {
-
-    }
-
-    @Override
-    public Object set(int index, T object) {
-        return null;
+    public T set(int index, T object) {
+        if (!rangeCheck(index)) System.exit(-1);
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++)
+            currentNode = currentNode.next;
+        T returnValue = currentNode.value;
+        currentNode.value = object;
+        return returnValue;
     }
 
     @Override
@@ -100,12 +142,33 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean contains(Object object) {
-        return false;
+        return indexOf(object) != -1;
+    }
+
+    private int indexOf(Object object) {
+        Node<T> iterator = head;
+        if (object == null) {
+            for (int i = 0; i < size; i++) {
+                if (null == iterator.value)
+                    return i;
+                iterator = iterator.next;
+            }
+
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (object.equals(iterator.value))
+                    return i;
+                iterator = iterator.next;
+            }
+        }
+        return -1;
     }
 
     @Override
     public void clear() {
-
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override

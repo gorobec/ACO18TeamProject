@@ -16,4 +16,10 @@ public class Node<T> {
         this.value = value;
         this.previous = previous;
     }
+
+    public Node(T value, Node<T> previous, Node<T> next) {
+        this.value = value;
+        this.previous = previous;
+        this.next = next;
+    }
 }
