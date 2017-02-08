@@ -23,10 +23,10 @@ public class Cat {
         StringBuilder sb = new StringBuilder();
         for (Cat cat : cats) {
             if (cat != null) {
-                System.out.println(sb.append(cat.asString()).toString());
-                sb.delete(0,sb.length());
+                sb.append(cat.asString()).append("\n");
             }
         }
+        System.out.println(sb.toString());
         return true;
     }
 
