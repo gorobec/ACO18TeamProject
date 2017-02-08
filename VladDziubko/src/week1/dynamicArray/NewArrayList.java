@@ -5,13 +5,13 @@ import java.util.Collection;
 
 public class NewArrayList<E> {
     private int size;
-    private Object[] data;
+    private E[] data;
     private static final int DEF_CAPASITY = 10;
     private static final Object[] EMPTY_DATA = {};
     private static final Object[] DEFAULTCAPASITY_EMPTY = {};
 
     public NewArrayList() {
-        data = new Object[DEF_CAPASITY];
+        data = (E[]) new Object[DEF_CAPASITY];
     }
 
     public NewArrayList(int initialCapasity) {
@@ -19,21 +19,21 @@ public class NewArrayList<E> {
             throw new IllegalArgumentException("Illegal capasity: " + initialCapasity);
         }
         if (initialCapasity > 0) {
-            data = new Object[initialCapasity];
+            data = (E[]) new Object[initialCapasity];
         }
         if (initialCapasity == 0) {
-            data = new Object[]{};
+            data = (E[]) DEFAULTCAPASITY_EMPTY;
         }
     }
 
     public NewArrayList(Collection<? extends E> c) {
-        data = c.toArray();
+        data = (E[]) c.toArray();
         if ((size = data.length) != 0) {
             if (data.getClass() != Object[].class) {
-                data = Arrays.copyOf(data, size, Object[].class);
+                data = (E[]) Arrays.copyOf(data, size, Object[].class);
             }
         } else {
-            data = EMPTY_DATA;
+            data = (E[]) EMPTY_DATA;
         }
     }
 
@@ -46,6 +46,9 @@ public class NewArrayList<E> {
             return false;
         }
         if (this == o) {
+            return true;
+        }
+        if(o.getClass() == this.getClass()){
             return true;
         }
         NewArrayList<E> localList = (NewArrayList<E>) o;
@@ -88,7 +91,7 @@ public class NewArrayList<E> {
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        return (E) data[index];
+        return data[index];
     }
 
     // clear()
@@ -104,7 +107,7 @@ public class NewArrayList<E> {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Illegal argument " + index);
         }
-        E old = (E) data[index];
+        E old = data[index];
         data[index] = element;
         return old;
     }
@@ -117,12 +120,12 @@ public class NewArrayList<E> {
     }
 
     // add by index
-    public boolean add(int index, Object element) {
+    public boolean add(int index, E element) {
         if (index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException("Illegal argument " + index);
         }
         ensureCapacity(size + 1);
-        data = new Object[size + 1];
+        data =  (E[]) new Object[size + 1];
         System.arraycopy(data, index, data, index + 1, size - index);
         data[index] = element;
         size++;
@@ -130,7 +133,7 @@ public class NewArrayList<E> {
     }
 
     // indexOf
-    public int indexOf(Object o) {
+    private int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < data.length; i++) {
                 if (data[i] == null) {
@@ -157,7 +160,7 @@ public class NewArrayList<E> {
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        E oldVal = (E) data[index];
+        E oldVal = data[index];
         int numMoved = size - index - 1;
         if (numMoved > 0) {
             System.arraycopy(data, index + 1, data, index, numMoved);

@@ -2,7 +2,7 @@ package week1.dynamicArray;
 
 public class Run {
     public static void main(String[] args) {
-        NewArrayList list = new NewArrayList();
+        NewArrayList<String> list = new NewArrayList<>();
         list.add("cat");
         list.add(1, "dog");
 
