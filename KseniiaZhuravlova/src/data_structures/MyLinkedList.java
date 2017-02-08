@@ -1,5 +1,8 @@
 package data_structures;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * Created by ksyashka on 04.02.2017.
  */
@@ -103,5 +106,26 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public void clear() {
 
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LLIterator();
+    }
+
+    private class LLIterator implements Iterator<T> {
+        Node<T> currentNode = head;
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        @Override
+        public T next() {
+            Node<T> returnNode = currentNode;
+            currentNode = currentNode.next;
+            return returnNode.value;
+        }
     }
 }

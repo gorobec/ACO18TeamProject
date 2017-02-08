@@ -128,4 +128,29 @@ public class MyArrayList<T> implements MyList<T> {
     public boolean isEmpty() {
         return size == 0;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ALIterator();
+    }
+
+    private class ALIterator implements Iterator<T>{
+
+        private int currentPosition;
+
+        private ALIterator() {
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+
+            return objects[currentPosition++];
+        }
+    }
 }

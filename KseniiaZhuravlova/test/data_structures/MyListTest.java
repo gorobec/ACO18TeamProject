@@ -1,9 +1,10 @@
 package data_structures;
 
+import org.junit.Test;
 import org.junit.*;
-
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 /**
  * Created by ksyashka on 29.01.2017.
  */
@@ -70,9 +71,8 @@ public abstract class MyListTest {
         assertTrue(list.add("0"));
         assertTrue(list.add(null));
         assertTrue(list.add("2"));
-        Object expected = null;
         Object actual = list.get(1);
-        assertEquals(expected, actual);
+        assertEquals(null, actual);
     }
 
     @Test
@@ -200,5 +200,21 @@ public abstract class MyListTest {
         list.clear();
         list.trimToSize();
         assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void testIterator(){
+        assertTrue(list.add("A"));
+        assertTrue(list.add("B"));
+        assertTrue(list.add("C"));
+        assertTrue(list.add("D"));
+        assertTrue(list.add("E"));
+        Iterator<String> iterator = list.iterator();
+        assertEquals("A", iterator.next());
+        assertEquals("B", iterator.next());
+        assertEquals("C", iterator.next());
+        assertEquals("D", iterator.next());
+        assertEquals("E", iterator.next());
+
     }
 }
