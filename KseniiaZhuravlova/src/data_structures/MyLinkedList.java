@@ -77,7 +77,7 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 
     @Override
-    public boolean remove (T object){
+    public boolean remove(T object) {
         int index = indexOf(object);
         if (index == -1) return false;
         remove(index);
@@ -189,6 +189,27 @@ public class MyLinkedList<T> implements MyList<T> {
             Node<T> returnNode = currentNode;
             currentNode = currentNode.next;
             return returnNode.value;
+        }
+    }
+
+    private static class Node<V> {
+        V value;
+        Node<V> next;
+        Node<V> previous;
+
+        private Node(V value) {
+            this.value = value;
+        }
+
+        private Node(V value, Node<V> previous) {
+            this.value = value;
+            this.previous = previous;
+        }
+
+        private Node(V value, Node<V> previous, Node<V> next) {
+            this.value = value;
+            this.previous = previous;
+            this.next = next;
         }
     }
 }
