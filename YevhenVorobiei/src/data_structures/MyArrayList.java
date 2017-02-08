@@ -68,4 +68,6 @@ public class MyArrayList<T> implements MyList<T>{
         if(index > size) System.exit(-1);
         return elementData[index];
     }
+
+
 }

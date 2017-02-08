@@ -1,4 +1,4 @@
-package ACO.week3.homework.main.java.ua.com.artcode;
+package ACO.week3.homework.ll_reversion;
 
 /**
  * Hello world!

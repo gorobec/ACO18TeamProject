@@ -1,11 +1,11 @@
-package ACO.week3.homework.java.ua.com.artcode;
+package ACO.week3.homework.ll_reversion;
 
 
 import static org.junit.Assert.*;
 
-import ACO.week3.homework.main.java.ua.com.artcode.A;
-import ACO.week3.homework.main.java.ua.com.artcode.ListUtils;
-import ACO.week3.homework.main.java.ua.com.artcode.Node;
+import ACO.week3.homework.ll_reversion.A;
+import ACO.week3.homework.ll_reversion.ListUtils;
+import ACO.week3.homework.ll_reversion.Node;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -138,18 +138,24 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            int currentPosition = 0;
+        return new ALIterator();
+    }
 
-            @Override
-            public boolean hasNext() {
-                return currentPosition < size();
-            }
+    private class ALIterator implements Iterator<E> {
+        int currentPosition;
 
-            @Override
-            public E next() {
-                return (E) elements[currentPosition++];
-            }
-        };
+        private ALIterator() {
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size();
+        }
+
+        @Override
+        public E next() {
+            return (E) elements[currentPosition++];
+        }
     }
 }

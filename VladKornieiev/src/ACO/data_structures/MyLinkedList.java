@@ -166,6 +166,7 @@ public class MyLinkedList<E> implements MyList<E> {
     private boolean deleteNode(Node<E> forDelete) {
         if (forDelete == null) return false;
 
+        // change links for next and prev
         if (forDelete != head) {
             forDelete.prev.next = forDelete.next;
         } else {
@@ -177,6 +178,10 @@ public class MyLinkedList<E> implements MyList<E> {
         } else {
             tail = forDelete.prev;
         }
+
+        // delete links for deleted Node
+        forDelete.prev = forDelete.next = null;
+        forDelete.item = null;
         size--;
         return true;
     }
@@ -186,7 +191,7 @@ public class MyLinkedList<E> implements MyList<E> {
         Node<E> prev;
         Node<E> next;
 
-        public Node(Node<E> prev, E element, Node<E> next) {
+        Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
             this.prev = prev;
             this.next = next;
@@ -195,18 +200,27 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int currentPosition = 0;
+        return new LLIterator();
+    }
 
-            @Override
-            public boolean hasNext() {
-                return currentPosition < size;
-            }
+    private class LLIterator implements Iterator<E> {
+        private Node<E> first;
+        private E tmp;
 
-            @Override
-            public E next() {
-                return findNodeByIndex(currentPosition++).item;
-            }
-        };
+        private LLIterator() {
+            this.first = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return first != null;
+        }
+
+        @Override
+        public E next() {
+            tmp = first.item;
+            first = first.next;
+            return tmp;
+        }
     }
 }

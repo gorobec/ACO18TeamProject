@@ -1,4 +1,4 @@
-package ACO.week3.homework.main.java.ua.com.artcode;
+package ACO.week3.homework.ll_reversion;
 
 public class ListUtils {
 
@@ -19,10 +19,17 @@ public class ListUtils {
         return head;
     }
 
-    public static<T> A<T> reversion(A<T> head) {
+    public static <T> A<T> reversion(A<T> head) {
+        A<T> prev = null;
+        A<T> next = null;
+        A<T> current = head;
 
-
-        return head;
-
+        while (current != null) {
+            next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
+        }
+        return prev;
     }
 }

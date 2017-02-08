@@ -151,6 +151,22 @@ public abstract class MyListTest {
         assertEquals(0, list.indexOf("abc"));
         assertEquals(-1, list.indexOf("dbc"));
     }
+
+    @Test
+    public void clearTest(){
+        list.add("2");
+        list.add("2");
+        list.add("2");
+        list.clear();
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void indexOfNull(){
+        list.add("!");
+        list.add(null);
+        assertEquals(1, list.indexOf(null));
+    }
 }
 
 
