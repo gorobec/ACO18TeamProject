@@ -50,7 +50,7 @@ public abstract  class TestListMy {
         list.add("0");
         list.add("1");
         list.add("2");
-        assertTrue(list.add(15, "3"));
+        assertFalse(list.add(15, "3"));
     }
 
     @Test
@@ -110,7 +110,7 @@ public abstract  class TestListMy {
         list.add("1");
         list.add("2");
         list.clear();
-        assertEquals(null, list.get(1));
+        assertEquals(0, list.size());
     }
 
     @Test
@@ -134,5 +134,15 @@ public abstract  class TestListMy {
         list.add("1");
         list.add("2");
         assertEquals(2, list.size());
+    }
+
+    @Test
+    public void testGet (){
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        assertEquals("1",list.get(0));
+        assertEquals("2",list.get(1));
+        assertEquals("3",list.get(2));
     }
 }

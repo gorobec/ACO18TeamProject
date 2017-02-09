@@ -1,25 +1,22 @@
 package library.utils;
 
-/**
- * Created by User on 28.01.2017.
- */
-public interface ListMy {
+public interface ListMy <T> {
 
-    boolean add(Object o);
+    boolean add(T o);
 
-    boolean add(int index, Object o);
+    boolean add(int index, T o);
 
-    Object get(int index);
+    T get(int index);
 
     boolean remove(int index);
 
-    boolean remove(Object obj);
+    boolean remove(T obj);
 
-    boolean set(int index, Object obj);
+    boolean set(int index, T obj);
 
     void clear();
 
-    boolean contains(Object obj);
+    boolean contains(T obj);
 
     int size();
 }
