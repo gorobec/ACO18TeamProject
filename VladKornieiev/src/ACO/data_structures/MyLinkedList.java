@@ -25,19 +25,20 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public void add(int index, E element) {
-        checkIndexAdd(index);
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
 
         if (index == size) {
             add(element);
         } else {
             // looking for node at this index
             Node<E> nodeAtThisIndex = findNodeByIndex(index);
-            // save prev and next (for better understanding)
-            Node prev = nodeAtThisIndex.prev;
-            Node next = nodeAtThisIndex;
+            // save prev (for better understanding)
+            Node<E> prev = nodeAtThisIndex.prev;
             // insert new node
-            prev.next = new Node(prev, element, next);
-            next.prev = prev.next;
+            prev.next = new Node<>(prev, element, nodeAtThisIndex);
+            nodeAtThisIndex.prev = prev.next;
             size++;
         }
     }
@@ -64,7 +65,6 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public E remove(int index) {
-        checkIndex(index);
 
         Node<E> forDelete = findNodeByIndex(index);
         E element = forDelete.item;
@@ -89,14 +89,11 @@ public class MyLinkedList<E> implements MyList<E> {
 
     @Override
     public E get(int index) {
-        checkIndex(index);
-
         return findNodeByIndex(index).item;
     }
 
     @Override
     public E set(int index, E element) {
-        checkIndex(index);
 
         Node<E> nodeToSet = findNodeByIndex(index);
         E tmp = nodeToSet.item;
@@ -138,21 +135,9 @@ public class MyLinkedList<E> implements MyList<E> {
         return indexOf(o) >= 0;
     }
 
-    private void checkIndex(int index) {
+    private Node<E> findNodeByIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
-        }
-    }
-
-    private void checkIndexAdd(int index) {
-        if (index < 0 || index > size()) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    private Node<E> findNodeByIndex(int index) {
-        if (index < 0 || index > size) {
-            return null;
         }
 
         Node<E> iterator = head;
@@ -160,12 +145,11 @@ public class MyLinkedList<E> implements MyList<E> {
         for (int i = 0; i < index; i++) {
             iterator = iterator.next;
         }
+
         return iterator;
     }
 
     private boolean deleteNode(Node<E> forDelete) {
-        if (forDelete == null) return false;
-
         // change links for next and prev
         if (forDelete != head) {
             forDelete.prev.next = forDelete.next;

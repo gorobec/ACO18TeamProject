@@ -9,12 +9,12 @@ public class MyArrayList<E> implements MyList<E> {
     // for default constructor
     private static final int DEFAULT_SIZE = 5;
 
-    private Object[] elements;
+    private E[] elements;
     private int size = 0;
     private int count = 0;
 
     public MyArrayList() {
-        this.elements = new Object[DEFAULT_SIZE];
+        this.elements = (E[]) new Object[DEFAULT_SIZE];
         size = DEFAULT_SIZE;
     }
 
@@ -25,10 +25,10 @@ public class MyArrayList<E> implements MyList<E> {
 
     public MyArrayList(int size) {
         if (size > 0) {
-            elements = new Object[size];
+            elements = (E[]) new Object[size];
             this.size = size;
         } else if (size == 0) {
-            this.elements = new Object[DEFAULT_SIZE];
+            this.elements = (E[]) new Object[DEFAULT_SIZE];
             size = DEFAULT_SIZE;
         } else {
             System.out.println("Wrong input, index must be positive number.");
@@ -59,10 +59,10 @@ public class MyArrayList<E> implements MyList<E> {
 
     public E remove(int index) {
         checkIndex(index);
-        Object tmp = elements[index];
+        E tmp = elements[index];
         System.arraycopy(elements, index + 1, elements, index, size - index - 1);
         elements[count--] = null;
-        return (E) tmp;
+        return tmp;
     }
 
     public boolean remove(Object o) {
@@ -79,14 +79,14 @@ public class MyArrayList<E> implements MyList<E> {
 
     public E get(int index) {
         checkIndex(index);
-        return (E) elements[index];
+        return elements[index];
     }
 
     public E set(int index, E o) {
         checkIndex(index);
-        Object tmp = elements[index];
+        E tmp = elements[index];
         elements[index] = o;
-        return (E) tmp;
+        return tmp;
     }
 
     public void clear() {
