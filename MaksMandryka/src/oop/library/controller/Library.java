@@ -1,6 +1,5 @@
 package oop.library.controller;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import oop.library.model.Edition;
 import oop.library.model.PrintedEdition;
 import oop.library.model.Reader;
@@ -32,6 +31,10 @@ public class Library {
             lb = new Library();
         }
         return lb;
+    }
+
+    public void close() {
+        lb = null;
     }
 
     //1. посмотреть список читателей
@@ -89,7 +92,7 @@ public class Library {
             PrintedEdition pE = printEditions.get(printEditions.indexOf(printEdit));
             Reader rd = readers.get(readers.indexOf(reader));
 
-            if (!rd.isBlackListed() && pE.isAvailable() && rd.getBooksTaken().size() <= Reader.BOOKS_LIMIT) {
+            if (!rd.isBlackListed() && pE.isAvailable() && rd.getBooksTaken().size() < Reader.BOOKS_LIMIT) {
                 pE.setReaderId(rd.getId());
                 rd.getBooksTaken().add(pE);
                 return true;
@@ -187,17 +190,18 @@ public class Library {
     public MyList<PrintedEdition> getPrintEditByMatch(String... keywords) {
 
         MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
-        boolean found = true;
+        boolean found = false;
 
         for (int i = 0; i < printEditions.size(); i++) {
             for (String key : keywords) {
-                if (!printEditions.get(i).getName().contains(key.toString())) {
-                    found = false;
+                if (printEditions.get(i).getName().contains(key.toString())) {
+                    found = true;
                 }
             }
 
             if (found) {
                 PrEdFound.add(printEditions.get(i));
+                found=false;
             }
 
         }
@@ -210,20 +214,21 @@ public class Library {
 
 
     //9. посмотреть печатные издания конкретного автора
-    public MyList<PrintedEdition> getPrintEditByMatch(String author) {
+    public MyList<PrintedEdition> getPrintEditByAuthor(String author) {
 
         MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
         boolean found = false;
 
         for (int i = 0; i < printEditions.size(); i++) {
             for (int j = 0; j < printEditions.get(i).getAuthorName().length; j++) {
-                if (printEditions.get(i).getAuthorName().equals(author)) {
+                if (printEditions.get(i).getAuthorName()[j].equals(author)) {
                     found = true;
                 }
             }
 
             if (found) {
                 PrEdFound.add(printEditions.get(i));
+                found = false;
             }
 
         }
