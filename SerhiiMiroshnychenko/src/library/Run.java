@@ -1,5 +1,6 @@
 package library;
 
+import library.comparators.ReaderFirstNameComparator;
 import library.model.*;
 
 import java.util.ArrayList;
@@ -10,12 +11,14 @@ import java.util.ArrayList;
 public class Run {
     public static void main(String[] args) {
         PrintedEdition book1 = new Book("qwe", "Qweasd", "Edition name1", "Address",
-                "01-01-1980", Genre.FANTASY, 200);
+                "01-01-1980", Genre.FANTASY, 2);
         PrintedEdition book2 = new Book("asd", "Asdfgh", "Edition name1", "Address",
-                "01-01-1980", Genre.ADVENTURE, 200);
+                "01-01-1980", Genre.ADVENTURE, 2);
         PrintedEdition book3 = new Book("zxc", "Zxcvbn", "Edition name1", "Address",
-                "01-01-1980", Genre.BIOGRAPHIES, 200);
+                "01-01-1980", Genre.BIOGRAPHIES, 1);
         PrintedEdition book4 = new Book("Cxz", "Nbvcxz", "Edition name2", "Address1",
+                "01-01-1980", Genre.ENCYCLOPEDIAS, 200);
+        PrintedEdition book5 = new Book("Cxz", "Qweasd", "Edition name2", "Address1",
                 "01-01-1980", Genre.ENCYCLOPEDIAS, 200);
 
         Reader reader1 = new Reader("Vasia", "Petrov", 20);
@@ -29,6 +32,7 @@ public class Run {
         printedEditions.add(book1);
         printedEditions.add(book2);
         printedEditions.add(book3);
+        printedEditions.add(book5);
         Library lib = new Library(printedEditions, readers);
         lib.giveItem(reader1, book1);
         lib.giveItem(reader1, book3);
@@ -58,6 +62,21 @@ public class Run {
         System.out.println("***************************");
 
         System.out.println(lib.getTakenItemsByReader(reader2));
+
+        System.out.println("***************************");
+
+        System.out.println(lib.readersToString());
+
+        System.out.println("***************************");
+
+        System.out.println(lib.itemsToString());
+
+        System.out.println("*******Get Items By  Author*******");
+        System.out.println(lib.getItemsByAuthor("Qweasd"));
+
+        System.out.println("*******Get Items By  Name*******");
+        System.out.println(lib.findItemByName("qwe"));
+
 
     }
 

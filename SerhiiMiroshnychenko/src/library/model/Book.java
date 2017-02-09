@@ -20,7 +20,8 @@ public class Book extends PrintedEdition {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s, %s", author, super.getName(), super.getEditionName(), super.getDate());
+        return String.format("%s, %s, %s, %s, copies available: %d", author, super.getName(), super.getEditionName(),
+                super.getDate(), super.getCopiesCount());
     }
 
     @Override
