@@ -1,5 +1,6 @@
 package data_structures;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -8,10 +9,7 @@ import java.util.List;
 public class MyLinkedList<T> implements MyList<T> {
     private Node<T> head;
     private Node<T> tail;
-    private Node<T> previous;
-    private Node<T> next;
     private int size = 0;
-    private Node<T> elements;
 
     @Override
     public boolean add(T object) {
@@ -28,13 +26,13 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean add(int index, T object) {
-        Node newNode = new Node<T>(object);
+        Node<T> newNode = new Node<T>(object);
         if (wrongIndex(index)) return false;
         if (head == null && index == 0) {
             head = tail = new Node<T>(object);
             return true;
         }
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < size; i++) {
             if (i == index) {
                 newNode.next = current;
@@ -65,7 +63,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean remove(int index) {
-        Node forDeleteNode = head;
+        Node<T> forDeleteNode = head;
         for (int i = 0; i < size; i++) {
             if (i == index) {
                 if (index == 0) {
@@ -97,7 +95,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public T get(int index) {
-        Node currentNode = head;
+        Node<T> currentNode = head;
         for (int i = 0; i < size; i++) {
             if (i == index) {
                 if (index == 0){
@@ -106,8 +104,10 @@ public class MyLinkedList<T> implements MyList<T> {
                 if (index == size -1){
                     return tail.value;
                 }
+                return (T) currentNode.value;
             }
             currentNode = currentNode.next;
+
         }
         return (T) currentNode.value;
     }
@@ -209,5 +209,26 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+
+        private int currentPosition = 0;
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+            T val = get(currentPosition);
+            currentPosition++;
+            return val;
+        }
     }
 }

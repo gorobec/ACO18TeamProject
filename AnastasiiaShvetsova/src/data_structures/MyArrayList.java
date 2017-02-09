@@ -1,5 +1,7 @@
 package data_structures;
 
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+
 import java.util.Arrays;
 import java.util.*;
 import java.util.List;
@@ -142,5 +144,28 @@ public class MyArrayList<T> implements MyList<T> {
         }
 
         return Arrays.toString(tmp);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayListIterator();
+    }
+
+    class ArrayListIterator implements Iterator<T> {
+
+        private int currentPosition;
+
+        private ArrayListIterator(){
+            currentPosition = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+            return objects[currentPosition++];
+        }
     }
 }

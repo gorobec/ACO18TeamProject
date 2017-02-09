@@ -3,7 +3,7 @@ package data_structures;
 /**
  * Created by Nastia on 06.02.17.
  */
-public interface MyList<T> {
+public interface MyList<T> extends Iterable<T>{
     boolean add(T object);
     boolean add(int index, T object);
     boolean wrongIndex(int index);
