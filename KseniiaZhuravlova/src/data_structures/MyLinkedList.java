@@ -78,12 +78,6 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean remove(T object) {
-        int index = indexOf(object);
-        if (index == -1) return false;
-        remove(index);
-        return true;
-    }
- /*   public boolean remove(T object) {
         Node<T> forDelete = findNode(object);
         if (forDelete == null) return false;
         if (forDelete != head) {
@@ -117,7 +111,7 @@ public class MyLinkedList<T> implements MyList<T> {
             }
         }
         return null;
-    }*/
+    }
 
     @Override
     public T set(int index, T object) {
