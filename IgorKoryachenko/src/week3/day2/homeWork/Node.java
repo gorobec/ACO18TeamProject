@@ -1,6 +1,6 @@
 package week3.day2.homeWork;
 
-public class Node<T> {
+public class Node<T>  {
     T value;
     Node<T> next;
     Node<T> previous;

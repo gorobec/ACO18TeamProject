@@ -1,9 +1,8 @@
 package week3.day2.homeWork;
 
 import java.util.Iterator;
-import java.util.ListIterator;
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T> implements Iterable{
 
     private Node<T> head;
     private Node<T> tail;
@@ -77,9 +76,11 @@ public class MyLinkedList<T> {
         return null;
     }
 
-    private Node<T> findNode(int i){
+    public Node<T> findNode(int i){
+        Node<T> node = head;
+        System.out.println(node.toString());
 
-        return null;
+        return head;
     }
 
     public void trimToSize() {
@@ -106,8 +107,32 @@ public class MyLinkedList<T> {
 
     }
 
-    public class Iter<T> implements Iterator<T>{
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            Node<T> current = head;
+            int position = 0;
+            @Override
+            public boolean hasNext() {
+                return position < size;
+            }
+
+            @Override
+            public T next() {
+                if (size == 0) return null;
+                System.out.println(head.value.toString());
+                T result = current.value;
+                System.out.println("44444");
+                current = current.next;
+                position++;
+                return result;
+            }
+        };
+    }
+
+   /* public  class Iter implements Iterator{
          Node<T> iterator;
+         Node<T> current = (Node<T>) head;
 
         @Override
         public boolean hasNext() {
@@ -116,7 +141,10 @@ public class MyLinkedList<T> {
 
         @Override
         public T next() {
-            return null;
+            if (size == 0) return null;
+            T result = current.value;
+            current = current.next;
+            return result;
         }
-    }
+    }*/
 }
