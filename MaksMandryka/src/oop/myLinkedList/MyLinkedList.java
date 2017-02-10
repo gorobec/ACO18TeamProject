@@ -23,11 +23,14 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return indexOf(o) >= -1;
     }
 
     @Override
     public boolean add(T o) {
+
+
+
         return false;
     }
 

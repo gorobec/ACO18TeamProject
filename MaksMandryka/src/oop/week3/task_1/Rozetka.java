@@ -1,4 +1,4 @@
-package oop.weak3.task_1;
+package oop.week3.task_1;
 
 import java.util.ArrayList;
 import java.util.List;
