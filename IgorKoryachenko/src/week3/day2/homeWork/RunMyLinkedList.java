@@ -13,9 +13,10 @@ public class RunMyLinkedList {
         list.add("111");
         list.add("222");
         list.add("333");
-        list.add(2, "555");
+        list.add("444");
+        list.add(3, "555");
 
-        System.out.println(list.get(2));
+        System.out.println(list.get(3));
 
         /*while (iterator.hasNext()){
             System.out.println(iterator.next());

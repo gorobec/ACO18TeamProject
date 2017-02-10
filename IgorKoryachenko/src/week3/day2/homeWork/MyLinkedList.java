@@ -127,8 +127,18 @@ public class MyLinkedList<T> implements Iterable{
 
     }
 
-    public T set(int index, T object) {
-        return null;
+    public boolean set(int index, T object) {
+        if (index >= size || index < 0) {
+            System.out.println("Такого индекса нет");
+            return false;
+        }
+
+        if (object != null){
+            Node<T> node = findNode(index);
+            node.value = object;
+            return true;
+        }
+        return false;
     }
 
     public int size() {
@@ -139,8 +149,8 @@ public class MyLinkedList<T> implements Iterable{
         return size == 0;
     }
 
-    public boolean contains(Object object) {
-        return false;
+    public boolean contains(T object) {
+        return findNode(object) != null;
     }
 
     public void clear() {
@@ -166,6 +176,8 @@ public class MyLinkedList<T> implements Iterable{
                 current = current.next;
                 position++;
                 return result;
+
+
             }
         };
     }
