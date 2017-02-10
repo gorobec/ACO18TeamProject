@@ -2,9 +2,11 @@ package data_structures;
 
 import org.junit.Test;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
+
 /**
  * Created by ksyashka on 29.01.2017.
  */
@@ -131,7 +133,37 @@ public abstract class MyListTest {
         Object expected = "1";
         Object actual = list.remove(1);
         assertEquals(expected, actual);
+    }
 
+    @Test
+    public void testRemoveFirstElement() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        Object expected = "0";
+        Object actual = list.remove(0);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 2);
+    }
+
+    @Test
+    public void testRemoveLastElement() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        Object expected = "2";
+        Object actual = list.remove(2);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 2);
+    }
+
+    @Test
+    public void testRemoveSingleElement() {
+        assertTrue(list.add("0"));
+        Object expected = "0";
+        Object actual = list.remove(0);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 0);
     }
 
     @Test
@@ -202,7 +234,7 @@ public abstract class MyListTest {
     }
 
     @Test
-    public void testIterator(){
+    public void testIterator() {
         assertTrue(list.add("A"));
         assertTrue(list.add("B"));
         assertTrue(list.add("C"));

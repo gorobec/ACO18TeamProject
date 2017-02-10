@@ -59,13 +59,16 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public T remove(int index) {
         if (!rangeCheck(index)) System.exit(-1);
-        Node<T> currentNode = head;
+        Node<T> currentNode = findNode(index);
+        ;
         if (index == 0) {
-            head = head.next;
+            head = currentNode.next;
+            if (currentNode.next == null) head = tail = null;
+            else head.previous = null;
         } else {
-            currentNode = findNode(index);
             currentNode.previous.next = currentNode.next;
-            currentNode.next.previous = currentNode.previous;
+            if (currentNode == tail) tail = currentNode.previous;
+            else currentNode.next.previous = currentNode.previous;
         }
         size--;
         return currentNode.value;
@@ -107,8 +110,8 @@ public class MyLinkedList<T> implements MyList<T> {
         }
         return null;
     }
-    
-        private Node<T> findNode(int index) {
+
+    private Node<T> findNode(int index) {
         Node<T> iter = head;
         for (int i = 0; i < index; i++)
             iter = iter.next;
