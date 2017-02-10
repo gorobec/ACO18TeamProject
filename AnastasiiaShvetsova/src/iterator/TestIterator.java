@@ -13,7 +13,7 @@ public class TestIterator {
         Product product4 = new Product("Phone", 200);
         Product product5 = new Product("Phone", 200);
         Product product6 = new Product("Phone2", 200);
-        String string = new String();
+        //String string = new String();
 
         Repka repka = new Repka(5);
         Rozetka rozetka = new Rozetka();
@@ -28,6 +28,9 @@ public class TestIterator {
         rozetka.addProduct(product5);
         rozetka.showRozetkaProducts();
 
-        //hotline.addProducts(product6);
+
+        hotline.addProducts(rozetka);
+        hotline.addProducts(repka);
+        hotline.showHotlineProducts();
     }
 }

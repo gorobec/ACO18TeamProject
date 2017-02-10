@@ -18,6 +18,11 @@ public class Rozetka<E extends Product> implements Iterator<Product> {
         size++;
         return true;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
     @Override
     public boolean hasNext() {
         return currentPosition < products.size();
