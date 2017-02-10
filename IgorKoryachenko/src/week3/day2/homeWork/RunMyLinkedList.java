@@ -13,11 +13,12 @@ public class RunMyLinkedList {
         list.add("111");
         list.add("222");
         list.add("333");
+        list.add(2, "555");
 
-       list.findNode(0);
+        System.out.println(list.get(2));
 
-        while (iterator.hasNext()){
+        /*while (iterator.hasNext()){
             System.out.println(iterator.next());
-        }
+        }*/
     }
 }

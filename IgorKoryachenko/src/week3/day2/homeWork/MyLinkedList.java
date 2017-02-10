@@ -20,20 +20,58 @@ public class MyLinkedList<T> implements Iterable{
     }
 
     public boolean add(int index, T object) {
-        if (index >= size){
+        if (index >= size || index < 0){
             System.out.println("Такого индекса нет");
             return false;
         }
+        Node<T> forAdd = new Node<T>(object);
+        Node<T> old = findNode(index);
+        if (index != 0 && index < size() - 1){
+            forAdd.next = old;
+            forAdd.previous = old.previous;
+            old.previous.next = forAdd;
+            old.previous = forAdd;
+            size++;
+            return true;
+        }
+        if (index == 0){
+            head.previous = forAdd;
+            forAdd.next = head;
+            head = forAdd;
+        }else {
+            tail.next = forAdd;
+            forAdd.previous = tail;
+            tail = forAdd;
 
-        return false;
+            //add(object);
+        }
+
+        size++;
+        return true;
     }
 
     public T get(int index) {
-        return null;
+        return findNode(index).value;
     }
 
-    public T remove(int index) {
-        return null;
+    public boolean remove(int index) {
+        if (index >= size || index < 0) {
+            System.out.println("Такого индекса нет");
+            return false;
+        }
+        Node<T> forDelete = findNode(index);
+        if(forDelete != head){
+            forDelete.previous.next = forDelete.next;
+        } else {
+            head = forDelete.next;
+        }
+        if(forDelete != tail){
+            forDelete.next.previous = forDelete.previous;
+        } else{
+            tail = forDelete.previous;
+        }
+        size--;
+        return true;
     }
 
     public boolean remove(T object) {
@@ -76,11 +114,13 @@ public class MyLinkedList<T> implements Iterable{
         return null;
     }
 
-    public Node<T> findNode(int i){
+    private Node<T> findNode(int j){
         Node<T> node = head;
-        System.out.println(node.toString());
+        for (int i = 0; i < j; i++) {
+            node = node.next;
+        }
 
-        return head;
+        return node;
     }
 
     public void trimToSize() {
