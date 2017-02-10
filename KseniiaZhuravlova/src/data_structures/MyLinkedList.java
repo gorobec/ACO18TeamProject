@@ -40,9 +40,7 @@ public class MyLinkedList<T> implements MyList<T> {
                 head.previous = new Node<>(object, null, head);
                 head = head.previous;
             } else {
-                Node<T> currentNode = head;
-                for (int i = 0; i < index; i++)
-                    currentNode = currentNode.next;
+                Node<T> currentNode = findNode(index);
                 currentNode.previous.next = new Node<>(object, currentNode.previous, currentNode);
                 currentNode.previous = currentNode.previous.next;
             }
@@ -54,9 +52,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public T get(int index) {
         if (!rangeCheck(index)) System.exit(-1);
-        Node<T> currentNode = head;
-        for (int i = 0; i < index; i++)
-            currentNode = currentNode.next;
+        Node<T> currentNode = findNode(index);
         return currentNode.value;
     }
 
@@ -67,8 +63,7 @@ public class MyLinkedList<T> implements MyList<T> {
         if (index == 0) {
             head = head.next;
         } else {
-            for (int i = 0; i < index; i++)
-                currentNode = currentNode.next;
+            currentNode = findNode(index);
             currentNode.previous.next = currentNode.next;
             currentNode.next.previous = currentNode.previous;
         }
@@ -112,13 +107,18 @@ public class MyLinkedList<T> implements MyList<T> {
         }
         return null;
     }
+    
+        private Node<T> findNode(int index) {
+        Node<T> iter = head;
+        for (int i = 0; i < index; i++)
+            iter = iter.next;
+        return iter;
+    }
 
     @Override
     public T set(int index, T object) {
         if (!rangeCheck(index)) System.exit(-1);
-        Node<T> currentNode = head;
-        for (int i = 0; i < index; i++)
-            currentNode = currentNode.next;
+        Node<T> currentNode = findNode(index);
         T returnValue = currentNode.value;
         currentNode.value = object;
         return returnValue;
