@@ -24,23 +24,17 @@ public class ListUtils {
 
     public static<T> A<T> reversion(A<T> head) {
 
-        List<A<T>> elements = new ArrayList<>();
-        elements.add(head);
-        A<T> a = head.getNext();
+        A<T> curr = head;
+        A<T> iterator = null;
 
-        while (a != null) {
-            elements.add(a);
-            a = a.getNext();
+        while (curr != null) {
+            A<T> next = curr.getNext();
+            curr.setNext(iterator);
+            iterator = curr;
+            curr = next;
         }
 
-        head.setNext(null);
-        head = elements.get(elements.size()-1);
-        A<T> elem = head;
-
-        for (int i = elements.size()-2; i >= 0 ; i--) {
-            elem.setNext(elements.get(i));
-            elem = elem.getNext();
-        }
+        head = iterator;
 
         return head;
     }

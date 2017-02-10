@@ -20,20 +20,6 @@ public final class Node<T> implements A<T> {
         return next;
     }
 
-//    public A<T> getLast() {
-//
-//        A<T> a;
-//        A<T> b = this;
-//
-//        while (true) {
-//            a = this.getNext();
-//            if (a == null) {
-//                return b;
-//            }
-//            b = a;
-//        }
-//
-//    }
 
     public void showValue() {
         System.out.print(value);
