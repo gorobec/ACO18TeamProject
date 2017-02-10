@@ -60,7 +60,6 @@ public class MyLinkedList<T> implements MyList<T> {
     public T remove(int index) {
         if (!rangeCheck(index)) System.exit(-1);
         Node<T> currentNode = findNode(index);
-        ;
         if (index == 0) {
             head = currentNode.next;
             if (currentNode.next == null) head = tail = null;
@@ -70,6 +69,8 @@ public class MyLinkedList<T> implements MyList<T> {
             if (currentNode == tail) tail = currentNode.previous;
             else currentNode.next.previous = currentNode.previous;
         }
+        currentNode.next = null;
+        currentNode.previous = null;
         size--;
         return currentNode.value;
     }
