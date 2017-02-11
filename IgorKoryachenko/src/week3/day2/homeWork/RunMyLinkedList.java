@@ -18,8 +18,8 @@ public class RunMyLinkedList {
 
         System.out.println(list.get(3));
 
-        /*while (iterator.hasNext()){
+        while (iterator.hasNext()){
             System.out.println(iterator.next());
-        }*/
+        }
     }
 }

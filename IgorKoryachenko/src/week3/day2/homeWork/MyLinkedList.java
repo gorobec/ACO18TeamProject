@@ -160,8 +160,10 @@ public class MyLinkedList<T> implements Iterable{
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+
             Node<T> current = head;
             int position = 0;
+
             @Override
             public boolean hasNext() {
                 return position < size;
@@ -170,6 +172,7 @@ public class MyLinkedList<T> implements Iterable{
             @Override
             public T next() {
                 if (size == 0) return null;
+
                 System.out.println(head.value.toString());
                 T result = current.value;
                 System.out.println("44444");

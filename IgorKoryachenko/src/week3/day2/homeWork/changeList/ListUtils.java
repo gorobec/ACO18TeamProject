@@ -23,11 +23,11 @@ public class ListUtils implements A {
         return node;
     }
 
-    HalfNode pair(HalfNode node){
+    void pair(HalfNode node){
         HalfNode fst = node;
         HalfNode snd = fst.next;
 
-        if (snd != tail) pair(snd);
+        if (snd != tail) pair(snd.next);
         if (fst != node) {
             snd.next = fst;
         }
@@ -35,7 +35,7 @@ public class ListUtils implements A {
         //System.out.println(snd.value);
 
 
-        return snd;
+        //return fst;
     }
 
     public boolean add(String str){
