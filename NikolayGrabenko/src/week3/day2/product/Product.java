@@ -1,14 +1,20 @@
 package week3.day2.product;
 
-/**
- * Created by User on 05.02.2017.
- */
-public class Product implements Comparable<Product> {
-    private String name;
-    private int price;
+/*Создать класс Product с полями: имя, цена. */
 
-    @Override
-    public int compareTo(Product o) {
-        return 0;
+public class Product{
+
+    private String name;
+    private double price;
+
+    public Product(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String asString (){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("Product name - %10s, product price - %6.2f ", name, price));
+    return stringBuilder.toString();
     }
 }
