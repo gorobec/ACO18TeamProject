@@ -1,10 +1,9 @@
 package library.model;
 
+import library.comparators.BookAuthorComparator;
 import library.comparators.ReaderFirstNameComparator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Created by serhiim on 31-Jan-17.
@@ -93,16 +92,20 @@ public class Library {
     }
 
     public String readersToString() {
+        ArrayList<Reader> sorted = readers;
+        Collections.sort(sorted, new ReaderFirstNameComparator());
         StringBuilder builder = new StringBuilder();
-        for (Reader aReader : readers) {
+        for (Reader aReader : sorted) {
             builder.append(aReader).append("\n");
         }
         return builder.toString();
     }
 
     public String itemsToString() {
+        ArrayList<PrintedEdition> sorted = printedEditions;
+        Collections.sort(sorted, new BookAuthorComparator());
         StringBuilder builder = new StringBuilder();
-        for (PrintedEdition item : printedEditions) {
+        for (PrintedEdition item : sorted) {
             if (item.getCopiesCount() > 0) {
                 builder.append(item.toString()).append("\n");
             }
@@ -150,9 +153,5 @@ public class Library {
             }
         }
         return "Invalid name";
-    }
-
-    public void setReaders(ArrayList<Reader> readers) {
-        this.readers = readers;
     }
 }

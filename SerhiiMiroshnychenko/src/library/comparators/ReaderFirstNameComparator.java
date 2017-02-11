@@ -7,13 +7,10 @@ import java.util.Comparator;
 /**
  * Created by serhiim on 06-Feb-17.
  */
-public class ReaderFirstNameComparator implements Comparator {
+public class ReaderFirstNameComparator<T extends Reader> implements Comparator<T>{
 
     @Override
-    public int compare(Object o1, Object o2) {
-        Reader reader1 = (Reader) o1;
-        Reader reader2 = (Reader) o2;
-
-        return reader1.getFirstName().compareTo(reader2.getFirstName());
+    public int compare(T o1, T o2) {
+        return o1.getFirstName().compareTo(o2.getFirstName());
     }
 }
