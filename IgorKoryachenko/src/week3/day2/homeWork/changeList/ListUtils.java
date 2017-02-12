@@ -24,10 +24,11 @@ public class ListUtils implements A {
     }
 
     void pair(HalfNode node){
+        if (node.next == tail) return;
         HalfNode fst = node;
         HalfNode snd = fst.next;
+        pair(snd);
 
-        if (snd != tail) pair(snd.next);
         if (fst != node) {
             snd.next = fst;
         }
