@@ -1,7 +1,6 @@
 package oop.myLinkedList;
 
 import oop.weak1.task_7_arrayList.MyList;
-
 import java.util.Comparator;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Comparator;
  */
 public class MyLinkedList<T> implements MyList<T> {
 
-    int size;
+    protected int size;
     MyNode<T> first;
     MyNode<T> last;
 
@@ -29,9 +28,23 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public boolean add(T o) {
 
+        MyNode<T> node = new MyNode<T>(o,null,null);
 
+        if (last == null) {
+            first = last = node;
+            size++;
+        } else if (size == 1){
+            node.prev = last;
+            first.next = node;
+            last = node;
+            size++;
+        } else {
+            node.prev = last;
+            last = node;
+            size++;
+        }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -79,16 +92,17 @@ public class MyLinkedList<T> implements MyList<T> {
 
     }
 
-    private static class MyNode<E> {
+    private class MyNode<E> {
 
         E element;
         MyNode<E> prev;
         MyNode<E> next;
-
+        
         public MyNode(E element, MyNode<E> prev, MyNode<E> next) {
             this.element = element;
             this.prev = prev;
             this.next = next;
         }
+
     }
 }
