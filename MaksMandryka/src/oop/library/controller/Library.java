@@ -3,8 +3,8 @@ package oop.library.controller;
 import oop.library.model.Edition;
 import oop.library.model.PrintedEdition;
 import oop.library.model.Reader;
-import oop.weak1.task_7_arrayList.MyArrayList;
-import oop.weak1.task_7_arrayList.MyList;
+import oop.dataStructures.MyArrayList;
+import oop.dataStructures.MyList;
 
 import java.util.Calendar;
 import java.util.Comparator;

@@ -2,12 +2,11 @@ package oop.library;
 
 import oop.library.controller.Library;
 import oop.library.model.*;
-import oop.weak1.task_7_arrayList.MyArrayList;
-import oop.weak1.task_7_arrayList.MyList;
+import oop.dataStructures.MyArrayList;
+import oop.dataStructures.MyList;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;

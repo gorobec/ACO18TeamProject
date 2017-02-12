@@ -1,5 +1,6 @@
-package oop.weak1.task_7_arrayList;
+package oop.dataStructures;
 
+import oop.dataStructures.MyArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +10,17 @@ import static org.junit.Assert.*;
 /**
  * Created by fmandryka on 29.01.2017.
  */
-public class MyArrayListTest {
-    private MyArrayList list;
+public class MyListsTest {
+
+    private MyArrayList<String> list;
+//    private MyLinkedList<String> list;
 
     @Before
     public void setUp() {
-        list = new MyArrayList();
+        list = new MyArrayList<String>();
+//        list = new MyLinkedList<String>();
     }
+
 
     @Test
     public void testAddThreeElement(){
@@ -57,12 +62,10 @@ public class MyArrayListTest {
         list.remove(-5);
     }
 
-    @Test (expected = ArrayIndexOutOfBoundsException.class)
+    @Test (expected = IndexOutOfBoundsException.class)
     public void testGetWhenEmptyList(){
         list.get(-5);
     }
-
-
 
     @After
     public void clear() {

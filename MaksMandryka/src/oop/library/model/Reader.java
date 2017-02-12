@@ -1,7 +1,7 @@
 package oop.library.model;
 
-import oop.weak1.task_7_arrayList.MyArrayList;
-import oop.weak1.task_7_arrayList.MyList;
+import oop.dataStructures.MyArrayList;
+import oop.dataStructures.MyList;
 
 import java.util.Calendar;
 import java.util.Comparator;

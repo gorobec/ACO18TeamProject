@@ -1,4 +1,4 @@
-package oop.weak1.task_7_arrayList;
+package oop.dataStructures;
 
 /**
  * Created by fmandryka on 27.01.2017.

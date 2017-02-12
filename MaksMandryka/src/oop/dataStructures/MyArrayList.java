@@ -1,4 +1,4 @@
-package oop.weak1.task_7_arrayList;
+package oop.dataStructures;
 
 import java.util.Arrays;
 import java.util.Comparator;
