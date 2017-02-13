@@ -18,7 +18,7 @@ public class RunList {
         HalfNode <String> node3 = new HalfNode<>("C", node4);
         HalfNode <String> node2 = new HalfNode<>("B", node3);
         HalfNode <String> node1 = new HalfNode<>("A", node2);
-        list.pair(node1);
+        ListUtils.pair(node3);
        /* System.out.println(node1.value);
         System.out.println(node2.value);
         System.out.println(node3.value);
@@ -28,7 +28,7 @@ public class RunList {
         System.out.println(tail.value);*/
 
 
-            System.out.println(node4.next.value);
+            System.out.println(node1.next.value);
 
     }
 }
