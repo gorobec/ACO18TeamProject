@@ -73,10 +73,10 @@ public class MyArrayList<T> implements MyList<T> {
     public boolean add(T o) {
 
         if (size < this.array.length) {
-            this.array[++size-1] = o;
+            this.array[++size - 1] = o;
         } else {
             ensureCapacity();
-            this.array[++size-1] = o;
+            this.array[++size - 1] = o;
         }
 
         return true;
@@ -86,11 +86,11 @@ public class MyArrayList<T> implements MyList<T> {
     @Override
     public boolean add(int index, T o) {
 
-        if (index == size -1 || size == this.array.length - 1) {
+        if (index == size || size == this.array.length) {
             ensureCapacity();
         }
 
-        if (index >= 0 && index < size - 1) {
+        if (index >= 0 && index <= size + 1) {
 
             System.arraycopy(array, index, array, index + 1, size - index);
             array[index] = o;
@@ -154,6 +154,7 @@ public class MyArrayList<T> implements MyList<T> {
             array[i] = null;
         }
 
+        size = 0;
     }
 
     @Override
@@ -177,7 +178,7 @@ public class MyArrayList<T> implements MyList<T> {
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (array[i].equals(o)) {
+                if (array[i] != null && array[i].equals(o)) {
                     return i;
                 }
             }

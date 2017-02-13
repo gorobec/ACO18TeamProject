@@ -22,7 +22,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
 
     @Override
     public boolean contains(Object o) {
-        return indexOf(o) >= -1;
+        return indexOf(o) > -1;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
     @Override
     public boolean add(int i, T o) {
 
-        checkIndex(i + 1);
+        checkIndexforExtension(i);
 
         MyNode<T> newNode = new MyNode<>(o, null, null);
 
@@ -107,7 +107,9 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
             node = node.next;
         }
 
-        if (node == first) {
+        if (first == null) {
+            first = last = newNode;
+        } else if (node == first) {
             first.prev = newNode;
             newNode.next = first;
             newNode.prev = null;
@@ -126,6 +128,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
         size++;
         return true;
     }
+
 
     @Override
     public T remove(int i) {
@@ -162,11 +165,10 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
         for (MyNode<T> node = first; node != null; node = node.next) {
             if (o == null && node.element == null) {
                 return count;
-            } else if (o != null && node.element.equals(o)) {
+            } else if (o != null && node.element != null && node.element.equals(o)) {
                 return count;
             }
             count++;
-            node = node.next;
         }
 
         return -1;
@@ -222,6 +224,15 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
         return true;
     }
 
+    private boolean checkIndexforExtension(int index) {
+
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException("No such index");
+        }
+
+        return true;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new LinkedListIterator<T>();
@@ -239,14 +250,15 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return currentIndex + 1 < size;
+            return currentIndex < size;
         }
 
         @Override
         public T next() {
+            T elem = current.element;
             current = current.next;
             currentIndex++;
-            return current.element;
+            return elem;
         }
 
     }

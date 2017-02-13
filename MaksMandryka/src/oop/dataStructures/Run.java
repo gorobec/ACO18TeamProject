@@ -31,5 +31,16 @@ public class Run {
 
         MyArrayList myAL4 = new MyArrayList(arr1);
 
+        MyLinkedList<String> myLL1 = new MyLinkedList<String>();
+        myLL1.add("1");
+        myLL1.add("2");
+        myLL1.add("3");
+        myLL1.add("4");
+        myLL1.add("5");
+
+        for (String s : myLL1) {
+            System.out.println(s);
+        }
+
     }
 }
