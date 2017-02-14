@@ -42,7 +42,7 @@ public class Group {
     }
 
 
-    public void sort(Comparator comparator) {
+    public void sort(Comparator<Student> comparator) {
 
        // Arrays.sort(students, comparator);
 
