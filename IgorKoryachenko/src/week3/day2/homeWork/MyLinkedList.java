@@ -159,10 +159,16 @@ public class MyLinkedList<T> implements Iterable{
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new IteratorList();
+    }
+        class IteratorList<T> implements Iterator<T>{
 
-            Node<T> current = head;
+            Node<T> current;
             int position = 0;
+
+            public IteratorList() {
+                this.current = (Node<T>) MyLinkedList.this.head;
+            }
 
             @Override
             public boolean hasNext() {
@@ -173,17 +179,17 @@ public class MyLinkedList<T> implements Iterable{
             public T next() {
                 if (size == 0) return null;
 
-                System.out.println(head.value.toString());
+                //System.out.println(head.value.toString());
                 T result = current.value;
-                System.out.println("44444");
+                //System.out.println("44444");
                 current = current.next;
                 position++;
                 return result;
 
 
             }
-        };
-    }
+        }
+}
 
    /* public  class Iter implements Iterator{
          Node<T> iterator;
@@ -202,4 +208,4 @@ public class MyLinkedList<T> implements Iterable{
             return result;
         }
     }*/
-}
+

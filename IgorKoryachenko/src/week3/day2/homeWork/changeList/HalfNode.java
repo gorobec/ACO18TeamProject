@@ -16,10 +16,11 @@ public class HalfNode {
 
 
 
-    static void  pair(HalfNode node){
+    static HalfNode  pair(HalfNode node){
+        HalfNode newFst = null;
         if (node.next == null){
-            HalfNode newFst = node.next;
-            return;
+            newFst = node.next;
+            return null;
         }
         HalfNode fst = node;
         HalfNode snd = fst.next;
@@ -27,6 +28,6 @@ public class HalfNode {
         snd.next = fst;
         fst.next = null;
 
-        //return fst;
+        return newFst;
     }
 }

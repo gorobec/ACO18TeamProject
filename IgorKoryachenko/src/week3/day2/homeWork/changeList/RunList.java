@@ -11,14 +11,14 @@ public class RunList {
         list.add("222");
         list.add("333");*/
        // list.createStringList();
-        HalfNode <String> tail = new HalfNode<>("G");
-        HalfNode <String> node6 = new HalfNode<>("F", tail);
-        HalfNode <String> node5 = new HalfNode<>("E", node6);
-        HalfNode <String> node4 = new HalfNode<>("D", node5);
-        HalfNode <String> node3 = new HalfNode<>("C", node4);
-        HalfNode <String> node2 = new HalfNode<>("B", node3);
-        HalfNode <String> node1 = new HalfNode<>("A", node2);
-        ListUtils.pair(node3);
+        HalfNode node7 = new HalfNode("G");
+        HalfNode node6 = new HalfNode("F", node7);
+        HalfNode node5 = new HalfNode("E", node6);
+        HalfNode node4 = new HalfNode("D", node5);
+        HalfNode node3 = new HalfNode("C", node4);
+        HalfNode node2 = new HalfNode("B", node3);
+        HalfNode node1 = new HalfNode("A", node2);
+        HalfNode.pair(node1);
        /* System.out.println(node1.value);
         System.out.println(node2.value);
         System.out.println(node3.value);
@@ -28,7 +28,14 @@ public class RunList {
         System.out.println(tail.value);*/
 
 
-            System.out.println(node1.next.value);
+        System.out.println(node7.value);
+        System.out.println(node7.next.value);
+        System.out.println(node6.next.value);
+        System.out.println(node5.next.value);
+        System.out.println(node4.next.value);
+        System.out.println(node3.next.value);
+        System.out.println(node2.next.value);
+
 
     }
 }
