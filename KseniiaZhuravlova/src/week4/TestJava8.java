@@ -1,6 +1,7 @@
 package week4;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,13 +22,15 @@ public class TestJava8 {
 
         Stream<Human> humansStream = Stream.generate(() -> new Human("Karl", 23, "Kiev", pets)).limit(10);
         List<Human> humans = humansStream.collect(Collectors.toList());
-        System.out.println(humans.get(i));
-        //humans.stream().filter( )
+
     }
 
     private static Human generateHuman() {
-        Human human = new (genName(), genAge(), genCity(), genPets());
-        return human;
+        return new Human(genName(), genAge(), genCity(), genPets());
+    }
+
+    private static List<Pet> genPets() {
+        return new LinkedList<>();
     }
 
     private static String genCity() {
