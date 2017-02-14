@@ -1,25 +1,28 @@
 package iterator;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
 
 /**
  * Created by Nastia on 09.02.17.
  */
-public class Repka<E extends Product> implements Iterator<Product> {
-    private Product[] products;
+public class Repka<E extends Product> implements Iterator<E> {
+    private E[] products;
     private int size;
     private int currentPosition = 0;
 
-    public Repka(int size){
-        this.products = new Product[size];
+    @SuppressWarnings("unchecked")
+    public Repka(Class<E> c, int size){
+        this.products = (E[]) Array.newInstance(c, size);
     }
 
-    public boolean addProduct(Product product){
+    @SuppressWarnings("unchecked")
+    public boolean addProduct(E product){
         if(size > products.length) return false;
-        Product[] tmpArray = new Product[size+1];
+        E[] tmpArray =  (E[]) Array.newInstance(Product.class, size+1);
         System.arraycopy(products, 0, tmpArray, 0, 1);
-        products = new Product[size+1];
+        products = (E[]) Array.newInstance(Product.class, size+1);
         products = tmpArray;
         products[size] = product;
         size++;
@@ -32,7 +35,7 @@ public class Repka<E extends Product> implements Iterator<Product> {
     }
 
     @Override
-    public Product next() {
+    public E next() {
         return products[currentPosition++];
     }
 

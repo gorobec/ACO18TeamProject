@@ -8,19 +8,15 @@ import java.util.List;
 /**
  * Created by Nastia on 09.02.17.
  */
-public class Rozetka<E extends Product> implements Iterator<Product> {
-    private List<Product> products = new ArrayList<>();
+public class Rozetka<E extends  Product>  implements Iterator<E>{
+    private List<E> products = new ArrayList<>();
     private int currentPosition;
     private int size = 0;
 
-    public boolean addProduct(Product product){
+    public boolean addProduct(E product){
         products.add(product);
         size++;
         return true;
-    }
-
-    public List<Product> getProducts() {
-        return products;
     }
 
     @Override
@@ -29,8 +25,8 @@ public class Rozetka<E extends Product> implements Iterator<Product> {
     }
 
     @Override
-    public Product next() {
-        Product product =  products.get(currentPosition);
+    public E next() {
+        E product =  products.get(currentPosition);
         currentPosition++;
         return product;
     }
