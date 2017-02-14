@@ -2,15 +2,17 @@ package data_structures;
 
 import org.junit.Test;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
+
 /**
  * Created by ksyashka on 29.01.2017.
  */
 public abstract class MyListTest {
 
-    protected MyList<String> list;
+    MyList<String> list;
 
     @Before
     public abstract void setUp();
@@ -50,8 +52,16 @@ public abstract class MyListTest {
 
     @Test
     public void testAddElementByIndex() {
-        assertTrue(list.add(0, "2"));
+        assertTrue(list.add(0, "A"));
         assertEquals(1, list.size());
+        assertTrue(list.add(0, "D"));
+        assertEquals(2, list.size());
+        assertTrue(list.add(1, "B"));
+        assertEquals(3, list.size());
+        assertTrue(list.add(2, "C"));
+        assertEquals(4, list.size());
+        assertTrue(list.add(2, "D"));
+        assertEquals(5, list.size());
     }
 
 
@@ -102,7 +112,7 @@ public abstract class MyListTest {
         assertTrue(list.add("0"));
         assertTrue(list.add("1"));
         assertTrue(list.add("1"));
-        assertTrue(list.remove("2"));
+        assertTrue(!list.remove("2"));
         assertEquals(3, list.size());
     }
 
@@ -123,7 +133,37 @@ public abstract class MyListTest {
         Object expected = "1";
         Object actual = list.remove(1);
         assertEquals(expected, actual);
+    }
 
+    @Test
+    public void testRemoveFirstElement() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        Object expected = "0";
+        Object actual = list.remove(0);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 2);
+    }
+
+    @Test
+    public void testRemoveLastElement() {
+        assertTrue(list.add("0"));
+        assertTrue(list.add("1"));
+        assertTrue(list.add("2"));
+        Object expected = "2";
+        Object actual = list.remove(2);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 2);
+    }
+
+    @Test
+    public void testRemoveSingleElement() {
+        assertTrue(list.add("0"));
+        Object expected = "0";
+        Object actual = list.remove(0);
+        assertEquals(expected, actual);
+        assertTrue(list.size() == 0);
     }
 
     @Test
@@ -183,14 +223,6 @@ public abstract class MyListTest {
         assertTrue(!list.isEmpty());
     }
 
-    @Test
-    public void testTrimToSize() {
-        assertTrue(list.add("0"));
-        assertTrue(list.add("1"));
-        assertTrue(list.add("2"));
-        list.trimToSize();
-        assertTrue(3 == list.size());
-    }
 
     @Test
     public void testClear() {
@@ -198,12 +230,11 @@ public abstract class MyListTest {
         assertTrue(list.add("1"));
         assertTrue(list.add("2"));
         list.clear();
-        list.trimToSize();
         assertTrue(list.isEmpty());
     }
 
     @Test
-    public void testIterator(){
+    public void testIterator() {
         assertTrue(list.add("A"));
         assertTrue(list.add("B"));
         assertTrue(list.add("C"));
