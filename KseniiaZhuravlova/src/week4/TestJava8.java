@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static week4.PetType.CAT;
 import static week4.PetType.DOG;
+import static week4.PetType.PARROT;
 
 /**
  * Created by ksyashka on 12.02.2017.
@@ -17,11 +19,12 @@ public class TestJava8 {
 
     public static void main(String[] args) {
 
-        Stream<Pet> petsStream = Stream.generate(() -> new Pet("Bob", 3, DOG)).limit(4);
-        List<Pet> pets = petsStream.collect(Collectors.toList());
 
-        Stream<Human> humansStream = Stream.generate(() -> new Human("Karl", 23, "Kiev", pets)).limit(10);
+        Stream<Human> humansStream = Stream.generate(TestJava8::generateHuman).limit(10);
         List<Human> humans = humansStream.collect(Collectors.toList());
+        for (Human h:humans) {
+            System.out.println(h);
+        }
 
     }
 
@@ -30,7 +33,22 @@ public class TestJava8 {
     }
 
     private static List<Pet> genPets() {
-        return new LinkedList<>();
+        List<Pet> pets = new LinkedList<>();
+        pets.add(new Pet (genPetName(),genAge(),genPetType()));
+        pets.add(new Pet (genPetName(),genAge(),genPetType()));
+        pets.add(new Pet (genPetName(),genAge(),genPetType()));
+        return pets;
+
+    }
+
+    private static PetType genPetType() {
+        PetType[] petTypes = {DOG, CAT, PARROT};
+        return petTypes[genRanIndex(petTypes.length)];
+    }
+
+    private static String genPetName() {
+        String[] names = {"Sharik", "Vas'ka", "Murka", "Savelii", "Bob"};
+        return names[genRanIndex(names.length)];
     }
 
     private static String genCity() {
