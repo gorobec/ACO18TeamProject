@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TestReversion {
 
     static A<Object> head;
-    static ua.com.artcode.A<Object> second;
-    static ua.com.artcode.A<Object> third;
+    static A<Object> second;
+    static A<Object> third;
     static A<Object> fourth;
     static A<Object> fifth;
     static A<Object> sixth;
