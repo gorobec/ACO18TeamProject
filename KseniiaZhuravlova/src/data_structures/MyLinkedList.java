@@ -98,7 +98,7 @@ public class MyLinkedList<T> implements MyList<T> {
         Node<T> iterator = head;
         if (object == null) {
             for (int i = 0; i < size; i++) {
-                if (object == iterator.value)
+                if (null == iterator.value)
                     return iterator;
                 iterator = iterator.next;
             }

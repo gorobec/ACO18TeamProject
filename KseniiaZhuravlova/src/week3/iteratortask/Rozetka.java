@@ -6,12 +6,14 @@ import java.util.List;
 /**
  * Created by ksyashka on 09.02.2017.
  */
-public class Rozetka<T> implements Iterator<Product> {
-    private List<Product> products = new LinkedList<>();
+public class Rozetka<T extends Product> implements Iterator<T> {
+    private List<T> products = new LinkedList<>();
     private int index = 0;
 
+    @SuppressWarnings({"unchecked", "unused"})
     public boolean addProduct(String name, int price) {
-        products.add(new Product(name, price));
+        T temp = (T) new Product(name,price);
+        products.add(temp);
         return true;
     }
 
@@ -23,7 +25,7 @@ public class Rozetka<T> implements Iterator<Product> {
     }
 
     @Override
-    public Product next() {
+    public T next() {
         return products.get(index++);
     }
 

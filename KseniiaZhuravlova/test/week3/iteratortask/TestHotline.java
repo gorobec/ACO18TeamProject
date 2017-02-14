@@ -9,7 +9,7 @@ import org.junit.Test;
  * Created by ksyashka on 09.02.2017.
  */
 public class TestHotline {
-    Hotline<Product> hotline = new Hotline<>();
+    private Hotline<Product> hotline = new Hotline<>();
 
 
     @Test

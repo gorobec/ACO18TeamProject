@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * Created by ksyashka on 09.02.2017.
  */
-public class Hotline<T> {
-    private List<Product> products = new LinkedList<>();
+public class Hotline<T extends Product> {
+    private List<T> products = new LinkedList<>();
 
-    public boolean addProducts(Iterator<Product> iterator) {
+    public boolean addProducts(Iterator<T> iterator) {
         while (iterator.hasNext()) {
             products.add(iterator.next());
         }
