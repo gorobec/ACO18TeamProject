@@ -191,10 +191,12 @@ public class RecursionUtils {
 
     public boolean groupSum(int start, int[] nums, int target) {
 
-        if (target == 0) {
+        if (start == nums.length) {
             return true;
-        } else if (target < 0) {
+        }
 
+        if (groupSum(start + 1, nums, target)) {
+            return true;
         }
 
         int sum = nums[start];
