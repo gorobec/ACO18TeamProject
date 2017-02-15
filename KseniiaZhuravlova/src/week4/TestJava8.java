@@ -1,8 +1,11 @@
 package week4;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,11 +22,44 @@ public class TestJava8 {
 
     public static void main(String[] args) {
 
+        // Supplier -> Object get(){}
+    /*    long count = Stream.generate(() -> Math.random() * 100)
+                .limit(100)
+                .map(Double::intValue)
+                .filter((el) -> el % 2 == 0)
+                .sorted(Comparator.<Integer>naturalOrder()).peek((el) -> System.out.print(el + "")).count();
+        System.out.println();
 
-        Stream<Human> humansStream = Stream.generate(TestJava8::generateHuman).limit(10);
-        List<Human> humans = humansStream.collect(Collectors.toList());
-        for (Human h:humans) {
-            System.out.println(h);
+        System.out.println(count);*/
+
+     /*   Function<Human, Human> addAgePets = new Function<Human, Human>() {
+            @Override
+            public Human apply(Human human) {
+                return human.addPetsAge(2);
+            };
+        };*/
+
+      //  Function<Human, Human> addAgePets = human -> human.addPetsAge(2);
+
+      /*  Predicate<Human> kievPredicate = new Predicate<Human>() {
+
+            @Override
+            public boolean test(Human human) {
+                return human.getCity().equals("Kiev");
+            }
+        };*/
+
+        //Predicate<Human> kievPredicate = human -> human.getCity().equals("Kiev");
+
+        Object[] humans = Stream.generate(TestJava8::generateHuman)
+                        .limit(10)
+                        .sorted(new NameComparator<>())
+                        .peek(human -> System.out.println(human))
+                        .map(human -> human.addPetsAge(2))
+                        .filter(human -> human.getCity().equals("Kiev"))
+                        .toArray();
+        for (int i=0; i<humans.length;i++) {
+            System.out.println(humans[i]);
         }
 
     }
@@ -34,9 +70,9 @@ public class TestJava8 {
 
     private static List<Pet> genPets() {
         List<Pet> pets = new LinkedList<>();
-        pets.add(new Pet (genPetName(),genAge(),genPetType()));
-        pets.add(new Pet (genPetName(),genAge(),genPetType()));
-        pets.add(new Pet (genPetName(),genAge(),genPetType()));
+        pets.add(new Pet(genPetName(), genAge(), genPetType()));
+        pets.add(new Pet(genPetName(), genAge(), genPetType()));
+        pets.add(new Pet(genPetName(), genAge(), genPetType()));
         return pets;
 
     }
