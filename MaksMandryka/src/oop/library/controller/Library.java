@@ -171,25 +171,25 @@ public class Library {
     //11. посмотреть печатные издания конкретного года
     public MyList<PrintedEdition> getPrintEditOfYear(int year) {
 
-        MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
+        MyList<PrintedEdition> prEdFound = new MyArrayList<>();
 
         for (int i = 0; i < printEditions.size(); i++) {
             if (printEditions.get(i).getEditionDate().get(Calendar.YEAR) == year) {
-                PrEdFound.add(printEditions.get(i));
+                prEdFound.add(printEditions.get(i));
             }
         }
 
         Comparator<? super Edition> c = new Edition.EditionCompar();
-        PrEdFound.sort(c);
+        prEdFound.sort(c);
 
-        return PrEdFound;
+        return prEdFound;
     }
 
 
     //12. найти печатное издание по названию (ключевым словам)
     public MyList<PrintedEdition> getPrintEditByMatch(String... keywords) {
 
-        MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
+        MyList<PrintedEdition> prEdFound = new MyArrayList<>();
         boolean found = false;
 
         for (int i = 0; i < printEditions.size(); i++) {
@@ -200,23 +200,23 @@ public class Library {
             }
 
             if (found) {
-                PrEdFound.add(printEditions.get(i));
+                prEdFound.add(printEditions.get(i));
                 found=false;
             }
 
         }
 
         Comparator<? super Edition> c = new Edition.EditionCompar();
-        PrEdFound.sort(c);
+        prEdFound.sort(c);
 
-        return PrEdFound;
+        return prEdFound;
     }
 
 
     //9. посмотреть печатные издания конкретного автора
     public MyList<PrintedEdition> getPrintEditByAuthor(String author) {
 
-        MyList<PrintedEdition> PrEdFound = new MyArrayList<>();
+        MyList<PrintedEdition> prEdFound = new MyArrayList<>();
         boolean found = false;
 
         for (int i = 0; i < printEditions.size(); i++) {
@@ -227,16 +227,16 @@ public class Library {
             }
 
             if (found) {
-                PrEdFound.add(printEditions.get(i));
+                prEdFound.add(printEditions.get(i));
                 found = false;
             }
 
         }
 
         Comparator<? super Edition> c = new Edition.EditionCompar();
-        PrEdFound.sort(c);
+        prEdFound.sort(c);
 
-        return PrEdFound;
+        return prEdFound;
     }
 
 

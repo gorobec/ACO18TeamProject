@@ -1,5 +1,6 @@
 package oop.library.model;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 
@@ -74,20 +75,17 @@ public class Edition implements Comparable<Object>{
 
         } else {
 
-            if (authorName.toString().compareTo(ed.getAuthorName().toString()) != 0) {
-                return authorName.toString().compareTo(ed.getAuthorName().toString());
+            if (Arrays.toString(authorName).compareTo(Arrays.toString(ed.getAuthorName())) != 0) {
+                return Arrays.toString(authorName).compareTo(Arrays.toString(ed.getAuthorName()));
             } else {
                 return editionDate.compareTo(ed.getEditionDate());
             }
         }
     }
 
-    public static class EditionCompar implements Comparator<Object> {
+    public static class EditionCompar implements Comparator<Edition> {
         @Override
-        public int compare(Object o1, Object o2) {
-
-            Edition e1 = (Edition) o1;
-            Edition e2 = (Edition) o2;
+        public int compare(Edition e1, Edition e2) {
 
             return e1.compareTo(e2);
         }

@@ -1,5 +1,6 @@
 package oop.library.model;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 /**
@@ -23,7 +24,7 @@ public class PeriodicalEdition extends PrintedEdition{
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append(name).append(". ").append(authorName.toString()).append(". ")
+        sb.append(name).append(". ").append(Arrays.toString(authorName)).append(". ")
                 .append(publisherName).append(". ").append(editionDate).append(". ").append(lang)
                 .append(country).append(". ").append(period).append(". ").append(subject);
         return sb.toString();

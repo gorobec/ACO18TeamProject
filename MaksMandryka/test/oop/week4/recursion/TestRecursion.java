@@ -3,6 +3,8 @@ package oop.week4.recursion;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +22,7 @@ public class TestRecursion {
 
 
     @Test
-    public void testBunnyEars2(){
+    public void testBunnyEars2() {
         assertEquals(0, rec.bunnyEars2(0));
         assertEquals(2, rec.bunnyEars2(1));
         assertEquals(5, rec.bunnyEars2(2));
@@ -32,7 +34,7 @@ public class TestRecursion {
     }
 
     @Test
-    public void testTriangle(){
+    public void testTriangle() {
         assertEquals(0, rec.triangle(0));
         assertEquals(1, rec.triangle(1));
         assertEquals(3, rec.triangle(2));
@@ -44,7 +46,7 @@ public class TestRecursion {
     }
 
     @Test
-    public void testFibonacci(){
+    public void testFibonacci() {
         assertEquals(0, rec.fibonacci(0));
         assertEquals(1, rec.fibonacci(1));
         assertEquals(1, rec.fibonacci(2));
@@ -56,7 +58,7 @@ public class TestRecursion {
     }
 
     @Test
-    public void testSumDigits(){
+    public void testSumDigits() {
         assertEquals(9, rec.sumDigits(126));
         assertEquals(13, rec.sumDigits(49));
         assertEquals(3, rec.sumDigits(12));
@@ -72,7 +74,7 @@ public class TestRecursion {
 
 
     @Test
-    public void testCount7(){
+    public void testCount7() {
         assertEquals(2, rec.count7(717));
         assertEquals(1, rec.count7(7));
         assertEquals(0, rec.count7(123));
@@ -89,7 +91,7 @@ public class TestRecursion {
     }
 
     @Test
-    public void testCount8(){
+    public void testCount8() {
         assertEquals(1, rec.count8(8));
         assertEquals(2, rec.count8(818));
         assertEquals(4, rec.count8(8818));
@@ -111,24 +113,24 @@ public class TestRecursion {
     }
 
     @Test
-    public void testPowerN(){
-        assertEquals(3, rec.powerN(3,1));
-        assertEquals(9, rec.powerN(3,2));
-        assertEquals(27, rec.powerN(3,3));
-        assertEquals(2, rec.powerN(2,1));
-        assertEquals(4, rec.powerN(2,2));
-        assertEquals(8, rec.powerN(2,3));
-        assertEquals(16, rec.powerN(2,4));
-        assertEquals(32, rec.powerN(2,5));
-        assertEquals(10, rec.powerN(10,1));
-        assertEquals(100, rec.powerN(10,2));
-        assertEquals(1000, rec.powerN(10,3));
+    public void testPowerN() {
+        assertEquals(3, rec.powerN(3, 1));
+        assertEquals(9, rec.powerN(3, 2));
+        assertEquals(27, rec.powerN(3, 3));
+        assertEquals(2, rec.powerN(2, 1));
+        assertEquals(4, rec.powerN(2, 2));
+        assertEquals(8, rec.powerN(2, 3));
+        assertEquals(16, rec.powerN(2, 4));
+        assertEquals(32, rec.powerN(2, 5));
+        assertEquals(10, rec.powerN(10, 1));
+        assertEquals(100, rec.powerN(10, 2));
+        assertEquals(1000, rec.powerN(10, 3));
 
     }
 
 
     @Test
-    public void testCountX(){
+    public void testCountX() {
         assertEquals(4, rec.countX("xxhixx"));
         assertEquals(3, rec.countX("xhixhix"));
         assertEquals(0, rec.countX("hi"));
@@ -142,7 +144,7 @@ public class TestRecursion {
 
 
     @Test
-    public void testCountHi(){
+    public void testCountHi() {
         assertEquals(1, rec.countHi("xxhixx"));
         assertEquals(2, rec.countHi("xhixhix"));
         assertEquals(1, rec.countHi("hi"));
@@ -157,7 +159,7 @@ public class TestRecursion {
     }
 
     @Test
-    public void testChangeXY(){
+    public void testChangeXY() {
         assertEquals("codey", rec.changeXY("codex"));
         assertEquals("yyhiyy", rec.changeXY("xxhixx"));
         assertEquals("yhiyhiy", rec.changeXY("xhixhix"));
@@ -169,4 +171,99 @@ public class TestRecursion {
         assertEquals("yyhyyi", rec.changeXY("yyhxyi"));
         assertEquals("hihi", rec.changeXY("hihi"));
     }
+
+    @Test
+    public void testGroupSum() {
+
+        int[] a1 = {2, 4, 8};
+        int[] a2 = {1};
+        int[] a3 = {9};
+        int[] a4 = {};
+        int[] a5 = {10, 2, 2, 5};
+        int[] a6 = {16, 50, 10, 20, 50};
+        int[] a7 = {16, 50, 10, 20, 50, 45, 24};
+
+        assertEquals(true, rec.groupSum(0, a1, 10));
+        assertEquals(true, rec.groupSum(0, a1, 14));
+        assertEquals(false, rec.groupSum(0, a1, 9));
+        assertEquals(true, rec.groupSum(0, a1, 8));
+        assertEquals(true, rec.groupSum(1, a1, 8));
+        assertEquals(false, rec.groupSum(1, a1, 2));
+        assertEquals(true, rec.groupSum(0, a2, 1));
+        assertEquals(false, rec.groupSum(0, a3, 1));
+        assertEquals(true, rec.groupSum(1, a3, 0));
+        assertEquals(true, rec.groupSum(0, a4, 0));
+        assertEquals(true, rec.groupSum(0, a5, 17));
+        assertEquals(true, rec.groupSum(0, a5, 15));
+        assertEquals(true, rec.groupSum(0, a5, 9));
+        assertEquals(true, rec.groupSum(0, a6, 100));
+        assertEquals(false, rec.groupSum(0, a6, 99));
+        assertEquals(false, rec.groupSum(0, a6, 99));
+        assertEquals(true, rec.groupSum(0, a7, 44));
+    }
+
+    @Test
+    public void testGroupSum6() {
+
+        int[] a1 = {5, 6, 2};
+        int[] a2 = {1};
+        int[] a3 = {9};
+        int[] a4 = {};
+        int[] a5 = {3, 2, 4, 6};
+        int[] a6 = {6, 2, 4, 3};
+        int[] a7 = {5, 2, 4, 6};
+        int[] a8 = {6, 2, 4, 5};
+        int[] a9 = {3, 2, 4, 6};
+        int[] a10 = {1, 6, 2, 6, 4};
+        int[] a11 = {1, 6, 2, 6, 5};
+
+
+        assertEquals(true, rec.groupSum6(0, a1, 8));
+        assertEquals(false, rec.groupSum6(0, a1, 9));
+        assertEquals(false, rec.groupSum6(0, a1, 7));
+        assertEquals(true, rec.groupSum6(0, a2, 1));
+        assertEquals(false, rec.groupSum6(0, a3, 1));
+        assertEquals(true, rec.groupSum6(0, a4, 0));
+        assertEquals(true, rec.groupSum6(0, a5, 8));
+        assertEquals(true, rec.groupSum6(0, a6, 8));
+        assertEquals(false, rec.groupSum6(1, a7, 9));
+        assertEquals(false, rec.groupSum6(0, a8, 9));
+        assertEquals(false, rec.groupSum6(0, a9, 3));
+        assertEquals(true, rec.groupSum6(0, a10, 12));
+        assertEquals(true, rec.groupSum6(0, a10, 13));
+        assertEquals(false, rec.groupSum6(0, a10, 4));
+        assertEquals(false, rec.groupSum6(0, a10, 9));
+        assertEquals(true, rec.groupSum6(0, a11, 14));
+        assertEquals(true, rec.groupSum6(0, a11, 15));
+        assertEquals(false, rec.groupSum6(0, a11, 16));
+    }
+
+    @Test
+    public void testGroupNoAdj() {
+
+        int[] a1 = {2, 5, 10, 4};
+        int[] a2 = {12, 5, 10, 4, 2};
+        int[] a3 = {10, 2, 2, 3, 3};
+        int[] a4 = {};
+        int[] a5 = {1};
+        int[] a6 = {9};
+        int[] a7 = {5, 10, 4, 1};
+
+
+
+        assertEquals(true, rec.groupNoAdj(0, a1, 12));
+        assertEquals(false, rec.groupNoAdj(0, a1, 14));
+        assertEquals(false, rec.groupNoAdj(0, a1, 7));
+        assertEquals(true, rec.groupNoAdj(0, a2, 7));
+        assertEquals(true, rec.groupNoAdj(0, a1, 9));
+        assertEquals(true, rec.groupNoAdj(0, a3, 15));
+        assertEquals(false, rec.groupNoAdj(0, a3, 7));
+        assertEquals(true, rec.groupNoAdj(0, a4, 0));
+        assertEquals(true, rec.groupNoAdj(0, a5, 1));
+        assertEquals(false, rec.groupNoAdj(0, a6, 1));
+        assertEquals(true, rec.groupNoAdj(0, a6, 0));
+        assertEquals(true, rec.groupNoAdj(0, a7, 11));
+
+    }
+
 }

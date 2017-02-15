@@ -95,13 +95,10 @@ public class Reader implements Comparable<Object>{
     }
 
 
-    public static class ReaderCompar implements Comparator<Object> {
+    public static class ReaderCompar implements Comparator<Reader> {
 
         @Override
-        public int compare(Object o1, Object o2) {
-
-            Reader r1 = (Reader) o1;
-            Reader r2 = (Reader) o2;
+        public int compare(Reader r1, Reader r2) {
 
             return r1.compareTo(r2);
         }
