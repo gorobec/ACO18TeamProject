@@ -25,8 +25,8 @@ public class Rozetka<T extends Product & Serializable> {
         return false;
     }
 
-    public static  void copy(List src, List dest){
-        for (Object o : src) {
+    public static<E> void copy(List<? extends E> src, List<? super E> dest){
+        for (E o : src) {
             dest.add(o);
         }
     }

@@ -1,6 +1,9 @@
 package library.model;
 
-import java.util.ArrayList;
+import library.comparators.BookAuthorComparator;
+import library.comparators.ReaderFirstNameComparator;
+
+import java.util.*;
 
 /**
  * Created by serhiim on 31-Jan-17.
@@ -26,7 +29,7 @@ public class Library {
         return -1;
     }
 
-    public boolean addReaderToBlackList(Reader reader){
+    public boolean addReaderToBlackList(Reader reader) {
         int readerIndex = findReader(reader);
         if (readerIndex == -1) return false;
         readers.get(readerIndex).setInBlackList(true);
@@ -47,7 +50,8 @@ public class Library {
         int readerIndex = findReader(reader);
         int bookIndex = findItem(item);
         int bookCopies = item.getCopiesCount();
-        if (readerIndex == -1 || bookIndex == -1 || readers.get(readerIndex).getInBlackList()) return false;
+        if (readerIndex == -1 || bookIndex == -1 || readers.get(readerIndex).getInBlackList() || bookCopies == 0)
+            return false;
         readers.get(readerIndex).takeItem(printedEditions.get(bookIndex));
         item.setCopiesCount(bookCopies - 1);
         return true;
@@ -70,19 +74,84 @@ public class Library {
         return readers;
     }
 
-    public String getAllTakenItems(){
+    public String getAllTakenItems() {
         StringBuilder builder = new StringBuilder();
-        for (Reader aReader : readers){
-            for (int i = 0; i < aReader.getTakenItems().size() ; i++) {
-               builder.append(aReader.getTakenItems().get(i).toString()).append("\n");
+        for (Reader aReader : readers) {
+            ArrayList<PrintedEdition> takenItems = aReader.getTakenItems();
+            for (int i = 0; i < takenItems.size(); i++) {
+                builder.append(takenItems.get(i).toString()).append("\n");
             }
         }
         return builder.toString();
     }
 
-    public String getTakenItemsByReader(Reader reader){
+    public String getTakenItemsByReader(Reader reader) {
         int readerIndex = findReader(reader);
-        if (readerIndex == -1) return "";
+        if (readerIndex == -1) return "No items";
         return reader.getTakenItems().toString();
+    }
+
+    public String readersToString() {
+        ArrayList<Reader> sorted = readers;
+        Collections.sort(sorted, new ReaderFirstNameComparator());
+        StringBuilder builder = new StringBuilder();
+        for (Reader aReader : sorted) {
+            builder.append(aReader).append("\n");
+        }
+        return builder.toString();
+    }
+
+    public String itemsToString() {
+        ArrayList<PrintedEdition> sorted = printedEditions;
+        Collections.sort(sorted, new BookAuthorComparator());
+        StringBuilder builder = new StringBuilder();
+        for (PrintedEdition item : sorted) {
+            if (item.getCopiesCount() > 0) {
+                builder.append(item.toString()).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    public String getItemsByAuthor(String author) {
+        if (author == null || !printedEditions.toString().contains(author)) return "Invalid author";
+        StringBuilder builder = new StringBuilder();
+        for (PrintedEdition item : printedEditions) {
+            if (item.toString().contains(author)) {
+                builder.append(item).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    public String getItemsByDate(String date) {
+        if (date == null || !printedEditions.toString().contains(date)) return "Invalid author";
+        StringBuilder builder = new StringBuilder();
+        for (PrintedEdition item : printedEditions) {
+            if (item.toString().contains(date)) {
+                builder.append(item).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    public String getItemsByEdition(String edition) {
+        if (edition == null || !printedEditions.toString().contains(edition)) return "Invalid author";
+        StringBuilder builder = new StringBuilder();
+        for (PrintedEdition item : printedEditions) {
+            if (item.toString().contains(edition)) {
+                builder.append(item).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    public String findItemByName(String name) {
+        for (PrintedEdition item : printedEditions) {
+            if (name != null && name.equals(item.getName())){
+                return item.toString();
+            }
+        }
+        return "Invalid name";
     }
 }

@@ -94,4 +94,9 @@ public class Reader {
         currentItemsInHands--;
         return true;
     }
+
+    @Override
+    public String toString(){
+        return String.format("First name: %s, Last name: %s, age: %d, Library card number: %d", firstName, lastName, age, libraryCardNumber);
+    }
 }

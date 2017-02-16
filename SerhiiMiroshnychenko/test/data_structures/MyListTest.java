@@ -1,22 +1,19 @@
-package week1.homework.arrayList;
-
-import static org.junit.Assert.*;
+package data_structures;
 
 import org.junit.Before;
 import org.junit.Test;
-import week3.day1.MyListTest;
 
+import static org.junit.Assert.*;
 
 /**
- * Created by serhiim on 29-Jan-17.
+ * Created by serhiim on 04-Feb-17.
  */
-public class MyArrayListTest{
-    private MyArrayList list;
+public abstract class MyListTest {
+
+    protected MyList<String> list;
 
     @Before
-    public void setUP() {
-        list = new MyArrayList();
-    }
+    public abstract void setUP();
 
     @Test
     public void testAddOneElement() {
@@ -29,11 +26,11 @@ public class MyArrayListTest{
     public void testAddElementToIndex() {
         assertTrue(list.add(3, "3"));
         for (int i = 0; i < 3; i++) {
-            assertTrue(list.getObjectArr()[i] == null);
+            assertTrue(list.getObject(i) == null);
         }
         assertEquals(list.getObject(3), "3");
-        for (int i = 4; i < list.getObjectArr().length; i++) {
-            assertTrue(list.getObjectArr()[i] == null);
+        for (int i = 4; i < list.size(); i++) {
+            assertTrue(list.getObject(i) == null);
         }
     }
 
@@ -98,10 +95,11 @@ public class MyArrayListTest{
         assertTrue(list.add("1"));
         assertTrue(list.add("1"));
         assertTrue(list.clear());
-        for (Object anObject : list.getObjectArr()) {
-            assertEquals(null, anObject);
+        for (int i = 0; i < list.size(); i++){
+            assertEquals(null, list.getObject(i));
         }
 
     }
-
 }
+
+

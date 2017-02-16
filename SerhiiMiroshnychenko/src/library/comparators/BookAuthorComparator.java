@@ -8,11 +8,10 @@ import java.util.Comparator;
 /**
  * Created by serhiim on 06-Feb-17.
  */
-public class BookAuthorComparator implements Comparator {
+public class BookAuthorComparator<T extends Book> implements Comparator<T> {
+
     @Override
-    public int compare(Object o1, Object o2) {
-        Book book1 = (Book) o1;
-        Book book2 = (Book) o2;
-        return book1.getAuthor().compareTo(book2.getAuthor());
+    public int compare(T o1, T o2) {
+        return o1.getAuthor().compareTo(o2.getAuthor());
     }
 }
