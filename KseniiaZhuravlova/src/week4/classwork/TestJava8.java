@@ -1,17 +1,8 @@
-package week4;
+package week4.classwork;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static week4.PetType.CAT;
-import static week4.PetType.DOG;
-import static week4.PetType.PARROT;
 
 /**
  * Created by ksyashka on 12.02.2017.
@@ -78,7 +69,7 @@ public class TestJava8 {
     }
 
     private static PetType genPetType() {
-        PetType[] petTypes = {DOG, CAT, PARROT};
+        PetType[] petTypes = {PetType.DOG, PetType.CAT, PetType.PARROT};
         return petTypes[genRanIndex(petTypes.length)];
     }
 

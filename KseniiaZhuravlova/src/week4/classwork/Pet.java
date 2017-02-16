@@ -1,4 +1,4 @@
-package week4;
+package week4.classwork;
 
 /**
  * Created by ksyashka on 12.02.2017.

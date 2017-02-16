@@ -1,7 +1,6 @@
-package week4;
+package week4.classwork;
 
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * Created by ksyashka on 12.02.2017.
