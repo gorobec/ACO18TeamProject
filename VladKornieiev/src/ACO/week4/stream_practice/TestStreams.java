@@ -1,4 +1,4 @@
-package ACO.week4;
+package ACO.week4.stream_practice;
 
 import java.util.ArrayList;
 import java.util.List;
