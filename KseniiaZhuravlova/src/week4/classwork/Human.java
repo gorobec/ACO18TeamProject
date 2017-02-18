@@ -1,4 +1,4 @@
-package week4;
+package week4.classwork;
 
 import java.util.List;
 
@@ -32,5 +32,18 @@ public class Human {
 
     public List<Pet> getPets() {
         return pets;
+    }
+
+    public Human addPetsAge(int age){
+        for (Pet p:pets) {
+            p.setAge(p.getAge() + age);
+        }
+        return this;
+    }
+
+    @Override
+    public String toString() {
+     return String.format("Name - %s, age - %d, city - %s \n Pets: %s", name, age, city, pets);
+
     }
 }
