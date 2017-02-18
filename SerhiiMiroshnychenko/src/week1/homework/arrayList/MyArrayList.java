@@ -3,10 +3,11 @@ package week1.homework.arrayList;
 /**
  * Created by serhiim on 27-Jan-17.
  */
-public class MyArrayList {
-    public int size;
-    public static final int DEFAULT_SIZE = 10;
-    private Object[] objectArr;
+public class MyArrayList<T> implements MyList {
+    private int size;
+    private static final int DEFAULT_SIZE = 10;
+    private Object[] objectArr = new Object[DEFAULT_SIZE];
+
 
     public MyArrayList() {
         this(DEFAULT_SIZE);
@@ -17,34 +18,32 @@ public class MyArrayList {
         this.size = 0;
     }
 
+    public Object[] getObjectArr() {
+        return objectArr;
+    }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     public boolean add(Object obj) {
-
         if (size >= objectArr.length) {
             ensureCapacity(5);
         }
-        if (size == 0) {
-            objectArr[size] = obj;
-            size++;
-        } else {
-            objectArr[size] = obj;
-            size++;
-        }
+        objectArr[size] = obj;
+        size++;
+
         return true;
     }
 
-    public void add(int index, Object obj) {
+    public boolean add(int index, Object obj) {
         if (index >= objectArr.length) {
-            ensureCapacity(index);
+            throw new ArrayIndexOutOfBoundsException();
         }
         objectArr[index] = obj;
         size++;
-    }
-
-    private void ensureCapacity(int index) {
-        Object[] temp = new Object[objectArr.length + index];
-        System.arraycopy(objectArr, 0, temp, 0, objectArr.length);
-        objectArr = temp;
+        return true;
     }
 
 
@@ -53,18 +52,23 @@ public class MyArrayList {
         return objectArr[index];
     }
 
-    public boolean remove(int index) {
+    public Object remove(int index) {
+        if (index < 0 && index < size) throw new ArrayIndexOutOfBoundsException();
+        Object temp = objectArr[index];
         objectArr[index] = null;
+        System.arraycopy(objectArr, index + 1, objectArr, index, size - index);
         size--;
-        return true;
+        return temp;
     }
 
 
-
     public boolean remove(Object object) {
+        int index;
         for (int i = 0; i < objectArr.length; i++) {
-            if (objectArr[i] != null && objectArr[i].equals(object)) {
+            if (objectArr[i].equals(object)) {
                 objectArr[i] = null;
+                index = i;
+                System.arraycopy(objectArr, index + 1, objectArr, index, size - index);
                 size--;
                 return true;
             }
@@ -72,71 +76,49 @@ public class MyArrayList {
         return false;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void set(int index, Object obj) {
-
+    public boolean set(int index, Object obj) {
+        if (index < 0 && index > objectArr.length) throw new ArrayIndexOutOfBoundsException();
+        objectArr[index] = obj;
+        return true;
     }
 
     public boolean clear() {
         for (int i = 0; i < objectArr.length; i++) {
-            objectArr[i] = 0;
+            objectArr[i] = null;
         }
         size = 0;
         return true;
     }
 
-    public int size() {
-        return size;
-    }
-
-    public Object[] getObjectArr() {
-        return objectArr;
-    }
-
     public boolean contains(Object object) {
-        for (int i = 0; i < objectArr.length; i++) {
-            if (objectArr[i] != null && objectArr[i].equals(object))
+        if (object == null) {
+            for (Object anObjectArr : objectArr) {
+                if (anObjectArr == null) {
+                    return true;
+                }
+            }
+        }
+        for (Object anObjectArr : objectArr) {
+            if (anObjectArr != null && anObjectArr.equals(object)) {
                 return true;
+            }
         }
         return false;
     }
 
-    public void throwException(){
-        throw new ArrayIndexOutOfBoundsException();
+    public int size() {
+        int count = 0;
+        for (int i = 0; i < objectArr.length; i++) {
+            if (objectArr[i] != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
-
-    public static void main(String[] args) {
-        MyArrayList arr = new MyArrayList(5);
-        Object obj = new Object();
-        Object obj2 = new Object();
-        Object obj3 = new Object();
-
-        System.out.println(arr.size());
-
-        arr.add(obj);
-        System.out.println(arr.size());
-        System.out.println(arr.getObjectArr()[0]);
-        System.out.println(arr.getObjectArr()[1]);
-
-
-        arr.add(obj2);
-        System.out.println(arr.size());
-        System.out.println(arr.getObjectArr()[0]);
-        System.out.println(arr.getObjectArr()[1]);
-        arr.add(5, obj3);
-        System.out.println(arr.size());
-        System.out.println(arr.getObjectArr()[0]);
-        System.out.println(arr.getObjectArr()[1]);
-        System.out.println(arr.getObjectArr()[2]);
-        System.out.println(arr.getObjectArr()[4]);
-        System.out.println(arr.getObjectArr()[5]);
-        System.out.println();
-        System.out.println(arr.getObject(3));
-
-
+    private void ensureCapacity(int index) {
+        Object[] temp = new Object[objectArr.length + index];
+        System.arraycopy(objectArr, 0, temp, 0, objectArr.length);
+        objectArr = temp;
     }
 }

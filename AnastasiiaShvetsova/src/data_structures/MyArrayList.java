@@ -1,111 +1,83 @@
 package data_structures;
 
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+
 import java.util.Arrays;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Nastia on 28.01.17.
  */
-public class MyArrayList {
+public class MyArrayList<T> implements MyList<T> {
     private int size = 0;
-    private Object[] objects;
-    public static  final int DEFAULT_SIZE = 10;
+    private T[] objects;
+    public static final int DEFAULT_SIZE = 0;
 
-    public MyArrayList(int size){
-        this.objects = new Object[size];
+    @SuppressWarnings("unchecked")
+    public MyArrayList(int size) {
+        this.objects = (T[]) new Object[size];
     }
 
-    public MyArrayList(){
+    public MyArrayList() {
         this(DEFAULT_SIZE);
     }
 
-    public boolean add(Object object) {
-        ensureCapacity(size + 1);
+    public boolean add(T object) {
+        ensureCapacity(size + objects.length / 2 + 1);
         objects[size] = object;
         size++;
         return true;
     }
 
-
+    @SuppressWarnings("unchecked")
     public void ensureCapacity(int minEnsureCapacity) {
-
         int arraylength = objects.length;
         if (minEnsureCapacity > arraylength) {
-            Object[] tmp = new Object[minEnsureCapacity];
+            T[] tmp = (T[]) new Object[minEnsureCapacity];
             System.arraycopy(objects, 0, tmp, 0, size);
-            objects = new Object[minEnsureCapacity];
+            objects = (T[]) new Object[minEnsureCapacity];
             objects = tmp;
         }
     }
 
-    public void add(int index, Object object) {
-        ensureCapacity(size + 1);
+    public boolean add(int index, T object) {
+        ensureCapacity(size + ((objects.length * 3) / 2 + 1));
         objects[index] = object;
         size++;
-    }
-
-    public boolean isIndex(int index) {
-        if ((index < 0 || index >= objects.length)) return false;
         return true;
     }
 
-    public Object get(int index) {
-        if (!isIndex(index)) return false;
+    public boolean wrongIndex(int index) {
+        return index < 0 || index >= objects.length;
+    }
+
+    public T get(int index) {
+        if (wrongIndex(index)) System.exit(-1);
         return objects[index];
     }
 
-    public Object remove(int index) {
-        if (!isIndex(index)) return false;
+    public boolean remove(int index) {
+        if (wrongIndex(index)) return false;
         int numMoved = objects.length - index - 1;
         System.arraycopy(objects, index + 1, objects, index, numMoved);
         objects[--size] = null;
-        return objects[index];
+        return true;
     }
 
-    public Object remove(Object object) {
-        int index = 0;
+    public boolean remove(T object) {
         if (object == null) {
             for (int i = 0; i < objects.length; i++)
                 if (objects[i] == null) {
                     remove(i);
-                    return objects[i];
+                    return true;
                 }
         }
 
         for (int i = 0; i < objects.length; i++) {
-            if(objects[i] != null) {
+            if (objects[i] != null) {
                 if (objects[i].equals(object)) {
-                    index = i;
                     remove(i);
-                }
-            }
-        }
-
-        return objects[index];
-    }
-
-    public Object set(int index, Object object) {
-        if (!isIndex(index)) return false;
-        return objects[index] = object;
-    }
-
-    public void clear() {
-        for (int i = 0; i < objects.length; i++){
-            objects[i] = null;
-        }
-        size = 0;
-    }
-
-    public boolean contains(Object object){
-        if (object == null) {
-            for (int i = 0; i < objects.length; i++)
-                if (objects[i] == null) {
-
-                    return true;
-                }
-        }
-        for (int i = 0; i < objects.length; i++){
-            if(objects[i] != null) {
-                if (objects[i].equals(object)) {
                     return true;
                 }
             }
@@ -113,22 +85,87 @@ public class MyArrayList {
         return false;
     }
 
-    public int size(){
-        int count = 0;
-        for (int i = 0; i < objects.length; i++) {
-            if(objects[i] != null){
-                count++;
-            }
-        }
-        return count;
+    public boolean set(int index, T object) {
+        if (wrongIndex(index)) return false;
+        objects[index] = object;
+        return true;
     }
 
-    public boolean isEmpty(){
+    public boolean clear() {
+        for (int i = 0; i < objects.length; i++) {
+            objects[i] = null;
+        }
+        size = 0;
+        return true;
+    }
+
+    public boolean contains(T object) {
+        if (object == null) {
+            for (T o : objects)
+                if (o == null) {
+                    return true;
+                }
+        }
+        for (T o : objects) {
+            if (o != null) {
+                if (o.equals(object)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public void printList(){
+    public void printList() {
         System.out.println(Arrays.toString(objects));
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public String toString() {
+        int count = 0;
+        for (T o : objects) {
+            if (o != null) {
+                count++;
+            }
+        }
+
+        T[] tmp = (T[]) new Object[count];
+        for (int i = 0; i < count; i++) {
+            System.arraycopy(objects, i, tmp, i, count);
+        }
+
+        return Arrays.toString(tmp);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayListIterator();
+    }
+
+    class ArrayListIterator implements Iterator<T> {
+
+        private int currentPosition;
+
+        private ArrayListIterator(){
+            currentPosition = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+            return objects[currentPosition++];
+        }
+    }
 }

@@ -1,0 +1,9 @@
+package week2.library.editions;
+
+enum Genre {
+    // В качестве жанра использовать enum.
+    BIOGRAPHY, FANTASY, WESTERN, FANTASTIC, DOCUMENTARY, DRAMA, HISTORICAL,
+    COMPUTER_SCIENCE, PROGRAMMING, ROMAN, MYSTIC, HORROR, POEM, NOVEL, ADVENTURES, PROSE, PSYCHOLOGY, TALE,
+    THRILLER, PHILOSOPHY;
+
+}
