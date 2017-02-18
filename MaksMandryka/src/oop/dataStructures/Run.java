@@ -1,4 +1,4 @@
-package oop.weak1.task_7_arrayList;
+package oop.dataStructures;
 
 /**
  * Created by fmandryka on 27.01.2017.
@@ -30,6 +30,17 @@ public class Run {
         System.out.println(myAL3.size() + " " + myAL3.toString());
 
         MyArrayList myAL4 = new MyArrayList(arr1);
+
+        MyLinkedList<String> myLL1 = new MyLinkedList<String>();
+        myLL1.add("1");
+        myLL1.add("2");
+        myLL1.add("3");
+        myLL1.add("4");
+        myLL1.add("5");
+
+        for (String s : myLL1) {
+            System.out.println(s);
+        }
 
     }
 }

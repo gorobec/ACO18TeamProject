@@ -1,4 +1,4 @@
-package library.model;
+package oop.library.model;
 
 import java.util.ArrayList;
 
