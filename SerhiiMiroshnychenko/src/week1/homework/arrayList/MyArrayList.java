@@ -3,10 +3,11 @@ package week1.homework.arrayList;
 /**
  * Created by serhiim on 27-Jan-17.
  */
-public class MyArrayList implements MyList {
+public class MyArrayList<T> implements MyList {
     private int size;
     private static final int DEFAULT_SIZE = 10;
     private Object[] objectArr = new Object[DEFAULT_SIZE];
+
 
     public MyArrayList() {
         this(DEFAULT_SIZE);
@@ -25,7 +26,7 @@ public class MyArrayList implements MyList {
         return size == 0;
     }
 
-
+    @Override
     public boolean add(Object obj) {
         if (size >= objectArr.length) {
             ensureCapacity(5);

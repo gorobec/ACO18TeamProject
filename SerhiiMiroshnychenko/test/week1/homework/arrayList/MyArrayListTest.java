@@ -4,12 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import week3.day1.MyListTest;
 
 
 /**
  * Created by serhiim on 29-Jan-17.
  */
-public class MyArrayListTest {
+public class MyArrayListTest{
     private MyArrayList list;
 
     @Before

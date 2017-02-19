@@ -1,6 +1,6 @@
 package oop.weak1.university;
 
-import oop.weak1.task_7_arrayList.MyArrayList;
+import oop.dataStructures.MyArrayList;
 
 /**
  * Created by fmandryka on 21.01.2017.
