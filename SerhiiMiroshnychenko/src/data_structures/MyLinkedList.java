@@ -1,17 +1,19 @@
-package week3.day1;
+package data_structures;
 
-import week1.homework.arrayList.MyList;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 /**
  * Created by serhiim on 04-Feb-17.
  */
-public class MyLinkedList<T>  {
-    /*private Node<T> head;
+public class MyLinkedList<T> implements MyList<T> {
+    private Node<T> head;
     private Node<T> tail;
     private int size;
 
     @Override
-    public boolean add(Object object) {
+    public boolean add(T object) {
         if (head == null){
             head = tail = new Node<>(object);
         } else {
@@ -24,17 +26,17 @@ public class MyLinkedList<T>  {
     }
 
     @Override
-    public boolean add(int index, Object object) {
+    public boolean add(int index, T object) {
         return false;
     }
 
     @Override
-    public Object getObject(int index) {
+    public T getObject(int index) {
         return null;
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         return null;
     }
 
@@ -83,7 +85,7 @@ public class MyLinkedList<T>  {
     }
 
     @Override
-    public boolean set(int index, Object object) {
+    public boolean set(int index, T object) {
         return false;
     }
 
@@ -93,12 +95,17 @@ public class MyLinkedList<T>  {
     }
 
     @Override
-    public boolean contains(Object object) {
+    public boolean contains(T object) {
         return false;
     }
 
     @Override
     public int size() {
         return 0;
-    }*/
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
 }

@@ -1,9 +1,9 @@
-package week1.homework.arrayList;
+package data_structures;
 
 /**
  * Created by serhiim on 30-Jan-17.
  */
-public interface MyList<T> {
+public interface MyList<T> extends Iterable<T> {
 
     boolean add(T object);
     boolean add(int index, T object);

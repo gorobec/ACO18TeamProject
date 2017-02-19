@@ -1,19 +1,29 @@
-package week3.day1;
-
-import org.junit.Before;
-import org.junit.Test;
+package data_structures;
 
 import static org.junit.Assert.*;
 
+import data_structures.MyArrayList;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Objects;
+
+
 /**
- * Created by serhiim on 04-Feb-17.
+ * Created by serhiim on 29-Jan-17.
  */
-public interface MyListTest {
+public class MyArrayListTest extends MyListTest{
+    @Override
+    public void setUP() {
+        list = new MyArrayList<>();
+    }
 
- /*   private MyLinkedList list;
 
-    @Before
-    public abstract void setUP();
+
+    /*@Before
+    public void setUP() {
+        list = new MyArrayList();
+    }
 
     @Test
     public void testAddOneElement() {
@@ -102,5 +112,3 @@ public interface MyListTest {
     }
 */
 }
-
-
