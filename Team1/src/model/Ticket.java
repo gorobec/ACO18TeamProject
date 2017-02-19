@@ -10,7 +10,7 @@ public class Ticket {
     private Address address;
     private int productID;
 
-    public Ticket() {
+    public Ticket(int i, String s, Address address) {
     }
 
 

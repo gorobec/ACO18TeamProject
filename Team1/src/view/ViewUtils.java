@@ -26,7 +26,7 @@ public class ViewUtils {
         iService.addPoduct(product3);
     }
 
-    public static boolean buy(IService iService) throws NoSuchProductException {
+    public static int buy(IService iService) throws NoSuchProductException {
         System.out.println("Choose product ID");
         int id = Integer.parseInt(sc.nextLine());
 
@@ -39,8 +39,9 @@ public class ViewUtils {
         System.out.println("Enter credit cart (12 digits):");
         String creditCard = sc.nextLine();
         Address address = new Address(city, street, number);
-
-        return iService.buy(id, address, creditCard);
+        int i = iService.buy(id, address, creditCard);
+        System.out.println(i);
+        return i;
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
