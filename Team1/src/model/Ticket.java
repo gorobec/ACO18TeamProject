@@ -56,4 +56,13 @@ public class Ticket {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", creditCard='" + creditCard + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }
