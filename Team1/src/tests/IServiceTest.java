@@ -2,6 +2,7 @@ package tests;
 
 import controller.IService;
 import exception.InvalidIdException;
+import exception.NoSuchProductException;
 import model.Address;
 import model.Product;
 import model.Ticket;
@@ -11,8 +12,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by v21k on 19.02.17.
@@ -59,12 +58,28 @@ public class IServiceTest {
 
     @org.junit.Test
     public void buy() throws Exception {
+        Assert.assertEquals(
+                new Ticket(4, "1111 1111", new Address("Kiev", "KPI", 1)),
+                controller.buy(controller.getProductById(0), new Address("Kiev", "KPI", 1), "1111 1111"));
+    }
 
+    @Test(expected = NoSuchProductException.class)
+    public void buyTest2() throws Exception{
+        controller.buy(new Product(7, "product1"), new Address("Kiev", "KPI", 1), "1111 1111");
+        controller.buy(null, null, null);
     }
 
     @org.junit.Test
     public void showTicket() throws Exception {
+        Assert.assertEquals(
+                new Ticket(0, "1111 1111", new Address("Kiev", "KPI", 1)),
+                controller.showTicket(0));
+    }
 
+    @Test(expected = InvalidIdException.class)
+    public void showTicketTest2() throws InvalidIdException{
+        controller.showTicket(-1);
+        controller.showTicket(10);
     }
 
 }
