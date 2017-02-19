@@ -40,7 +40,7 @@ public class TestPrintedEditions {
     public void testGetNumberOfCopiesAvailableWithLoan() {
         library.addPrintedEdition(edition);
         library.addReader(reader);
-        library.loanPrintedEdition(reader, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         assertEquals(34, edition.getNumberOfCopiesAvailable());
     }
 
@@ -55,7 +55,7 @@ public class TestPrintedEditions {
     public void testGetNumberOfCopiesAtReadersWithLoan() {
         library.addPrintedEdition(edition);
         library.addReader(reader);
-        library.loanPrintedEdition(reader, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         assertEquals(1, edition.getNumberOfCopiesAtReader());
     }
 
