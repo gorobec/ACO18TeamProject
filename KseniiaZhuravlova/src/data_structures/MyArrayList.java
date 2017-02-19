@@ -19,6 +19,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     }
 
+    @SuppressWarnings({"unchecked", "unused"})
     public MyArrayList(int size) {
         this.objects = (T[]) new Object[size];
     }
@@ -35,6 +36,7 @@ public class MyArrayList<T> implements MyList<T> {
         return true;
     }
 
+    @SuppressWarnings({"unchecked", "unused"})
     private void ensureCapacity(int minCapacity) {
         if (objects.length < minCapacity) {
             minCapacity = 3 * size / 2 + 1;
@@ -60,12 +62,14 @@ public class MyArrayList<T> implements MyList<T> {
         System.out.println(Arrays.toString(objects));
     }
 
+    @Override
     public boolean add(T object) {
         ensureCapacity(size + 1);
         objects[size++] = object;
         return true;
     }
 
+    @Override
     public boolean add(int index, T object) {
         if (index > size || index < 0) System.exit(-1);
         ensureCapacity(size + 1);
@@ -74,6 +78,7 @@ public class MyArrayList<T> implements MyList<T> {
         return true;
     }
 
+    @Override
     public T get(int index) {
         if (!rangeCheck(index)) System.exit(-1);
         return objects[index];
@@ -86,6 +91,7 @@ public class MyArrayList<T> implements MyList<T> {
         return result;
     }
 
+    @Override
     public T remove(int index) {
         if (!rangeCheck(index)) System.exit(-1);
         T result = objects[index];
@@ -94,37 +100,76 @@ public class MyArrayList<T> implements MyList<T> {
         return result;
     }
 
-    public boolean remove(T object) {
+  /*  public boolean remove(T object) {
         int index = 0;
         if (object == null) while (index != size && !(objects[index] == null)) index++;
         else while (index != size && !(object.equals(objects[index]))) index++;
         if (index != size) {
             System.arraycopy(objects, index + 1, objects, index, objects.length - index - 1);
             objects[--size] = null;
+            return true;
         }
+        return false;
+    }*/
+
+    @Override
+    public boolean remove(T object) {
+        int index = indexOf(object);
+        if (index == -1) return false;
+        remove(index);
         return true;
     }
+
 
     public void trimToSize() {
         if (size < objects.length)
             objects = Arrays.copyOf(objects, size);
     }
 
+    @Override
     public void clear() {
         for (int i = 0; i < size; i++)
             objects[i] = null;
         size = 0;
     }
 
+    @Override
     public boolean contains(Object object) {
         return indexOf(object) >= 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ALIterator();
+    }
+
+    private class ALIterator implements Iterator<T> {
+
+        private int currentPosition;
+
+        private ALIterator() {
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < size;
+        }
+
+        @Override
+        public T next() {
+
+            return objects[currentPosition++];
+        }
     }
 }

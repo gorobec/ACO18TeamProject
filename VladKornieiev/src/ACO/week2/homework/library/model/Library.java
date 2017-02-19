@@ -1,7 +1,10 @@
 package ACO.week2.homework.library.model;
 
-import ACO.data_structures.MyArrayList;
-import ACO.week2.homework.library.model.printed_editions.*;
+import ACO.week2.homework.library.model.printed_editions.PrintedEdition;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by v21k on 31.01.17.
@@ -9,8 +12,8 @@ import ACO.week2.homework.library.model.printed_editions.*;
 public class Library {
     private String name;
     private String city;
-    private MyArrayList readers = new MyArrayList();
-    private MyArrayList printedEditionsInLibrary = new MyArrayList();
+    private List<Reader> readers = new ArrayList<>();
+    private List<PrintedEdition> printedEditionsInLibrary = new ArrayList<>();
 
     public Library() {
         this.name = "Library";
@@ -38,12 +41,20 @@ public class Library {
         this.city = city;
     }
 
-    public MyArrayList getReaders() {
+    public List<Reader> getReaders() {
         return readers;
     }
 
-    public MyArrayList getPrintedEditionsInLibrary() {
+    public void setReaders(List<Reader> readers) {
+        this.readers = readers;
+    }
+
+    public List<PrintedEdition> getPrintedEditionsInLibrary() {
         return printedEditionsInLibrary;
+    }
+
+    public void setPrintedEditionsInLibrary(List<PrintedEdition> printedEditionsInLibrary) {
+        this.printedEditionsInLibrary = printedEditionsInLibrary;
     }
 
     public boolean addReader(Reader reader) {

@@ -3,6 +3,7 @@ package library.controler;
 import data_structures.MyArrayList;
 import library.model.*;
 import library.comparators.*;
+
 import java.util.Comparator;
 
 /**
@@ -13,32 +14,33 @@ public class Library {
     MyArrayList<Reader> readers;
 
     public Library() {
-        editions = new MyArrayList();
-        readers = new MyArrayList();
+        editions = new MyArrayList<>();
+        readers = new MyArrayList<>();
     }
 
     private Reader getReaderById(int id) {
         Reader reader;
         for (int i = 0; i < readers.size(); i++) {
             reader = readers.get(i);
-            if (reader.getId() == id) return reader;
+            if (reader != null && reader.getId() == id) return reader;
         }
         return null;
     }
 
     public boolean addEdition(Edition edition) {
+        if (edition == null) return false;
         int index = duplicateEdition(edition);
         if (index == -1) editions.add(edition);
         else {
             Edition tempEdition = editions.get(index);
-            tempEdition.setNumber(tempEdition.getNumber()+edition.getNumber());
+            tempEdition.setNumber(tempEdition.getNumber() + edition.getNumber());
         }
         return true;
     }
 
-    public int duplicateEdition(Edition edition){
+    public int duplicateEdition(Edition edition) {
         for (int i = 0; i < editions.size(); i++)
-            if( editions.get(i).equals(edition)) {
+            if (edition.equals(editions.get(i))) {
                 return i;
             }
         return -1;
@@ -60,17 +62,20 @@ public class Library {
         return result;
     }
 
-    public Edition findEdition(Edition edition){
+    private Edition findEdition(Edition edition) {
+        if (edition == null) return null;
         Edition findEdition;
         for (int i = 0; i < editions.size(); i++) {
-             findEdition = editions.get(i);
+            findEdition = editions.get(i);
             if (edition.equals(findEdition)) return findEdition;
         }
         return null;
     }
 
     public boolean addReaderToBlackList(int id) {
-        getReaderById(id).setInBlackList(true);
+        Reader reader = getReaderById(id);
+        if (reader == null) return false;
+        reader.setInBlackList(true);
         return true;
     }
 
