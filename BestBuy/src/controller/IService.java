@@ -1,5 +1,7 @@
 package controller;
 
+import exceptions.NoSuchProductException;
+import exceptions.NoSuchTicketException;
 import model.Product;
 import model.Ticket;
 
@@ -12,10 +14,10 @@ public interface IService {
 
     Map<Integer, Product> getAllProducts();
 
-    Product getProductById(int id);
+    Product getProductById(int id) throws NoSuchProductException;
 
-    Ticket buy(String addressTo, int creditCard, int productId);
+    Ticket buy(String addressTo, String creditCard, int productId);
 
-    Ticket showTicketById(int id);
+    Ticket showTicketById(int id) throws NoSuchTicketException;
 
 }
