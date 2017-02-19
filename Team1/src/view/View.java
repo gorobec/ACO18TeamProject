@@ -5,6 +5,7 @@ import controller.IDataBase;
 import controller.IService;
 import controller.ServiseImpl;
 import exception.InvalidIdException;
+import exception.NoSuchProductException;
 
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ import java.util.Scanner;
 public class View {
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws InvalidIdException {
+    public static void main(String[] args) throws InvalidIdException, NoSuchProductException {
         IDataBase iDataBase = new DB();
         IService iService = new ServiseImpl(iDataBase);
 
