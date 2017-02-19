@@ -22,7 +22,7 @@ public interface IService {
 
     Ticket getTicketById(int id) throws InvalidIdException;
 
-    boolean buy(int productID, Address address, String creditCard) throws NoSuchProductException;
+    int buy(int productID, Address address, String creditCard) throws NoSuchProductException;
 
     Ticket showTicket(int id) throws InvalidIdException;
 

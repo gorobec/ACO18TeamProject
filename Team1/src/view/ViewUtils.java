@@ -16,16 +16,26 @@ import java.util.stream.Collectors;
 public class ViewUtils {
     private static Scanner sc = new Scanner(System.in);
 
+    public static void initService(IService iService){
+        Product product = new Product(1, "IPhone");
+        Product product2 = new Product(2, "Samsung");
+        Product product3 = new Product(3, "Xaiomi");
+
+        iService.addPoduct(product);
+        iService.addPoduct(product2);
+        iService.addPoduct(product3);
+    }
+
     public static boolean buy(IService iService) throws NoSuchProductException {
         System.out.println("Choose product ID");
-        int id = sc.nextInt();
+        int id = Integer.parseInt(sc.nextLine());
 
         System.out.println("Enter city");
         String city = sc.nextLine();
         System.out.println("Enter street ");
         String street = sc.nextLine();
         System.out.println("Enter house number:");
-        int number = sc.nextInt();
+        int number = Integer.parseInt(sc.nextLine());
         System.out.println("Enter credit cart (12 digits):");
         String creditCard = sc.nextLine();
         Address address = new Address(city, street, number);

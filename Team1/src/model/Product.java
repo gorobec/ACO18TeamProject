@@ -48,9 +48,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("Name: %10s, id: %d\n", name, id);
     }
 }

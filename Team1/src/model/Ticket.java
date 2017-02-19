@@ -5,17 +5,20 @@ package model;
  */
 public class Ticket {
     private int id;
+    private static int nextID=0;
     private String creditCard;
     private Address address;
+    private int productID;
 
     public Ticket() {
     }
 
 
-    public Ticket(int id, String creditCard, Address address) {
-        this.id = id;
+    public Ticket(String creditCard, Address address, int productID) {
+        this.id = ++nextID;
         this.creditCard = creditCard;
         this.address = address;
+        this.productID = productID;
     }
 
     public int getId() {
@@ -59,10 +62,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", creditCard='" + creditCard + '\'' +
-                ", address=" + address +
-                '}';
+        return String.format("ID: %d, address: %s\n", id, address.toString());
     }
 }

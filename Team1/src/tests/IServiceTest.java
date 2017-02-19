@@ -2,7 +2,7 @@ package tests;
 
 import controller.DB;
 import controller.IService;
-import controller.ServiseImpl;
+import controller.ServiceImpl;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
@@ -24,7 +24,7 @@ public class IServiceTest {
 
     @Before
     public void setUp(){
-        controller = new ServiseImpl(new DB());
+        controller = new ServiceImpl(new DB());
 
         controller.addProduct(new Product(0, "product1"));
         controller.addProduct(new Product(1, "product2"));

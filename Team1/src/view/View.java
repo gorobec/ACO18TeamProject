@@ -3,7 +3,7 @@ package view;
 import controller.DB;
 import controller.IDataBase;
 import controller.IService;
-import controller.ServiseImpl;
+import controller.ServiceImpl;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 
@@ -17,7 +17,9 @@ public class View {
 
     public static void main(String[] args) throws InvalidIdException, NoSuchProductException {
         IDataBase iDataBase = new DB();
-        IService iService = new ServiseImpl(iDataBase);
+        IService iService = new ServiceImpl(iDataBase);
+
+        ViewUtils.initService(iService);
 
         boolean exit = false;
 
