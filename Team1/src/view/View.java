@@ -19,6 +19,8 @@ public class View {
         IDataBase iDataBase = new DB();
         IService iService = new ServiseImpl(iDataBase);
 
+        ViewUtils.initService(iService);
+
         boolean exit = false;
 
         while (!exit){

@@ -60,4 +60,9 @@ public class Address {
         result = 31 * result + number;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return String.format("City: %10s, street: %10s, house number: %d", city, street, number);
+    }
 }

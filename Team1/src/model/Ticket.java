@@ -59,10 +59,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", creditCard='" + creditCard + '\'' +
-                ", address=" + address +
-                '}';
+        return String.format("ID: %d, address: %s\n", id, address.toString());
     }
 }
