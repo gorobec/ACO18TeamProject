@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface IService {
     Product addProduct(Product product);
+    Ticket addTicket(Ticket ticket);
     List<Product> getProducts();
     Product getProductById(int id) throws InvalidIdException;
     Ticket buy(Product product, Address address, String creditCard) throws NoSuchProductException;
