@@ -4,10 +4,12 @@ import controller.DB;
 import model.Address;
 import model.Product;
 import model.Ticket;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.hamcrest.Matchers;
+import org.junit.*;
+
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
 
 import static org.junit.Assert.*;
 
@@ -18,20 +20,31 @@ import static org.junit.Assert.*;
 public class PersistenceUtilsTest {
 
 
-    private String json;
+    private String json =
+            "{\"products\":" +
+                    "[{\"id\":1,\"name\":\"ProdName1\"}," +
+                    "{\"id\":2,\"name\":\"ProdName2\"},{\"id\":1,\"name\":\"ProdName3\"}]," +
+                    "\"tickets\":[" +
+                    "{\"id\":1,\"creditCard\":\"credCard\"," +
+                    "\"address\":{\"city\":\"kiev\",\"street\":\"sdf\",\"number\":12}}," +
+                    "{\"id\":2,\"creditCard\":\"credCard\"," +
+                    "\"address\":{\"city\":\"kiev\",\"street\":\"sdf\",\"number\":12}}," +
+                    "{\"id\":3,\"creditCard\":\"credCard\"," +
+                    "\"address\":{\"city\":\"kiev\",\"street\":\"sdf\",\"number\":12}}]}";
     private DB db;
+    private String path = "db.json";
 
 
     @Before
     public void setUp() throws Exception {
         db = new DB();
-        db.addProduct(new Product(1,"ProdName1"));
-        db.addProduct(new Product(2,"ProdName2"));
-        db.addProduct(new Product(1,"ProdName3"));
+        db.addProduct(new Product(1, "ProdName1"));
+        db.addProduct(new Product(2, "ProdName2"));
+        db.addProduct(new Product(1, "ProdName3"));
 
         db.addTicket(new Ticket(1, "credCard", new Address("kiev", "sdf", 12)));
         db.addTicket(new Ticket(2, "credCard", new Address("kiev", "sdf", 12)));
-        db.addTicket(new Ticket(3, "credCard", new Address("kiev","sdf", 12)));
+        db.addTicket(new Ticket(3, "credCard", new Address("kiev", "sdf", 12)));
     }
 
     @After
@@ -48,16 +61,24 @@ public class PersistenceUtilsTest {
 
     @Test
     public void testConvertFromJson() throws Exception {
-//        PersistenceUtils.convertFromJson(DB.class,)
+        DB fromJSonDb = PersistenceUtils.convertFromJson(DB.class,json);
+        Assert.assertNotNull(fromJSonDb);
     }
 
     @Test
     public void testSaveIntoFile() throws Exception {
+        File tempFile = new File("./temp.json");
+        PersistenceUtils.saveIntoFile(tempFile.getPath(), json);
 
+        Assert.assertTrue(tempFile.exists());
+        tempFile.delete();
     }
 
     @Test
     public void testLoadFromFile() throws Exception {
+        URL uri = PersistenceUtils.class.getResource("/utils/db.json");
 
+        String loadedJson = PersistenceUtils.loadFromFile(uri.getFile());
+        Assert.assertNotEquals("{}", loadedJson);
     }
 }
