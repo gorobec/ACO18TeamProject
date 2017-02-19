@@ -36,8 +36,9 @@ public class Service implements IService {
     @Override
     public Ticket buy(String addressTo, String creditCard, int productId) {
 
-        Ticket tc = new Ticket(base.getMaxTicketID(), productId,addressTo,creditCard);
+        Ticket tc = new Ticket(base.getMaxTicketID()+1, productId, addressTo,creditCard);
         base.addTicket(tc);
+
         return tc;
     }
 
