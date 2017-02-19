@@ -1,14 +1,17 @@
 package week1.homeWork.implementAL;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+import  org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.*;
+//import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import week1.homeWork.implementAL.ArrList;
 
-/**
- * Created by Игорь on 29.01.2017.
- */
-public class ArrListTest {
+
+public class
+ArrListTest {
     private ArrList list;
 
     @Before
@@ -20,8 +23,50 @@ public class ArrListTest {
     public void testAddOneElement(){
         boolean actual = list.add("1");
 
-        Assert.assertTrue(actual);
+        assertTrue(actual);
         //Assert.assertEquals(3, list.size());
+    }
+
+    @Test
+    public void testGet(){
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("444");
+
+        String actual = (String) list.get(2);
+        assertThat(actual, is("333"));
+    }
+
+    @Test
+    public void testSet(){
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("444");
+
+        list.set(2, "555");
+        String actual = (String) list.get(2);
+        assertThat(actual, is("555"));
+    }
+
+    @Test
+    public void testClear(){
+        boolean actual = list.clear();
+        assertTrue(actual);
+    }
+
+    @Test
+    public void testToArray(){
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("444");
+
+        list.toArray(list);
+        Object actual[] = list.toArray(list);
+        Object [] arr = {"111","222","333","444"};
+        assertThat(actual, is(arr));
     }
 
     @Test
@@ -32,7 +77,18 @@ public class ArrListTest {
         list.add("444");
 
         boolean actual = list.remove(5);
-        Assert.assertFalse(actual);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testRemoveObject(){
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("444");
+
+        boolean actual = list.remove("333");
+        assertTrue(actual);
     }
 
     @Test
@@ -43,7 +99,7 @@ public class ArrListTest {
         list.add("444");
 
         boolean actual = list.contains("222");
-        Assert.assertTrue(actual);
+        assertTrue(actual);
     }
 
     @Test
@@ -54,6 +110,6 @@ public class ArrListTest {
         list.add("444");
 
         int actual = list.size();
-        Assert.assertEquals(4, actual);
+        assertEquals(4, actual);
     }
 }
