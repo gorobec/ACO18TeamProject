@@ -6,16 +6,29 @@ package model;
 public class Ticket {
 
     private int id;
+    private int productID;
     private String adress;
-    private int creditCard;
+    private String creditCard;
 
     public Ticket() {}
 
-    public Ticket(int id, String adress, int creditCard) {
+    public Ticket(int id, int productID, String adress, String creditCard) {
         this.id = id;
+        this.productID = productID;
         this.adress = adress;
         this.creditCard = creditCard;
+
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getAdress() {
+        return adress;
+    }
+
+    public String  getCreditCard() {
+        return creditCard;
+    }
 }
