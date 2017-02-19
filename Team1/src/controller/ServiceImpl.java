@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Created by SDotsenko on 19.02.2017.
  */
-public class ServiseImpl implements IService {
+public class ServiceImpl implements IService {
     private  IDataBase db;
 
-    public ServiseImpl(IDataBase db) {
+    public ServiceImpl(IDataBase db) {
         this.db = db;
     }
 
@@ -44,7 +44,7 @@ public class ServiseImpl implements IService {
     }
 
     @Override
-    public boolean buy(int productID, Address address, String creditCard) throws NoSuchProductException {
+    public int buy(int productID, Address address, String creditCard) throws NoSuchProductException {
         if(address == null || creditCard == null) {
             try {
                 throw new InvalidInputParameters("Incorrect parameters");
@@ -52,7 +52,12 @@ public class ServiseImpl implements IService {
                 invalidInputParameters.printStackTrace();
             }
         }
-        return true;
+
+        Ticket newTicket = new Ticket(creditCard,address,productID);
+
+        db.addTicket(newTicket);
+
+        return newTicket.getId();
     }
 
     @Override
