@@ -1,6 +1,8 @@
 package tests;
 
+import controller.DB;
 import controller.IService;
+import controller.ServiseImpl;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
@@ -22,6 +24,8 @@ public class IServiceTest {
 
     @Before
     public void setUp(){
+        controller = new ServiseImpl(new DB());
+
         controller.addProduct(new Product(0, "product1"));
         controller.addProduct(new Product(1, "product2"));
         controller.addProduct(new Product(2, "product3"));
@@ -60,13 +64,13 @@ public class IServiceTest {
     public void buy() throws Exception {
         Assert.assertEquals(
                 new Ticket(4, "1111 1111", new Address("Kiev", "KPI", 1)),
-                controller.buy(controller.getProductById(0), new Address("Kiev", "KPI", 1), "1111 1111"));
+                controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
     }
 
     @Test(expected = NoSuchProductException.class)
-    public void buyTest2() throws Exception{
-        controller.buy(new Product(7, "product1"), new Address("Kiev", "KPI", 1), "1111 1111");
-        controller.buy(null, null, null);
+    public void buyTest2() throws NoSuchProductException{
+        controller.buy(-1, new Address("Kiev", "KPI", 1), "1111 1111");
+        controller.buy(7, null, null);
     }
 
     @org.junit.Test
