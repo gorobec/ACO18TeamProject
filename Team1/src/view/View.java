@@ -1,5 +1,7 @@
 package view;
 
+import controller.DB;
+import controller.IDataBase;
 import controller.IService;
 
 /**
@@ -7,6 +9,14 @@ import controller.IService;
  */
 public class View {
     public static void main(String[] args) {
+        IDataBase iDataBase = new DB();
+        IService iService = new ServiceImpl(DB);
+
+        boolean exit = false;
+
+        while (!exit){
+            viewMenu();
+        }
     }
 
     public static void viewMenu(){
