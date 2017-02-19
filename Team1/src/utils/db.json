@@ -1,0 +1,45 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "ProdName1"
+    },
+    {
+      "id": 2,
+      "name": "ProdName2"
+    },
+    {
+      "id": 1,
+      "name": "ProdName3"
+    }
+  ],
+  "tickets": [
+    {
+      "id": 1,
+      "creditCard": "credCard",
+      "address": {
+        "city": "kiev",
+        "street": "sdf",
+        "number": 12
+      }
+    },
+    {
+      "id": 2,
+      "creditCard": "credCard",
+      "address": {
+        "city": "kiev",
+        "street": "sdf",
+        "number": 12
+      }
+    },
+    {
+      "id": 3,
+      "creditCard": "credCard",
+      "address": {
+        "city": "kiev",
+        "street": "sdf",
+        "number": 12
+      }
+    }
+  ]
+}
