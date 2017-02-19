@@ -8,7 +8,7 @@ import java.io.*;
 public class SuperFileReader {
 
     public String readFromFile() throws IOException{
-        BufferedReader reader = new BufferedReader(new FileReader("resources/database.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("BestBuy/resources/database.txt"));
         StringBuilder result = new StringBuilder();
         String line;
         try {
@@ -27,7 +27,7 @@ public class SuperFileReader {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter("resources/database.txt");
+            fw = new FileWriter("BestBuy/resources/database.txt");
             bw = new BufferedWriter(fw);
             bw.write(str);
         } catch (IOException e) {
