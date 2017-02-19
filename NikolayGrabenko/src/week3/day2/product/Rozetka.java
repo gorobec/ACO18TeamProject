@@ -9,33 +9,25 @@ import java.util.List;
 Repka (с полем Product[] products). Унаследовать классы от интерфейса Iterator.
 */
 
-public class Rozetka implements Iterable, AddProduct  {
+public class Rozetka<T extends Product> implements Iterator<T>, AddProduct<T> {
 
-    private List<Product> products = new ArrayList<>();
+    private List<T> products = new ArrayList<>();
+    private int currentPos = 0;
 
     @Override
-    public boolean addProduct(Product product) {
+    public boolean addProduct(T product) {
         products.add(product);
         return true;
     }
 
     @Override
-    public Iterator iterator() {
-        return new RozetkaIterator();
+    public boolean hasNext() {
+        return currentPos < products.size();
     }
 
-    public class RozetkaIterator implements Iterator{
-
-        private  int currentPos = 0;
-
-        @Override
-        public boolean hasNext() {
-            return currentPos < products.size();
-        }
-
-        @Override
-        public Product next() {
-            return products.get(currentPos++);
-        }
+    @Override
+    public T next() {
+        return products.get(currentPos++);
     }
 }
+

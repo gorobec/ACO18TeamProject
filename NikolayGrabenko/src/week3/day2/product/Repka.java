@@ -7,12 +7,13 @@ import java.util.Iterator;
 Repka (с полем Product[] products). Унаследовать классы от интерфейса Iterator.
 */
 
-public class Repka implements Iterable, AddProduct {
+public class Repka<T extends Product> implements Iterator<T>, AddProduct<T> {
 
-    private Product[] products = new Product[20];
+    private T[] products = (T[]) new Product[20];
+    private int currentPos = 0;
 
     @Override
-    public boolean addProduct(Product product) {
+    public boolean addProduct(T product) {
         boolean wasAdded = false;
         for (int i = 0; i < products.length; i++) {
             if (products[i] == null) {
@@ -25,23 +26,13 @@ public class Repka implements Iterable, AddProduct {
     }
 
     @Override
-    public Iterator iterator() {
-        return new RepkaIterator();
+    public boolean hasNext() {
+        return currentPos < products.length;
     }
 
-// inner class iterator
-    public class RepkaIterator implements Iterator{
-
-        private int currentPos = 0;
-
-        @Override
-        public boolean hasNext() {
-            return currentPos < products.length;
-        }
-
-        @Override
-        public Product next() {
-            return products[currentPos++];
-        }
+    @Override
+    public T next() {
+        return products[currentPos++];
     }
+
 }

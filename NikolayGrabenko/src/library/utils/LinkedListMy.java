@@ -70,16 +70,16 @@ public class LinkedListMy<T> implements ListMy<T> {
         } else if (index == size) {
             tail.previous = null;
             tail = tail.previous;
-        }else{
-            Node <T> iterator = head;
-            for (int i = 0; i<size;i++){
-                if (index==i){
-                   iterator.previous.next = iterator.next;
-                   iterator.next.previous= iterator.previous;
-                   wasRemoved = true;
-                   break;
+        } else {
+            Node<T> iterator = head;
+            for (int i = 0; i < size; i++) {
+                if (index == i) {
+                    iterator.previous.next = iterator.next;
+                    iterator.next.previous = iterator.previous;
+                    wasRemoved = true;
+                    break;
                 }
-              iterator = iterator.next;
+                iterator = iterator.next;
             }
         }
         return wasRemoved;
@@ -88,19 +88,18 @@ public class LinkedListMy<T> implements ListMy<T> {
     @Override
     public boolean remove(T obj) {
         boolean wasRemoved = false;
-        Node <T> iterator = head;
-        if (obj != null){
-            for (int i =0 ;i < size; i++){
-                if(obj.equals(iterator.value)){
+        Node<T> iterator = head;
+        if (obj != null) {
+            for (int i = 0; i < size; i++) {
+                if (obj.equals(iterator.value)) {
                     iterator.previous.next = iterator.next;
-                    iterator.next.previous= iterator.previous;
+                    iterator.next.previous = iterator.previous;
                     wasRemoved = true;
                     break;
                 }
                 iterator = iterator.next;
             }
         }
-
         return wasRemoved;
     }
 
@@ -149,10 +148,10 @@ public class LinkedListMy<T> implements ListMy<T> {
         return size;
     }
 
-    private class Node<T> {
-        T value;
-        Node<T> next;
-        Node<T> previous;
+    private static class Node<T> {
+        private T value;
+        private Node<T> next;
+        private Node<T> previous;
 
         public Node(T object) {
             value = object;

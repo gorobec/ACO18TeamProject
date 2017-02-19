@@ -11,24 +11,21 @@ public class RunHotline {
         Product p4 = new Product("Xiaomi3", 150);
         Product p5 = new Product("Nokia", 1200);
 
-        Rozetka rozetka = new Rozetka();
+        Rozetka <Product> rozetka = new Rozetka<>();
         rozetka.addProduct(p1);
         rozetka.addProduct(p4);
 
-        Repka repka = new Repka () ;
+        Repka <Product>repka = new Repka<> () ;
         repka.addProduct(p2);
         repka.addProduct(p3);
         repka.addProduct(p5);
 
-        Iterator rozetkaIterator = rozetka.iterator();
-
-        Iterator repkaIterator = repka.iterator();
 
         Hotline hotline = new Hotline();
-        hotline.addProducts(rozetkaIterator);
+        hotline.addProducts(rozetka);
         System.out.println("Products in Rozetka:");
         System.out.println(hotline.showAllProducts());
-        hotline.addProducts(repkaIterator);
+        hotline.addProducts(repka);
         System.out.println("Products in Rozetka and Repka:");
         System.out.println(hotline.showAllProducts());
 

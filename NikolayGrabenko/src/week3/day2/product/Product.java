@@ -13,8 +13,6 @@ public class Product{
     }
 
     public String asString (){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("Product name - %10s, product price - %6.2f ", name, price));
-    return stringBuilder.toString();
+        return String.format("Product name - %10s, product price - %6.2f ", name, price);
     }
 }
