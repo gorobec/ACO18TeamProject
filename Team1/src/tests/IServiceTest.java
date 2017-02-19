@@ -62,15 +62,13 @@ public class IServiceTest {
 
     @org.junit.Test
     public void buy() throws Exception {
-        Assert.assertEquals(
-                new Ticket(4, "1111 1111", new Address("Kiev", "KPI", 1)),
-                controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
+        Assert.assertTrue(controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
     }
 
     @Test(expected = NoSuchProductException.class)
     public void buyTest2() throws NoSuchProductException{
         controller.buy(-1, new Address("Kiev", "KPI", 1), "1111 1111");
-        controller.buy(7, null, null);
+        controller.buy(7, new Address("Kiev", "KPI", 1), "1111 1111");
     }
 
     @org.junit.Test
