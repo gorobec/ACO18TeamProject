@@ -13,6 +13,8 @@ public class DB implements IDataBase {
     private List<Product> products = new ArrayList<>();
     private List<Ticket> tickets = new ArrayList<>();
 
+    public DB() {
+    }
 
     @Override
     public boolean addTicket(Ticket ticket){

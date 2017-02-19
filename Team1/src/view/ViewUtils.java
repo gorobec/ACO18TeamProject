@@ -2,6 +2,7 @@ package view;
 
 import controller.IService;
 import exception.InvalidIdException;
+import exception.NoSuchProductException;
 import model.Address;
 import model.Product;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class ViewUtils {
     private static Scanner sc = new Scanner(System.in);
 
-    public static boolean buy(IService iService){
+    public static boolean buy(IService iService) throws NoSuchProductException {
         System.out.println("Choose product ID");
         int id = sc.nextInt();
 
@@ -38,13 +39,13 @@ public class ViewUtils {
         return iService.getProductById(id).toString();
     }
 
-    public static String getTicketById(IService iService){
+    public static String getTicketById(IService iService) throws InvalidIdException {
         System.out.println("Enter an ID");
         int id = sc.nextInt();
         return iService.getTicketById(id).toString();
     }
 
-    private static String showProducts(IService iService){
+    public static String showProducts(IService iService){
        return iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
 
     }
