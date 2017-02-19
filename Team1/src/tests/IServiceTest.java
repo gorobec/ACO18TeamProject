@@ -31,10 +31,10 @@ public class IServiceTest {
         controller.addProduct(new Product(2, "product3"));
         controller.addProduct(new Product(3, "product4"));
 
-        controller.addTicket(new Ticket(0, "1111 1111", new Address("Kiev", "KPI", 1)));
-        controller.addTicket(new Ticket(1, "1111 1111", new Address("Kiev", "KPI", 1)));
-        controller.addTicket(new Ticket(2, "1111 1111", new Address("Kiev", "KPI", 1)));
-        controller.addTicket(new Ticket(3, "1111 1111", new Address("Kiev", "KPI", 1)));
+        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
     }
 
     @org.junit.Test
@@ -62,7 +62,7 @@ public class IServiceTest {
 
     @org.junit.Test
     public void buy() throws Exception {
-        Assert.assertTrue(controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
+        Assert.assertEquals(4, controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
     }
 
     @Test(expected = NoSuchProductException.class)
@@ -74,7 +74,7 @@ public class IServiceTest {
     @org.junit.Test
     public void showTicket() throws Exception {
         Assert.assertEquals(
-                new Ticket(0, "1111 1111", new Address("Kiev", "KPI", 1)),
+                new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0),
                 controller.showTicket(0));
     }
 

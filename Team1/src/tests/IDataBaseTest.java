@@ -30,10 +30,10 @@ public class IDataBaseTest {
         db.addProduct(new Product(2, "product3"));
         db.addProduct(new Product(3, "product4"));
 
-        db.addTicket(new Ticket(0, "1111 1111", new Address("Kiev", "KPI", 1)));
-        db.addTicket(new Ticket(1, "1111 1111", new Address("Kiev", "KPI", 1)));
-        db.addTicket(new Ticket(2, "1111 1111", new Address("Kiev", "KPI", 1)));
-        db.addTicket(new Ticket(3, "1111 1111", new Address("Kiev", "KPI", 1)));
+        db.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        db.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        db.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        db.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class IDataBaseTest {
 
     @Test
     public void getTicketByID() throws Exception {
-        Assert.assertEquals(new Ticket(0, "1111 1111", new Address("Kiev", "KPI", 1)), db.getTicketByID(0));
+        Assert.assertEquals(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0), db.getTicketByID(0));
     }
 
     @Test
