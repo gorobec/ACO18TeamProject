@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Игорь on 19.02.2017.
  */
-public interface IDataBase {
+public interface IDataBase{
 
     boolean addTicket(Ticket ticket);
     boolean addProduct(Product product);
