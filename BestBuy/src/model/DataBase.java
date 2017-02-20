@@ -1,5 +1,6 @@
 package model;
 
+import javax.xml.crypto.Data;
 import java.util.Map;
 
 /**
@@ -10,6 +11,7 @@ public class DataBase {
     private Map<Integer, Product> products;
     private Map<Integer, Ticket> tickets;
 
+    public DataBase(){};
     public DataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets) {
         this.products = products;
         this.tickets = tickets;

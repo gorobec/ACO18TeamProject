@@ -36,8 +36,8 @@ public class DataBaseHelper {
             e.printStackTrace();
         }
 
-        Map<Integer, Product> baseProd = serProd.convertJsonToObject(jsonProduct);
-        Map<Integer, Ticket> baseTick = serTicket.convertJsonToObject(jsonTicket);
+        Map<Integer, Product> baseProd = serProd.convertJsonToProduct(jsonProduct);
+        Map<Integer, Ticket> baseTick = serTicket.convertJsonToTicket(jsonTicket);
 
         db = new DataBase(baseProd, baseTick);
     }

@@ -46,7 +46,7 @@ public class SerializerTest {
     public void testConvertJsonToObject() throws Exception {
         productMap.put(0, product);
         String txt = serProduct.convertObjectToJson(productMap);
-        Assert.assertNotNull(serProduct.convertJsonToObject(txt));
+        Assert.assertNotNull(serProduct.convertJsonToProduct(txt));
     }
 
     @org.junit.Test
@@ -59,7 +59,7 @@ public class SerializerTest {
     public void testTicketToObject() throws Exception {
         ticketMap.put(0, ticket);
         String txt = serTicket.convertObjectToJson(ticketMap);
-        Assert.assertNotNull(serTicket.convertJsonToObject(txt));
+        Assert.assertNotNull(serTicket.convertJsonToTicket(txt));
     }
 
 }

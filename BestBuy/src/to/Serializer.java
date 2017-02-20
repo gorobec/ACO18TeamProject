@@ -18,14 +18,15 @@ public class Serializer<T> {
     }
 
     // json to object
-    public Map<Integer, T> convertJsonToObject(String txt) {
-        GsonBuilder builder = new GsonBuilder();
-        Type type = new TypeToken<Map<Integer, T>>() {
+    public Map<Integer, Product> convertJsonToProduct(String txt) {
+        Type type = new TypeToken<Map<Integer, Product>>() {
         }.getType();
         return new Gson().fromJson(txt, type);
     }
 
-
-
-
+    public Map<Integer, Ticket> convertJsonToTicket(String txt) {
+        Type type = new TypeToken<Map<Integer, Ticket>>() {
+        }.getType();
+        return new Gson().fromJson(txt, type);
+    }
 }
