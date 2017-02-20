@@ -2,6 +2,7 @@ package ACO.week5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.List;
 
@@ -26,11 +27,11 @@ public interface IBash {
     boolean append(String path, String content) throws FileNotFoundException;
 
     // create new file
-    boolean touch(String path) throws FileNotFoundException;
+    boolean touch(String path) throws IOException;
 
     // mkdir create new directory
     boolean mkdir(String dirPath);
 
-    List<File> find(String searchKey, String startPointPath);
+    List<File> find(String searchKey, String startPointPath) throws IOException;
 
 }

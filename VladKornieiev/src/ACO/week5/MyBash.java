@@ -1,9 +1,11 @@
 package ACO.week5;
 
-import ACO.week5.IBash;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +32,7 @@ public class MyBash implements IBash {
 
     @Override
     public String cd(String path) throws FileNotFoundException {
-        File newPath = check(path);
+        File newPath = getFile(path);
 
         if (newPath.isDirectory()) {
             currentDir = newPath;
@@ -41,25 +43,19 @@ public class MyBash implements IBash {
 
     @Override
     public List<File> ls() {
-        return currentDir.listFiles() == null ?
-                null : Arrays.stream(currentDir.listFiles()).collect(Collectors.toList());
+        return Arrays.stream(currentDir.listFiles()).collect(Collectors.toList());
     }
 
     @Override
     public boolean mkdir(String dirPath) {
-        if (dirPath != null) {
-            File file = new File(dirPath);
-            if (!file.exists()) {
-                return file.mkdir();
-            }
-        }
-        return false;
+        return getFile(dirPath).mkdir();
     }
 
     @Override
     public String cat(String path) throws NoSuchFileException, FileNotFoundException {
         StringBuilder sb = new StringBuilder();
-        File file = check(path);
+
+        File file = getFile(path);
 
         try (BufferedReader bf = new BufferedReader(new FileReader(file))) {
 
@@ -71,7 +67,13 @@ public class MyBash implements IBash {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return sb.toString().trim();
+    }
+
+    @Override
+    public boolean touch(String path) throws IOException {
+        return getFile(path).createNewFile();
     }
 
     @Override
@@ -85,30 +87,25 @@ public class MyBash implements IBash {
     }
 
     @Override
-    public boolean touch(String path) throws FileNotFoundException {
-        File file = check(path);
-        if (!file.exists()) {
-            try {
-                return file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
+    public List<File> find(String searchKey, String startPointPath) throws IOException {
 
-    @Override
-    public List<File> find(String searchKey, String startPointPath) {
-        return null;
+        return Files.walk(Paths.get(getFile(startPointPath).getAbsolutePath()))
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .filter(s -> s.getAbsolutePath().toLowerCase()
+                        .startsWith(getFile(searchKey).getAbsolutePath().toLowerCase()))
+                .collect(Collectors.toList());
+
     }
 
     private boolean write(String path, String content, boolean appendFlag) throws FileNotFoundException {
-        File file = check(path);
+        File file = getFile(path);
+
         if (content != null) {
             try (Writer wr = new PrintWriter(new BufferedWriter(new FileWriter(file, appendFlag)))) {
                 if (appendFlag) {
                     wr.append("\n").append(content);
-                } else{
+                } else {
                     wr.write(content);
                 }
                 wr.flush();
@@ -120,16 +117,8 @@ public class MyBash implements IBash {
         return false;
     }
 
-    private File check(String path) throws FileNotFoundException {
+    private File getFile(String path) {
         File file = new File(path);
-        File file1 = new File(currentDir + "/" + path);
-
-        if (file.exists()) {
-            return file;
-        } else if (file1.exists()) {
-            return file1;
-        } else {
-            throw new FileNotFoundException();
-        }
+        return file.isAbsolute() ? file : new File(pwd() + "/" + path);
     }
 }
