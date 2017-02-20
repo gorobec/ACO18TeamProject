@@ -6,7 +6,7 @@ package model;
 public class Ticket {
     private int id;
     private static int nextID=0;
-    private String creditCard;
+    private CreditCard creditCard;
     private Address address;
     private int productID;
 
@@ -14,7 +14,7 @@ public class Ticket {
     }
 
 
-    public Ticket(String creditCard, Address address, int productID) {
+    public Ticket(CreditCard creditCard, Address address, int productID) {
         this.id = ++nextID;
         this.creditCard = creditCard;
         this.address = address;
@@ -29,11 +29,11 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCreditCard() {
+    public CreditCard getCreditCard() {
         return creditCard;
     }
 
-    public void setCreditCard(String creditCard) {
+    public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
 
