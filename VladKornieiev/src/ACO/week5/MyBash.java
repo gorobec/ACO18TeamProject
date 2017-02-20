@@ -1,4 +1,6 @@
-package ACO.week5.day1;
+package ACO.week5;
+
+import ACO.week5.IBash;
 
 import java.io.*;
 import java.nio.file.NoSuchFileException;

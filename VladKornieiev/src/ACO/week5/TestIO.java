@@ -1,4 +1,4 @@
-package ACO.week5.day1;
+package ACO.week5;
 
 import java.io.*;
 import java.nio.charset.Charset;

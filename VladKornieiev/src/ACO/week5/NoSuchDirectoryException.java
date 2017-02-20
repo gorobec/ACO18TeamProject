@@ -1,4 +1,4 @@
-package ACO.week5.day1;
+package ACO.week5;
 
 /**
  * Created by v21k on 18.02.17.
