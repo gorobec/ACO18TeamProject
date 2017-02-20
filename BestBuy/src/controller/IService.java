@@ -5,6 +5,7 @@ import exceptions.NoSuchTicketException;
 import model.Product;
 import model.Ticket;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public interface IService {
 
     Product getProductById(int id) throws NoSuchProductException;
 
-    Ticket buy(String addressTo, String creditCard, int productId);
+    Ticket buy(String addressTo, String creditCard, List<Integer> productId);
 
     Ticket showTicketById(int id) throws NoSuchTicketException;
 

@@ -6,6 +6,7 @@ import model.DataBase;
 import model.Product;
 import model.Ticket;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,7 +49,7 @@ public class Service implements IService {
     }
 
     @Override
-    public Ticket buy(String addressTo, String creditCard, int productId) {
+    public Ticket buy(String addressTo, String creditCard, List<Integer> productId) {
         Ticket tc = new Ticket(base.getMaxTicketID() + 1, productId, addressTo, creditCard);
         base.addTicket(tc);
         return tc;

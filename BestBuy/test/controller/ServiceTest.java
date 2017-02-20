@@ -6,7 +6,9 @@ import model.Ticket;
 import org.junit.Assert;
 import org.junit.Before;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -20,7 +22,9 @@ public class ServiceTest {
     Product pr4 = new Product("HDD", 4, 1000);
     Product pr5 = new Product("SSD", 5, 2000);
     Map<Integer, Product> baseProd = new HashMap<>();
-    Ticket t1 = new Ticket(1, 1, "Kyiv", "4444 4444 4444 4444");
+    List<Integer> ticket1Products = new ArrayList<>();
+
+    Ticket t1;
     Map<Integer, Ticket> baseTick = new HashMap<>();
     DataBase db = new DataBase(baseProd,baseTick);
     Service service;
@@ -33,6 +37,8 @@ public class ServiceTest {
         baseProd.put(pr3.getId(),pr3);
         baseProd.put(pr4.getId(),pr4);
         baseProd.put(pr5.getId(),pr5);
+        ticket1Products.add(1);
+        t1 = new Ticket(1, ticket1Products, "Kyiv", "4444 4444 4444 4444");
         baseTick.put(t1.getId(),t1);
         service = new Service(db);
     }
@@ -49,8 +55,9 @@ public class ServiceTest {
 
     @org.junit.Test
     public void buyTest() throws Exception {
-
-        service.buy("Kyiv","4444 4444 4444 4445",4);
+        List<Integer> ticket2Products = new ArrayList<>();
+        ticket2Products.add(4);
+        service.buy("Kyiv","4444 4444 4444 4445",ticket2Products);
 
 //        Ticket t = new Ticket(db.getMaxTicketID(),4,"Kyiv", "4444 4444 4444 4445");
 
