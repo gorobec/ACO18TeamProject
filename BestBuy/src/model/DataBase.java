@@ -7,8 +7,8 @@ import java.util.Map;
  */
 public class DataBase {
 
-    Map<Integer, Product> products;
-    Map<Integer, Ticket> tickets;
+    private Map<Integer, Product> products;
+    private Map<Integer, Ticket> tickets;
 
     public DataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets) {
         this.products = products;
@@ -23,18 +23,16 @@ public class DataBase {
         return tickets;
     }
 
-    public boolean addTicket(Ticket ticket) {
-        tickets.put(ticket.getId(), ticket);
-        return true;
+    public Ticket addTicket(Ticket ticket) {
+        return tickets.put(ticket.getId(), ticket);
     }
 
-    public boolean addProduct(Product product) {
-        products.put(product.getId(), product);
-        return true;
+    public Product addProduct(Product product) {
+        return products.put(product.getId(), product);
     }
 
     public int getMaxTicketID() {
-        int maxKey =0;
+        int maxKey = 0;
         for (Integer me : tickets.keySet()) {
 
             if (me > maxKey) {

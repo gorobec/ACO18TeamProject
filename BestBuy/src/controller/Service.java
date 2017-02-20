@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Service implements IService {
 
-    DataBase base;
+    private DataBase base;
 
     public Service(DataBase base) {
         this.base = base;
@@ -36,14 +36,14 @@ public class Service implements IService {
     @Override
     public Ticket buy(String addressTo, String creditCard, int productId) {
 
-        Ticket tc = new Ticket(base.getMaxTicketID()+1, productId, addressTo,creditCard);
+        Ticket tc = new Ticket(base.getMaxTicketID() + 1, productId, addressTo, creditCard);
         base.addTicket(tc);
 
         return tc;
     }
 
     @Override
-    public Ticket showTicketById(int id) throws NoSuchTicketException{
+    public Ticket showTicketById(int id) throws NoSuchTicketException {
         Ticket tc = base.getTickets().get(id);
         if (tc == null) {
             throw new NoSuchTicketException("No such ticket with this id" + id);
