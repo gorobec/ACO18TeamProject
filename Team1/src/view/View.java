@@ -39,10 +39,18 @@ public class View {
                     System.out.println(ViewUtils.buy(iService));
                     break;
                 case 4:
-                    System.out.println(ViewUtils.getTicketById(iService));
+                    System.out.println("Your ticket ID is: " + ViewUtils.getTicketById(iService));
+                    break;
+                case 6:
+                    System.out.println(ViewUtils.register(iService));
+                    break;
+                case 7:
+                    System.out.println(ViewUtils.login(iService));
                     break;
                 case 0:
+                    System.out.println("Bye");
                     exit = true;
+                    break;
                 default:
                     System.out.println("Wrong input.");
                 }
@@ -56,6 +64,8 @@ public class View {
         System.out.println("2. Get products by ID");
         System.out.println("3. Buy");
         System.out.println("4. Show ticket by ID");
+        System.out.println("6. Register");
+        System.out.println("7. Login");
     }
 }
 

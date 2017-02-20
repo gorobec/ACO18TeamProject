@@ -38,10 +38,10 @@ public class ViewUtils {
         int number = Integer.parseInt(sc.nextLine());
         System.out.println("Enter credit cart (12 digits):");
         String creditCard = sc.nextLine();
+
         Address address = new Address(city, street, number);
-        int i = iService.buy(id, address, creditCard);
-        System.out.println(i);
-        return i;
+
+        return iService.buy(id, address, creditCard);
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
@@ -59,5 +59,35 @@ public class ViewUtils {
     public static String showProducts(IService iService){
        return iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
 
+    }
+
+    public static String register(IService iService){
+
+        System.out.println("Enter a name");
+        String name = sc.nextLine();
+        System.out.println("Enter a password ");
+        String pass = sc.nextLine();
+        System.out.println("Enter an email:");
+        String email = sc.nextLine();
+
+        if(iService.register(name, pass, email)){
+            return "OK";
+        }
+
+        return "Registration failed.";
+    }
+
+    public static String login(IService iService){
+
+        System.out.println("Enter a name");
+        String name = sc.nextLine();
+        System.out.println("Enter a password ");
+        String pass = sc.nextLine();
+
+        if(iService.login(name, pass)){
+            return "OK";
+        }
+
+        return "Registration failed.";
     }
 }
