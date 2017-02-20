@@ -1,6 +1,7 @@
 package oop.week5.io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -12,12 +13,13 @@ public interface IBash {
     //show current directory
     String pwd();
 
+    //change current directory
     String cd(String path);
 
     //show all in current directory
     List<File> ls();
 
-    String cat(String path) throws NoSuchElementException;
+    String cat(String path) throws FileNotFoundException;
 
     //>
     //return true if file didn't exist, false existed

@@ -1,6 +1,6 @@
 package oop.week5.io;
 
-import java.io.File;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,15 +12,15 @@ public class MyBash implements IBash {
 
     private File currentDir;
 
-    public MyBash(String currentPath) {
 
-        File currDir = new File(currentPath);
+    public MyBash(String path) {
+
+        File currDir = new File(path);
 
         if (currDir.exists() && currDir.isDirectory()) {
             this.currentDir = currDir;
         } else {
             throw new NoSuchDirectoryExeption("No such directory");
-
         }
     }
 
@@ -32,18 +32,12 @@ public class MyBash implements IBash {
     @Override
     public String cd(String path) {
         File nextPath = new File(path);
-        if (nextPath.isAbsolute()) {
+
             if (nextPath.isDirectory()) {
                 currentDir = nextPath;
                 return pwd();
             }
 
-        } else {
-            if (nextPath.isDirectory()) {
-                currentDir = nextPath;
-                return pwd();
-            }
-        }
         return null;
     }
 
@@ -54,7 +48,26 @@ public class MyBash implements IBash {
     }
 
     @Override
-    public String cat(String path) throws NoSuchElementException {
+    public String cat(String path) throws FileNotFoundException {
+
+        File file = new File(path);
+
+        if (file.isFile() && !file.isAbsolute()) {
+
+            FileReader fileReader = new FileReader(file);
+            char[] buffer = new char[1024];
+            String result ="";
+            try {
+                while (fileReader.read(buffer) > 0) {
+                    result += String.valueOf(buffer);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+
+        }
+
         return null;
     }
 
@@ -62,6 +75,8 @@ public class MyBash implements IBash {
     public boolean writeInfo(String path, String content) {
 
         File file = new File(path);
+
+
 
 
         return false;
@@ -74,8 +89,18 @@ public class MyBash implements IBash {
 
     @Override
     public boolean touch(String path) {
+        File file = new File(path);
 
-
+        // check if file exists, if no - create file
+        // in case of absolute path check if last directory exists, if yes - create file
+        if (!file.exists() && file.getAbsoluteFile().getParentFile().exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
         return false;
     }
 
@@ -83,7 +108,7 @@ public class MyBash implements IBash {
     public boolean mkdir(String dirPath) {
         File file = new File(dirPath);
 
-        if (!file.exists()) {
+        if (!file.exists() && file.getAbsoluteFile().getParentFile().exists()) {
 
             file.mkdir();
             return true;

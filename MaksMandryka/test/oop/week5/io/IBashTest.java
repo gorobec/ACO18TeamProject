@@ -42,8 +42,8 @@ public class IBashTest {
     }
 
     @Test
-    public void cat() throws Exception {
-
+    public void catTest() throws Exception {
+        System.out.println(iBash.cat("MaksMandryka.iml"));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class IBashTest {
 
     @Test
     public void touch() throws Exception {
-
+        iBash.touch("tttt.txt");
     }
 
     @Test
