@@ -9,39 +9,23 @@ import model.Ticket;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class Serializer {
+public class Serializer<T> {
     // map to json
-    public String convertProductToJson(Map<Integer, Product> map) {
+    public String convertObjectToJson(Map<Integer, T> map) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         return gson.toJson(map);
     }
 
     // json to object
-    public Map<Integer, Product> convertJsonToObject(String txt) {
+    public Map<Integer, T> convertJsonToObject(String txt) {
         GsonBuilder builder = new GsonBuilder();
-        Type type = new TypeToken<Map<Integer, Product>>() {
+        Type type = new TypeToken<Map<Integer, T>>() {
         }.getType();
         return new Gson().fromJson(txt, type);
     }
 
 
-    //FOR TICKETS
-    // to json
-    public String ticketToJson(Map<Integer, Ticket> map) {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        return gson.toJson(map);
-    }
-
-
-    // to object
-    public Map<Integer, Ticket> ticketToObject(String txt) {
-        GsonBuilder builder = new GsonBuilder();
-        Type type = new TypeToken<Map<Integer, Ticket>>() {
-        }.getType();
-        return new Gson().fromJson(txt, type);
-    }
 
 
 }

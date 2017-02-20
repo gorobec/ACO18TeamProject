@@ -5,29 +5,28 @@ import java.io.*;
 /**
  * Created by ksyashka on 19.02.2017.
  */
-public class SuperFileReader {
+public class FileHelper {
 
-    public String readFromFile() throws IOException{
-        BufferedReader reader = new BufferedReader(new FileReader("BestBuy/resources/database.txt"));
+    public String readFromFile(String path) throws IOException{
         StringBuilder result = new StringBuilder();
         String line;
-        try {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             while ((line = reader.readLine()) != null)
                 result.append(line);
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        reader.close();
         return result.toString();
     }
 
 
-    public boolean writeToFile(String str) throws IOException{
+    public boolean writeToFile(String str, String path) throws IOException{
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter("BestBuy/resources/database.txt");
+            fw = new FileWriter(path);
             bw = new BufferedWriter(fw);
             bw.write(str);
         } catch (IOException e) {
@@ -35,8 +34,8 @@ public class SuperFileReader {
             return false;
         }
         finally {
-            bw.close();
-            fw.close();
+            if (bw != null) bw.close();
+            if (fw != null) fw.close();
         }
         return true;
     }

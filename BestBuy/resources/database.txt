@@ -1,1 +1,0 @@
-{"1":{"name":"Iron","id":1,"price":300.0},"2":{"name":"Cup","id":2,"price":100.0},"3":{"name":"Phone","id":3,"price":3000.0},"4":{"name":"HDD","id":4,"price":1000.0},"5":{"name":"SSD","id":5,"price":2000.0}}
