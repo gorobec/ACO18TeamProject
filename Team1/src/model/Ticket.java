@@ -62,6 +62,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, address: %s\n", id, address.toString());
+        return String.format("ID: %d, address: %s, product id: %d\n", id, address.toString(), productID);
     }
 }
