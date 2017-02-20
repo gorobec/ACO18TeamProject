@@ -31,4 +31,14 @@ public class Ticket {
     public String  getCreditCard() {
         return creditCard;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", productID=" + productID +
+                ", adress='" + adress + '\'' +
+                ", creditCard='" + creditCard + '\'' +
+                '}';
+    }
 }
