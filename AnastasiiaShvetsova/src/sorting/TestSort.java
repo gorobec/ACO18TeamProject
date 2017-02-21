@@ -8,8 +8,9 @@ import java.util.Arrays;
 public class TestSort {
     public static void main(String[] args) {
         MergeSortArray el1 = new MergeSortArray();
+        QuickSort el2 = new QuickSort();
 
         int[] array = {20, 1, 5, 6, 7, 90, 15};
-        System.out.println(Arrays.toString(el1.sortArray(array)));
+        el2.sortArray(array);
     }
 }
