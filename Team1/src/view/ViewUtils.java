@@ -4,8 +4,11 @@ import controller.IService;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
+import model.CreditCard;
 import model.Product;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -36,9 +39,17 @@ public class ViewUtils {
         String street = sc.nextLine();
         System.out.println("Enter house number:");
         int number = Integer.parseInt(sc.nextLine());
-        System.out.println("Enter credit cart (12 digits):");
-        String creditCard = sc.nextLine();
 
+        System.out.println("Enter credit cart (12 digits):");
+        int creditCardnumber = Integer.parseInt(sc.nextLine());
+        System.out.println("Enter cvv2-code");
+        int cvv = Integer.parseInt(sc.nextLine());
+        System.out.println("Valid until (year and months ): ");
+        System.out.println("FORMAT : XXXX-XX");
+        String valid = sc.nextLine();
+
+        YearMonth yearMonth = YearMonth.parse(valid);
+        CreditCard creditCard = new CreditCard(creditCardnumber, cvv, yearMonth);
         Address address = new Address(city, street, number);
 
         return iService.buy(id, address, creditCard);
