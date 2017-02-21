@@ -1,9 +1,9 @@
 package oop.week5.io;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Created by fmandryka on 18.02.2017.
@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 public class MyBash implements IBash {
 
     private File currentDir;
-
 
     public MyBash(String path) {
 
@@ -51,39 +50,45 @@ public class MyBash implements IBash {
     public String cat(String path) throws FileNotFoundException {
 
         File file = new File(path);
+        StringBuilder sb = new StringBuilder();
 
-        if (file.isFile() && !file.isAbsolute()) {
-
-            FileReader fileReader = new FileReader(file);
-            char[] buffer = new char[1024];
-            String result ="";
-            try {
-                while (fileReader.read(buffer) > 0) {
-                    result += String.valueOf(buffer);
+        if (file.isFile()) {
+            String line;
+            try (BufferedReader fileReader = new BufferedReader(new FileReader(file))){
+                while ((line = fileReader.readLine()) != null) {
+                    sb.append(line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return result;
-
+            return sb.toString();
         }
-
         return null;
     }
 
     @Override
     public boolean writeInfo(String path, String content) {
-
-        File file = new File(path);
-
-
-
-
-        return false;
+        return write(path, content, false);
     }
 
     @Override
     public boolean append(String path, String content) {
+        return write(path, content, true);
+    }
+
+    private boolean write(String path, String content, boolean append) {
+
+        File file = new File(path);
+
+        if (file.exists()) {
+            try (BufferedWriter fr = new BufferedWriter(new FileWriter(file, append))) {
+                fr.write(content);
+                fr.close();
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return false;
     }
 
@@ -113,12 +118,46 @@ public class MyBash implements IBash {
             file.mkdir();
             return true;
         }
-
         return false;
     }
 
     @Override
     public List<File> find(String searchKey, String startPointPath) {
-        return null;
+        File startFile = new File(startPointPath);
+        List<File> foundFiles = new ArrayList<>();
+
+        if (startFile.isDirectory()) {
+            for (int i = 0; i < startFile.listFiles().length; i++) {
+                if (searchKey.equals(startFile.listFiles()[i].getName())) {
+                    foundFiles.add(startFile.listFiles()[i]);
+                    if (startFile.listFiles()[i].isDirectory()) {
+                        foundFiles.addAll(ls(startFile.listFiles()[i]));
+                    }
+                }
+            }
+        }
+        return foundFiles;
     }
+
+
+    public List<File> ls(File directory) {
+
+        List<File> foundFiles = new ArrayList<>();
+
+        if (directory != null) {
+            if (directory.isDirectory()) {
+                for (int i = 0; i < directory.listFiles().length; i++) {
+                    foundFiles.add(directory.listFiles()[i]);
+                    if (directory.listFiles()[i].isDirectory()) {
+                        foundFiles.addAll(ls(directory.listFiles()[i]));
+                    }
+                }
+            }
+        } else {
+            throw new NullPointerException("File shouldn't be null");
+        }
+        return foundFiles;
+    }
+
+
 }

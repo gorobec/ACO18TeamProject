@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,18 +19,13 @@ public class IBashTest {
 
     @Before
     public void setUp() throws Exception {
-        iBash = new MyBash("C:\\Users\\f.mandryka\\Documents\\Idea\\ACO18TeamProject\\MaksMandryka");
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
+        iBash = new MyBash("\\Idea\\ACO18TeamProject\\MaksMandryka\\src\\oop\\week5\\io");
 
     }
 
     @Test
     public void pwd() throws Exception {
-
+        Assert.assertEquals(iBash.pwd(),"");
     }
 
     @Test
@@ -48,12 +46,12 @@ public class IBashTest {
 
     @Test
     public void writeInfo() throws Exception {
-
+        iBash.writeInfo("D:\\Test.txt", "Test");
     }
 
     @Test
     public void append() throws Exception {
-
+        iBash.append("D:\\Test.txt", "Test2");
     }
 
     @Test
@@ -68,7 +66,8 @@ public class IBashTest {
 
     @Test
     public void find() throws Exception {
-
+        List<File> foundFiles = iBash.find("Andrey", "C:\\Users\\f.mandryka\\Documents\\Idea\\ACO18TeamProject");
+        iBash.ls();
     }
 
 }

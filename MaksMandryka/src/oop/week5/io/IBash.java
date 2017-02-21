@@ -3,7 +3,6 @@ package oop.week5.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Created by fmandryka on 18.02.2017.
