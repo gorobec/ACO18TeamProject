@@ -1,19 +1,7 @@
 
-import controller.Service;
-import model.DataBase;
-import model.Product;
-import model.Ticket;
+import controller.BestBuy;
 import to.DataBaseHelper;
-import to.Serializer;
-import to.FileHelper;
 import view.LoginWindow;
-import view.RegistrationWindow;
-import view.ViewBestBuy;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RunBestBuy {
 
@@ -24,7 +12,7 @@ public class RunBestBuy {
 
         dbHelper.loadDataBase();
 
-        Service service = new Service(dbHelper.getDb());
+        BestBuy service = new BestBuy(dbHelper.getDb());
 
         LoginWindow log = new LoginWindow(service);
 

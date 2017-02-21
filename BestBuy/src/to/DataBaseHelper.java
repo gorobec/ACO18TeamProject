@@ -1,6 +1,6 @@
 package to;
 
-import model.DataBase;
+import dao.MapDataBase;
 import model.Product;
 import model.Ticket;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class DataBaseHelper {
 
-    private DataBase db;
+    private MapDataBase db;
 
     private static String FILE_FOR_PRODUCTS = "BestBuy/resources/database_products.txt";
     private static String FILE_FOR_TICKETS = "BestBuy/resources/database_tickets.txt";
@@ -20,7 +20,7 @@ public class DataBaseHelper {
     private Serializer<Ticket> serTicket = new Serializer<>();
 
 
-    public DataBase getDb() {
+    public MapDataBase getDb() {
         return db;
     }
 
@@ -39,14 +39,14 @@ public class DataBaseHelper {
         Map<Integer, Product> baseProd = serProd.convertJsonToProduct(jsonProduct);
         Map<Integer, Ticket> baseTick = serTicket.convertJsonToTicket(jsonTicket);
 
-        db = new DataBase(baseProd, baseTick);
+        db = new MapDataBase(baseProd, baseTick);
     }
 
     public void unloadDataBase(){
 
         try {
-            fh.writeToFile(serProd.convertObjectToJson(db.getProducts()), FILE_FOR_PRODUCTS);
-            fh.writeToFile(serTicket.convertObjectToJson(db.getTickets()), FILE_FOR_TICKETS);
+            fh.writeToFile(serProd.convertObjectToJson(db.getAllProducts()), FILE_FOR_PRODUCTS);
+            fh.writeToFile(serTicket.convertObjectToJson(db.getAllTickets()), FILE_FOR_TICKETS);
         } catch (IOException e) {
             e.printStackTrace();
         }

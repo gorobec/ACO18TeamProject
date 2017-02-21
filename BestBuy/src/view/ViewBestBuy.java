@@ -1,6 +1,6 @@
 package view;
 
-import controller.Service;
+import controller.BestBuy;
 import exceptions.NoSuchProductException;
 import exceptions.NoSuchTicketException;
 
@@ -11,7 +11,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class ViewBestBuy extends JFrame {
 
-    public ViewBestBuy(Service service) {
+    public ViewBestBuy(BestBuy service) {
 
         Dimension sizeWindow = Toolkit.getDefaultToolkit().getScreenSize();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

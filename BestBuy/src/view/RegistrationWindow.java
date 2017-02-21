@@ -1,6 +1,6 @@
 package view;
 
-import controller.Service;
+import controller.BestBuy;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +12,7 @@ public class RegistrationWindow extends JFrame {
     private JTextField addressField;
     private JTextField creditCardField;
 
-    public RegistrationWindow(Service service) {
+    public RegistrationWindow(BestBuy service) {
 
         String infoStr = "Enter registration data";
 

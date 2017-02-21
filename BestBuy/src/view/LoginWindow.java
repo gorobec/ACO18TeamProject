@@ -1,6 +1,6 @@
 package view;
 
-import controller.Service;
+import controller.BestBuy;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +10,7 @@ public class LoginWindow extends JFrame {
     private JTextField loginField;
     private JPasswordField passwordField;
 
-    public LoginWindow(Service service) {
+    public LoginWindow(BestBuy service) {
         String infoStr = "SIGN IN";
 
         setTitle("Login Window");

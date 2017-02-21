@@ -8,30 +8,30 @@ import java.util.List;
 public class Ticket {
 
     private int id;
-    private List<Integer> productID;
-    private String adress;
-    private String creditCard;
+    private int productID;
+    private User user;
 
     public Ticket() {}
 
-    public Ticket(int id, List<Integer> productID, String adress, String creditCard) {
-        this.id = id;
+    public Ticket(User user, int productID) {
         this.productID = productID;
-        this.adress = adress;
-        this.creditCard = creditCard;
+        this.user = user;
+    }
 
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getAdress() {
-        return adress;
+    public User getUser() {
+        return user;
     }
 
-    public String  getCreditCard() {
-        return creditCard;
+    public int getProductID() {
+        return productID;
     }
 
     @Override
@@ -39,8 +39,28 @@ public class Ticket {
         return "Ticket{" +
                 "id=" + id +
                 ", productID=" + productID +
-                ", adress='" + adress + '\'' +
-                ", creditCard='" + creditCard + '\'' +
+                ", adress='" + user.getAddress() + '\'' +
+                ", creditCard='" + user.getCreditCard() + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+
+        Ticket ticket = (Ticket) o;
+
+        if (id != ticket.id) return false;
+        if (productID != ticket.productID) return false;
+        return user.equals(ticket.user);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + productID;
+        result = 31 * result + user.hashCode();
+        return result;
     }
 }
