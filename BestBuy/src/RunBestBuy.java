@@ -6,6 +6,8 @@ import model.Ticket;
 import to.DataBaseHelper;
 import to.Serializer;
 import to.FileHelper;
+import view.LoginWindow;
+import view.RegistrationWindow;
 import view.ViewBestBuy;
 
 import java.io.File;
@@ -19,11 +21,12 @@ public class RunBestBuy {
 
 
         DataBaseHelper dbHelper = new DataBaseHelper();
+
         dbHelper.loadDataBase();
 
-        Service service= new Service(dbHelper.getDb());
+        Service service = new Service(dbHelper.getDb());
 
-        ViewBestBuy viewBestBuy = new ViewBestBuy(service);
+        LoginWindow log = new LoginWindow(service);
 
         dbHelper.unloadDataBase();
     }

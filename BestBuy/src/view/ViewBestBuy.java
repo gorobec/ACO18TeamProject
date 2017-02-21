@@ -29,10 +29,12 @@ public class ViewBestBuy extends JFrame {
         Dimension labDim = new Dimension(1000, 40);
         label.setPreferredSize(labDim);
         topPanel.add(label);
-        JButton butYourProducts = new JButton("корзина");
+        JButton cartButton = new JButton("Cart");
         Dimension butlDim = new Dimension(100, 50);
-        butYourProducts.setPreferredSize(butlDim);
-        topPanel.add(butYourProducts);
+        cartButton.setPreferredSize(butlDim);
+
+        cartButton.addActionListener(e -> new CartWindow(service));
+        topPanel.add(cartButton);
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
         JPanel bottomPanel = new JPanel();
@@ -64,10 +66,10 @@ public class ViewBestBuy extends JFrame {
         rightPanel.setPreferredSize(rightPaneldim);
 
         JPanel rightTopPanel = new JPanel();
-        Dimension rightTopPaneldim = new Dimension(330, 220);
+        Dimension rightTopPaneldim = new Dimension(430, 220);
         rightTopPanel.setPreferredSize(rightTopPaneldim);
 
-        JButton getProductByIdBut = new JButton("Get product by ID");
+        JButton getProductByIdBut = new JButton("Show product by ID");
         Dimension butDim3 = new Dimension(300, 50);
         getProductByIdBut.setPreferredSize(butDim3);
         rightTopPanel.add(getProductByIdBut);
@@ -88,7 +90,7 @@ public class ViewBestBuy extends JFrame {
             textArea.setText(productStr);
         });
 
-        JButton getTicketByIdBut = new JButton("Get ticket by ID");
+        JButton getTicketByIdBut = new JButton("Show ticket by ID");
         getTicketByIdBut.setPreferredSize(butDim3);
         rightTopPanel.add(getTicketByIdBut);
         JTextField ticketIdField = new JTextField();
@@ -106,9 +108,19 @@ public class ViewBestBuy extends JFrame {
             textArea.setText(ticketStr);
         });
 
+        JButton buy = new JButton("ADD product to Cart by ID");
+        buy.setPreferredSize(butDim3);
+        rightTopPanel.add(buy);
+        JTextField addToCart = new JTextField();
+        addToCart.setPreferredSize(fieldIdDim);
+        rightTopPanel.add(buy);
+        rightTopPanel.add(addToCart);
+
         JPanel rightBottomPanel = new JPanel();
         rightBottomPanel.setPreferredSize(rightTopPaneldim);
-        JButton showProducts = new JButton("Show all products");
+
+
+        JButton showProducts = new JButton("Show all products in catalog");
         Dimension butDim2 = new Dimension(400, 50);
         showProducts.setPreferredSize(butDim2);
         rightBottomPanel.add(showProducts);
@@ -117,9 +129,7 @@ public class ViewBestBuy extends JFrame {
             String productStr = service.printAllProducts();
             textArea.setText(productStr);
         });
-        JButton buy = new JButton("BUY");
-        buy.setPreferredSize(butDim2);
-        rightBottomPanel.add(buy);
+
 
         rightPanel.add(rightTopPanel, BorderLayout.NORTH);
         rightPanel.add(rightBottomPanel, BorderLayout.CENTER);
