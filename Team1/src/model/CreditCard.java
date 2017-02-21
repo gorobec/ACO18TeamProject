@@ -1,20 +1,23 @@
 package model;
 
+import java.time.YearMonth;
+import java.util.Date;
+
 /**
  * Created by v21k on 20.02.17.
  */
 public class CreditCard {
     private int number;
     private int cvv2;
-    private int validUntilYear;
+    private YearMonth validUntil;
 
     public CreditCard() {
     }
 
-    public CreditCard(int number, int cvv2, int validUntilYear) {
+    public CreditCard(int number, int cvv2, YearMonth validUntilYear) {
         this.number = number;
         this.cvv2 = cvv2;
-        this.validUntilYear = validUntilYear;
+        this.validUntil = validUntilYear;
     }
 
     public int getNumber() {
@@ -33,12 +36,12 @@ public class CreditCard {
         this.cvv2 = cvv2;
     }
 
-    public int getValidUntilYear() {
-        return validUntilYear;
+    public YearMonth getValidUntilYear() {
+        return this.validUntil;
     }
 
-    public void setValidUntilYear(int validUntilYear) {
-        this.validUntilYear = validUntilYear;
+    public void setValidUntilYear(YearMonth validUntilYear) {
+        this.validUntil = validUntilYear;
     }
 
     @Override
@@ -57,5 +60,10 @@ public class CreditCard {
         int result = number;
         result = 31 * result + cvv2;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Number: %s, valid until :%s\n", number, validUntil.toString());
     }
 }
