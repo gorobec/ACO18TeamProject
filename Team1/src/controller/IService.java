@@ -2,10 +2,7 @@ package controller;
 
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
-import model.Address;
-import model.Product;
-import model.Ticket;
-
+import model.*;
 import java.util.List;
 
 /**
@@ -22,10 +19,9 @@ public interface IService {
 
     Ticket getTicketById(int id) throws InvalidIdException;
 
-    int buy(int productID, Address address, String creditCard) throws NoSuchProductException;
+    int buy(int productID, Address address, BankCard bankCard) throws NoSuchProductException;
 
     Ticket showTicket(int id) throws InvalidIdException;
 
     boolean addPoduct(Product product);
-
 }

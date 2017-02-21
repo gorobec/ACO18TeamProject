@@ -5,18 +5,14 @@ package model;
  */
 public class Ticket {
     private int id;
-    private static int nextID=0;
-    private CreditCard creditCard;
+    private static int nextID = 0;
+    private BankCard bankCard;
     private Address address;
     private int productID;
 
-    public Ticket(int i, String s, Address address) {
-    }
-
-
-    public Ticket(CreditCard creditCard, Address address, int productID) {
+    public Ticket(BankCard bankCard, Address address, int productID) {
         this.id = ++nextID;
-        this.creditCard = creditCard;
+        this.bankCard = bankCard;
         this.address = address;
         this.productID = productID;
     }
@@ -29,12 +25,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
+    public BankCard getBankCard() {
+        return bankCard;
     }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
+    public void setBankCard(BankCard bankCard) {
+        this.bankCard = bankCard;
     }
 
     public Address getAddress() {

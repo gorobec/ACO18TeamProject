@@ -4,12 +4,10 @@ import controller.IService;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
-import model.CreditCard;
+import model.BankCard;
 import model.Product;
 
-import java.time.Year;
 import java.time.YearMonth;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -49,10 +47,10 @@ public class ViewUtils {
         String valid = sc.nextLine();
 
         YearMonth yearMonth = YearMonth.parse(valid);
-        CreditCard creditCard = new CreditCard(creditCardnumber, cvv, yearMonth);
+        BankCard bankCard = new BankCard(creditCardnumber, cvv, yearMonth);
         Address address = new Address(city, street, number);
 
-        return iService.buy(id, address, creditCard);
+        return iService.buy(id, address, bankCard);
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
