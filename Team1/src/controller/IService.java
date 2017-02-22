@@ -26,9 +26,7 @@ public interface IService {
 
     Ticket showTicket(int id) throws InvalidIdException;
 
-    boolean addPoduct(Product product);
-
     String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters;
 
-    String signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
+    boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
 }
