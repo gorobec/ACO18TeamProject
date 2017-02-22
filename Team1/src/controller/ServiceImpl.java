@@ -1,5 +1,6 @@
 package controller;
 
+import container.IDataBase;
 import exception.InvalidIdException;
 import exception.InvalidInputParameters;
 import exception.NoSuchProductException;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by SDotsenko on 19.02.2017.
  */
 public class ServiceImpl implements IService {
-    private  IDataBase db;
+    private IDataBase db;
 
     public ServiceImpl(IDataBase db) {
         this.db = db;

@@ -1,6 +1,6 @@
 package tests;
 
-import controller.DB;
+import container.ProductDB;
 import controller.IService;
 import controller.ServiceImpl;
 import exception.InvalidIdException;
@@ -24,7 +24,7 @@ public class IServiceTest {
 
     @Before
     public void setUp(){
-        controller = new ServiceImpl(new DB());
+        controller = new ServiceImpl(new ProductDB());
 
         controller.addProduct(new Product(0, "product1"));
         controller.addProduct(new Product(1, "product2"));

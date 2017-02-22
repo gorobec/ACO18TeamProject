@@ -1,6 +1,6 @@
 package utils;
 
-import controller.DB;
+import container.ProductDB;
 import model.Address;
 import model.Product;
 import model.Ticket;
@@ -8,7 +8,6 @@ import org.hamcrest.Matchers;
 import org.junit.*;
 
 import java.io.File;
-import java.net.URI;
 import java.net.URL;
 
 import static org.junit.Assert.*;
@@ -31,20 +30,20 @@ public class PersistenceUtilsTest {
                     "\"address\":{\"city\":\"kiev\",\"street\":\"sdf\",\"number\":12}}," +
                     "{\"id\":3,\"creditCard\":\"credCard\"," +
                     "\"address\":{\"city\":\"kiev\",\"street\":\"sdf\",\"number\":12}}]}";
-    private DB db;
-    private String path = "db.json";
+    private ProductDB productDb;
+    private String path = "productDb.json";
 
 
     @Before
     public void setUp() throws Exception {
-        db = new DB();
-        db.addProduct(new Product(1, "ProdName1"));
-        db.addProduct(new Product(2, "ProdName2"));
-        db.addProduct(new Product(1, "ProdName3"));
+        productDb = new ProductDB();
+        productDb.addProduct(new Product(1, "ProdName1"));
+        productDb.addProduct(new Product(2, "ProdName2"));
+        productDb.addProduct(new Product(1, "ProdName3"));
 
-        db.addTicket(new Ticket(1, "credCard", new Address("kiev", "sdf", 12)));
-        db.addTicket(new Ticket(2, "credCard", new Address("kiev", "sdf", 12)));
-        db.addTicket(new Ticket(3, "credCard", new Address("kiev", "sdf", 12)));
+        productDb.addTicket(new Ticket(1, "credCard", new Address("kiev", "sdf", 12)));
+        productDb.addTicket(new Ticket(2, "credCard", new Address("kiev", "sdf", 12)));
+        productDb.addTicket(new Ticket(3, "credCard", new Address("kiev", "sdf", 12)));
     }
 
     @After
@@ -54,15 +53,15 @@ public class PersistenceUtilsTest {
 
     @Test
     public void testConvertToJson() throws Exception {
-        String json = PersistenceUtils.convertToJson(db);
+        String json = PersistenceUtils.convertToJson(productDb);
         System.out.println(json);
         Assert.assertNotNull(json);
     }
 
     @Test
     public void testConvertFromJson() throws Exception {
-        DB fromJSonDb = PersistenceUtils.convertFromJson(DB.class,json);
-        Assert.assertNotNull(fromJSonDb);
+        ProductDB fromJSonProductDb = PersistenceUtils.convertFromJson(ProductDB.class,json);
+        Assert.assertNotNull(fromJSonProductDb);
     }
 
     @Test

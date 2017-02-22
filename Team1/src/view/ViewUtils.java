@@ -4,9 +4,10 @@ import controller.IService;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
+import model.BankCard;
 import model.Product;
 
-import java.util.List;
+import java.time.YearMonth;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -36,12 +37,20 @@ public class ViewUtils {
         String street = sc.nextLine();
         System.out.println("Enter house number:");
         int number = Integer.parseInt(sc.nextLine());
+
         System.out.println("Enter credit cart (12 digits):");
-        String creditCard = sc.nextLine();
+        int creditCardnumber = Integer.parseInt(sc.nextLine());
+        System.out.println("Enter cvv2-code");
+        int cvv = Integer.parseInt(sc.nextLine());
+        System.out.println("Valid until (year and months ): ");
+        System.out.println("FORMAT : XXXX-XX");
+        String valid = sc.nextLine();
+
+        YearMonth yearMonth = YearMonth.parse(valid);
+        BankCard bankCard = new BankCard(creditCardnumber, cvv, yearMonth);
         Address address = new Address(city, street, number);
-        int i = iService.buy(id, address, creditCard);
-        System.out.println(i);
-        return i;
+
+        return iService.buy(id, address, bankCard);
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
@@ -59,5 +68,35 @@ public class ViewUtils {
     public static String showProducts(IService iService){
        return iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
 
+    }
+
+    public static String register(IService iService){
+
+        System.out.println("Enter a name");
+        String name = sc.nextLine();
+        System.out.println("Enter a password ");
+        String pass = sc.nextLine();
+        System.out.println("Enter an email:");
+        String email = sc.nextLine();
+
+        if(iService.register(name, pass, email)){
+            return "OK";
+        }
+
+        return "Registration failed.";
+    }
+
+    public static String login(IService iService){
+
+        System.out.println("Enter a name");
+        String name = sc.nextLine();
+        System.out.println("Enter a password ");
+        String pass = sc.nextLine();
+
+        if(iService.login(name, pass)){
+            return "OK";
+        }
+
+        return "Registration failed.";
     }
 }

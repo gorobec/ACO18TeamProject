@@ -5,18 +5,14 @@ package model;
  */
 public class Ticket {
     private int id;
-    private static int nextID=0;
-    private String creditCard;
+    private static int nextID = 0;
+    private BankCard bankCard;
     private Address address;
     private int productID;
 
-    public Ticket(int i, String s, Address address) {
-    }
-
-
-    public Ticket(String creditCard, Address address, int productID) {
+    public Ticket(BankCard bankCard, Address address, int productID) {
         this.id = ++nextID;
-        this.creditCard = creditCard;
+        this.bankCard = bankCard;
         this.address = address;
         this.productID = productID;
     }
@@ -29,12 +25,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCreditCard() {
-        return creditCard;
+    public BankCard getBankCard() {
+        return bankCard;
     }
 
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
+    public void setBankCard(BankCard bankCard) {
+        this.bankCard = bankCard;
     }
 
     public Address getAddress() {
@@ -62,6 +58,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, address: %s\n", id, address.toString());
+        return String.format("ID: %d, address: %s, product id: %d\n", id, address.toString(), productID);
     }
 }
