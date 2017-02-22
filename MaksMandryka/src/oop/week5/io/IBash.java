@@ -2,6 +2,7 @@ package oop.week5.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public interface IBash {
     String cd(String path);
 
     //show all in current directory
-    List<File> ls();
+    List<File> ls() throws IOException;
 
     String cat(String path) throws FileNotFoundException;
 

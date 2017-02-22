@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by fmandryka on 18.02.2017.
@@ -19,7 +20,7 @@ public class MyBash implements IBash {
         if (currDir.exists() && currDir.isDirectory()) {
             this.currentDir = currDir;
         } else {
-            throw new NoSuchDirectoryExeption("No such directory");
+            throw new NoSuchDirectoryException("No such directory");
         }
     }
 
@@ -41,9 +42,10 @@ public class MyBash implements IBash {
     }
 
     @Override
-    public List<File> ls() {
-
-        return Arrays.asList(currentDir.listFiles());
+    public List<File> ls() throws IOException {
+        return Arrays.stream(currentDir.listFiles())
+                .map(File::getAbsoluteFile)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -51,6 +53,10 @@ public class MyBash implements IBash {
 
         File file = new File(path);
         StringBuilder sb = new StringBuilder();
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found");
+        }
 
         if (file.isFile()) {
             String line;
@@ -127,11 +133,12 @@ public class MyBash implements IBash {
         List<File> foundFiles = new ArrayList<>();
 
         if (startFile.isDirectory()) {
-            for (int i = 0; i < startFile.listFiles().length; i++) {
-                if (searchKey.equals(startFile.listFiles()[i].getName())) {
-                    foundFiles.add(startFile.listFiles()[i]);
-                    if (startFile.listFiles()[i].isDirectory()) {
-                        foundFiles.addAll(ls(startFile.listFiles()[i]));
+            File[] files = startFile.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (searchKey.toLowerCase().equals(files[i].getName().toLowerCase())) {
+                    foundFiles.add(files[i].getAbsoluteFile());
+                    if (files[i].isDirectory()) {
+                        foundFiles.addAll(ls(files[i]));
                     }
                 }
             }
@@ -144,18 +151,16 @@ public class MyBash implements IBash {
 
         List<File> foundFiles = new ArrayList<>();
 
-        if (directory != null) {
             if (directory.isDirectory()) {
-                for (int i = 0; i < directory.listFiles().length; i++) {
-                    foundFiles.add(directory.listFiles()[i]);
-                    if (directory.listFiles()[i].isDirectory()) {
-                        foundFiles.addAll(ls(directory.listFiles()[i]));
+                File[] files = directory.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    foundFiles.add(files[i].getAbsoluteFile());
+                    if (files[i].isDirectory()) {
+                        foundFiles.addAll(ls(files[i]));
                     }
                 }
             }
-        } else {
-            throw new NullPointerException("File shouldn't be null");
-        }
+
         return foundFiles;
     }
 
