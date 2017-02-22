@@ -1,17 +1,16 @@
 package model;
 
+import exception.InvalidInputParameters;
+
 /**
  * Created by v21k on 20.02.17.
  */
 public class User {
-    private String name;
+    private final String name;
     private String pass;
-    private String email;
+    private final String email;
 
-    public User() {
-    }
-
-    public User(String name, String pass, String email) {
+    private User(String name, String pass, String email) {
         this.name = name;
         this.pass = pass;
         this.email = email;
@@ -19,10 +18,6 @@ public class User {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPass() {
@@ -35,10 +30,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override
@@ -64,5 +55,39 @@ public class User {
     @Override
     public String toString() {
         return String.format("Name: %s, email: %s\n", name, email);
+    }
+
+    private class UserBuilder{
+        private String name;
+        private String pass;
+        private String email;
+
+        UserBuilder setName(String name) throws InvalidInputParameters{
+            if(name == null || name.length() == 0) throw new InvalidInputParameters("Name is empty");
+
+            this.name = name;
+            return this;
+        }
+
+        UserBuilder setPass(String pass) throws InvalidInputParameters{
+            if(pass == null || pass.length() == 0) throw new InvalidInputParameters("Pass is empty");
+
+            this.pass = pass;
+            return this;
+        }
+
+        UserBuilder setEmail(String email) throws InvalidInputParameters{
+            if(email == null) throw new InvalidInputParameters("Email is null");
+
+            if(email.indexOf("@") == -1 || email.lastIndexOf(".") < email.indexOf("@"))
+                throw new InvalidInputParameters("Incorrect email format!");
+
+            this.email = email;
+            return this;
+        }
+
+        User build(){
+            return new User(name, pass, email);
+        }
     }
 }
