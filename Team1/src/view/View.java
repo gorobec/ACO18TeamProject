@@ -1,7 +1,7 @@
 package view;
 
-import controller.DB;
-import controller.IDataBase;
+import container.ProductDB;
+import container.IDataBase;
 import controller.IService;
 import controller.ServiceImpl;
 import exception.InvalidIdException;
@@ -16,7 +16,7 @@ public class View {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws InvalidIdException, NoSuchProductException {
-        IDataBase iDataBase = new DB();
+        IDataBase iDataBase = new ProductDB();
         IService iService = new ServiceImpl(iDataBase);
 
         ViewUtils.initService(iService);
