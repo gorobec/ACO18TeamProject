@@ -10,10 +10,10 @@ public class User {
     private String pass;
     private final String email;
 
-    private User(String name, String pass, String email) {
-        this.name = name;
-        this.pass = pass;
-        this.email = email;
+    private User(UserBuilder builder) {
+        this.name = builder.name;
+        this.pass = builder.pass;
+        this.email = builder.email;
     }
 
     public String getName() {
@@ -57,26 +57,26 @@ public class User {
         return String.format("Name: %s, email: %s\n", name, email);
     }
 
-    private class UserBuilder{
+    public static class UserBuilder{
         private String name;
         private String pass;
         private String email;
 
-        UserBuilder setName(String name) throws InvalidInputParameters{
+        public UserBuilder setName(String name) throws InvalidInputParameters{
             if(name == null || name.length() == 0) throw new InvalidInputParameters("Name is empty");
 
             this.name = name;
             return this;
         }
 
-        UserBuilder setPass(String pass) throws InvalidInputParameters{
+        public UserBuilder setPass(String pass) throws InvalidInputParameters{
             if(pass == null || pass.length() == 0) throw new InvalidInputParameters("Pass is empty");
 
             this.pass = pass;
             return this;
         }
 
-        UserBuilder setEmail(String email) throws InvalidInputParameters{
+        public UserBuilder setEmail(String email) throws InvalidInputParameters{
             if(email == null) throw new InvalidInputParameters("Email is null");
 
             if(email.indexOf("@") == -1 || email.lastIndexOf(".") < email.indexOf("@"))
@@ -86,8 +86,8 @@ public class User {
             return this;
         }
 
-        User build(){
-            return new User(name, pass, email);
+        public User build(){
+            return new User(this);
         }
     }
 }
