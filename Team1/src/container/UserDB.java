@@ -16,6 +16,22 @@ public class UserDB implements IUserDataBase{
         this.tokenMap = tokenMap;
     }
 
+    public Map<Integer, User> getUserMap() {
+        return userMap;
+    }
+
+    public void setUserMap(Map<Integer, User> userMap) {
+        this.userMap = userMap;
+    }
+
+    public Map<String, User> getTokenMap() {
+        return tokenMap;
+    }
+
+    public void setTokenMap(Map<String, User> tokenMap) {
+        this.tokenMap = tokenMap;
+    }
+
     @Override
     public String createAccessToken(User user) throws InvalidIdException {
         User find =

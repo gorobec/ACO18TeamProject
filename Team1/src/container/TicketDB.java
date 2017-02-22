@@ -12,6 +12,13 @@ import java.util.List;
 public class TicketDB implements IDataBase<Ticket> {
     private List<Ticket> tickets = new ArrayList<>();
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 
     public TicketDB(List<Ticket> tickets) {
         this.tickets = tickets;

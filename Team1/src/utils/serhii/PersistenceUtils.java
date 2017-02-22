@@ -1,4 +1,4 @@
-package utils;
+package utils.serhii;
 
 import com.google.gson.Gson;
 
