@@ -7,9 +7,15 @@ import exception.InvalidIdException;
 import exception.InvalidInputParameters;
 import exception.NoSuchProductException;
 import model.*;
+import model.Address;
 import org.apache.commons.mail.*;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.net.PasswordAuthentication;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by SDotsenko on 19.02.2017.
@@ -72,23 +78,34 @@ public class ServiceImpl implements IService {
     private boolean sendEmail(User user, Ticket ticket){
         String productName = productDB.get(ticket.getProductID()).getName();
 
-        String msg = String.format("You bought some cool stuff in our shop!\nIt`s %s\nTicket id - %d\nThank you!",
+        String msgStr = String.format("You bought some cool stuff in our shop!\nIt`s %s\nTicket id - %d\nThank you!",
                 productName, ticket.getId());
 
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                        return new javax.mail.PasswordAuthentication(DEFAULT_EMAIL, DEFAULT_PASS);
+                    }
+                });
+
         try {
-            Email email = new SimpleEmail();
-            email.setHostName("smtp.googlemail.com");
-            email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator(DEFAULT_NAME, DEFAULT_PASS));
-            email.setSSLOnConnect(true);
-            email.setFrom(DEFAULT_EMAIL);
-            email.setSubject("You bought some cool stuff");
-            email.setMsg(msg);
-            email.addTo(user.getEmail());
-            email.send();
-        } catch (EmailException e){
-            System.out.println("Unable to send email");
-            return false;
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(DEFAULT_EMAIL));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(user.getEmail().toLowerCase().trim()));
+            message.setSubject("You bought some cool stuff");
+            message.setText(msgStr);
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
         }
 
         return true;
