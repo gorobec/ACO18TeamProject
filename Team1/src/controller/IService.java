@@ -4,6 +4,8 @@ import exception.InvalidIdException;
 import exception.InvalidInputParameters;
 import exception.NoSuchProductException;
 import model.*;
+
+import java.security.SecureRandom;
 import java.util.List;
 
 /**
@@ -25,4 +27,8 @@ public interface IService {
     Ticket showTicket(int id) throws InvalidIdException;
 
     boolean addPoduct(Product product);
+
+    String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters;
+
+    String signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
 }

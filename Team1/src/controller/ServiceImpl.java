@@ -16,6 +16,8 @@ import javax.mail.internet.MimeMessage;
 import java.net.PasswordAuthentication;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by SDotsenko on 19.02.2017.
@@ -119,5 +121,43 @@ public class ServiceImpl implements IService {
     @Override
     public boolean addPoduct(Product product) {
         return db.addProduct(product);
+    }
+
+    @Override
+    public String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters{
+
+        if(name == null || name.length() == 0)
+            throw new InvalidInputParameters("Incorrect user name");
+
+        if(pass == null || pass.length() == 0)
+            throw new InvalidInputParameters("Incorrect user pass");
+
+        return userDB.createAccessToken(new User.UserBuilder().setName(pass).setPass(pass).build());
+    }
+
+    @Override
+    public String signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException{
+
+        if(name == null || name.length() == 0)
+            throw new InvalidInputParameters("Incorrect user name");
+
+        if(pass == null || pass.length() == 0)
+            throw new InvalidInputParameters("Incorrect user pass");
+
+        if(email == null || email.length() == 0 || checkWithRegExp(email))
+            throw new InvalidInputParameters("Incorrect user email");
+
+        User u = new User.UserBuilder().setName(pass).setPass(pass).setEmail(email).build();
+
+        userDB.add(u);
+
+        return userDB.createAccessToken(u);
+    }
+
+    public static boolean checkWithRegExp(String email){
+        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 }

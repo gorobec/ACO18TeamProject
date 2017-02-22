@@ -73,26 +73,17 @@ public class User {
         private String pass;
         private String email;
 
-        public UserBuilder setName(String name) throws InvalidInputParameters{
-            if(name == null || name.length() == 0) throw new InvalidInputParameters("Name is empty");
-
+        public UserBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public UserBuilder setPass(String pass) throws InvalidInputParameters{
-            if(pass == null || pass.length() == 0) throw new InvalidInputParameters("Pass is empty");
-
+        public UserBuilder setPass(String pass) {
             this.pass = pass;
             return this;
         }
 
-        public UserBuilder setEmail(String email) throws InvalidInputParameters{
-            if(email == null) throw new InvalidInputParameters("Email is null");
-
-            if(email.indexOf("@") == -1 || email.lastIndexOf(".") < email.indexOf("@"))
-                throw new InvalidInputParameters("Incorrect email format!");
-
+        public UserBuilder setEmail(String email){
             this.email = email;
             return this;
         }
