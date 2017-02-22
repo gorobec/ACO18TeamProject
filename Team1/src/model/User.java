@@ -6,11 +6,14 @@ import exception.InvalidInputParameters;
  * Created by v21k on 20.02.17.
  */
 public class User {
+    private int id;
+    private static int nextID = 0;
     private final String name;
     private String pass;
     private final String email;
 
     private User(UserBuilder builder) {
+        this.id = ++ nextID;
         this.name = builder.name;
         this.pass = builder.pass;
         this.email = builder.email;

@@ -6,12 +6,14 @@ import controller.ServiceImpl;
 import exception.InvalidIdException;
 import exception.NoSuchProductException;
 import model.Address;
+import model.BankCard;
 import model.Product;
 import model.Ticket;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +33,10 @@ public class IServiceTest {
         controller.addProduct(new Product(2, "product3"));
         controller.addProduct(new Product(3, "product4"));
 
-        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
-        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
-        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
-        controller.addTicket(new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket(new BankCard(1111, 111, null), new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket(new BankCard(1111, 111, null), new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket(new BankCard(1111, 111, null), new Address("Kiev", "KPI", 1), 0));
+        controller.addTicket(new Ticket(new BankCard(1111, 111, null), new Address("Kiev", "KPI", 1), 0));
     }
 
     @org.junit.Test
@@ -62,19 +64,19 @@ public class IServiceTest {
 
     @org.junit.Test
     public void buy() throws Exception {
-        Assert.assertEquals(4, controller.buy(0, new Address("Kiev", "KPI", 1), "1111 1111"));
+        Assert.assertEquals(4, controller.buy(0, new Address("Kiev", "KPI", 1), new BankCard(1111, 111, null)));
     }
 
     @Test(expected = NoSuchProductException.class)
     public void buyTest2() throws NoSuchProductException{
-        controller.buy(-1, new Address("Kiev", "KPI", 1), "1111 1111");
-        controller.buy(7, new Address("Kiev", "KPI", 1), "1111 1111");
+        controller.buy(-1, new Address("Kiev", "KPI", 1), new BankCard(1111, 111, null));
+        controller.buy(7, new Address("Kiev", "KPI", 1), new BankCard(1111, 111, null));
     }
 
     @org.junit.Test
     public void showTicket() throws Exception {
         Assert.assertEquals(
-                new Ticket("1111 1111", new Address("Kiev", "KPI", 1), 0),
+                new Ticket(new BankCard(1111, 111, null), new Address("Kiev", "KPI", 1), 0),
                 controller.showTicket(0));
     }
 

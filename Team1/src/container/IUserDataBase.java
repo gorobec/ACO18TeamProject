@@ -6,6 +6,6 @@ import model.User;
 /**
  * Created by Мастер on 21.02.2017.
  */
-public interface IUserDataBase extends IDataBase{
+public interface IUserDataBase extends IDataBase<User> {
     String createAccessToken(User user) throws InvalidIdException;
 }

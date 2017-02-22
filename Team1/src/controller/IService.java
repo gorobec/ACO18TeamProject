@@ -1,6 +1,7 @@
 package controller;
 
 import exception.InvalidIdException;
+import exception.InvalidInputParameters;
 import exception.NoSuchProductException;
 import model.*;
 import java.util.List;
@@ -19,7 +20,7 @@ public interface IService {
 
     Ticket getTicketById(int id) throws InvalidIdException;
 
-    int buy(int productID, Address address, BankCard bankCard) throws NoSuchProductException;
+    int buy(int userID, int productID, Address address, BankCard bankCard) throws NoSuchProductException, InvalidInputParameters;
 
     Ticket showTicket(int id) throws InvalidIdException;
 

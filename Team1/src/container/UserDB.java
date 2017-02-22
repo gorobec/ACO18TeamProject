@@ -1,6 +1,7 @@
 package container;
 
 import exception.InvalidIdException;
+import exception.InvalidInputParameters;
 import model.User;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 /**
  * Created by Мастер on 21.02.2017.
  */
-public class UserDB implements IUserDataBase {
+public class UserDB implements IUserDataBase{
 
     Map<Integer, User> userMap = new TreeMap<>();
     Map<String, User> tokenMap = new HashMap<>();
@@ -33,7 +34,7 @@ public class UserDB implements IUserDataBase {
     }
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(User o) {
         return false;
     }
 
@@ -43,12 +44,12 @@ public class UserDB implements IUserDataBase {
     }
 
     @Override
-    public Object remove(int i) {
+    public User remove(int i) {
         return null;
     }
 
     @Override
-    public Object get(int i) {
+    public User get(int i) {
         return null;
     }
 

@@ -60,4 +60,8 @@ public class Ticket {
     public String toString() {
         return String.format("ID: %d, address: %s, product id: %d\n", id, address.toString(), productID);
     }
+
+    public int getProductID() {
+        return productID;
+    }
 }
