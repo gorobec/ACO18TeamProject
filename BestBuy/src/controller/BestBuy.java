@@ -4,6 +4,7 @@ import dao.IDataBase;
 import exceptions.NoSuchProductException;
 import exceptions.NoSuchTicketException;
 import dao.MapDataBase;
+import exceptions.TicketIsEmptyException;
 import model.Product;
 import model.Ticket;
 import model.User;
@@ -22,57 +23,93 @@ public class BestBuy implements IStore {
         this.base = base;
     }
 
-    @Override
+  /*  @Override
     public Map<Integer, Product> getAllProducts() {
         return base.getAllProducts();
-    }
+    }*/
 
-    @Override
+    //@Override
     public Product getProductById(int id) throws NoSuchProductException {
         return base.getProductById(id);
     }
 
-    @Override
+   // @Override
     public Ticket buy(User user, int productId) {
         Ticket tc = new Ticket(user, productId);
         base.addTicket(tc);
         return tc;
     }
 
-    @Override
+   // @Override
     public Ticket showTicketById(int id) throws NoSuchTicketException {
         return base.getTicketById(id);
     }
 
-    @Override
+    //@Override
     public String printTicketById(Ticket ticket) {
         if (ticket != null)
             return ticket.toString();
         else return "product == null";
     }
 
-    @Override
+  //  @Override
     public String printAllTickets() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Ticket> e : base.getAllTickets().entrySet()) {
-            stringBuilder.append("ID : " + e.getKey() + " Ticket : " + e.getValue().toString()).append("\n");
-        }
-        return stringBuilder.toString();
+    return null;
     }
 
-    @Override
+
     public String printProduct(Product product) {
         if (product != null)
             return product.toString();
         else return "product == null";
     }
+
+
+    //We have to use next
     @Override
     public String printAllProducts() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Product> e : base.getAllProducts().entrySet()) {
-            stringBuilder.append("ID : " + e.getKey() + " Product : " + e.getValue().toString()).append("\n");
-        }
-        return stringBuilder.toString();
+        return base.allProductsToString();
+    }
+
+    @Override
+    public boolean checkLoginAndPassword(String login, String password) {
+        return true;
+    }
+
+    @Override
+    public boolean registerUser(String email, String password, String address, int creditCard) {
+        return true;
+    }
+
+    @Override
+    public String printTicketById(int id) throws NoSuchTicketException {
+        Ticket ticket = base.getTicketById(id);
+        if (ticket != null)
+            return ticket.toString();
+        else return "ticket == null";
+    }
+
+    @Override
+    public String printProductById(int id) throws NoSuchProductException {
+        Product product = base.getProductById(id);
+        if (product != null)
+            return product.toString();
+        else return "product == null";
+    }
+
+    @Override
+    public Ticket addProductByIdToTicket(int productId) throws NoSuchProductException {
+        return null;
+    }
+
+    @Override
+    public boolean removeProductByIdFromTicket(int productId) throws NoSuchProductException {
+        return false;
+    }
+
+    @Override
+    public boolean buy() throws TicketIsEmptyException {
+        return false;
     }
 
 }

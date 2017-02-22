@@ -16,11 +16,11 @@ public class MapDataBase implements IDataBase {
 
     private Map<Integer, Product> products;
     private Map<Integer, Ticket> tickets;
-    private Map<Integer, User> users;
+    private Map<String, User> users;
 
     public MapDataBase() {}
 
-    public MapDataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets, Map<Integer, User> users) {
+    public MapDataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets, Map<String, User> users) {
         this.products = products;
         this.tickets = tickets;
         this.users = users;
@@ -37,13 +37,29 @@ public class MapDataBase implements IDataBase {
     }
 
     @Override
+    public User addUser(User user) {
+        return users.put(user.getEmail(), user);
+    }
+
     public Map<Integer, Product> getAllProducts() {
         return products;
     }
 
-    @Override
     public Map<Integer, Ticket> getAllTickets() {
         return tickets;
+    }
+
+    public Map<String, User> getAllUsers() {
+        return users;
+    }
+
+    @Override
+    public String allProductsToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<Integer, Product> e : products.entrySet()) {
+            stringBuilder.append("ID : ").append(e.getKey()).append(" Product : ").append(e.getValue().toString()).append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     @Override

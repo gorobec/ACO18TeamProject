@@ -1,0 +1,1 @@
+{"user@gmail.com":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"}}

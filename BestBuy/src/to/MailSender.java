@@ -14,10 +14,8 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 
-    //private User user;
-    private Ticket ticket;
 
-    public boolean sendMail(String userMail) {
+    public boolean sendMail(Ticket ticket) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -38,9 +36,10 @@ public class MailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("from@no-spam.com"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("USER MAIL"));
-            message.setSubject("New Order");
-            message.setText("Текст сообщения");
+                    InternetAddress.parse(ticket.getUser().getEmail()));
+            System.out.println(ticket.getUser().getEmail());
+            message.setSubject("New Order №" + ticket.getId());
+            message.setText("Dear buyer,\nyour order has been sent, please wait.\nThank you\n" + ticket.toString());
 
             Transport.send(message);
 
