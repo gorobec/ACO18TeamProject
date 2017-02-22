@@ -1,6 +1,8 @@
 package container;
 
 import exception.InvalidIdException;
+import exception.InvalidInputParameters;
+import exception.InvalidTokenException;
 import model.User;
 import java.util.*;
 
@@ -30,6 +32,20 @@ public class UserDB implements IUserDataBase{
 
     public void setTokenMap(Map<String, User> tokenMap) {
         this.tokenMap = tokenMap;
+    }
+
+    public User getUserByToken(String token)throws InvalidTokenException {
+        User find =
+                tokenMap.values()
+                        .stream()
+                        .filter(t -> t.equals(token))
+                        .findFirst().orElse(null);
+
+        if (find == null) {
+            throw new InvalidTokenException("Invalid token");
+        }
+
+        return find;
     }
 
     @Override

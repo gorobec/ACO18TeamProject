@@ -5,6 +5,7 @@ import container.TicketDB;
 import container.UserDB;
 import exception.InvalidIdException;
 import exception.InvalidInputParameters;
+import exception.InvalidTokenException;
 import exception.NoSuchProductException;
 import model.*;
 import model.Address;
@@ -159,5 +160,12 @@ public class ServiceImpl implements IService {
                 "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher m = p.matcher(email);
         return m.matches();
+    }
+
+    @Override
+    public User getUserByToken(String token) throws InvalidTokenException {
+        if(token == null || token.length() == 0) throw new InvalidTokenException("Empty string!");
+
+        return userDB.getUserByToken(token);
     }
 }
