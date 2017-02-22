@@ -3,10 +3,7 @@ package controller;
 import container.ProductDB;
 import container.TicketDB;
 import container.UserDB;
-import exception.InvalidIdException;
-import exception.InvalidInputParameters;
-import exception.InvalidTokenException;
-import exception.NoSuchProductException;
+import exception.*;
 import model.*;
 import model.Address;
 
@@ -59,12 +56,15 @@ public class ServiceImpl implements IService {
 
     @Override
     public Product getProductById(int id) throws InvalidIdException {
-        return productDB.get(id);
+        return productDB.get(productDB.findProuctById(id));
     }
 
     @Override
-    public Ticket getTicketById(int id) throws InvalidIdException {
-        return ticketDB.get(id);
+    public Ticket getTicketById(int id, String token) throws InvalidIdException, UserLoginException {
+        if(userDB.isTokenExisted(token))
+            throw new UserLoginException("Token not found");
+
+        return ticketDB.get(ticketDB.findTicketById(id));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ServiceImpl implements IService {
 
         productDB.remove(productID);
 
-        User user = userDB.get(userID);
+        User user = userDB.findUserById(userID);
 
         sendEmail(user, newTicket);
 
@@ -122,8 +122,11 @@ public class ServiceImpl implements IService {
     }
 
     @Override
-    public Ticket showTicket(int id) throws InvalidIdException {
-        return ticketDB.get(id);
+    public Ticket showTicket(int id, String token) throws InvalidIdException, UserLoginException {
+        if(userDB.isTokenExisted(token))
+            throw new UserLoginException("Token not found");
+
+        return ticketDB.get(ticketDB.findTicketById(id));
     }
 
     @Override

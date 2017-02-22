@@ -35,17 +35,19 @@ public class UserDB implements IUserDataBase{
     }
 
     public User getUserByToken(String token)throws InvalidTokenException {
-        User find =
-                tokenMap.values()
-                        .stream()
-                        .filter(t -> t.equals(token))
-                        .findFirst().orElse(null);
+        User find = tokenMap.get(token);
 
         if (find == null) {
             throw new InvalidTokenException("Invalid token");
         }
 
         return find;
+    }
+
+    public boolean isTokenExisted(String token){
+        User find = tokenMap.get(token);
+
+        return !(find == null);
     }
 
     @Override
@@ -87,6 +89,11 @@ public class UserDB implements IUserDataBase{
     @Override
     public List getAll() {
         return (List) userMap.values();
+    }
+
+
+    public User findUserById(int id){
+        return userMap.get(new Integer(id));
     }
 
 }
