@@ -13,6 +13,12 @@ public class TicketDB implements IDataBase<Ticket> {
     private List<Ticket> tickets = new ArrayList<>();
 
 
+    public TicketDB(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public TicketDB() {}
+
     @Override
     public boolean add(Ticket ticket) {
         return true;

@@ -13,9 +13,11 @@ public class ProductDB implements IDataBase<Product> {
     private List<Product> products = new ArrayList<>();
 
 
-    public ProductDB() {
-    }
+    public ProductDB() {}
 
+    public ProductDB(List<Product> products) {
+        this.products = products;
+    }
 
     @Override
     public boolean add(Product product) {
