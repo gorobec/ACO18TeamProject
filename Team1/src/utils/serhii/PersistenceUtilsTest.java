@@ -1,4 +1,4 @@
-package utils;
+package utils.serhii;
 
 import container.ProductDB;
 import model.Address;
@@ -9,8 +9,6 @@ import org.junit.*;
 
 import java.io.File;
 import java.net.URL;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Serhii Bilobrov
@@ -75,7 +73,7 @@ public class PersistenceUtilsTest {
 
     @Test
     public void testLoadFromFile() throws Exception {
-        URL uri = PersistenceUtils.class.getResource("/utils/db.json");
+        URL uri = PersistenceUtils.class.getResource("/utils/serhii/db.json");
 
         String loadedJson = PersistenceUtils.loadFromFile(uri.getFile());
         Assert.assertNotEquals("{}", loadedJson);
