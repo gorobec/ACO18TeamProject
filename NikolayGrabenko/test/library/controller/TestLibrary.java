@@ -5,6 +5,7 @@ import library.model.Book;
 import library.model.PrintedEditions;
 import library.model.Reader;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class TestLibrary {
@@ -122,21 +123,40 @@ public class TestLibrary {
 
     @Test
     public void testLoanPrintedEditionWhenReaderNOTAdded() {
-        assertTrue(!library.loanPrintedEdition(reader, edition)); // reader Not added
+        assertTrue(!library.loanPrintedEdition("Will", "Smith", 40, edition)); // reader Not added
     }
 
 
     @Test
     public void testLoanPrintedEditionWhenReaderAddedWithoutEditionInLibrary() {
         library.addReader(reader);
-        assertFalse(library.loanPrintedEdition(reader, edition)); // reader added,edition in NOT available
+        assertFalse(library.loanPrintedEdition("Will", "Smith", 40, edition)); // reader added,edition in NOT available
     }
 
     @Test
     public void testLoanPrintedEditionWhenReaderAddedWithEditionAdded() {
         library.addReader(reader);
         library.addPrintedEdition(edition);
-        assertTrue(library.loanPrintedEdition(reader, edition)); // reader added,edition in library available
+        assertTrue(library.loanPrintedEdition("Will", "Smith", 40, edition)); // reader added,edition in library available
+    }
+
+    @Test
+    public void testLoanPrintedEditionWhen2ReaderAddedWith2EditionAdded() {
+        library.addReader(reader);
+        library.addPrintedEdition(edition);
+        assertTrue(library.loanPrintedEdition("Will", "Smith", 40, edition));
+        assertTrue(reader.getReaderEditions().size() == 1);
+        assertTrue(edition.getNumberOfCopiesAvailable() == 34);
+        Reader reader2 = new Reader("Will", "Smith", 40, "Kiev, Kreschatyk 17");
+        PrintedEditions edition2 = new Book("Some test book", "Dontsova",
+                2008, 1, 384);
+        assertFalse(library.addReader(reader2));
+        assertTrue(library.addPrintedEdition(edition2));
+        assertTrue(library.loanPrintedEdition("Will", "Smith", 40, edition2));
+        assertTrue(reader.getReaderEditions().size() == 2);
+        assertTrue(edition2.getNumberOfCopiesAvailable() == 0);
+        reader2 = null;
+        edition2 = null;
     }
 
     @Test
@@ -144,12 +164,13 @@ public class TestLibrary {
         library.addReader(reader);
         library.addPrintedEdition(edition);
         library.addToBlackList(reader);
-        assertFalse(library.loanPrintedEdition(reader, edition));
+        assertFalse(library.loanPrintedEdition("Will", "Smith", 40, edition));
     }
+
 
     @Test
     public void testShowPrintedEditionsAtOneReader() {
-        library.loanPrintedEdition(reader, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         String s = library.showPrintedEditionsAtOneReader(reader);
         assertFalse(s.compareTo("just some text") == 0);
     }
@@ -164,7 +185,7 @@ public class TestLibrary {
     public void testShowPrintedEditionsAtOneReaderWithBooks() {
         library.addReader(reader);
         library.addPrintedEdition(edition);
-        library.loanPrintedEdition(reader, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         String s = library.showPrintedEditionsAtOneReader(reader);
         assertFalse(s.compareTo("") == 0);
     }
@@ -188,6 +209,7 @@ public class TestLibrary {
         library.addPrintedEdition(edition);
         assertTrue(library.showPrintedEditionsOfYear(2008, new PrintedEditionComparatorByName()));
     }
+
     @Test
     public void testShowPrintedEditionsOfAuthorNoBookInLibrary() {
         assertFalse(library.showPrintedEditionsOfAuthor("Joshua Bloch", new PrintedEditionComparatorByName()));
@@ -223,9 +245,9 @@ public class TestLibrary {
     }
 
     @Test
-    public void testFindPrintedEditionByKeyWord(){
+    public void testFindPrintedEditionByKeyWord() {
         library.addPrintedEdition(edition);
-        assertEquals(library.findPrintedEditionByKeyWord("java",new PrintedEditionComparatorByName()),edition);
+        assertEquals(library.findPrintedEditionByKeyWord("java", new PrintedEditionComparatorByName()), edition);
     }
 
     @Test
@@ -271,6 +293,7 @@ public class TestLibrary {
         library.addPrintedEdition(null);
         assertFalse(library.showPrintedEditions(new PrintedEditionComparatorByName()));
     }
+
     @Test
     public void testShowPrintedEditionsAvailableNotAdded() {
         assertFalse(library.showPrintedEditions(new PrintedEditionComparatorByName()));
@@ -304,7 +327,7 @@ public class TestLibrary {
     public void testShowPrintedEditionsAtReadersAdded() {
         library.addPrintedEdition(edition);
         library.addReader(reader);
-        library.loanPrintedEdition(reader,edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         assertTrue(library.showPrintedEditionsAtReaders(new PrintedEditionComparatorByName()));
     }
 

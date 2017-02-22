@@ -57,18 +57,16 @@ public class Reader {
                 this.getName(), this.getSurName(), this.getAge(), this.getHomeAddress());
     }
 
-    public boolean isEditionInReaderList(PrintedEditions edition) {
-        boolean isEditionInReaderList = false;
+    public boolean isEditionInListOfReader(PrintedEditions edition) {
         if (edition != null) {
             for (int i = 0; i < readerEditions.size(); i++) {
                 PrintedEditions editionTemp = (PrintedEditions) readerEditions.get(i);
                 if (edition.equals(editionTemp)) {
-                    isEditionInReaderList = true;
-                    break;
+                   return true;
                 }
             }
         }
-        return isEditionInReaderList;
+        return false;
     }
 
     public boolean addPrintedEditionToList(PrintedEditions edition) {

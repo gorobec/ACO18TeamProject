@@ -1,4 +1,6 @@
-package week1.day1;
+package week1.day1.student;
+
+import week1.day1.cat.Cat;
 
 public class Test {
     public static void main(String[] args) {
