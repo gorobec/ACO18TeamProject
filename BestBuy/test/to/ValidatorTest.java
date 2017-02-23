@@ -23,4 +23,9 @@ public class ValidatorTest {
 
     }
 
+    @Test
+    public void validCard() throws Exception {
+        Assert.assertEquals(true, validator.validCreditCard("5168755632007247"));
+    }
+
 }
