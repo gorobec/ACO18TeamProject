@@ -26,6 +26,10 @@ public class MapDataBaseHelper {
         return db;
     }
 
+    public MapDataBaseHelper(MapDataBase db) {
+        this.db = db;
+    }
+
     public void loadDataBase(){
 
         String jsonProduct = null;

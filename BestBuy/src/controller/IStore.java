@@ -43,5 +43,6 @@ public interface IStore {
   //but its impossible, we have to create TicketBuilder
 // to create empy Ticket without IDproduct and then after pushing addProduct button we can add IDproduct );
 
-
+    boolean loadDatabase();
+    boolean saveDatabase();
 }

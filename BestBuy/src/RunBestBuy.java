@@ -8,14 +8,12 @@ public class RunBestBuy {
     public static void main(String[] args) {
 
 
-        MapDataBaseHelper dbHelper = new MapDataBaseHelper();
-
-        dbHelper.loadDataBase();
-
-        BestBuy service = new BestBuy(dbHelper.getDb());
+        BestBuy service = new BestBuy();
+        service.loadDatabase();
 
         LoginWindow log = new LoginWindow(service);
 
-        dbHelper.unloadDataBase();
+        //этот метод надо вызвать при закрытии формы
+        service.saveDatabase();
     }
 }

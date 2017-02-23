@@ -1,24 +1,27 @@
 package controller;
 
 import dao.IDataBase;
+import dao.MapDataBase;
 import exceptions.*;
 import model.Product;
 import model.Ticket;
 import model.User;
+import to.MapDataBaseHelper;
 import to.Validator;
 
 /**
  * Created by fmandryka on 19.02.2017.
  */
+
 public class BestBuy implements IStore {
 
     private IDataBase base;
 
     private User currentUser;
 
-    public BestBuy(IDataBase base) {
+ /*   public BestBuy(IDataBase base) {
         this.base = base;
-    }
+    }*/
 
   /*  @Override
     public Map<Integer, Product> getAllProducts() {
@@ -121,6 +124,21 @@ public class BestBuy implements IStore {
     @Override
     public boolean buy() throws TicketIsEmptyException {
         return false;
+    }
+
+    @Override
+    public boolean loadDatabase() {
+        MapDataBaseHelper dbHelper = new MapDataBaseHelper((MapDataBase)base);
+        dbHelper.loadDataBase();
+        base = dbHelper.getDb();
+        return true;
+    }
+
+    @Override
+    public boolean saveDatabase() {
+        MapDataBaseHelper dbHelper = new MapDataBaseHelper((MapDataBase)base);
+        dbHelper.unloadDataBase();
+        return true;
     }
 
 }
