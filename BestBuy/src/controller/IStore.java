@@ -1,8 +1,6 @@
 package controller;
 
-import exceptions.NoSuchProductException;
-import exceptions.NoSuchTicketException;
-import exceptions.TicketIsEmptyException;
+import exceptions.*;
 import model.Ticket;
 
 /**
@@ -27,10 +25,9 @@ public interface IStore {
     String printAllProducts();
 
 //// button - "OK " in login Window
-      boolean checkLoginAndPassword (String login, String password); /*throws UserNotRegisteredException, IllegalPasswordException*/;
+      boolean checkLoginAndPassword (String login, String password) throws NoSuchUserException, IllegalPasswordException;
 // //button - "Apply " in Registration Window
-      boolean registerUser (String email, String password, String address, int creditCard); /*throws IllegalEmailFormatException,
-//    UserWithSuchEmailRegisteredException,IllegalPasswordFormatException,IllegalCreditCardFormatException */
+      boolean registerUser (String email, String password, String address, String creditCard) throws IllegalEmailFormatException, UserWithSuchEmailRegisteredException,IllegalPasswordFormatException,IllegalCreditCardFormatException;
 
     String printTicketById(int id)  throws NoSuchTicketException;
 

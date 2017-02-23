@@ -18,6 +18,12 @@ public interface IDataBase {
 
  //   Map<Integer, Ticket> getAllTickets();
 
+    boolean containsUser(String login);
+
+    User getUserByLogin(String login);
+
+    String getUserPassword(String login);
+
     String allProductsToString();
 
     Product getProductById(int id) throws NoSuchProductException;

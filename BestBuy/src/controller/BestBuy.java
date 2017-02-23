@@ -1,16 +1,11 @@
 package controller;
 
 import dao.IDataBase;
-import exceptions.NoSuchProductException;
-import exceptions.NoSuchTicketException;
-import dao.MapDataBase;
-import exceptions.TicketIsEmptyException;
+import exceptions.*;
 import model.Product;
 import model.Ticket;
 import model.User;
-
-import java.util.List;
-import java.util.Map;
+import to.Validator;
 
 /**
  * Created by fmandryka on 19.02.2017.
@@ -18,6 +13,8 @@ import java.util.Map;
 public class BestBuy implements IStore {
 
     private IDataBase base;
+
+    private User currentUser;
 
     public BestBuy(IDataBase base) {
         this.base = base;
@@ -33,14 +30,14 @@ public class BestBuy implements IStore {
         return base.getProductById(id);
     }
 
-   // @Override
+    // @Override
     public Ticket buy(User user, int productId) {
         Ticket tc = new Ticket(user, productId);
         base.addTicket(tc);
         return tc;
     }
 
-   // @Override
+    // @Override
     public Ticket showTicketById(int id) throws NoSuchTicketException {
         return base.getTicketById(id);
     }
@@ -52,9 +49,9 @@ public class BestBuy implements IStore {
         else return "product == null";
     }
 
-  //  @Override
+    //  @Override
     public String printAllTickets() {
-    return null;
+        return null;
     }
 
 
@@ -71,13 +68,41 @@ public class BestBuy implements IStore {
         return base.allProductsToString();
     }
 
+
     @Override
-    public boolean checkLoginAndPassword(String login, String password) {
+    public boolean checkLoginAndPassword(String login, String password) throws IllegalPasswordException, NoSuchUserException {
+
+        if (!base.containsUser(login)) {
+            throw new NoSuchUserException("User not found in database!");
+        }
+        if (!base.getUserPassword(login).equals(password)) {
+            throw new IllegalPasswordException("Password not correct!");
+        }
+
+        currentUser = base.getUserByLogin(login);
+
         return true;
     }
 
+
     @Override
-    public boolean registerUser(String email, String password, String address, int creditCard) {
+    public boolean registerUser(String email, String password, String address, String creditCard) throws IllegalPasswordFormatException, IllegalEmailFormatException, UserWithSuchEmailRegisteredException, IllegalCreditCardFormatException {
+
+        if (!Validator.validEmail(email)) {
+            throw new IllegalEmailFormatException("Email format is invalid!");
+        }
+        if (base.containsUser(email)) {
+            throw new UserWithSuchEmailRegisteredException("User with such email alresdy exists");
+        }
+        if (!Validator.validPassword(password)) {
+            throw new IllegalPasswordFormatException("Password should contains only a-Z, 0-9, _ . Length 6-30 characters!");
+        }
+        if (!Validator.validCreditCard(creditCard)) {
+            throw new IllegalCreditCardFormatException("Credit card is not valid!");
+        }
+
+        base.addUser(new User(email, password, creditCard, address));
+
         return true;
     }
 

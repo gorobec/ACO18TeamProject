@@ -54,6 +54,21 @@ public class MapDataBase implements IDataBase {
     }
 
     @Override
+    public boolean containsUser(String login) {
+        return users.containsKey(login);
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        return users.get(login);
+    }
+
+    @Override
+    public String getUserPassword(String login) {
+        return users.get(login).getPassword();
+    }
+
+    @Override
     public String allProductsToString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Integer, Product> e : products.entrySet()) {
