@@ -1,8 +1,6 @@
 package controller;
 
-import exception.InvalidIdException;
-import exception.InvalidInputParameters;
-import exception.NoSuchProductException;
+import exception.*;
 import model.*;
 
 import java.security.SecureRandom;
@@ -20,15 +18,15 @@ public interface IService {
 
     Product getProductById(int id) throws InvalidIdException;
 
-    Ticket getTicketById(int id) throws InvalidIdException;
+    Ticket getTicketById(int id, String token) throws InvalidIdException, UserLoginException;
 
     int buy(int userID, int productID, Address address, BankCard bankCard) throws NoSuchProductException, InvalidInputParameters;
 
-    Ticket showTicket(int id) throws InvalidIdException;
-
-    boolean addPoduct(Product product);
+    Ticket showTicket(int id, String token) throws InvalidIdException, UserLoginException;
 
     String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters;
 
-    String signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
+    boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
+
+    User getUserByToken(String token) throws InvalidTokenException;
 }

@@ -49,7 +49,7 @@ public class TicketDB implements IDataBase<Ticket> {
     }
 
 
-    private int findTicketById(int id){
+    public int findTicketById(int id){
         for (int i = 0; i < tickets.size(); i++) {
             if (tickets.get(i).getId() == id) return i;
         }

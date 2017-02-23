@@ -46,15 +46,13 @@ public class ProductDB implements IDataBase<Product> {
     }
 
 
-
-
     @Override
     public List<Product> getAll() {
         return products;
     }
 
 
-    private int findProuctById(int id){
+    public int findProuctById(int id){
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getId() == id) return i;
         }
