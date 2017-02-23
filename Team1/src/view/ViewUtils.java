@@ -2,6 +2,7 @@ package view;
 
 import controller.IService;
 import exception.InvalidIdException;
+import exception.InvalidInputParameters;
 import exception.NoSuchProductException;
 import model.Address;
 import model.BankCard;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  */
 public class ViewUtils {
     private static Scanner sc = new Scanner(System.in);
+    private static String token;
 
     public static void initService(IService iService){
         Product product = new Product(1, "IPhone");
@@ -70,7 +72,7 @@ public class ViewUtils {
 
     }
 
-    public static String register(IService iService){
+    public static String register(IService iService) throws InvalidIdException, InvalidInputParameters {
 
         System.out.println("Enter a name");
         String name = sc.nextLine();
@@ -79,21 +81,20 @@ public class ViewUtils {
         System.out.println("Enter an email:");
         String email = sc.nextLine();
 
-        if(iService.register(name, pass, email)){
-            return "OK";
-        }
+        iService.signUp(name, pass, email);
 
-        return "Registration failed.";
+        return "OK";
+
     }
 
-    public static String login(IService iService){
+    public static String login(IService iService) throws InvalidIdException, InvalidInputParameters {
 
         System.out.println("Enter a name");
         String name = sc.nextLine();
         System.out.println("Enter a password ");
         String pass = sc.nextLine();
 
-        if(iService.login(name, pass)){
+        if(iService.logIn(name, pass)){
             return "OK";
         }
 
