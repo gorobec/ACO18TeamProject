@@ -1,13 +1,20 @@
 package view;
 
+import container.*;
+import container.IDB.IDataBase;
+import container.IDB.IUserDataBase;
 import controller.IService;
-import exception.InvalidIdException;
-import exception.InvalidInputParameters;
-import exception.NoSuchProductException;
+import controller.ServiceImpl;
+import exception.*;
 import model.Address;
 import model.BankCard;
 import model.Product;
+import model.Ticket;
+import utils.DataBaseConverter;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.YearMonth;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -19,17 +26,21 @@ public class ViewUtils {
     private static Scanner sc = new Scanner(System.in);
     private static String token;
 
-    public static void initService(IService iService){
+    private static final Path productDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/productsDB.txt");
+    private static final Path ticketDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/ticketDB.txt");
+    private static final Path userDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/userDB.txt");
+
+    public static void initService(IService iService) {
         Product product = new Product(1, "IPhone");
         Product product2 = new Product(2, "Samsung");
         Product product3 = new Product(3, "Xaiomi");
 
-        iService.addPoduct(product);
-        iService.addPoduct(product2);
-        iService.addPoduct(product3);
+        iService.addProduct(product);
+        iService.addProduct(product2);
+        iService.addProduct(product3);
     }
 
-    public static int buy(IService iService) throws NoSuchProductException {
+    public static int buy(IService iService) throws NoSuchProductException, InvalidTokenException, InvalidInputParameters {
         System.out.println("Choose product ID");
         int id = Integer.parseInt(sc.nextLine());
 
@@ -41,7 +52,7 @@ public class ViewUtils {
         int number = Integer.parseInt(sc.nextLine());
 
         System.out.println("Enter credit cart (12 digits):");
-        int creditCardnumber = Integer.parseInt(sc.nextLine());
+        String creditCardnumber = sc.nextLine();
         System.out.println("Enter cvv2-code");
         int cvv = Integer.parseInt(sc.nextLine());
         System.out.println("Valid until (year and months ): ");
@@ -52,7 +63,9 @@ public class ViewUtils {
         BankCard bankCard = new BankCard(creditCardnumber, cvv, yearMonth);
         Address address = new Address(city, street, number);
 
-        return iService.buy(id, address, bankCard);
+        int userID = iService.getUserByToken(token).getId();
+
+        return iService.buy(userID, id, address, bankCard);
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
@@ -61,14 +74,14 @@ public class ViewUtils {
         return iService.getProductById(id).toString();
     }
 
-    public static String getTicketById(IService iService) throws InvalidIdException {
+    public static String getTicketById(IService iService) throws InvalidIdException, UserLoginException {
         System.out.println("Enter an ID");
         int id = sc.nextInt();
-        return iService.getTicketById(id).toString();
+        return iService.getTicketById(id, token).toString();
     }
 
-    public static String showProducts(IService iService){
-       return iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
+    public static String showProducts(IService iService) {
+        return iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
 
     }
 
@@ -94,10 +107,21 @@ public class ViewUtils {
         System.out.println("Enter a password ");
         String pass = sc.nextLine();
 
-        if(iService.logIn(name, pass)){
-            return "OK";
-        }
+        token = iService.logIn(name, pass);
+        return token != null ? "OK" : "FAILED";
+    }
 
-        return "Registration failed.";
+    public static void save(IService iService) throws IOException {
+        DataBaseConverter.saveToFile(iService.getProductDB(), productDB);
+        DataBaseConverter.saveToFile(iService.getTicketDB(), ticketDB);
+        DataBaseConverter.saveToFile(iService.getUserDB(), userDB);
+    }
+
+    public static IService load() throws IOException {
+        IDataBase<Product> products = DataBaseConverter.loadFromFile(productDB, ProductDB.class);
+        IDataBase<Ticket> tickets = DataBaseConverter.loadFromFile(ticketDB, TicketDB.class);
+        IUserDataBase users = DataBaseConverter.loadFromFile(userDB, UserDB.class);
+
+        return new ServiceImpl(products, tickets, users);
     }
 }

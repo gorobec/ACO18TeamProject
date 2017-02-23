@@ -1,9 +1,10 @@
 package controller;
 
+import container.IDB.IDataBase;
+import container.IDB.IUserDataBase;
 import exception.*;
 import model.*;
 
-import java.security.SecureRandom;
 import java.util.List;
 
 /**
@@ -22,11 +23,18 @@ public interface IService {
 
     int buy(int userID, int productID, Address address, BankCard bankCard) throws NoSuchProductException, InvalidInputParameters;
 
-    Ticket showTicket(int id, String token) throws InvalidIdException, UserLoginException;
-
     String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters;
 
     boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
 
     User getUserByToken(String token) throws InvalidTokenException;
+
+    // for saving
+    IDataBase<Product> getProductDB();
+
+    IDataBase<Ticket> getTicketDB();
+
+    IUserDataBase getUserDB();
+
+
 }

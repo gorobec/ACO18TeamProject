@@ -1,17 +1,19 @@
 package container;
 
+import container.IDB.IUserDataBase;
 import exception.InvalidIdException;
-import exception.InvalidInputParameters;
 import exception.InvalidTokenException;
 import model.User;
+
 import java.util.*;
 
-public class UserDB implements IUserDataBase{
+public class UserDB implements IUserDataBase {
 
-    Map<Integer, User> userMap = new TreeMap<>();
-    Map<String, User> tokenMap = new HashMap<>();
+    private Map<Integer, User> userMap = new TreeMap<>();
+    private Map<String, User> tokenMap = new HashMap<>();
 
-    public UserDB() {}
+    public UserDB() {
+    }
 
     public UserDB(Map<Integer, User> userMap, Map<String, User> tokenMap) {
         this.userMap = userMap;
@@ -34,7 +36,8 @@ public class UserDB implements IUserDataBase{
         this.tokenMap = tokenMap;
     }
 
-    public User getUserByToken(String token)throws InvalidTokenException {
+    @Override
+    public User getUserByToken(String token) throws InvalidTokenException {
         User find = tokenMap.get(token);
 
         if (find == null) {
@@ -44,7 +47,8 @@ public class UserDB implements IUserDataBase{
         return find;
     }
 
-    public boolean isTokenExisted(String token){
+    @Override
+    public boolean isTokenExisted(String token) {
         User find = tokenMap.get(token);
 
         return !(find == null);
@@ -89,11 +93,6 @@ public class UserDB implements IUserDataBase{
     @Override
     public List getAll() {
         return (List) userMap.values();
-    }
-
-
-    public User findUserById(int id){
-        return userMap.get(new Integer(id));
     }
 
 }

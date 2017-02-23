@@ -1,11 +1,9 @@
 package utils.serhii;
 
 import container.ProductDB;
-import model.Address;
-import model.Product;
-import model.Ticket;
-import org.hamcrest.Matchers;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.File;
 import java.net.URL;
@@ -32,7 +30,7 @@ public class PersistenceUtilsTest {
     private String path = "productDb.json";
 
 
-    @Before
+/*    @Before
     public void setUp() throws Exception {
         productDb = new ProductDB();
         productDb.addProduct(new Product(1, "ProdName1"));
@@ -42,7 +40,7 @@ public class PersistenceUtilsTest {
         productDb.addTicket(new Ticket(1, "credCard", new Address("kiev", "sdf", 12)));
         productDb.addTicket(new Ticket(2, "credCard", new Address("kiev", "sdf", 12)));
         productDb.addTicket(new Ticket(3, "credCard", new Address("kiev", "sdf", 12)));
-    }
+    }*/
 
     @After
     public void tearDown() throws Exception {
@@ -58,7 +56,7 @@ public class PersistenceUtilsTest {
 
     @Test
     public void testConvertFromJson() throws Exception {
-        ProductDB fromJSonProductDb = PersistenceUtils.convertFromJson(ProductDB.class,json);
+        ProductDB fromJSonProductDb = PersistenceUtils.convertFromJson(ProductDB.class, json);
         Assert.assertNotNull(fromJSonProductDb);
     }
 

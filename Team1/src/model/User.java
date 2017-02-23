@@ -1,7 +1,5 @@
 package model;
 
-import exception.InvalidInputParameters;
-
 /**
  * Created by v21k on 20.02.17.
  */
@@ -13,7 +11,7 @@ public class User {
     private final String email;
 
     private User(UserBuilder builder) {
-        this.id = ++ nextID;
+        this.id = ++nextID;
         this.name = builder.name;
         this.pass = builder.pass;
         this.email = builder.email;
@@ -68,7 +66,7 @@ public class User {
         return String.format("Name: %s, email: %s\n", name, email);
     }
 
-    public static class UserBuilder{
+    public static class UserBuilder {
         private String name;
         private String pass;
         private String email;
@@ -83,12 +81,12 @@ public class User {
             return this;
         }
 
-        public UserBuilder setEmail(String email){
+        public UserBuilder setEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public User build(){
+        public User build() {
             return new User(this);
         }
     }

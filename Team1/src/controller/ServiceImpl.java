@@ -1,13 +1,14 @@
 package controller;
 
-import container.ProductDB;
-import container.TicketDB;
-import container.UserDB;
+import container.IDB.IDataBase;
+import container.IDB.IUserDataBase;
 import exception.*;
 import model.*;
-import model.Address;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
@@ -20,72 +21,109 @@ import java.util.regex.Pattern;
  */
 public class ServiceImpl implements IService {
 
-    private UserDB userDB;
-    private ProductDB productDB;
-    private TicketDB ticketDB;
+    private IDataBase<Product> productDB;
+    private IDataBase<Ticket> ticketDB;
+    private IUserDataBase userDB;
 
     private static final String DEFAULT_PASS = "password";
     private static final String DEFAULT_EMAIL = "lorem@gmail.com";
 
-    public ServiceImpl(UserDB userDB, ProductDB productDB, TicketDB ticketDB) {
+    public ServiceImpl(IDataBase<Product> productDB, IDataBase<Ticket> ticketDB, IUserDataBase userDB) {
         this.userDB = userDB;
         this.productDB = productDB;
         this.ticketDB = ticketDB;
     }
 
-    public ServiceImpl() {
-        this.userDB = new UserDB();
-        this.productDB = new ProductDB();
-        this.ticketDB = new TicketDB();
-    }
-
-    @Override
-    public boolean addProduct(Product product) {
-        return productDB.add(product);
-    }
-
-    @Override
-    public boolean addTicket(Ticket ticket) {
-        return ticketDB.add(ticket);
-    }
-
+    // showAll
     @Override
     public List<Product> getProducts() {
         return productDB.getAll();
     }
 
+    // show product by ID
     @Override
     public Product getProductById(int id) throws InvalidIdException {
-        return productDB.get(productDB.findProuctById(id));
+        return productDB.get(id);
     }
 
+    // show by ID
     @Override
     public Ticket getTicketById(int id, String token) throws InvalidIdException, UserLoginException {
-        if(userDB.isTokenExisted(token))
+        if (!userDB.isTokenExisted(token))
             throw new UserLoginException("Token not found");
 
-        return ticketDB.get(ticketDB.findTicketById(id));
+        return ticketDB.get(id);
     }
 
+    // for buy method in view
+    @Override
+    public User getUserByToken(String token) throws InvalidTokenException {
+        if (token == null || token.length() == 0) throw new InvalidTokenException("Empty string!");
+
+        return userDB.getUserByToken(token);
+    }
+
+    // buy
     @Override
     public int buy(int userID, int productID, Address address, BankCard creditCard) throws NoSuchProductException, InvalidInputParameters {
-        if(address == null || creditCard == null)
-                throw new InvalidInputParameters("Incorrect parameters");
+        if (address == null || creditCard == null)
+            throw new InvalidInputParameters("Incorrect parameters");
 
-        Ticket newTicket = new Ticket(creditCard,address,productID);
+        Ticket newTicket = new Ticket(creditCard, address, productID);
 
         ticketDB.add(newTicket);
 
-        productDB.remove(productID);
-
-        User user = userDB.findUserById(userID);
+        User user = userDB.get(userID);
 
         sendEmail(user, newTicket);
 
         return newTicket.getId();
     }
 
-    private boolean sendEmail(User user, Ticket ticket){
+    // login
+    @Override
+    public String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters {
+
+        if (name == null || name.length() == 0)
+            throw new InvalidInputParameters("Incorrect user name");
+
+        if (pass == null || pass.length() == 0)
+            throw new InvalidInputParameters("Incorrect user pass");
+
+        return userDB.createAccessToken(new User.UserBuilder().setName(pass).setPass(pass).build());
+    }
+
+    // register
+    @Override
+    public boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException {
+
+        if (name == null || name.length() == 0)
+            throw new InvalidInputParameters("Incorrect user name");
+
+        if (pass == null || pass.length() == 0)
+            throw new InvalidInputParameters("Incorrect user pass");
+
+        // todo some problems here
+        /*if(email == null || email.length() == 0 || checkWithRegExp(email))
+            throw new InvalidInputParameters("Incorrect user email");*/
+
+        User u = new User.UserBuilder().setName(pass).setPass(pass).setEmail(email).build();
+
+        return userDB.add(u);
+    }
+
+
+    // ---- better to move in another class ----
+    // email validation
+    private static boolean checkWithRegExp(String email) {
+        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+    // sending email in buy()
+    private boolean sendEmail(User user, Ticket ticket) {
         String productName = productDB.get(ticket.getProductID()).getName();
 
         String msgStr = String.format("You bought some cool stuff in our shop!\nIt`s %s\nTicket id - %d\nThank you!",
@@ -120,55 +158,32 @@ public class ServiceImpl implements IService {
 
         return true;
     }
+    // ------------------------------
 
+
+    // for save-load purposes
     @Override
-    public Ticket showTicket(int id, String token) throws InvalidIdException, UserLoginException {
-        if(userDB.isTokenExisted(token))
-            throw new UserLoginException("Token not found");
-
-        return ticketDB.get(ticketDB.findTicketById(id));
+    public IDataBase<Product> getProductDB() {
+        return productDB;
     }
 
     @Override
-    public String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters{
-
-        if(name == null || name.length() == 0)
-            throw new InvalidInputParameters("Incorrect user name");
-
-        if(pass == null || pass.length() == 0)
-            throw new InvalidInputParameters("Incorrect user pass");
-
-        return userDB.createAccessToken(new User.UserBuilder().setName(pass).setPass(pass).build());
+    public IDataBase<Ticket> getTicketDB() {
+        return ticketDB;
     }
 
     @Override
-    public boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException{
-
-        if(name == null || name.length() == 0)
-            throw new InvalidInputParameters("Incorrect user name");
-
-        if(pass == null || pass.length() == 0)
-            throw new InvalidInputParameters("Incorrect user pass");
-
-        if(email == null || email.length() == 0 || checkWithRegExp(email))
-            throw new InvalidInputParameters("Incorrect user email");
-
-        User u = new User.UserBuilder().setName(pass).setPass(pass).setEmail(email).build();
-
-        return userDB.add(u);
-    }
-
-    private static boolean checkWithRegExp(String email){
-        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher m = p.matcher(email);
-        return m.matches();
+    public IUserDataBase getUserDB() {
+        return userDB;
     }
 
     @Override
-    public User getUserByToken(String token) throws InvalidTokenException {
-        if(token == null || token.length() == 0) throw new InvalidTokenException("Empty string!");
+    public boolean addProduct(Product product) {
+        return productDB.add(product);
+    }
 
-        return userDB.getUserByToken(token);
+    @Override
+    public boolean addTicket(Ticket ticket) {
+        return ticketDB.add(ticket);
     }
 }

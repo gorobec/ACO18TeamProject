@@ -1,0 +1,1 @@
+{"tickets":[{"id":1,"bankCard":{"number":"2321321321312","cvv2":123,"validUntil":{"year":2017,"month":6}},"address":{"city":"KIEV","street":"NABEREZHNA","number":16},"productID":2}]}

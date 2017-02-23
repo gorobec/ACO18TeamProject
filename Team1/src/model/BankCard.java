@@ -6,24 +6,24 @@ import java.time.YearMonth;
  * Created by v21k on 20.02.17.
  */
 public class BankCard {
-    private int number;
+    private String number;
     private int cvv2;
     private YearMonth validUntil;
 
     public BankCard() {
     }
 
-    public BankCard(int number, int cvv2, YearMonth validUntilYear) {
+    public BankCard(String number, int cvv2, YearMonth validUntilYear) {
         this.number = number;
         this.cvv2 = cvv2;
         this.validUntil = validUntilYear;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -48,16 +48,16 @@ public class BankCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BankCard that = (BankCard) o;
+        BankCard bankCard = (BankCard) o;
 
-        if (number != that.number) return false;
-        return cvv2 == that.cvv2;
+        if (number != null ? !number.equals(bankCard.number) : bankCard.number != null) return false;
+        return validUntil != null ? validUntil.equals(bankCard.validUntil) : bankCard.validUntil == null;
     }
 
     @Override
     public int hashCode() {
-        int result = number;
-        result = 31 * result + cvv2;
+        int result = number != null ? number.hashCode() : 0;
+        result = 31 * result + (validUntil != null ? validUntil.hashCode() : 0);
         return result;
     }
 

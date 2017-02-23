@@ -1,13 +1,7 @@
 package tests;
 
-import container.IDataBase;
-import model.Address;
-import model.Product;
-import model.Ticket;
-import org.junit.Before;
+import container.IDB.IDataBase;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zhenia on 19.02.17.
@@ -16,6 +10,7 @@ public class IDataBaseTest {
 
     private IDataBase db;
 
+/*
     @Before
     public void setUp(){
         db.addProduct(new Product(0, "product1"));
@@ -28,6 +23,7 @@ public class IDataBaseTest {
         db.addTicket(new Ticket(2, "1111 1111", new Address("Kiev", "KPI", 1)));
         db.addTicket(new Ticket(3, "1111 1111", new Address("Kiev", "KPI", 1)));
     }
+*/
 
     @Test
     public void removeProductByID() throws Exception {

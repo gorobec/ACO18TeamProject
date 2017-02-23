@@ -1,25 +1,9 @@
 package tests;
 
-import container.ProductDB;
-import controller.IService;
-import controller.ServiceImpl;
-import exception.InvalidIdException;
-import exception.NoSuchProductException;
-import model.Address;
-import model.BankCard;
-import model.Product;
-import model.Ticket;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by v21k on 19.02.17.
  */
+/*
 public class IServiceTest {
 
     private IService controller;
@@ -87,3 +71,4 @@ public class IServiceTest {
     }
 
 }
+*/
