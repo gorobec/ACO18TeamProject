@@ -140,6 +140,7 @@ public class ViewBestBuy extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+        
     }
 
 }

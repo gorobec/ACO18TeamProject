@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by fmandryka on 19.02.2017.
  */
 public class BestBuyTest {
-    Product pr1 = new Product("Iron", 1, 300.00);
+   /* Product pr1 = new Product("Iron", 1, 300.00);
     Product pr2 = new Product("Cup", 2, 100);
     Product pr3 = new Product("Phone", 3, 3000);
     Product pr4 = new Product("HDD", 4, 1000);
@@ -68,5 +68,5 @@ public class BestBuyTest {
     public void showTicketByIdTest() throws Exception {
         Assert.assertEquals(t1, service.showTicketById(1));
     }
-
+*/
 }

@@ -12,8 +12,8 @@ public class SerializerTest {
     Map<Integer, Ticket> ticketMap;
     Product product;
     Ticket ticket;
-    Serializer<Product> serProduct;
-    Serializer<Ticket> serTicket;
+    Serializer<Integer,Product> serProduct;
+    Serializer<Integer,Ticket> serTicket;
 
     @org.junit.Before
     public void setUp() throws Exception {

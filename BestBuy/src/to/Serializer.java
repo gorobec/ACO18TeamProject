@@ -5,13 +5,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import model.Product;
 import model.Ticket;
+import model.User;
 
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class Serializer<T> {
+public class Serializer<K,T> {
     // map to json
-    public String convertObjectToJson(Map<Integer, T> map) {
+    public String convertObjectToJson(Map<K, T> map) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         return gson.toJson(map);
@@ -26,6 +27,12 @@ public class Serializer<T> {
 
     public Map<Integer, Ticket> convertJsonToTicket(String txt) {
         Type type = new TypeToken<Map<Integer, Ticket>>() {
+        }.getType();
+        return new Gson().fromJson(txt, type);
+    }
+
+    public Map<String,User> convertJsonToUser(String txt) {
+        Type type = new TypeToken<Map<String, User>>() {
         }.getType();
         return new Gson().fromJson(txt, type);
     }

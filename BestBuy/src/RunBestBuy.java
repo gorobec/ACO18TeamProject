@@ -1,6 +1,6 @@
 
 import controller.BestBuy;
-import to.DataBaseHelper;
+import to.MapDataBaseHelper;
 import view.LoginWindow;
 
 public class RunBestBuy {
@@ -8,7 +8,7 @@ public class RunBestBuy {
     public static void main(String[] args) {
 
 
-        DataBaseHelper dbHelper = new DataBaseHelper();
+        MapDataBaseHelper dbHelper = new MapDataBaseHelper();
 
         dbHelper.loadDataBase();
 

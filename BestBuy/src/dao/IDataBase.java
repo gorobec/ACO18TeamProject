@@ -4,6 +4,7 @@ import exceptions.NoSuchProductException;
 import exceptions.NoSuchTicketException;
 import model.Product;
 import model.Ticket;
+import model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,11 @@ import java.util.Map;
  */
 public interface IDataBase {
 
-    Map<Integer, Product> getAllProducts();
+  //  Map<Integer, Product> getAllProducts();
 
-    Map<Integer, Ticket> getAllTickets();
+ //   Map<Integer, Ticket> getAllTickets();
+
+    String allProductsToString();
 
     Product getProductById(int id) throws NoSuchProductException;
 
@@ -24,6 +27,8 @@ public interface IDataBase {
     Ticket addTicket(Ticket ticket);
 
     Product addProduct(Product product);
+
+    User addUser(User user);
 
     int getMaxTicketID();
 
