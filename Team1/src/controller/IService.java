@@ -25,7 +25,7 @@ public interface IService {
 
     String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters;
 
-    boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
+    User signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException;
 
     User getUserByToken(String token) throws InvalidTokenException;
 

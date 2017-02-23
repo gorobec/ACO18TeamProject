@@ -2,6 +2,9 @@ package controller;
 
 import container.IDB.IDataBase;
 import container.IDB.IUserDataBase;
+import container.ProductDB;
+import container.TicketDB;
+import container.UserDB;
 import exception.*;
 import model.*;
 import utils.MailSender;
@@ -24,6 +27,12 @@ public class ServiceImpl implements IService {
         this.ticketDB = ticketDB;
     }
 
+    public ServiceImpl() {
+        this.userDB = new UserDB();
+        this.productDB = new ProductDB();
+        this.ticketDB = new TicketDB();
+    }
+
     // showAll
     @Override
     public List<Product> getProducts() {
@@ -33,6 +42,8 @@ public class ServiceImpl implements IService {
     // show product by ID
     @Override
     public Product getProductById(int id) throws InvalidIdException {
+        if(id < 0) throw new InvalidIdException("Id < 0");
+
         return productDB.get(id);
     }
 
@@ -41,6 +52,8 @@ public class ServiceImpl implements IService {
     public Ticket getTicketById(int id, String token) throws InvalidIdException, UserLoginException {
         if (!userDB.isTokenExisted(token))
             throw new UserLoginException("Token not found");
+
+        if(id < 0) throw new InvalidIdException("Id < 0");
 
         return ticketDB.get(id);
     }
@@ -57,11 +70,15 @@ public class ServiceImpl implements IService {
     @Override
     public int buy(int userID, int productID, Address address, BankCard creditCard) throws NoSuchProductException, InvalidInputParameters {
 
+        if(userID < 0 || productID < 0 || creditCard == null) throw new InvalidInputParameters("Incorrect input");
+
         Ticket newTicket = new Ticket(ticketDB.getAll().size() + 1, creditCard, address, productID);
         ticketDB.add(newTicket);
 
         User user = userDB.get(userID);
         Product product = productDB.get(newTicket.getProductID());
+
+        if(user == null || product == null) throw new InvalidInputParameters("Incorrect input");
 
         MailSender.sendEmail(user, newTicket, product);
 
@@ -83,7 +100,7 @@ public class ServiceImpl implements IService {
 
     // register
     @Override
-    public boolean signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException {
+    public User signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException {
 
         if (name == null || !name.matches(RegEx.USERNAME))
             throw new InvalidInputParameters("Incorrect user name");
@@ -96,7 +113,7 @@ public class ServiceImpl implements IService {
 
         User u = new User.UserBuilder().setName(pass).setPass(pass).setEmail(email).build();
 
-        return userDB.add(u);
+        return userDB.add(u) ? u : null;
     }
 
     // for save-load purposes
