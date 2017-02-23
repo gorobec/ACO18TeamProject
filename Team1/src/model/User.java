@@ -4,11 +4,11 @@ package model;
  * Created by v21k on 20.02.17.
  */
 public class User {
-    private int id;
     private static int nextID = 0;
     private final String name;
-    private String pass;
     private final String email;
+    private int id;
+    private String pass;
 
     private User(UserBuilder builder) {
         this.id = ++nextID;

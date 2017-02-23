@@ -1,5 +1,8 @@
 package model;
 
+import exception.InvalidInputParameters;
+import utils.RegEx;
+
 import java.time.YearMonth;
 
 /**
@@ -13,10 +16,18 @@ public class BankCard {
     public BankCard() {
     }
 
-    public BankCard(String number, int cvv2, YearMonth validUntilYear) {
-        this.number = number;
-        this.cvv2 = cvv2;
-        this.validUntil = validUntilYear;
+    public BankCard(String number, int cvv2, YearMonth validUntilYear) throws InvalidInputParameters {
+        if (number != null
+                && cvv2 > 99 && cvv2 < 1000
+                && validUntilYear != null
+                && number.matches(RegEx.ONLY_NUMERIC)
+                && number.length() == 16) {
+            this.number = number;
+            this.cvv2 = cvv2;
+            this.validUntil = validUntilYear;
+        } else {
+            throw new InvalidInputParameters("Wrong credit card info.");
+        }
     }
 
     public String getNumber() {

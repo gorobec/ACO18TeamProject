@@ -5,13 +5,12 @@ package model;
  */
 public class Ticket {
     private int id;
-    private static int nextID = 0;
     private BankCard bankCard;
     private Address address;
     private int productID;
 
-    public Ticket(BankCard bankCard, Address address, int productID) {
-        this.id = ++nextID;
+    public Ticket(int id, BankCard bankCard, Address address, int productID) {
+        this.id = id;
         this.bankCard = bankCard;
         this.address = address;
         this.productID = productID;

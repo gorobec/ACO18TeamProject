@@ -41,7 +41,7 @@ public class View {
                         System.out.println(ViewUtils.getProductById(iService));
                         break;
                     case 3:
-                        System.out.println(ViewUtils.buy(iService));
+                        System.out.println("Your ticket ID is: " + ViewUtils.buy(iService));
                         break;
                     case 4:
                         System.out.println("Your ticket ID is: " + ViewUtils.getTicketById(iService));

@@ -1,5 +1,8 @@
 package model;
 
+import exception.InvalidInputParameters;
+import utils.RegEx;
+
 /**
  * Created by v21k on 19.02.17.
  */
@@ -11,10 +14,16 @@ public class Address {
     public Address() {
     }
 
-    public Address(String city, String street, int number) {
-        this.city = city;
-        this.street = street;
-        this.number = number;
+    public Address(String city, String street, int number) throws InvalidInputParameters {
+        if (city != null && street != null && number > 0
+                && city.trim().matches(RegEx.ONLY_ALPHA)
+                && street.trim().matches(RegEx.ONLY_ALPHA)) {
+            this.city = city;
+            this.street = street;
+            this.number = number;
+        } else {
+            throw new InvalidInputParameters("Wrong address");
+        }
     }
 
     public String getCity() {

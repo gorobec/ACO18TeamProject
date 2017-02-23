@@ -1,8 +1,10 @@
 package view;
 
-import container.*;
 import container.IDB.IDataBase;
 import container.IDB.IUserDataBase;
+import container.ProductDB;
+import container.TicketDB;
+import container.UserDB;
 import controller.IService;
 import controller.ServiceImpl;
 import exception.*;
@@ -23,12 +25,11 @@ import java.util.stream.Collectors;
  * Created by v21k on 19.02.17.
  */
 public class ViewUtils {
-    private static Scanner sc = new Scanner(System.in);
-    private static String token;
-
+    private static final Scanner sc = new Scanner(System.in);
     private static final Path productDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/productsDB.txt");
     private static final Path ticketDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/ticketDB.txt");
     private static final Path userDB = Paths.get("/home/v21k/Java/dev/ACO18TeamProject/Team1/resources/userDB.txt");
+    private static String token;
 
     public static void initService(IService iService) {
         Product product = new Product(1, "IPhone");
@@ -50,6 +51,7 @@ public class ViewUtils {
         String street = sc.nextLine();
         System.out.println("Enter house number:");
         int number = Integer.parseInt(sc.nextLine());
+        Address address = new Address(city, street, number);
 
         System.out.println("Enter credit cart (12 digits):");
         String creditCardnumber = sc.nextLine();
@@ -58,14 +60,14 @@ public class ViewUtils {
         System.out.println("Valid until (year and months ): ");
         System.out.println("FORMAT : XXXX-XX");
         String valid = sc.nextLine();
-
         YearMonth yearMonth = YearMonth.parse(valid);
         BankCard bankCard = new BankCard(creditCardnumber, cvv, yearMonth);
-        Address address = new Address(city, street, number);
 
         int userID = iService.getUserByToken(token).getId();
 
         return iService.buy(userID, id, address, bankCard);
+
+
     }
 
     public static String getProductById(IService iService) throws InvalidIdException {
