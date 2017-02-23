@@ -1,6 +1,7 @@
 package view;
 
 import controller.BestBuy;
+import controller.IStore;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +11,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class CartWindow extends JFrame {
 
-    public CartWindow(BestBuy service) {
+    public CartWindow(IStore service) {
 
         setTitle("Cart");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

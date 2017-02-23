@@ -42,25 +42,11 @@ public class BestBuy implements IStore {
         return base.getTicketById(id);
     }
 
-    //@Override
-    public String printTicketById(Ticket ticket) {
-        if (ticket != null)
-            return ticket.toString();
-        else return "product == null";
-    }
 
     //  @Override
     public String printAllTickets() {
         return null;
     }
-
-
-    public String printProduct(Product product) {
-        if (product != null)
-            return product.toString();
-        else return "product == null";
-    }
-
 
     //We have to use next
     @Override

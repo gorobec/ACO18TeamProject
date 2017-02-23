@@ -1,6 +1,9 @@
 package view;
 
 import controller.BestBuy;
+import controller.IStore;
+import exceptions.IllegalPasswordException;
+import exceptions.NoSuchUserException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +13,9 @@ public class LoginWindow extends JFrame {
     private JTextField loginField;
     private JPasswordField passwordField;
 
-    public LoginWindow(BestBuy service) {
+    private String loginString;
+
+    public LoginWindow(IStore service) {
         String infoStr = "SIGN IN";
 
         setTitle("Login Window");
@@ -18,7 +23,7 @@ public class LoginWindow extends JFrame {
         setLocation(500, 250);
 
         Box box0 = Box.createHorizontalBox();
-        JLabel infoLabel = new JLabel("info: "+infoStr+"");
+        JLabel infoLabel = new JLabel("info: " + infoStr + "");
         box0.add(infoLabel);
         box0.add(Box.createHorizontalGlue());
 
@@ -43,9 +48,20 @@ public class LoginWindow extends JFrame {
             dispose();
         });
         JButton ok = new JButton("OK");
-        ok.addActionListener(e ->{
-            new ViewBestBuy(service);
-            dispose();
+        ok.addActionListener(e -> {
+            loginString = loginField.getText();
+            try {
+                service.checkLoginAndPassword(loginField.getText(), passwordField.getText());
+                new ViewBestBuy(service);
+                dispose();
+            } catch (NoSuchUserException e1) {
+                JOptionPane.showMessageDialog(null, "User with such login is Not registered",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            } catch (IllegalPasswordException e1) {
+                JOptionPane.showMessageDialog(null, "Wrong password",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
         });
         JButton cancel = new JButton("Cancel");
 

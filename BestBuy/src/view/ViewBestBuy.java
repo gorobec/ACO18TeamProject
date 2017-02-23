@@ -1,6 +1,7 @@
 package view;
 
 import controller.BestBuy;
+import controller.IStore;
 import exceptions.NoSuchProductException;
 import exceptions.NoSuchTicketException;
 
@@ -11,7 +12,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class ViewBestBuy extends JFrame {
 
-    public ViewBestBuy(BestBuy service) {
+    public ViewBestBuy(IStore service) {
 
         Dimension sizeWindow = Toolkit.getDefaultToolkit().getScreenSize();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -29,12 +30,12 @@ public class ViewBestBuy extends JFrame {
         Dimension labDim = new Dimension(1000, 40);
         label.setPreferredSize(labDim);
         topPanel.add(label);
-        JButton cartButton = new JButton("Cart");
-        Dimension butlDim = new Dimension(100, 50);
-        cartButton.setPreferredSize(butlDim);
-
-        cartButton.addActionListener(e -> new CartWindow(service));
-        topPanel.add(cartButton);
+//        JButton cartButton = new JButton("Cart");
+//        Dimension butlDim = new Dimension(100, 50);
+//        cartButton.setPreferredSize(butlDim);
+//
+//        cartButton.addActionListener(e -> new CartWindow(service));
+//        topPanel.add(cartButton);
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
         JPanel bottomPanel = new JPanel();
@@ -83,9 +84,10 @@ public class ViewBestBuy extends JFrame {
             int idProd = Integer.parseInt(productIdField.getText());
             String productStr = null;
             try {
-                productStr = service.printProduct(service.getProductById(idProd));
+                productStr = service.printProductById(idProd);
             } catch (NoSuchProductException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "There is no product with such ID",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
             }
             textArea.setText(productStr);
         });
@@ -101,14 +103,15 @@ public class ViewBestBuy extends JFrame {
             int idTick = Integer.parseInt(ticketIdField.getText());
             String ticketStr = null;
             try {
-                ticketStr = service.printTicketById(service.showTicketById(idTick));
+                ticketStr = service.printTicketById(idTick);
             } catch (NoSuchTicketException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "There is no ticket with such ID",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
             }
             textArea.setText(ticketStr);
         });
 
-        JButton buy = new JButton("ADD product to Cart by ID");
+        JButton buy = new JButton("BUY product by ID");
         buy.setPreferredSize(butDim3);
         rightTopPanel.add(buy);
         JTextField addToCart = new JTextField();

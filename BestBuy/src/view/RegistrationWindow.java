@@ -1,6 +1,11 @@
 package view;
 
 import controller.BestBuy;
+import controller.IStore;
+import exceptions.IllegalCreditCardFormatException;
+import exceptions.IllegalEmailFormatException;
+import exceptions.IllegalPasswordFormatException;
+import exceptions.UserWithSuchEmailRegisteredException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +17,9 @@ public class RegistrationWindow extends JFrame {
     private JTextField addressField;
     private JTextField creditCardField;
 
-    public RegistrationWindow(BestBuy service) {
+    private String loginString;
+
+    public RegistrationWindow(IStore service) {
 
         String infoStr = "Enter registration data";
 
@@ -21,7 +28,7 @@ public class RegistrationWindow extends JFrame {
         setLocation(500, 250);
 
         Box box0 = Box.createHorizontalBox();
-        JLabel infoLabel = new JLabel("info: "+infoStr+"");
+        JLabel infoLabel = new JLabel("info: " + infoStr + "");
         box0.add(infoLabel);
         box0.add(Box.createHorizontalGlue());
 
@@ -55,12 +62,34 @@ public class RegistrationWindow extends JFrame {
 
         Box box5 = Box.createHorizontalBox();
         JButton apply = new JButton("Apply");
-        apply.addActionListener(e -> {
-            new LoginWindow(service);
-            dispose();});
-        JButton cancel = new JButton("Cancel");
-        cancel.addActionListener(e -> dispose());
 
+        apply.addActionListener(e -> {
+            loginString = loginField.getText();
+            try {
+                service.registerUser(loginField.getText(), passwordField.getText(), addressField.getText(), creditCardField.getText());
+                JOptionPane.showMessageDialog(null, "You have registered now!!!\n" +
+                                " You can log in, using your login and password!!!", "Congratulation!",
+                        JOptionPane.INFORMATION_MESSAGE);
+                new LoginWindow(service);
+                dispose();
+            } catch (IllegalEmailFormatException emailEx) {
+                JOptionPane.showMessageDialog(null, "Illegal Email format",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } catch (UserWithSuchEmailRegisteredException loginEx) {
+                JOptionPane.showMessageDialog(null, "User with such login is already registered",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } catch (IllegalPasswordFormatException pasEx) {
+                JOptionPane.showMessageDialog(null, "Your password should have 6 chars minimum ",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } catch (IllegalCreditCardFormatException cardEx) {
+                JOptionPane.showMessageDialog(null, "Card with such number don't exists",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+        JButton cancel = new JButton("Cancel");
         cancel.addActionListener(e -> dispose());
 
         box5.add(Box.createHorizontalGlue());
