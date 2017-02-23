@@ -64,9 +64,10 @@ public class RegistrationWindow extends JFrame {
         JButton apply = new JButton("Apply");
 
         apply.addActionListener(e -> {
-            loginString = loginField.getText();
             try {
                 service.registerUser(loginField.getText(), passwordField.getText(), addressField.getText(), creditCardField.getText());
+                loginString = loginField.getText();
+                service.saveDatabase();
                 JOptionPane.showMessageDialog(null, "You have registered now!!!\n" +
                                 " You can log in, using your login and password!!!", "Congratulation!",
                         JOptionPane.INFORMATION_MESSAGE);

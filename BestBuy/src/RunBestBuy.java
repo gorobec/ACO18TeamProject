@@ -14,6 +14,6 @@ public class RunBestBuy {
         LoginWindow log = new LoginWindow(service);
 
         //этот метод надо вызвать при закрытии формы
-        service.saveDatabase();
+//        service.saveDatabase();
     }
 }

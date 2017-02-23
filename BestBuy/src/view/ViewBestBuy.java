@@ -7,6 +7,8 @@ import exceptions.NoSuchTicketException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -15,9 +17,36 @@ public class ViewBestBuy extends JFrame {
     public ViewBestBuy(IStore service) {
 
         Dimension sizeWindow = Toolkit.getDefaultToolkit().getScreenSize();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setSize(sizeWindow);
         setTitle("Best Buy SHOP");
+
+        addWindowListener(new WindowListener() {
+            public void windowActivated(WindowEvent event) {
+            }
+            public void windowClosed(WindowEvent event) {
+            }
+            public void windowClosing(WindowEvent event) {
+                Object[] options = { "Yes", "No" };
+                int n = JOptionPane
+                        .showOptionDialog(event.getWindow(), "Close the Window?",
+                                "Confirm EXIT", JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options,
+                                options[0]);
+                if (n == 0) {
+                    service.saveDatabase();
+                    event.getWindow().dispose();
+                }
+            }
+            public void windowDeactivated(WindowEvent event) {
+            }
+            public void windowDeiconified(WindowEvent event) {
+            }
+            public void windowIconified(WindowEvent event) {
+            }
+            public void windowOpened(WindowEvent event) {
+            }
+        });
 
         Container container = getContentPane();
 
