@@ -1,23 +1,76 @@
 package view;
 
+<<<<<<< HEAD
 import controller.Service;
+=======
+import controller.IStore;
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
 import exceptions.NoSuchProductException;
 import exceptions.NoSuchTicketException;
+import exceptions.TicketIsEmptyException;
 
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
+=======
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class ViewBestBuy extends JFrame {
 
+<<<<<<< HEAD
     public ViewBestBuy(Service service) {
+=======
+    private String login;
+
+     ViewBestBuy(IStore service) {
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
 
         Dimension sizeWindow = Toolkit.getDefaultToolkit().getScreenSize();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(sizeWindow);
         setTitle("Best Buy SHOP");
 
+<<<<<<< HEAD
+=======
+        addWindowListener(new WindowListener() {
+            public void windowActivated(WindowEvent event) {
+            }
+
+            public void windowClosed(WindowEvent event) {
+            }
+
+            public void windowClosing(WindowEvent event) {
+                Object[] options = {"Yes", "No"};
+                int n = JOptionPane
+                        .showOptionDialog(event.getWindow(), "Close the Window?",
+                                "Confirm EXIT", JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options,
+                                options[0]);
+                if (n == 0) {
+                    service.saveDatabase();
+                    event.getWindow().dispose();
+                }
+            }
+
+            public void windowDeactivated(WindowEvent event) {
+            }
+
+            public void windowDeiconified(WindowEvent event) {
+            }
+
+            public void windowIconified(WindowEvent event) {
+            }
+
+            public void windowOpened(WindowEvent event) {
+            }
+        });
+
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
         Container container = getContentPane();
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -110,11 +163,23 @@ public class ViewBestBuy extends JFrame {
 
         JButton buy = new JButton("ADD product to Cart by ID");
         buy.setPreferredSize(butDim3);
+        JTextField buyField = new JTextField();
+        buyField.setPreferredSize(fieldIdDim);
         rightTopPanel.add(buy);
-        JTextField addToCart = new JTextField();
-        addToCart.setPreferredSize(fieldIdDim);
-        rightTopPanel.add(buy);
-        rightTopPanel.add(addToCart);
+        rightTopPanel.add(buyField);
+
+        buy.addActionListener((ActionEvent event) -> {
+//            int idProd = Integer.parseInt(buyField.getText());
+//            String ticketStr = null;
+            try {
+                service.buy();
+                service.saveDatabase();
+            } catch (TicketIsEmptyException e) {
+                JOptionPane.showMessageDialog(null, "Ticket is empty",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+//            textArea.setText(ticketStr);
+        });
 
         JPanel rightBottomPanel = new JPanel();
         rightBottomPanel.setPreferredSize(rightTopPaneldim);
@@ -140,6 +205,17 @@ public class ViewBestBuy extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+<<<<<<< HEAD
+=======
+
     }
 
+    public String getThisLogin() {
+        return login;
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 }

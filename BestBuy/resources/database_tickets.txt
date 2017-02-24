@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {"1":{"id":1},"2":{"id":2}}
 =======
 null
 >>>>>>> b32e2468435e54b56b311570238e0c2a74d5042a
+=======
+{"0":{"id":0,"productID":1,"user":{"email":"ksyashka@ukr.net","password":"123456","creditCard":"Kiev","address":"4444 4444 4444 4444"}}}
+>>>>>>> b904e875bf9d16d0806129702664b4b56d3f7fa0
