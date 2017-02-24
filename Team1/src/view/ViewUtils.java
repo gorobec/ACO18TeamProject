@@ -42,6 +42,10 @@ public class ViewUtils {
     }
 
     public static int buy(IService iService) throws NoSuchProductException, InvalidTokenException, InvalidInputParameters {
+        if (iService.getUserByToken(token) == null){
+            return -1;
+        }
+
         System.out.println("Choose product ID");
         int id = Integer.parseInt(sc.nextLine());
 
@@ -111,6 +115,11 @@ public class ViewUtils {
 
         token = iService.logIn(name, pass);
         return token != null ? "OK" : "FAILED";
+    }
+
+    public static String logOut(){
+        token = "";
+        return "OK";
     }
 
     public static void save(IService iService) throws IOException {

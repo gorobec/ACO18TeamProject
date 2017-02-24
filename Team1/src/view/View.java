@@ -17,7 +17,7 @@ public class View {
         try {
             view();
         } catch (IOException | StoreException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -41,7 +41,8 @@ public class View {
                         System.out.println(ViewUtils.getProductById(iService));
                         break;
                     case 3:
-                        System.out.println("Your ticket ID is: " + ViewUtils.buy(iService));
+                        int result = ViewUtils.buy(iService);
+                        System.out.println(result > 0 ? "Your ticket ID is: " + result : "Login first");
                         break;
                     case 4:
                         System.out.println("Your ticket ID is: " + ViewUtils.getTicketById(iService));
@@ -51,6 +52,9 @@ public class View {
                         break;
                     case 7:
                         System.out.println(ViewUtils.login(iService));
+                        break;
+                    case 8:
+                        System.out.println(ViewUtils.logOut());
                         break;
                     case 0:
                         System.out.println("Bye");
@@ -73,6 +77,7 @@ public class View {
         System.out.println("4. Show ticket by ID");
         System.out.println("6. Register");
         System.out.println("7. Login");
+        System.out.println("8. Log out");
     }
 }
 
