@@ -6,8 +6,6 @@ import model.Product;
 import model.Ticket;
 import model.User;
 
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Администратор on 21.02.2017.
@@ -39,4 +37,8 @@ public interface IDataBase {
     int getMaxTicketID();
 
     int getMaxProductID();
+
+
+    boolean loadDatabase();
+    boolean saveDatabase();
 }

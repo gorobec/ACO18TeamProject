@@ -37,7 +37,6 @@ public class MailSender {
             message.setFrom(new InternetAddress("from@no-spam.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(ticket.getUser().getEmail()));
-            System.out.println(ticket.getUser().getEmail());
             message.setSubject("New Order №" + ticket.getId());
             message.setText("Dear buyer,\nyour order has been sent, please wait.\nThank you\n" + ticket.toString());
 

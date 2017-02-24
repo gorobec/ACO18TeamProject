@@ -1,6 +1,5 @@
 package view;
 
-import controller.BestBuy;
 import controller.IStore;
 
 import javax.swing.*;

@@ -5,8 +5,9 @@ import exceptions.NoSuchTicketException;
 import model.Product;
 import model.Ticket;
 import model.User;
-
-import javax.xml.crypto.Data;
+import to.FileHelper;
+import to.Serializer;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -14,11 +15,16 @@ import java.util.Map;
  */
 public class MapDataBase implements IDataBase {
 
+    private static String FILE_FOR_PRODUCTS = "BestBuy/resources/database_products.txt";
+    private static String FILE_FOR_TICKETS = "BestBuy/resources/database_tickets.txt";
+    private static String FILE_FOR_USERS = "BestBuy/resources/database_users.txt";
+
     private Map<Integer, Product> products;
     private Map<Integer, Ticket> tickets;
     private Map<String, User> users;
 
-    public MapDataBase() {}
+    public MapDataBase() {
+    }
 
     public MapDataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets, Map<String, User> users) {
         this.products = products;
@@ -41,17 +47,6 @@ public class MapDataBase implements IDataBase {
         return users.put(user.getEmail(), user);
     }
 
-    public Map<Integer, Product> getAllProducts() {
-        return products;
-    }
-
-    public Map<Integer, Ticket> getAllTickets() {
-        return tickets;
-    }
-
-    public Map<String, User> getAllUsers() {
-        return users;
-    }
 
     @Override
     public boolean containsUser(String login) {
@@ -116,5 +111,48 @@ public class MapDataBase implements IDataBase {
             }
         }
         return maxKey;
+    }
+
+
+    @Override
+    public boolean loadDatabase() {
+        FileHelper fh = new FileHelper();
+        Serializer<Integer, Product> serProd = new Serializer<>();
+        Serializer<Integer, Ticket> serTicket = new Serializer<>();
+        Serializer<String, User> serUser = new Serializer<>();
+        String jsonProduct, jsonTicket, jsonUser;
+
+        try {
+            jsonProduct = fh.readFromFile(FILE_FOR_PRODUCTS);
+            jsonTicket = fh.readFromFile(FILE_FOR_TICKETS);
+            jsonUser = fh.readFromFile(FILE_FOR_USERS);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        products = serProd.convertJsonToProduct(jsonProduct);
+        tickets = serTicket.convertJsonToTicket(jsonTicket);
+        users = serUser.convertJsonToUser(jsonUser);
+
+        return true;
+    }
+
+    @Override
+    public boolean saveDatabase() {
+
+        FileHelper fh = new FileHelper();
+        Serializer<Integer, Product> serProd = new Serializer<>();
+        Serializer<Integer, Ticket> serTicket = new Serializer<>();
+        Serializer<String, User> serUser = new Serializer<>();
+        try {
+            fh.writeToFile(serProd.convertObjectToJson(products), FILE_FOR_PRODUCTS);
+            fh.writeToFile(serTicket.convertObjectToJson(tickets), FILE_FOR_TICKETS);
+            fh.writeToFile(serUser.convertObjectToJson(users), FILE_FOR_USERS);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

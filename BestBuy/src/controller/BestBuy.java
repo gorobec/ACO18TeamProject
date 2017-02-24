@@ -1,13 +1,11 @@
 package controller;
 
 import dao.IDataBase;
-import dao.MapDataBase;
 import exceptions.*;
 import model.Product;
 import model.Ticket;
 import model.User;
 import to.MailSender;
-import to.MapDataBaseHelper;
 import to.Validator;
 
 /**
@@ -22,44 +20,14 @@ public class BestBuy implements IStore {
 
     private int chosenProductId;
 
- /*   public BestBuy(IDataBase base) {
+    public BestBuy(IDataBase base) {
         this.base = base;
-    }*/
-
-  /*  @Override
-    public Map<Integer, Product> getAllProducts() {
-        return base.getAllProducts();
-    }*/
-
-    //@Override
-    public Product getProductById(int id) throws NoSuchProductException {
-        return base.getProductById(id);
     }
 
-    // @Override
-    public Ticket buy(User user, int productId) {
-        Ticket tc = new Ticket(user, productId);
-        base.addTicket(tc);
-        return tc;
-    }
-
-    // @Override
-    public Ticket showTicketById(int id) throws NoSuchTicketException {
-        return base.getTicketById(id);
-    }
-
-
-    //  @Override
-    public String printAllTickets() {
-        return null;
-    }
-
-    //We have to use next
     @Override
     public String printAllProducts() {
         return base.allProductsToString();
     }
-
 
     @Override
     public boolean checkLoginAndPassword(String login, String password) throws IllegalPasswordException, NoSuchUserException {
@@ -75,7 +43,6 @@ public class BestBuy implements IStore {
 
         return true;
     }
-
 
     @Override
     public boolean registerUser(String email, String password, String address, String creditCard) throws IllegalPasswordFormatException, IllegalEmailFormatException, UserWithSuchEmailRegisteredException, IllegalCreditCardFormatException {
@@ -130,31 +97,26 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public boolean buy() throws TicketIsEmptyException {
+    public String buy() throws TicketIsEmptyException {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
-        Ticket ticket = new Ticket(currentUser,chosenProductId);
+        Ticket ticket = new Ticket(currentUser, chosenProductId);
         base.addTicket(ticket);
 
         MailSender mailSender = new MailSender();
         mailSender.sendMail(ticket);
-        return true;
+        return ticket.toString();
     }
 
     @Override
     public boolean loadDatabase() {
-        MapDataBaseHelper dbHelper = new MapDataBaseHelper((MapDataBase)base);
-        dbHelper.loadDataBase();
-        base = dbHelper.getDb();
-        return true;
+        return base.loadDatabase();
     }
 
     @Override
     public boolean saveDatabase() {
-        MapDataBaseHelper dbHelper = new MapDataBaseHelper((MapDataBase)base);
-        dbHelper.unloadDataBase();
-        return true;
+        return base.saveDatabase();
     }
 
 }
