@@ -38,9 +38,15 @@ public class MailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("from@no-spam.com"));
             message.setRecipients(Message.RecipientType.TO,
+<<<<<<< HEAD
                     InternetAddress.parse("USER MAIL"));
             message.setSubject("New Order");
             message.setText("Текст сообщения");
+=======
+                    InternetAddress.parse(ticket.getUser().getEmail()));
+            message.setSubject("New Order №" + ticket.getId());
+            message.setText("Dear buyer,\nyour order has been sent, please wait.\nThank you\n" + ticket.toString());
+>>>>>>> c76d27dd9d564296fd56155b5fa253888c031950
 
             Transport.send(message);
 

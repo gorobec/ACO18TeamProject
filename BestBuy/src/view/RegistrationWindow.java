@@ -1,6 +1,14 @@
 package view;
 
+<<<<<<< HEAD
 import controller.Service;
+=======
+import controller.IStore;
+import exceptions.IllegalCreditCardFormatException;
+import exceptions.IllegalEmailFormatException;
+import exceptions.IllegalPasswordFormatException;
+import exceptions.UserWithSuchEmailRegisteredException;
+>>>>>>> c76d27dd9d564296fd56155b5fa253888c031950
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
