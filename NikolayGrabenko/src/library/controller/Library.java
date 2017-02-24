@@ -28,7 +28,8 @@ public class Library {
     public boolean isRegistered(Reader someReader) {
         boolean isRegistered = false;
         for (int i = 0; i < registeredReaders.size(); i++) {
-            if (registeredReaders.get(i).equals(someReader)) {
+            Reader tempReader = (Reader) registeredReaders.get(i);
+            if (tempReader.equals(someReader)) {
                 isRegistered = true;
                 break;
             }
@@ -170,17 +171,41 @@ public class Library {
 
     // 5)выдать печатное издание читателю(если книга есть в наличии).
     // Читателю запрещается брать больше 3-х печатных изданий.
-    public boolean loanPrintedEdition(Reader reader, PrintedEditions edition) {
-        boolean canLoan = false;
-        if (edition != null && reader.getCounterOfPrintEds() < 3 &&
-                reader.isNotInBlackList() && isAvailablePrintEds(edition) &&
-                !reader.isEditionInReaderList(edition)&& isRegistered(reader)) {
-            reader.addPrintedEditionToList(edition);
-            edition.setNumberOfCopiesAvailable(edition.getNumberOfCopiesAvailable() - 1);
-            edition.setNumberOfCopiesAtReader(edition.getNumberOfCopiesAtReader() + 1);
-            canLoan = true;
+    public boolean loanPrintedEdition(String readerName, String readerSurName, int age, PrintedEditions edition) {
+        Reader reader = findReaderByNameAndSurname(readerName, readerSurName, age);
+        PrintedEditions printedEdition = findEdition(edition);
+        if (printedEdition != null && reader != null && reader.getCounterOfPrintEds() < 3 &&
+                reader.isNotInBlackList() && isAvailablePrintEds(printedEdition)) {
+            reader.addPrintedEditionToList(printedEdition);
+            printedEdition.setNumberOfCopiesAvailable(printedEdition.getNumberOfCopiesAvailable() - 1);
+            printedEdition.setNumberOfCopiesAtReader(printedEdition.getNumberOfCopiesAtReader() + 1);
+            return true;
         }
-        return canLoan;
+        return false;
+    }
+
+    private PrintedEditions findEdition(PrintedEditions edition) {
+        PrintedEditions printedEdition = null;
+        for (int i = 0; i < printedEditionsBase.size(); i++) {
+            if (edition.equals(printedEditionsBase.get(i))) {
+                printedEdition = (PrintedEditions) printedEditionsBase.get(i);
+            }
+        }
+        return printedEdition;
+    }
+
+    public Reader findReaderByNameAndSurname(String readerName, String readerSurName, int age) {
+        Reader reader = null;
+        for (int i = 0; i < registeredReaders.size(); i++) {
+            if (registeredReaders.get(i) != null) {
+                reader = (Reader) registeredReaders.get(i);
+                if (reader.getName().equals(readerName) &&
+                        reader.getSurName().equals(readerSurName) &&
+                        reader.getAge() == age)
+                    break;
+            }
+        }
+        return reader;
     }
 
     // 6)посмотреть список печатных изданий,которые находятся у читателей
@@ -207,7 +232,7 @@ public class Library {
     // *пункты 1,2,6,7,9,10,11,12выводить в отсортированом виде
     public String showPrintedEditionsAtOneReader(Reader reader) {
         String result = "";
-        if (reader.getReaderEditions().size() > 0 ) {
+        if (reader.getReaderEditions().size() > 0) {
             for (int i = 0; i < reader.getReaderEditions().size(); i++) {
                 PrintedEditions edition = (PrintedEditions) reader.getReaderEditions().get(i);
                 result = edition.showEdition() + "\n";
@@ -273,7 +298,7 @@ public class Library {
             if (printedEditionsBase.get(i) != null) {
                 PrintedEditions edition = (PrintedEditions) printedEditionsBase.get(i);
                 if (findStringByKeyWord(edition.getName(), keyWord)) {
-                    foundEdition=edition;
+                    foundEdition = edition;
                     System.out.println(foundEdition.showEdition());
                 }
             }

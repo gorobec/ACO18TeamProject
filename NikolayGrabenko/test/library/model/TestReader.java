@@ -49,7 +49,7 @@ public class TestReader {
     public void testGetCounterOfPrinEds1Added() {
         library.addPrintedEdition(edition);
         library.addReader(reader);
-        library.loanPrintedEdition(reader, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
         assertEquals(1, reader.getCounterOfPrintEds());
     }
 
@@ -57,9 +57,9 @@ public class TestReader {
     public void testGetCounterOfPrinEds2Added() {
         library.addPrintedEdition(edition);
         library.addReader(reader);
-        library.loanPrintedEdition(reader, edition);
-        library.loanPrintedEdition(reader, edition); // we can't loan same book
-        assertEquals(1, reader.getCounterOfPrintEds());
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
+        library.loanPrintedEdition("Will", "Smith", 40, edition); // we canloan same book
+        assertEquals(2, reader.getCounterOfPrintEds());
     }
 
     @Test
@@ -84,8 +84,8 @@ public class TestReader {
     public void testIsEditionInReaderList() {
         library.addReader(reader);
         library.addPrintedEdition(edition);
-        library.loanPrintedEdition(reader, edition);
-        assertTrue(reader.isEditionInReaderList(edition));
+        library.loanPrintedEdition("Will", "Smith", 40, edition);
+        assertTrue(reader.isEditionInListOfReader(edition));
     }
 
     @Test

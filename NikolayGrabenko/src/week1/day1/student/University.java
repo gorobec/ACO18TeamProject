@@ -1,4 +1,4 @@
-package week1.day1;
+package week1.day1.student;
 
 public class University {
 

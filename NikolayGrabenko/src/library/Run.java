@@ -69,9 +69,9 @@ public class Run {
         // 5) выдать печатное издание читателю (если книга есть в наличии).
         // Читателю запрещается брать больше 3-х печатных изданий.
         System.out.println("Выдаем книги 4-му,  1-му читателю и 2-му читателю:");
-        System.out.println(library.loanPrintedEdition(reader4, goneWithTheWind));
-        System.out.println(library.loanPrintedEdition(reader1, effectiveJava));
-        System.out.println(library.loanPrintedEdition(reader2, thinkingInJava));
+        System.out.println(library.loanPrintedEdition("Koby", "Briant", 35, goneWithTheWind));
+        System.out.println(library.loanPrintedEdition("Will", "Smith", 40, effectiveJava));
+        System.out.println(library.loanPrintedEdition("Bruce", "Willis", 50, thinkingInJava));
         System.out.println();
 
         // 6) посмотреть список печатных изданий, которые находятся у читателей
@@ -96,7 +96,7 @@ public class Run {
         System.out.println("Добавляем 2-го читателя  в черный список :");
         System.out.println(library.addToBlackList(reader2));
         System.out.println("Пытаемся выдать 2-му читателю  книгу: ");
-        System.out.println(library.loanPrintedEdition(reader2, thinkingInJava));
+        System.out.println(library.loanPrintedEdition("Bruce", "Willis", 50, thinkingInJava));
         System.out.println("Смотрим список печатных изданий, которые находятся у 2-го читателя :");
         System.out.println(library.showPrintedEditionsAtOneReader(reader2));
         System.out.println();

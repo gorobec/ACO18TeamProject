@@ -15,17 +15,17 @@ public class ArrayListMy<T> implements ListMy {
 
     private int capacity = 10;
     private int size = 0;
-    private Object[] arrayListBody;
+    private T[] arrayListBody;
 
     public ArrayListMy() {
-        arrayListBody = new Object[capacity];
+        arrayListBody = (T[]) new Object[capacity];
     }
 
     public ArrayListMy(int capacity) {
         if (capacity == 0) {
-            arrayListBody = new Object[0];
+            arrayListBody = (T[]) new Object[0];
         } else if (capacity > 0) {
-            arrayListBody = new Object[capacity];
+            arrayListBody = (T[]) new Object[capacity];
         } else {
             System.out.println("You've entered wrong capacity (it should be >= 0)");
         }
@@ -39,8 +39,8 @@ public class ArrayListMy<T> implements ListMy {
         return size;
     }
 
-    public Object get(int index) {
-        Object o;
+    public T get(int index) {
+        T o;
         if (index >= 0 && index <= size)
             o = arrayListBody[index];
         else
@@ -51,7 +51,7 @@ public class ArrayListMy<T> implements ListMy {
     private void increaseCapacity() {
 
         capacity = capacity * 3 / 2 + 1;
-        Object[] temp = new Object[capacity];
+        T[] temp = (T[]) new Object[capacity];
         System.arraycopy(arrayListBody, 0, temp, 0, size);
         arrayListBody = temp;
 
@@ -61,7 +61,7 @@ public class ArrayListMy<T> implements ListMy {
         if (size < arrayListBody.length) {
             for (int i = 0; i < arrayListBody.length; i++) {
                 if (arrayListBody[i] == null) {
-                    arrayListBody[i] = o;
+                    arrayListBody[i] = (T) o;
                     size++;
                     break;
                 }
@@ -75,26 +75,24 @@ public class ArrayListMy<T> implements ListMy {
     }
 
     public boolean add(int index, Object o) {
+        boolean canAdd = false;
         if (index < arrayListBody.length - 1) {
             System.arraycopy(arrayListBody, index, arrayListBody, index + 1, arrayListBody.length - 1 - index);
-            arrayListBody[index] = o;
+            arrayListBody[index] = (T) o;
             size++;
-        } else {
-            increaseCapacity();
-            add(index, o);
+            canAdd = true;
         }
-        return true;
+        return canAdd;
     }
 
     public boolean remove(int index) {
         boolean isRemoved = false;
-        if (index <= size) {
+        if (index < size && index >= 0) {
             System.arraycopy(arrayListBody, index + 1, arrayListBody, index, size - index);
             arrayListBody[size] = null;
             size--;
             isRemoved = true;
-        } else
-            System.out.println("You've entered wrong index");
+        }
         return isRemoved;
     }
 
@@ -114,10 +112,10 @@ public class ArrayListMy<T> implements ListMy {
 
     public boolean set(int index, Object obj) {
         boolean isSet = false;
-        if (index >= 0 && index <= size) {
+        if (index >= 0 && index < size) {
             for (int i = 0; i < arrayListBody.length; i++) {
                 if (i == index) {
-                    arrayListBody[i] = obj;
+                    arrayListBody[i] = (T) obj;
                     isSet = true;
                 }
             }
@@ -133,6 +131,7 @@ public class ArrayListMy<T> implements ListMy {
         size = 0;
     }
 
+    @Override
     public boolean contains(Object obj) {
         boolean flag = false;
         for (int i = 0; i < arrayListBody.length; i++) {
