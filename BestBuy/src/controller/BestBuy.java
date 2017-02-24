@@ -6,6 +6,7 @@ import exceptions.*;
 import model.Product;
 import model.Ticket;
 import model.User;
+import to.MailSender;
 import to.MapDataBaseHelper;
 import to.Validator;
 
@@ -18,6 +19,8 @@ public class BestBuy implements IStore {
     private IDataBase base;
 
     private User currentUser;
+
+    private int chosenProductId;
 
  /*   public BestBuy(IDataBase base) {
         this.base = base;
@@ -106,9 +109,14 @@ public class BestBuy implements IStore {
     @Override
     public String printProductById(int id) throws NoSuchProductException {
         Product product = base.getProductById(id);
-        if (product != null)
+        if (product != null) {
+            chosenProductId = id;
             return product.toString();
-        else return "product == null";
+        } else {
+            chosenProductId = -1;
+            return "product == null";
+        }
+
     }
 
     @Override
@@ -123,7 +131,15 @@ public class BestBuy implements IStore {
 
     @Override
     public boolean buy() throws TicketIsEmptyException {
-        return false;
+        if (chosenProductId < 0) {
+            throw new TicketIsEmptyException("No product in ticket!");
+        }
+        Ticket ticket = new Ticket(currentUser,chosenProductId);
+        base.addTicket(ticket);
+
+        MailSender mailSender = new MailSender();
+        mailSender.sendMail(ticket);
+        return true;
     }
 
     @Override
