@@ -14,7 +14,7 @@ public interface IStore {
     String printAllProducts();
 
     //// button - "OK " in login Window
-    boolean checkLoginAndPassword(String login, String password) throws NoSuchUserException, IllegalPasswordException;
+    boolean checkLoginAndPassword(String login, String password) throws NoSuchUserException, IncorrectPasswordException;
 
     // //button - "Apply " in Registration Window
     boolean registerUser(String email, String password, String address, String creditCard) throws IllegalEmailFormatException, UserWithSuchEmailRegisteredException, IllegalPasswordFormatException, IllegalCreditCardFormatException;
