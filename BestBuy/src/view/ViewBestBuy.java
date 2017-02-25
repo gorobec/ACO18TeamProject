@@ -159,8 +159,7 @@ public class ViewBestBuy extends JFrame {
         buy.setPreferredSize(butDim3);
         JTextField buyField = new JTextField();
         buyField.setPreferredSize(fieldIdDim);
-        rightTopPanel.add(buy);
-        rightTopPanel.add(buyField);
+
 
         buy.addActionListener((ActionEvent event) -> {
 //            int idProd = Integer.parseInt(buyField.getText());
@@ -177,6 +176,10 @@ public class ViewBestBuy extends JFrame {
 
         JPanel rightBottomPanel = new JPanel();
         rightBottomPanel.setPreferredSize(rightTopPaneldim);
+
+        rightBottomPanel.add(buy);
+        rightBottomPanel.add(buyField);
+        buyField.setVisible(false);
 
 
         JButton showProducts = new JButton("Show all products in catalog");
