@@ -30,13 +30,13 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public boolean checkLoginAndPassword(String login, String password) throws IllegalPasswordException, NoSuchUserException {
+    public boolean checkLoginAndPassword(String login, String password) throws IncorrectPasswordException, NoSuchUserException {
 
         if (!base.containsUser(login)) {
             throw new NoSuchUserException("User not found in database!");
         }
         if (!base.getUserPassword(login).equals(password)) {
-            throw new IllegalPasswordException("Password not correct!");
+            throw new IncorrectPasswordException("Password not correct!");
         }
 
         currentUser = base.getUserByLogin(login);
