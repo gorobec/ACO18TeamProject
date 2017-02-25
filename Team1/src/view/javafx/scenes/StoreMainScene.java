@@ -18,6 +18,7 @@ import view.javafx.ViewJavaFX;
 
 import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by v21k on 24.02.17.
@@ -40,7 +41,7 @@ public class StoreMainScene {
         Text idResult = new Text();
 
         GridPane gridPane = new GridPane();
-        gridPane.setMinSize(600, 400);
+        gridPane.setMinSize(1000, 600);
         gridPane.setPadding(new Insets(10, 10, 10, 10));
         gridPane.setVgap(5);
         gridPane.setHgap(5);
@@ -77,8 +78,8 @@ public class StoreMainScene {
         });
 
         showAllProducts.setOnAction(event -> {
-            List<Product> productList = iService.getProducts();
-            allProducts.setText(productList.toString());
+            String res = iService.getProducts().stream().map(Object::toString).collect(Collectors.joining());
+            allProducts.setText(res);
         });
 
         buy.setOnAction(event -> {
