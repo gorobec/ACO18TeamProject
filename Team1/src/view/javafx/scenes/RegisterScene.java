@@ -64,7 +64,7 @@ public class RegisterScene {
 
         gridPane.add(submit, 0, 3);
         gridPane.add(clear, 1, 3);
-        gridPane.add(back, 1, 4);
+        gridPane.add(back, 2, 3);
 
         //Styling nodes
         submit.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");

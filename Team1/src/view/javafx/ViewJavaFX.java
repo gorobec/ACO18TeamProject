@@ -4,11 +4,6 @@ package view.javafx;/**
 
 import controller.IService;
 import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import view.ViewUtils;
 import view.javafx.scenes.LoginScene;
@@ -31,6 +26,7 @@ public class ViewJavaFX extends Application {
         iService = ViewUtils.load();
 
         primaryStage.setScene(LoginScene.loginScene(iService));
+        primaryStage.setTitle("Welcome to our store!");
         primaryStage.show();
     }
 }
