@@ -17,7 +17,7 @@ public class ViewBestBuy extends JFrame {
 
     private String login;
 
-     ViewBestBuy(IStore service) {
+    ViewBestBuy(IStore service) {
 
         Dimension sizeWindow = Toolkit.getDefaultToolkit().getScreenSize();
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -119,12 +119,15 @@ public class ViewBestBuy extends JFrame {
         rightTopPanel.add(productIdField);
 
         getProductByIdBut.addActionListener(event -> {
-            int idProd = Integer.parseInt(productIdField.getText());
             String productStr = null;
             try {
+                int idProd = Integer.parseInt(productIdField.getText());
                 productStr = service.printProductById(idProd);
             } catch (NoSuchProductException e) {
                 JOptionPane.showMessageDialog(null, "There is no product with such ID",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            } catch (NumberFormatException nfex) {
+                JOptionPane.showMessageDialog(null, "Illegal input format of product ID",
                         "Warning", JOptionPane.WARNING_MESSAGE);
             }
             textArea.setText(productStr);
@@ -138,18 +141,21 @@ public class ViewBestBuy extends JFrame {
         rightTopPanel.add(ticketIdField);
 
         getTicketByIdBut.addActionListener(event -> {
-            int idTick = Integer.parseInt(ticketIdField.getText());
             String ticketStr = null;
             try {
+                int idTick = Integer.parseInt(ticketIdField.getText());
                 ticketStr = service.printTicketById(idTick);
             } catch (NoSuchTicketException e) {
                 JOptionPane.showMessageDialog(null, "There is no ticket with such ID",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            } catch (NumberFormatException nfex) {
+                JOptionPane.showMessageDialog(null, "Illegal input format of ticket ID",
                         "Warning", JOptionPane.WARNING_MESSAGE);
             }
             textArea.setText(ticketStr);
         });
 
-        JButton buy = new JButton("BUY product by ID");
+        JButton buy = new JButton("BUY");
         buy.setPreferredSize(butDim3);
         JTextField buyField = new JTextField();
         buyField.setPreferredSize(fieldIdDim);
@@ -158,15 +164,15 @@ public class ViewBestBuy extends JFrame {
 
         buy.addActionListener((ActionEvent event) -> {
 //            int idProd = Integer.parseInt(buyField.getText());
-//            String ticketStr = null;
+            String ticketStr = null;
             try {
-                service.buy();
+                ticketStr = service.buy();
                 service.saveDatabase();
             } catch (TicketIsEmptyException e) {
                 JOptionPane.showMessageDialog(null, "Ticket is empty",
                         "Warning", JOptionPane.WARNING_MESSAGE);
             }
-//            textArea.setText(ticketStr);
+            textArea.setText("YOUR BUY: \n " + ticketStr);
         });
 
         JPanel rightBottomPanel = new JPanel();

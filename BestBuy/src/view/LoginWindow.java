@@ -1,8 +1,7 @@
 package view;
 
-import controller.BestBuy;
 import controller.IStore;
-import exceptions.IllegalPasswordException;
+import exceptions.IncorrectPasswordException;
 import exceptions.NoSuchUserException;
 
 import javax.swing.*;
@@ -52,12 +51,13 @@ public class LoginWindow extends JFrame {
             loginString = loginField.getText();
             try {
                 service.checkLoginAndPassword(loginField.getText(), passwordField.getText());
-                new ViewBestBuy(service);
+                ViewBestBuy mainWindow = new ViewBestBuy(service);
+                mainWindow.setLogin(loginField.getText());
                 dispose();
             } catch (NoSuchUserException e1) {
                 JOptionPane.showMessageDialog(null, "User with such login is Not registered",
                         "Warning", JOptionPane.WARNING_MESSAGE);
-            } catch (IllegalPasswordException e1) {
+            } catch (IncorrectPasswordException e1) {
                 JOptionPane.showMessageDialog(null, "Wrong password",
                         "Warning", JOptionPane.WARNING_MESSAGE);
             }
