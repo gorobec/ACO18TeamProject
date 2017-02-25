@@ -101,7 +101,7 @@ public class BestBuy implements IStore {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
-        Ticket ticket = new Ticket(currentUser, chosenProductId);
+        Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
 
         MailSender mailSender = new MailSender();
