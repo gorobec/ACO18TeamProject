@@ -28,5 +28,7 @@ public class ViewJavaFX extends Application {
         primaryStage.setScene(LoginScene.loginScene(iService));
         primaryStage.setTitle("Welcome to our store!");
         primaryStage.show();
+
+        ViewUtils.save(iService);
     }
 }
