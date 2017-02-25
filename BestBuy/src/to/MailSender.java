@@ -43,7 +43,8 @@ public class MailSender {
             Transport.send(message);
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
 
         return true;
