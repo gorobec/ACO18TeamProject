@@ -26,5 +26,4 @@ public class DataBaseConverter {
         String objectJson = GSON.toJson(object);
         Files.write(path, objectJson.getBytes(), StandardOpenOption.CREATE);
     }
-
 }
