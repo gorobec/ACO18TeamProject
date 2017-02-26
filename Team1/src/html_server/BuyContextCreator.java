@@ -19,8 +19,8 @@ public class BuyContextCreator {
     /**
      * sends in response ticket id if all good, else "NULL"
      * required request have to be similar to
-     *          ".../buy?productId=<id>&city=<city>&street=<street>&house=<house>
-     *              &bankCardNumber=<number>&bankCardCvv2=<cvv2>&bankCardDate=<year + month in format XXXX-XX>"
+     * ".../buy?productId=<id>&city=<city>&street=<street>&house=<house>
+     * &bankCardNumber=<number>&bankCardCvv2=<cvv2>&bankCardDate=<year + month in format XXXX-XX>"
      */
 
     public static void createBuyContext(HttpServer httpServer, IService iService) {
@@ -29,7 +29,7 @@ public class BuyContextCreator {
 
             String response = "NULL";
 
-            if(HttpServerUtils.checkParams(iService, reqURI, response, 7)){
+            if (HttpServerUtils.checkParams(iService, reqURI, response, 7)) {
                 String[] params = HttpServerUtils.getParams(reqURI.split("\\?")[1], "\\&");
 
                 int productId = Integer.parseInt(params[0].split("=")[1]);
@@ -48,18 +48,14 @@ public class BuyContextCreator {
                     );
 
                     response = "" + iService.buy(
-                                                iService.getUserByToken(OurHttpServer.token).getId(),
-                                                    productId,
-                                                        adress,
-                                                            card
-                                                );
+                            iService.getUserByToken(OurHttpServer.token).getId(),
+                            productId,
+                            adress,
+                            card
+                    );
 
-                } catch (InvalidInputParameters invalidInputParameters) {
-                    invalidInputParameters.printStackTrace();
-                } catch (InvalidTokenException e) {
-                    e.printStackTrace();
-                } catch (NoSuchProductException e) {
-                    e.printStackTrace();
+                } catch (InvalidInputParameters | InvalidTokenException | NoSuchProductException e) {
+                    response = e.getMessage();
                 }
             }
 

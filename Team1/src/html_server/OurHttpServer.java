@@ -21,7 +21,8 @@ public class OurHttpServer {
         HttpServer httpServer = HttpServer.create(new InetSocketAddress(8000), 0);
         LoginContextCreator.createLoginContext(httpServer, iService);
         RegisterContextCreator.createRegisterContext(httpServer, iService);
-        BuyContextCreator.createBuyContext(httpServer, iService);
+        GetAllProductsContextCreator.getAllProductsContext(httpServer, iService);
+        HelpContextCreator.createHelpContext(httpServer);
         httpServer.start();
 
         // save
