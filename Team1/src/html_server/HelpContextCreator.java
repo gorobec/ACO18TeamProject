@@ -5,6 +5,7 @@ import utils.HttpServerUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Paths;
 
 /**
  * Created by v21k on 26.02.17.
@@ -15,7 +16,7 @@ public class HelpContextCreator {
 
             StringBuilder response = new StringBuilder();
 
-            try(BufferedReader bf = new BufferedReader(new FileReader("/home/v21k/Java/dev/ACO18TeamProject/Team1/src/html_server/README.txt"))){
+            try(BufferedReader bf = new BufferedReader(new FileReader(Paths.get("Team1/src/html_server/README.txt").toString()))){
                 String s;
                 while ((s = bf.readLine()) != null){
                     response.append(s).append("\n");
