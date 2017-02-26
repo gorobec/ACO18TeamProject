@@ -23,19 +23,12 @@ public class FileHelper {
 
 
     public boolean writeToFile(String str, String path) throws IOException{
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        try {
-            fw = new FileWriter(path);
-            bw = new BufferedWriter(fw);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
             bw.write(str);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }
-        finally {
-            if (bw != null) bw.close();
-            if (fw != null) fw.close();
         }
         return true;
     }

@@ -16,9 +16,9 @@ import java.util.Map;
  */
 public class MapDataBase implements IDataBase {
 
-    private static String FILE_FOR_PRODUCTS = "BestBuy/resources/database_products.txt";
-    private static String FILE_FOR_TICKETS = "BestBuy/resources/database_tickets.txt";
-    private static String FILE_FOR_USERS = "BestBuy/resources/database_users.txt";
+    private static String FILE_FOR_PRODUCTS = "BestBuy/resources/database_products.json";
+    private static String FILE_FOR_TICKETS = "BestBuy/resources/database_tickets.json";
+    private static String FILE_FOR_USERS = "BestBuy/resources/database_users.json";
 
     private Map<Integer, Product> products;
     private Map<Integer, Ticket> tickets;
