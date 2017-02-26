@@ -14,3 +14,7 @@ Returns "OK" if everything is okay and exception message otherwise.
 Request form: /buy?productId=<id>&city=<city>&street=<street>&house=<house>
                     &bankCardNumber=<number>&bankCardCvv2=<cvv2>&bankCardDate=<year + month in format XXXX-XX>"
 Returns ticket id if OK, else "NULL"
+
+4. GetAllProducts
+Request form: /getallproducts
+Returns list of products in DB
