@@ -54,12 +54,8 @@ public class BuyContextCreator {
                             card
                     );
 
-                } catch (InvalidInputParameters invalidInputParameters) {
-                    invalidInputParameters.printStackTrace();
-                } catch (InvalidTokenException e) {
-                    e.printStackTrace();
-                } catch (NoSuchProductException e) {
-                    e.printStackTrace();
+                } catch (InvalidInputParameters | InvalidTokenException | NoSuchProductException e) {
+                    response = e.getMessage();
                 }
             }
 
