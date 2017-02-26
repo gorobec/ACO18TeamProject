@@ -14,13 +14,13 @@ public class Validator {
     public static boolean validEmail(String email) {
         Pattern pattern = Pattern.compile("^[a-z0-9_.]+@[a-z0-9_]+\\.[a-z]{2,5}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
-        return matcher.matches() ? true : false;
+        return matcher.matches();
     }
 
     public static boolean validPassword(String password) {
         Pattern pattern = Pattern.compile("^[a-z0-9_.]{6,30}$");
         Matcher matcher = pattern.matcher(password);
-        return matcher.matches() ? true : false;
+        return matcher.matches();
     }
 
     public static boolean validCreditCard(String creditCard) {
@@ -30,6 +30,7 @@ public class Validator {
         return true;
     }
 
+    //
     private static boolean validCardByAlgorithm(String cardNumber) {
         int sum = 0;
         boolean alternate = false;

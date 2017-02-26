@@ -8,6 +8,7 @@ import model.User;
 import to.FileHelper;
 import to.Serializer;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -141,8 +142,10 @@ public class MapDataBase implements IDataBase {
     @Override
     public boolean saveDatabase() {
 
+        Serializer serializer = new Serializer();
+
         FileHelper fh = new FileHelper();
-        Serializer<Integer, Product> serProd = new Serializer<>();
+        Serializer<Integer, Product> serProd = serializer;
         Serializer<Integer, Ticket> serTicket = new Serializer<>();
         Serializer<String, User> serUser = new Serializer<>();
         try {
