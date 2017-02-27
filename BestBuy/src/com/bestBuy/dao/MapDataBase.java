@@ -151,8 +151,8 @@ public class MapDataBase implements IDataBase {
 
         FileHelper fh = new FileHelper();
         Serializer<Integer, Product> serProd = serializer;
-        Serializer<Integer, Ticket> serTicket = new Serializer<>();
-        Serializer<String, User> serUser = new Serializer<>();
+        Serializer<Integer, Ticket> serTicket = serializer;
+        Serializer<String, User> serUser = serializer;
         try {
             fh.writeToFile(serProd.convertObjectToJson(products), FILE_FOR_PRODUCTS);
             fh.writeToFile(serTicket.convertObjectToJson(tickets), FILE_FOR_TICKETS);

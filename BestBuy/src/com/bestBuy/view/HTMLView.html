@@ -9,66 +9,64 @@
 <body>
 <h1>Hello</h1>
 <div id="container"></div>
+<button id="getAllProducts">ALL PRODUCTS</button>
 <input id="ProductID"></input>
-<button id="getDataButton">Get Data</button>
-<button id="ajaxRequest">AJAX REQ</button>
-<button id="ajaxPost">POST Data</button>
+<button id="getProductById">GET PRODUCT BY ID</button>
+<button id="Buy">BUY</button>
+<input id="TicketID"></input>
+<button id="getTicketById">GET TICKET BY ID</button>
+<br/>
+<input id="email"></input>
+<input id="pass"></input>
+<button id="login">Login</button>
 </body>
 
 <script>
     $(document).ready(function() {
-        $("#ajaxRequest").click(function() {
+        $("#getAllProducts").click(function() {
             $.ajax({
-                url: "http://localhost:8000/test?id=2",
-                // data: {
-                //     zipcode: 97201
-                // },
+                url: "http://localhost:8000/allProducts",
                 success: function(result) {
                     $("#container").html(result);
                 }
             });
         });
-        function sendData() {
-            console.log(new Date());
-            document.getElementById('container').innerHTML = "Button was pressed";
-        }
-        function loadDoc() {
-            // ajax
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("container").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("GET", "http://localhost:8000/test?id=1", true);
-            xhttp.send();
-        }
-        $("#ajaxPost").click(function() {
+
+        $("#getProductById").click(function() {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8000/post-info?id=1",
+                url: "http://localhost:8000/productByID",
                 data: JSON.stringify({id : $("#ProductID").val()}),
                 success: function(result) {
                     $("#container").html(result);
                 }
             });
+			});
+
+
+        $("#getTicketById").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/ticketByID",
+                data: JSON.stringify({id : $("#TicketID").val()}),
+                success: function(result) {
+                    $("#container").html(result);
+                }
+            });
         });
 
-        function postInfo() {
-            // ajax
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("container").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("POST", "http://localhost:8000/post-info", true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send("some\n");
-        }
-    });
+         $("#login").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/login",
+                //data: JSON.stringify({email : $("#email").val(), pass : $("#pass").val()}),
+                data: $("#email").val() + ";" + $("#pass").val(),
+               success: function(result) {
+                  $("#container").html(result);
+              }
+            });
+        });
+		});
 </script>
 
 </html>

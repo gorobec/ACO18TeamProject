@@ -43,4 +43,5 @@ public class Serializer<K,T> {
         }.getType();
         return new Gson().fromJson(txt, type);
     }
+
 }

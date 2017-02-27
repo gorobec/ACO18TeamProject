@@ -1,7 +1,10 @@
 package com.bestBuy.server;
 
 import com.bestBuy.controller.IStore;
+import com.bestBuy.exceptions.IncorrectPasswordException;
 import com.bestBuy.exceptions.NoSuchProductException;
+import com.bestBuy.exceptions.NoSuchUserException;
+import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -17,7 +20,7 @@ import java.util.Map;
 /**
  * Created by fmandryka on 27.02.2017.
  */
-public class Server{
+public class Server {
 
     HttpServer server = null;
 
@@ -27,7 +30,7 @@ public class Server{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        server.createContext("/test", new HttpHandler() {
+        server.createContext("/allProducts", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
@@ -35,7 +38,7 @@ public class Server{
                 System.out.println(requestUrl);
                 System.out.println("HTTP method is " + httpExchange.getRequestMethod());
 
-                try (OutputStream outputStream = httpExchange.getResponseBody()){
+                try (OutputStream outputStream = httpExchange.getResponseBody()) {
                     String s = service.printAllProducts();
                     httpExchange.sendResponseHeaders(200, s.length());
 
@@ -46,30 +49,18 @@ public class Server{
 
             }
         });
-        server.createContext("/post-info", new HttpHandler() {
+        server.createContext("/productByID", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
 
-                InputStream is = httpExchange.getRequestBody();
-                StringBuilder sb = new StringBuilder();
-
-                String input = "";
-                int read = -1;
-                while((read = is.read()) != -1){
-                    input += (char)read;
-                }
-
-                Serializer ser = new Serializer();
-
-                Map<String,Integer> map = ser.convertJsonIDToObject(input);
-
-                try (OutputStream outputStream = httpExchange.getResponseBody()){
+                int productId = Server.getIdData(httpExchange);
+                try (OutputStream outputStream = httpExchange.getResponseBody()) {
                     String s = null;
                     try {
-                        s = service.printProductById(Integer.valueOf(map.get("id")));
+                        s = service.printProductById(productId);
                     } catch (NoSuchProductException e) {
-                        e.printStackTrace();
+                        s = e.getMessage();
                     }
                     httpExchange.sendResponseHeaders(200, s.length());
 
@@ -77,13 +68,86 @@ public class Server{
                     outputStream.flush();
                     outputStream.close();
                 }
-
-
             }
         });
+
+        server.createContext("/ticketByID", new HttpHandler() {
+            @Override
+            public void handle(HttpExchange httpExchange) throws IOException {
+                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+
+                int ticketId = Server.getIdData(httpExchange);
+                try (OutputStream outputStream = httpExchange.getResponseBody()) {
+                    String s = null;
+                    try {
+                        s = service.printProductById(ticketId);
+                    } catch (NoSuchProductException e) {
+                        s = e.getMessage();
+                    }
+                    httpExchange.sendResponseHeaders(200, s.length());
+
+                    outputStream.write(s.getBytes());
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            }
+        });
+
+        server.createContext("/login", new HttpHandler() {
+            @Override
+            public void handle(HttpExchange httpExchange) throws IOException {
+                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+
+                String[] userData = getUserData(httpExchange);
+                String s = "login was successful";
+                try (OutputStream outputStream = httpExchange.getResponseBody()) {
+                    try {
+                        service.checkLoginAndPassword(userData[0], userData[1]);
+                    } catch (NoSuchUserException e) {
+                        s = e.getMessage();
+                    } catch (IncorrectPasswordException e) {
+                        s = e.getMessage();
+                    }
+                    httpExchange.sendResponseHeaders(200, s.length());
+
+                    outputStream.write(s.getBytes());
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            }
+        });
+
         server.setExecutor(null); // creates a default executor
         server.start();
         System.out.println("Server started. Connect com.bestBuy.to localhost:8000/test");
+    }
+
+    public static int getIdData(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+        StringBuilder sb = new StringBuilder();
+
+        String input = "";
+        int read = -1;
+        while ((read = is.read()) != -1) {
+            input += (char) read;
+        }
+        System.out.println(read);
+        Serializer<String, Integer> ser = new Serializer<>();
+        Map<String, Integer> map = ser.convertJsonIDToObject(input);
+        return Integer.valueOf(map.get("id"));
+    }
+
+    public static String[] getUserData(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+        StringBuilder sb = new StringBuilder();
+
+        String input = "";
+        int read = -1;
+        while ((read = is.read()) != -1) {
+            input += (char) read;
+        }
+        System.out.println(input);
+        return input.split(";");
     }
 
 }
