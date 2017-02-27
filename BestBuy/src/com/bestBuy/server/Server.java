@@ -131,7 +131,6 @@ public class Server {
         while ((read = is.read()) != -1) {
             input += (char) read;
         }
-        System.out.println(read);
         Serializer<String, Integer> ser = new Serializer<>();
         Map<String, Integer> map = ser.convertJsonIDToObject(input);
         return Integer.valueOf(map.get("id"));
@@ -146,7 +145,6 @@ public class Server {
         while ((read = is.read()) != -1) {
             input += (char) read;
         }
-        System.out.println(input);
         return input.split(";");
     }
 
