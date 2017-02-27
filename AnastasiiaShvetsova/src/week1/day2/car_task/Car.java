@@ -44,6 +44,6 @@ public class Car {
     }
 
     public String showCarModel(){
-        return String.format("Car model - %s", model);
+        return String.format("Car com.bestBuy.model - %s", model);
     }
 }

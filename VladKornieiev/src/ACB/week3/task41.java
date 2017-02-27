@@ -8,7 +8,7 @@ import static ACB.week2.ArrayUtils.printArr;
  */
 public class task41 {
     public static void main(String[] args) {
-        String str = "Hello,dear dear friend.I am I very glad to see you:glad!";
+        String str = "Hello,dear dear friend.I am I very glad com.bestBuy.to see you:glad!";
         String[] array = str.split("\\W+");
         // check
         printArr(array);
@@ -21,7 +21,7 @@ public class task41 {
             }
         }
 
-        // to delete unnecessary whitespaces
+        // com.bestBuy.to delete unnecessary whitespaces
         str = str.replaceAll("\\W+", " ");
         System.out.println(str);
     }

@@ -22,6 +22,6 @@ public class Dog extends Animal {
     }
 
     public void bit(){
-        System.out.println("I'm going to bite you!");
+        System.out.println("I'm going com.bestBuy.to bite you!");
     }
 }

@@ -18,6 +18,6 @@ public class Wheel {
 
     @Override
     public String toString() {
-        return String.format("Wheel model: %s, diameter: %f", model, diameter);
+        return String.format("Wheel com.bestBuy.model: %s, diameter: %f", model, diameter);
     }
 }

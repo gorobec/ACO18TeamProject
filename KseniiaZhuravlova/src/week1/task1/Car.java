@@ -69,7 +69,7 @@ public class Car {
     }
 
     public void showModel() {
-        System.out.println("Car model is " + model);
+        System.out.println("Car com.bestBuy.model is " + model);
     }
 
 

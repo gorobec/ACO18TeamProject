@@ -57,7 +57,7 @@ public class University {
             System.out.println("Done removing");
             return;
         }
-        System.out.println("No groups to remove.");
+        System.out.println("No groups com.bestBuy.to remove.");
     }
 
     public void removeGroupByName(String name) {

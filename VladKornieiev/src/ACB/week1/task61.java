@@ -18,10 +18,10 @@ public class task61 {
                 
         String output = "";
 
-        System.out.print("Convert to binary or decimal? (B/D): ");
+        System.out.print("Convert com.bestBuy.to binary or decimal? (B/D): ");
         String answer = sc.next();
 
-        // converting to binary
+        // converting com.bestBuy.to binary
         if (answer.equals("B")) {
 
             while (true) {
@@ -38,7 +38,7 @@ public class task61 {
             output = new StringBuffer(output).reverse().toString();
             System.out.println(output);
         }
-        // converting to decimal
+        // converting com.bestBuy.to decimal
         else if (answer.equals("D")) {
             int result = 0;
             int i = 0;

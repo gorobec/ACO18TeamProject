@@ -22,7 +22,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return String.format("Car model: %s,\nyear: %d,\nengine %s,\nfuel: %f",
+        return String.format("Car com.bestBuy.model: %s,\nyear: %d,\nengine %s,\nfuel: %f",
                 model, year, engine.toString(), fuel);
     }
 
@@ -46,7 +46,7 @@ public class Car {
 
     public void replaceWheel(Wheel wheel) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Which wheel has to be replaced?");
+        System.out.println("Which wheel has com.bestBuy.to be replaced?");
         System.out.println("1-2 for right/left front wheel, 3-4 for right/left rear wheel");
         int wheelIndex = sc.nextInt();
 

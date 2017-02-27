@@ -50,7 +50,7 @@ public class Car {
 
    @Override
     public String toString() {
-        return String.format("Car model: %s,\nengine %s, ",
+        return String.format("Car com.bestBuy.model: %s,\nengine %s, ",
                  model, engine.toString());
     }
 

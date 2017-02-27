@@ -96,15 +96,15 @@ public class ViewConsole {
 
     private static String startMenu() {
         System.out.println("================================================");
-        System.out.println("Welcome to our library! What do you want to do?");
+        System.out.println("Welcome com.bestBuy.to our library! What do you want com.bestBuy.to do?");
         System.out.println("1. Show all readers in Library");
         System.out.println("2. Show available printed editions");
-        System.out.println("3. Add PE to library");
-        System.out.println("4. Add reader to library");
-        System.out.println("5. Give PE to the reader");
+        System.out.println("3. Add PE com.bestBuy.to library");
+        System.out.println("4. Add reader com.bestBuy.to library");
+        System.out.println("5. Give PE com.bestBuy.to the reader");
         System.out.println("6. Show PE which readers took");
         System.out.println("7. Show certain reader PEs");
-        System.out.println("8. Add reader to blacklist");
+        System.out.println("8. Add reader com.bestBuy.to blacklist");
         System.out.println("9. Show certain author PEs");
         System.out.println("10. Show ceretain year PEs");
         System.out.println("11. Find PE by keyword(s)");

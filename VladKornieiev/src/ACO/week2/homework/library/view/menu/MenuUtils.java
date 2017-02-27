@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class MenuUtils {
     private static final Gson GSON = new Gson();
-    private static final Path PATH = Paths.get("VladKornieiev/src/ACO/week2/homework/library/view/menu/files/library.txt");
+    private static final Path PATH = Paths.get("VladKornieiev/src/ACO/week2/homework/library/com.bestBuy.view/menu/files/library.txt");
     private static Scanner sc = new Scanner(System.in);
 
     public static Library loadLibrary() throws IOException {

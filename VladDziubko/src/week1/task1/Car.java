@@ -69,7 +69,7 @@ public class Car {
     }
 
     public String showCarModel() {
-        return String.format("Car model is -> %s", carModel);
+        return String.format("Car com.bestBuy.model is -> %s", carModel);
     }
 
     public StringBuilder ride() {
@@ -90,6 +90,6 @@ public class Car {
         if (puncturedTire == true) {
             return wheels.wheelReplace();
         }
-        return new StringBuilder("Don`t need to replace wheels. Ride safely.");
+        return new StringBuilder("Don`t need com.bestBuy.to replace wheels. Ride safely.");
     }
 }

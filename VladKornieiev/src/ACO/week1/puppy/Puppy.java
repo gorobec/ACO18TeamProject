@@ -10,11 +10,11 @@ public class Puppy extends Dog {
 
     @Override
     public void bark() {
-        System.out.println("I'm still learning to bark");
+        System.out.println("I'm still learning com.bestBuy.to bark");
     }
 
     @Override
     public void bit() {
-        System.out.println("I have no teeth to bite :(");;
+        System.out.println("I have no teeth com.bestBuy.to bite :(");;
     }
 }

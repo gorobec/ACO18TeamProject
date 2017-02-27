@@ -28,10 +28,10 @@ public class Car {
 
         for (int i = 0; i < wheels.length; i++) {
             if (wheels[i].getIsBroken() && !spareWhell.getIsBroken()) {
-                System.out.println("Wheel is broken, changing to spare one");
+                System.out.println("Wheel is broken, changing com.bestBuy.to spare one");
                 changeWheel(spareWhell);
             } else if (wheels[i].getIsBroken() && spareWhell.getIsBroken()) {
-                System.out.println("Spare wheel is also broken. You should get to service station");
+                System.out.println("Spare wheel is also broken. You should get com.bestBuy.to service station");
                 return;
             }
 
@@ -59,7 +59,7 @@ public class Car {
     }
 
     public void printModel() {
-        System.out.println("Car model is " + model);;
+        System.out.println("Car com.bestBuy.model is " + model);;
     }
 
     public void setFuelLevel(int fuelLevel) {

@@ -56,14 +56,14 @@ public class Surgeon implements Physician {
     @Override
     public String giveAdvice(Patient patient) {
         Formatter fm = new Formatter();
-        fm.format("Surgeon %s is giving some advice to patient %s...", name, patient.getName());
+        fm.format("Surgeon %s is giving some advice com.bestBuy.to patient %s...", name, patient.getName());
         return fm.toString();
     }
 
     @Override
     public String provideMedicalAssistance(Patient patient) {
         Formatter fm = new Formatter();
-        fm.format("Surgeon %s is doing surgery to patient %s...", name, patient.getName());
+        fm.format("Surgeon %s is doing surgery com.bestBuy.to patient %s...", name, patient.getName());
         return fm.toString();
     }
 }
