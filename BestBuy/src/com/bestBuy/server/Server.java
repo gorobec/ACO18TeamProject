@@ -41,8 +41,8 @@ public class Server {
 
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
                     Product[] products = service.showAllProducts();
-                    Serializer<Integer,Product> s = new Serializer<Integer, Product>();
-                    String json = s.convertToJson(products);
+                    Serializer serializer = Serializer.getInstance();
+                    String json = serializer.convertObjectToJson(products);
                     httpExchange.sendResponseHeaders(200, json.length());
 
                     outputStream.write(json.getBytes());
@@ -134,7 +134,8 @@ public class Server {
         while ((read = is.read()) != -1) {
             input += (char) read;
         }
-        Serializer<String, Integer> ser = new Serializer<>();
+
+        Serializer ser = Serializer.getInstance();
         Map<String, Integer> map = ser.convertJsonIDToObject(input);
         return Integer.valueOf(map.get("id"));
     }

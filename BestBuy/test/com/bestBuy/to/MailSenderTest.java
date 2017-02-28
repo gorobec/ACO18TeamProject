@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Kseniya on 22.02.2017.
  */
 public class MailSenderTest {
-    MailSender mailSender = new MailSender();
+    MailSender mailSender = MailSender.getInstance();
 
     public MailSenderTest() throws IOException {
 
