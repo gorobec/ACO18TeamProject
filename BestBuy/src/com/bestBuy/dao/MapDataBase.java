@@ -127,16 +127,16 @@ public class MapDataBase implements IDataBase {
 
     @Override
     public boolean loadDatabase() {
-        FileHelper fh = new FileHelper();
+
         Serializer<Integer, Product> serProd = new Serializer<>();
         Serializer<Integer, Ticket> serTicket = new Serializer<>();
         Serializer<String, User> serUser = new Serializer<>();
         String jsonProduct, jsonTicket, jsonUser;
 
         try {
-            jsonProduct = fh.readFromFile(FILE_FOR_PRODUCTS);
-            jsonTicket = fh.readFromFile(FILE_FOR_TICKETS);
-            jsonUser = fh.readFromFile(FILE_FOR_USERS);
+            jsonProduct = FileHelper.readFromFile(FILE_FOR_PRODUCTS);
+            jsonTicket = FileHelper.readFromFile(FILE_FOR_TICKETS);
+            jsonUser = FileHelper.readFromFile(FILE_FOR_USERS);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -154,14 +154,13 @@ public class MapDataBase implements IDataBase {
 
         Serializer serializer = new Serializer();
 
-        FileHelper fh = new FileHelper();
         Serializer<Integer, Product> serProd = serializer;
         Serializer<Integer, Ticket> serTicket = serializer;
         Serializer<String, User> serUser = serializer;
         try {
-            fh.writeToFile(serProd.convertObjectToJson(products), FILE_FOR_PRODUCTS);
-            fh.writeToFile(serTicket.convertObjectToJson(tickets), FILE_FOR_TICKETS);
-            fh.writeToFile(serUser.convertObjectToJson(users), FILE_FOR_USERS);
+            FileHelper.writeToFile(serProd.convertObjectToJson(products), FILE_FOR_PRODUCTS);
+            FileHelper.writeToFile(serTicket.convertObjectToJson(tickets), FILE_FOR_TICKETS);
+            FileHelper.writeToFile(serUser.convertObjectToJson(users), FILE_FOR_USERS);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
