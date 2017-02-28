@@ -18,6 +18,13 @@ public class Serializer<K,T> {
         return gson.toJson(map);
     }
 
+    // map com.bestBuy.to json
+    public String convertToJson(T[] objects) {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        return gson.toJson(objects);
+    }
+
     // json com.bestBuy.to object
     public Map<Integer, Product> convertJsonToProduct(String txt) {
         Type type = new TypeToken<Map<Integer, Product>>() {

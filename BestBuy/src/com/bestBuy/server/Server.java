@@ -4,6 +4,7 @@ import com.bestBuy.controller.IStore;
 import com.bestBuy.exceptions.IncorrectPasswordException;
 import com.bestBuy.exceptions.NoSuchProductException;
 import com.bestBuy.exceptions.NoSuchUserException;
+import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
@@ -39,10 +40,12 @@ public class Server {
                 System.out.println("HTTP method is " + httpExchange.getRequestMethod());
 
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
-                    String s = service.printAllProducts();
-                    httpExchange.sendResponseHeaders(200, s.length());
+                    Product[] products = service.showAllProducts();
+                    Serializer<Integer,Product> s = new Serializer<Integer, Product>();
+                    String json = s.convertToJson(products);
+                    httpExchange.sendResponseHeaders(200, json.length());
 
-                    outputStream.write(s.getBytes());
+                    outputStream.write(json.getBytes());
                     outputStream.flush();
                     outputStream.close();
                 }

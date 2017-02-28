@@ -6,13 +6,15 @@ import com.bestBuy.model.Product;
 import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 
+import java.util.Map;
+
 
 /**
  * Created by Администратор on 21.02.2017.
  */
 public interface IDataBase {
 
-  //  Map<Integer, Product> getAllProducts();
+    Map<Integer, Product> getAllProducts();
 
  //   Map<Integer, Ticket> getAllTickets();
 

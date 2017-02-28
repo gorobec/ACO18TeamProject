@@ -7,8 +7,12 @@ import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 import com.bestBuy.to.MailSender;
 import com.bestBuy.to.Validator;
+import com.google.gson.internal.Streams;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by fmandryka on 19.02.2017.
@@ -27,8 +31,8 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public String printAllProducts() {
-        return base.allProductsToString();
+    public Product[] showAllProducts() {
+        return base.getAllProducts().values().stream().toArray(size -> new Product[size]);
     }
 
     @Override

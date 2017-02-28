@@ -55,6 +55,11 @@ public class MapDataBase implements IDataBase {
 
 
     @Override
+    public Map<Integer, Product> getAllProducts() {
+        return products;
+    }
+
+    @Override
     public boolean containsUser(String login) {
         return users.containsKey(login);
     }

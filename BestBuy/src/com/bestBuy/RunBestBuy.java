@@ -15,8 +15,6 @@ public class RunBestBuy {
 
         Server server = new Server(service);
 
-//        LoginWindow log = new LoginWindow(service);
-
         //этот метод надо вызвать при закрытии формы
 //        service.saveDatabase();
     }
