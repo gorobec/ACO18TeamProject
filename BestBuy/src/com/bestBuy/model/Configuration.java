@@ -16,7 +16,7 @@ public class Configuration extends Properties{
     public static Properties getConfig() throws IOException {
         if (Configuration.config == null) {
             config = new Properties();
-            FileInputStream fi = new FileInputStream("BestBuy\\resources\\config.properties");
+            FileInputStream fi = new FileInputStream("BestBuy/resources/config.properties");
             config.load(fi);
         }
         return config;

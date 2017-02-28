@@ -1,4 +1,13 @@
 $(document).ready(function() {
+    var dataItems = [];
+    $(window).load(function() {
+            $.ajax({
+                url: "http://localhost:8000/allProducts",
+                success: function(result) {
+                    dataItems = result;
+                }
+            });
+        });
     <script id="productTmpl" type="text/x-jquery-tmpl">
             <div class="col-md-3 product-left">
                 <div class="product-main simpleCart_shelfItem">
@@ -15,7 +24,8 @@ $(document).ready(function() {
             </div>
     </script>
     function () {
-                $('#movieTmpl').tmpl(dataItems).appendTo('#movieListBag');
+                $('#productTmpl').tmpl(dataItems).appendTo('.product-one');
             }
+
 
 	});
