@@ -72,27 +72,6 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public String printTicketById(int id) throws NoSuchTicketException {
-        Ticket ticket = base.getTicketById(id);
-        if (ticket != null)
-            return ticket.toString();
-        else return "ticket == null";
-    }
-
-    @Override
-    public String printProductById(int id) throws NoSuchProductException {
-        Product product = base.getProductById(id);
-        if (product != null) {
-            chosenProductId = id;
-            return product.toString();
-        } else {
-            chosenProductId = -1;
-            return "product == null";
-        }
-
-    }
-
-    @Override
     public String buy() throws TicketIsEmptyException, IOException {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
@@ -115,4 +94,24 @@ public class BestBuy implements IStore {
         return base.saveDatabase();
     }
 
+    @Override
+    public String printTicketById(int id) throws NoSuchTicketException {
+        Ticket ticket = base.getTicketById(id);
+        if (ticket != null)
+            return ticket.toString();
+        else return "ticket == null";
+    }
+
+    @Override
+    public String printProductById(int id) throws NoSuchProductException {
+        Product product = base.getProductById(id);
+        if (product != null) {
+            chosenProductId = id;
+            return product.toString();
+        } else {
+            chosenProductId = -1;
+            return "product == null";
+        }
+
+    }
 }

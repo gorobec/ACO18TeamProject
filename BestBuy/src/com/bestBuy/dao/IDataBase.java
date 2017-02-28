@@ -24,8 +24,6 @@ public interface IDataBase {
 
     String getUserPassword(String login);
 
-    String allProductsToString();
-
     Product getProductById(int id) throws NoSuchProductException;
 
     Ticket getTicketById(int id) throws NoSuchTicketException;

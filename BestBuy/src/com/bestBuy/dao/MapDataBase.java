@@ -75,15 +75,6 @@ public class MapDataBase implements IDataBase {
     }
 
     @Override
-    public String allProductsToString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Product> e : products.entrySet()) {
-            stringBuilder.append("ID : ").append(e.getKey()).append(" Product : ").append(e.getValue().toString()).append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
-    @Override
     public Product getProductById(int id) throws NoSuchProductException {
         Product pr = products.get(id);
         if (pr == null) {
@@ -103,25 +94,12 @@ public class MapDataBase implements IDataBase {
 
     @Override
     public int getMaxTicketID() {
-        int maxKey = 0;
-        for (Integer me : tickets.keySet()) {
-            if (me > maxKey) {
-                maxKey = me;
-            }
-        }
-        return maxKey;
+        return (int) tickets.values().stream().count();
     }
 
     @Override
     public int getMaxProductID() {
-        int maxKey = 0;
-        for (Integer me : products.keySet()) {
-
-            if (me > maxKey) {
-                maxKey = me;
-            }
-        }
-        return maxKey;
+        return (int) products.values().stream().count();
     }
 
 
