@@ -16,11 +16,22 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 
-    Properties config;
+    private static MailSender mailSender;
+    private String email;
+    private String emailPassword;
 
-    public MailSender() throws IOException {
-        config = Configuration.getConfig();
+    private MailSender() throws IOException {
+        email = Configuration.getConfig().getProperty("email");
+        emailPassword = Configuration.getConfig().getProperty("email_password");
     }
+
+    public static MailSender getInstance() throws IOException {
+        if (MailSender.mailSender == null) {
+            mailSender = new MailSender();
+        }
+        return mailSender;
+    }
+
 
     public boolean sendMail(Ticket ticket) {
 
@@ -35,7 +46,7 @@ public class MailSender {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(config.getProperty("email"), config.getProperty("email_password"));
+                        return new PasswordAuthentication(email, emailPassword);
                     }
                 });
 

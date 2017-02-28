@@ -100,7 +100,7 @@ public class BestBuy implements IStore {
         Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
 
-        MailSender mailSender = new MailSender();
+        MailSender mailSender = MailSender.getInstance();
         mailSender.sendMail(ticket);
         return ticket.toString();
     }
