@@ -12,8 +12,7 @@ public class SerializerTest {
     Map<Integer, Ticket> ticketMap;
     Product product;
     Ticket ticket;
-    Serializer<Integer,Product> serProduct;
-    Serializer<Integer,Ticket> serTicket;
+    Serializer serializer;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -21,8 +20,8 @@ public class SerializerTest {
         ticketMap = new HashMap<>();
         product = new Product();
         ticket = new Ticket();
-        serProduct = new Serializer<>();
-        serTicket = new Serializer<>();
+        serializer = Serializer.getInstance();
+
     }
 
     @org.junit.After
@@ -31,35 +30,34 @@ public class SerializerTest {
         ticketMap = null;
         product = null;
         ticket = null;
-        serProduct = null;
-        serTicket = null;
+        serializer = null;
     }
 
     @org.junit.Test
     public void testConvertProductToJson() throws Exception {
         productMap.put(0, product);
-        Assert.assertNotNull(serProduct.convertObjectToJson(productMap));
+        Assert.assertNotNull(serializer.convertObjectToJson(productMap));
     }
 
 
     @org.junit.Test
     public void testConvertJsonToObject() throws Exception {
         productMap.put(0, product);
-        String txt = serProduct.convertObjectToJson(productMap);
-        Assert.assertNotNull(serProduct.convertJsonToProduct(txt));
+        String txt = serializer.convertObjectToJson(productMap);
+        Assert.assertNotNull(serializer.convertJsonToProduct(txt));
     }
 
     @org.junit.Test
     public void testTicketToJson() throws Exception {
         ticketMap.put(0, ticket);
-        Assert.assertNotNull(serTicket.convertObjectToJson(ticketMap));
+        Assert.assertNotNull(serializer.convertObjectToJson(ticketMap));
     }
 
     @org.junit.Test
     public void testTicketToObject() throws Exception {
         ticketMap.put(0, ticket);
-        String txt = serTicket.convertObjectToJson(ticketMap);
-        Assert.assertNotNull(serTicket.convertJsonToTicket(txt));
+        String txt = serializer.convertObjectToJson(ticketMap);
+        Assert.assertNotNull(serializer.convertJsonToTicket(txt));
     }
 
 }

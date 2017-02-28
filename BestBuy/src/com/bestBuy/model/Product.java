@@ -6,6 +6,7 @@ public class Product {
     private String name;
     private int id;
     private double price;
+    private String[] imageUrl;
 
     public Product() {};
 
@@ -36,6 +37,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setImageSource(String[] imageSource) {
+        this.imageUrl = imageSource;
+    }
+
+    public String[] getImageSource() {
+        return imageUrl;
     }
 
     @Override

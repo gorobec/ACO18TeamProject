@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class FileHelper {
 
-    public String readFromFile(String path) throws IOException{
+    public static String readFromFile(String path) throws IOException{
         StringBuilder result = new StringBuilder();
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -22,7 +22,7 @@ public class FileHelper {
     }
 
 
-    public boolean writeToFile(String str, String path) throws IOException{
+    public static boolean writeToFile(String str, String path) throws IOException{
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
             bw.write(str);

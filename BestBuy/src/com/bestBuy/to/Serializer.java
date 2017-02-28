@@ -10,13 +10,28 @@ import com.bestBuy.model.User;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class Serializer<K,T> {
-    // map com.bestBuy.to json
-    public String convertObjectToJson(Map<K, T> map) {
+public class Serializer {
+
+    private static Serializer serializer;
+
+    private Serializer(){
+    }
+
+    public static Serializer getInstance() {
+        if (Serializer.serializer == null) {
+            serializer = new Serializer();
+        }
+        return serializer;
+    }
+
+    // any Object to json
+    public String convertObjectToJson(Object objects) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        return gson.toJson(map);
+        return gson.toJson(objects);
     }
+
+
 
     // json com.bestBuy.to object
     public Map<Integer, Product> convertJsonToProduct(String txt) {

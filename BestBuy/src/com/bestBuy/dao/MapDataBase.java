@@ -55,6 +55,11 @@ public class MapDataBase implements IDataBase {
 
 
     @Override
+    public Map<Integer, Product> getAllProducts() {
+        return products;
+    }
+
+    @Override
     public boolean containsUser(String login) {
         return users.containsKey(login);
     }
@@ -67,15 +72,6 @@ public class MapDataBase implements IDataBase {
     @Override
     public String getUserPassword(String login) {
         return users.get(login).getPassword();
-    }
-
-    @Override
-    public String allProductsToString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Product> e : products.entrySet()) {
-            stringBuilder.append("ID : ").append(e.getKey()).append(" Product : ").append(e.getValue().toString()).append("\n");
-        }
-        return stringBuilder.toString();
     }
 
     @Override
@@ -98,48 +94,33 @@ public class MapDataBase implements IDataBase {
 
     @Override
     public int getMaxTicketID() {
-        int maxKey = 0;
-        for (Integer me : tickets.keySet()) {
-            if (me > maxKey) {
-                maxKey = me;
-            }
-        }
-        return maxKey;
+        return (int) tickets.values().stream().count();
     }
 
     @Override
     public int getMaxProductID() {
-        int maxKey = 0;
-        for (Integer me : products.keySet()) {
-
-            if (me > maxKey) {
-                maxKey = me;
-            }
-        }
-        return maxKey;
+        return (int) products.values().stream().count();
     }
 
 
     @Override
     public boolean loadDatabase() {
-        FileHelper fh = new FileHelper();
-        Serializer<Integer, Product> serProd = new Serializer<>();
-        Serializer<Integer, Ticket> serTicket = new Serializer<>();
-        Serializer<String, User> serUser = new Serializer<>();
+
+        Serializer serializer = Serializer.getInstance();
         String jsonProduct, jsonTicket, jsonUser;
 
         try {
-            jsonProduct = fh.readFromFile(FILE_FOR_PRODUCTS);
-            jsonTicket = fh.readFromFile(FILE_FOR_TICKETS);
-            jsonUser = fh.readFromFile(FILE_FOR_USERS);
+            jsonProduct = FileHelper.readFromFile(FILE_FOR_PRODUCTS);
+            jsonTicket = FileHelper.readFromFile(FILE_FOR_TICKETS);
+            jsonUser = FileHelper.readFromFile(FILE_FOR_USERS);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
 
-        products = serProd.convertJsonToProduct(jsonProduct);
-        tickets = serTicket.convertJsonToTicket(jsonTicket);
-        users = serUser.convertJsonToUser(jsonUser);
+        products = serializer.convertJsonToProduct(jsonProduct);
+        tickets = serializer.convertJsonToTicket(jsonTicket);
+        users = serializer.convertJsonToUser(jsonUser);
 
         return true;
     }
@@ -147,16 +128,12 @@ public class MapDataBase implements IDataBase {
     @Override
     public boolean saveDatabase() {
 
-        Serializer serializer = new Serializer();
+        Serializer serializer = Serializer.getInstance();
 
-        FileHelper fh = new FileHelper();
-        Serializer<Integer, Product> serProd = serializer;
-        Serializer<Integer, Ticket> serTicket = serializer;
-        Serializer<String, User> serUser = serializer;
         try {
-            fh.writeToFile(serProd.convertObjectToJson(products), FILE_FOR_PRODUCTS);
-            fh.writeToFile(serTicket.convertObjectToJson(tickets), FILE_FOR_TICKETS);
-            fh.writeToFile(serUser.convertObjectToJson(users), FILE_FOR_USERS);
+            FileHelper.writeToFile(serializer.convertObjectToJson(products), FILE_FOR_PRODUCTS);
+            FileHelper.writeToFile(serializer.convertObjectToJson(tickets), FILE_FOR_TICKETS);
+            FileHelper.writeToFile(serializer.convertObjectToJson(users), FILE_FOR_USERS);
         } catch (IOException e) {
             e.printStackTrace();
             return false;

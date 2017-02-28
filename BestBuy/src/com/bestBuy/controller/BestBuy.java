@@ -7,8 +7,12 @@ import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 import com.bestBuy.to.MailSender;
 import com.bestBuy.to.Validator;
+import com.google.gson.internal.Streams;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by fmandryka on 19.02.2017.
@@ -27,8 +31,8 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public String printAllProducts() {
-        return base.allProductsToString();
+    public Product[] showAllProducts() {
+        return base.getAllProducts().values().stream().toArray(size -> new Product[size]);
     }
 
     @Override
@@ -68,6 +72,29 @@ public class BestBuy implements IStore {
     }
 
     @Override
+    public String buy() throws TicketIsEmptyException, IOException {
+        if (chosenProductId < 0) {
+            throw new TicketIsEmptyException("No product in ticket!");
+        }
+        Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
+        base.addTicket(ticket);
+
+        MailSender mailSender = MailSender.getInstance();
+        mailSender.sendMail(ticket);
+        return ticket.toString();
+    }
+
+    @Override
+    public boolean loadDatabase() {
+        return base.loadDatabase();
+    }
+
+    @Override
+    public boolean saveDatabase() {
+        return base.saveDatabase();
+    }
+
+    @Override
     public String printTicketById(int id) throws NoSuchTicketException {
         Ticket ticket = base.getTicketById(id);
         if (ticket != null)
@@ -87,28 +114,4 @@ public class BestBuy implements IStore {
         }
 
     }
-
-    @Override
-    public String buy() throws TicketIsEmptyException, IOException {
-        if (chosenProductId < 0) {
-            throw new TicketIsEmptyException("No product in ticket!");
-        }
-        Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
-        base.addTicket(ticket);
-
-        MailSender mailSender = new MailSender();
-        mailSender.sendMail(ticket);
-        return ticket.toString();
-    }
-
-    @Override
-    public boolean loadDatabase() {
-        return base.loadDatabase();
-    }
-
-    @Override
-    public boolean saveDatabase() {
-        return base.saveDatabase();
-    }
-
 }
