@@ -1,23 +1,14 @@
 
 $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
 
 function buy(){
-  let reqStr = "http://localhost:8000/buy?" +
-              "productId=" + $('#product_id').val() + "&" +
-              "city=" + $('#city').val() + "&" +
-              "street=" + $('#street').val() + "&" +
-              "number=" + $('#home').val() + "&" +
-              "bancCardNumber=" + $('#cardNumber').val() + "&" +
-              "cvv2=" + $('#cvv2').val() + "&" +
-              "cardDate=" + $('#cardDate').val();
-  //alert(reqStr);
+  var reqStr = "http://localhost:8000/buy";
 
   $.ajax({
-    type: "POST",
-    url:reqStr,
+    type : "POST",
+    url : reqStr,
 
     data : JSON.stringify({
       productId : $('#product_id').val(),
