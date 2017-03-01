@@ -30,9 +30,24 @@ public class BestBuy implements IStore {
         this.base = base;
     }
 
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
     @Override
     public Product[] showAllProducts() {
         return base.getAllProducts().values().stream().toArray(size -> new Product[size]);
+    }
+
+
+    @Override
+    public Product getProductById(int id) throws NoSuchProductException {
+        Product product = base.getProductById(id);
+        if (product != null) {
+            chosenProductId = id;
+            return product;
+        }
+        chosenProductId = -1;
+        return null;
     }
 
     @Override

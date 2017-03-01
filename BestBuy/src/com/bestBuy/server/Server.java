@@ -4,6 +4,7 @@ import com.bestBuy.controller.IStore;
 import com.bestBuy.exceptions.IncorrectPasswordException;
 import com.bestBuy.exceptions.NoSuchProductException;
 import com.bestBuy.exceptions.NoSuchUserException;
+import com.bestBuy.exceptions.TicketIsEmptyException;
 import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
@@ -58,41 +59,45 @@ public class Server {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
 
                 int productId = Server.getIdData(httpExchange);
+                String json = null;
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
-                    String s = null;
                     try {
-                        s = service.printProductById(productId);
-                    } catch (NoSuchProductException e) {
-                        s = e.getMessage();
+                        Product product = service.getProductById(productId);
+                        Serializer serializer = Serializer.getInstance();
+                        json = serializer.convertObjectToJson(product);
+                    } catch (NoSuchProductException e){
+                        e.printStackTrace();
                     }
-                    httpExchange.sendResponseHeaders(200, s.length());
+                    httpExchange.sendResponseHeaders(200, json.length());
 
-                    outputStream.write(s.getBytes());
+                    outputStream.write(json.getBytes());
                     outputStream.flush();
                     outputStream.close();
                 }
             }
         });
 
-        server.createContext("/ticketByID", new HttpHandler() {
+        server.createContext("/buy", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+                String result = "Thank for you order! You got mail with information";
+                //next need to delete
+                User user = new User("usergmail.com", "123456");
+                service.setCurrentUser(user);
 
-                int ticketId = Server.getIdData(httpExchange);
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
-                    String s = null;
                     try {
-                        s = service.printProductById(ticketId);
-                    } catch (NoSuchProductException e) {
-                        s = e.getMessage();
+                        service.buy();
+                    }catch (TicketIsEmptyException e){
+                        result = "error";
                     }
-                    httpExchange.sendResponseHeaders(200, s.length());
-
-                    outputStream.write(s.getBytes());
+                    httpExchange.sendResponseHeaders(200, result.length());
+                    outputStream.write(result.getBytes());
                     outputStream.flush();
                     outputStream.close();
                 }
+
             }
         });
 

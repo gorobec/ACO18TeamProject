@@ -3,6 +3,7 @@ package com.bestBuy.controller;
 import com.bestBuy.exceptions.*;
 import com.bestBuy.model.Product;
 import com.bestBuy.model.Ticket;
+import com.bestBuy.model.User;
 
 import java.io.IOException;
 
@@ -13,7 +14,9 @@ public interface IStore {
 
     // button - "show all products in catalog "
     Product[] showAllProducts();
+    Product getProductById(int id) throws NoSuchProductException ;
 
+    void setCurrentUser(User currentUser);
     // button - "OK " in login Window
     boolean checkLoginAndPassword(String login, String password) throws NoSuchUserException, IncorrectPasswordException;
 
