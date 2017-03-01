@@ -1,4 +1,4 @@
-package html_server.LoginPage;
+package html_server.LoginAndReg;
 
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;
@@ -23,7 +23,6 @@ public class LoginContextCreator {
                 response = e.getMessage();
             }
             // sending a response
-            // короче выдправити назад має або повідомлення ексепшена, або ок
             HttpServerUtils.sendingAResponse(httpExchange, response);
         });
     }

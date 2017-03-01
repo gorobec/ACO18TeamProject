@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to our Store!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+<div class="container" id="container">
+    <!--inputs-->
+    <div id="inputs">
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="username" type="text" class="validate">
+                <label class="active" for="username">User Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="password" type="password" class="validate">
+                <label class="active" for="password">Password</label>
+            </div>
+        </div>
+    </div>
+
+
+    <!--buttons-login-->
+    <div id="buttons-login">
+        <div class="row">
+            <div class="input-field col s6">
+                <button class="waves-effect waves-light btn" id="submitLogin">Submit</button>
+                <button class="waves-effect waves-light btn" id="goToRegister">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!--register part to add-->
+    <div id="registerPart" style="display:none">
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="email" type="text" class="validate">
+                <label class="active" for="email">email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <button class="waves-effect waves-light btn" id="submitRegister">Register</button>
+                <button class="waves-effect waves-light btn" id="backToLogin">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="LoginRegister.js" type="text/javascript"></script>
+
+</body>
+</html>
