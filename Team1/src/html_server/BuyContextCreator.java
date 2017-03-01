@@ -6,14 +6,9 @@ import controller.IService;
 import exception.*;
 import model.Address;
 import model.BankCard;
-import requestModels.BuyRequestModel;
 import utils.HttpServerUtils;
 import utils.MailSender;
 
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.time.YearMonth;
 import java.util.Arrays;
 
 import static utils.DataBaseConverter.GSON;
@@ -59,19 +54,8 @@ public class BuyContextCreator {
 
                     response = GSON.toJson(iService.getTicketById(ticketId, OurHttpServer.token));
 
-                } catch (InvalidInputParameters invalidInputParameters) {
-                    invalidInputParameters.printStackTrace();
-                    check = false;
-                } catch (InvalidTokenException e) {
-                    e.printStackTrace();
-                    check = false;
-                } catch (NoSuchProductException e) {
-                    e.printStackTrace();
-                    check = false;
-                } catch (InvalidIdException e) {
-                    e.printStackTrace();
-                    check = false;
-                } catch (UserLoginException e) {
+                } catch (InvalidInputParameters |InvalidTokenException | NoSuchProductException |
+                        InvalidIdException | UserLoginException e) {
                     e.printStackTrace();
                     check = false;
                 }
@@ -79,10 +63,7 @@ public class BuyContextCreator {
 
             System.out.println(response);
 
-            httpExchange.sendResponseHeaders(200, response.length());
-            OutputStream os = httpExchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            HttpServerUtils.sendingAResponse(httpExchange, response);
 
             if(model != null && model.adress != null && model.bankCard != null && check) {
                 if (check) try {
@@ -91,14 +72,16 @@ public class BuyContextCreator {
                             iService.getTicketById(ticketId, OurHttpServer.token),
                             iService.getProductById(model.productId)
                     );
-                } catch (InvalidTokenException e) {
-                    e.printStackTrace();
-                } catch (InvalidIdException e) {
-                    e.printStackTrace();
-                } catch (UserLoginException e) {
+                } catch (InvalidTokenException | InvalidIdException | UserLoginException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private class BuyRequestModel {
+        public int productId;
+        public Address adress;
+        public BankCard bankCard;
     }
 }
