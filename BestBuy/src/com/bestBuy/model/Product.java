@@ -6,7 +6,8 @@ public class Product {
     private String name;
     private int id;
     private double price;
-    private String[] imageUrl;
+    private String imageUrl;
+    private boolean isPopular;
 
     public Product() {};
 
@@ -27,6 +28,10 @@ public class Product {
         return price;
     }
 
+    public boolean getIsPopular() {
+        return isPopular;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,11 +44,11 @@ public class Product {
         this.price = price;
     }
 
-    public void setImageSource(String[] imageSource) {
+    public void setImageSource(String imageSource) {
         this.imageUrl = imageSource;
     }
 
-    public String[] getImageSource() {
+    public String getImageSource() {
         return imageUrl;
     }
 

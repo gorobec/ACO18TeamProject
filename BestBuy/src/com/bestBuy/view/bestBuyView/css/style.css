@@ -616,8 +616,11 @@ figure.effect-bubba:hover p,figure.effect-bubba:hover h2 {
 /*--about-end--*/
 /*--product-starts--*/
 .product-left {
-    text-align: center;
-
+        text-align: center;
+        vertical-align: top;
+        display: inline-block;
+        float: none;
+        margin-top: 10px;
 }
 .product-main {
     padding: 1em 0px 2.7em 0px;

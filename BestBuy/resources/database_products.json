@@ -3,30 +3,56 @@
     "name": "Iron",
     "id": 1,
     "price": 300.0,
-    "imageUrl": null
+    "imageUrl": "http://mrslamarche.com/wp-content/uploads/2016/08/dell-xps-laptop-620.jpg",
+    "isPopular": true
   },
   "2": {
     "name": "Cup",
     "id": 2,
     "price": 100.0,
-    "imageUrl": null
+    "imageUrl": "http://www.publicdomainpictures.net/pictures/160000/velka/ordinateur-de-bureau-pc-1456070535WEH.jpg",
+    "isPopular": false
   },
   "3": {
     "name": "Phone",
     "id": 3,
     "price": 3000.0,
-    "imageUrl": null
+    "imageUrl": "http://hyser-40.cdn.pjtsu.com/wp-content/uploads/2015/10/iphone-4.jpg",
+    "isPopular": true
   },
   "4": {
-    "name": "HDD",
-    "id": 4,
-    "price": 1000.0,
-    "imageUrl": null
+  "name": "HDD",
+  "id": 4,
+  "price": 1000.0,
+  "imageUrl": "http://i.siteapi.org/zA735sKx_hWgoJOg9hR1aQ9acn4=/fit-in/1024x768/center/top/89db94309797583.ru.s.siteapi.org/img/434040b724484c3e35d3a3fbf6c50da23dd77de4.jpg",
+   "isPopular": false
   },
   "5": {
     "name": "SSD",
     "id": 5,
     "price": 2000.0,
-    "imageUrl": null
+    "imageUrl": "http://www.laboiteacom.be/wp-content/uploads/Phantom3.jpg",
+    "isPopular": false
+  },
+  "6": {
+    "name": "HDD",
+    "id": 6,
+    "price": 1000.0,
+    "imageUrl": "http://www.irobotweb.com/~/media/MainSite/Images/Home/Products/Roomba/iRobot-Roomba-3Stage-Cleaning.jpg?h=581&la=en&w=1000",
+    "isPopular": true
+  },
+  "7": {
+    "name": "SSD",
+    "id": 7,
+    "price": 2000.0,
+    "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQHQht9YI1joN-5WAXGSybs4ONjH05EJ2aUbwIhsDtqNcOfqepIaA",
+    "isPopular": false
+  },
+  "8": {
+    "name": "SSD",
+    "id": 8,
+    "price": 3000.0,
+    "imageUrl": "https://ecoelectro.com.ua/image/data/Vehicles/dzhamper-dlya-vesa-30-50-kg-1.jpg",
+    "isPopular": false
   }
 }
