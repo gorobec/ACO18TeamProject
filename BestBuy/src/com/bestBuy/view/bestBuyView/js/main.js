@@ -10,8 +10,11 @@ $(document).ready(function() {
         	console.log(JSON.parse(dataItems));
         	},
         	complete: function(result){
-        	$('#productTmpl').tmpl(JSON.parse(dataItems)).appendTo('#product-one');
+                $('#productTmpl').tmpl(JSON.parse(dataItems)).appendTo('#product-one');
+                $('#productTmpl2').tmpl(JSON.parse(dataItems)).appendTo('#about-top');
         	}
+
+
         	});        
 
     });
