@@ -95,7 +95,7 @@ public class ServiceImpl implements IService {
         if (pass == null || pass.length() < 6)
             throw new InvalidInputParameters("Incorrect user pass");
 
-        return userDB.createAccessToken(new User.UserBuilder().setName(pass).setPass(pass).build());
+        return userDB.createAccessToken(new User.UserBuilder().setName(name).setPass(pass).build());
     }
 
     // register
