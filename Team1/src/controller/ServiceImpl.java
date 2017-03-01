@@ -80,7 +80,7 @@ public class ServiceImpl implements IService {
 
         if(user == null || product == null) throw new InvalidInputParameters("Incorrect input");
 
-        MailSender.sendEmail(user, newTicket, product);
+//        MailSender.sendEmail(user, newTicket, product);
 
         return newTicket.getId();
     }
@@ -111,7 +111,7 @@ public class ServiceImpl implements IService {
         if (email == null || email.length() == 0 || !email.matches(RegEx.EMAIL))
             throw new InvalidInputParameters("Incorrect user email");
 
-        User u = new User.UserBuilder().setName(pass).setPass(pass).setEmail(email).build();
+        User u = new User.UserBuilder().setName(name).setPass(pass).setEmail(email).build();
 
         return userDB.add(u) ? u : null;
     }

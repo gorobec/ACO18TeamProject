@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/home/zhenia/IdeaProjects/ACO18TeamProject/Team1/resources/css/master.css" media="screen" title="no title">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/home/zhenia/IdeaProjects/ACO18TeamProject/Team1/resources/css/materialize.css" media="screen" title="no title">
+    <title>First team</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Hello</a>
+        </div>
+      </nav>
+    </header>
+    <div class="container input_box" id="input_box">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="1" value="1" id="product_id" type="number" class="validate">
+              <label for="product_id">Product ID</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m4">
+              <input placeholder="Kiev" value="Kiev" id="city" type="text" class="validate">
+              <label for="city">City</label>
+            </div>
+            <div class="input-field col s12 m3 offset-m1">
+              <input placeholder="Kasiyana" value="Kasiyana" id="street" type="text" class="validate">
+              <label for="street">Street</label>
+            </div>
+            <div class="input-field col s12 m3 offset-m1">
+              <input placeholder="10" value="10" id="home" type="number" class="validate">
+              <label for="home">Home</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m4">
+              <input placeholder="1111-1111-1111-1111" value="1111111111111111" id="cardNumber" type="number" class="validate">
+              <label for="cardNumber">Card Number</label>
+            </div>
+            <div class="input-field col s12 m3 offset-m1">
+              <input placeholder="101" value="101" id="cvv2" type="number" class="validate">
+              <label for="cvv2">cvv2</label>
+            </div>
+            <div class="input-field col s12 m3 offset-m1">
+              <input placeholder="2030-01" value="2030-01" id="cardDate" type="text" class="validate">
+              <label for="cardDate">Date</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button class="btn waves-effect waves-light send_btn" type="submit" onclick="buy()" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+      <div id="container">
+
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Thank you!</h4>
+      <p id="modalText"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/home/zhenia/IdeaProjects/ACO18TeamProject/Team1/resources/js/materialize.js"/></script>
+    <script src="/home/zhenia/IdeaProjects/ACO18TeamProject/Team1/resources/js/main.js"/></script>
+  </body>
+</html>

@@ -12,6 +12,17 @@ public class BankCard {
     private String number;
     private int cvv2;
     private YearMonth validUntil;
+    private String valid;
+
+    public void setValid(String valid) {
+        this.valid = valid;
+        this.validUntil = YearMonth.parse(valid);
+    }
+
+    public String getValid() {
+
+        return valid;
+    }
 
     public BankCard() {
     }
@@ -25,10 +36,27 @@ public class BankCard {
             this.number = number;
             this.cvv2 = cvv2;
             this.validUntil = validUntilYear;
+            this.valid = validUntilYear.toString();
         } else {
             throw new InvalidInputParameters("Wrong credit card info.");
         }
     }
+
+    public BankCard(String number, int cvv2, String validUntilYear) throws InvalidInputParameters {
+        if (number != null
+                && cvv2 > 99 && cvv2 < 1000
+                && validUntilYear != null
+                && number.matches(RegEx.ONLY_NUMERIC)
+                && number.length() == 16) {
+            this.number = number;
+            this.cvv2 = cvv2;
+            this.validUntil = YearMonth.parse(validUntilYear);
+            this.valid = validUntilYear;
+        } else {
+            throw new InvalidInputParameters("Wrong credit card info.");
+        }
+    }
+
 
     public String getNumber() {
         return number;
@@ -74,6 +102,10 @@ public class BankCard {
 
     @Override
     public String toString() {
-        return String.format("Number: %s, valid until :%s\n", number, validUntil.toString());
+        return "BankCard{" +
+                "number='" + number + '\'' +
+                ", cvv2=" + cvv2 +
+                ", valid='" + valid + '\'' +
+                '}';
     }
 }

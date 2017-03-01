@@ -8,6 +8,7 @@ import model.Address;
 import model.BankCard;
 import requestModels.BuyRequestModel;
 import utils.HttpServerUtils;
+import utils.MailSender;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -32,65 +33,47 @@ public class BuyContextCreator {
     public static void createBuyContext(HttpServer httpServer, IService iService) {
         httpServer.createContext("/buy", httpExchange -> {
 
-            String reqURI = httpExchange.getRequestURI().toString();
             httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
             System.out.println("O_O");
 
-            int ticketId;
+            int ticketId = 0;
+
+            boolean check = true;
 
             String response = "NULL";
 
-            if(HttpServerUtils.checkParams(iService, reqURI, response, 7)){
-                String[] params = HttpServerUtils.getParams(reqURI.split("\\?")[1], "\\&");
+            BuyRequestModel model = HttpServerUtils.getRequestData(httpExchange, BuyRequestModel.class);
 
-                int productId = Integer.parseInt(params[0].split("=")[1]);
+            System.out.println(model.productId);
+            System.out.println(model.adress);
+            System.out.println(model.bankCard);
 
-                //String parameters = HttpServerUtils.readRequestBody(httpExchange);
-
-                //Gson GSON = new Gson();
-
-                //BuyRequestModel model = GSON.fromJson(parameters, BuyRequestModel.class);
-
-                BuyRequestModel model = HttpServerUtils.getRequestData(httpExchange, BuyRequestModel.class);
-
-                System.out.println(model.productId);
-                System.out.println(model.adress);
-                System.out.println(model.bankCard);
-
+            if(model != null && model.adress != null && model.bankCard != null){
                 try {
-                    Address adress = new Address(
-                            params[1].split("=")[1],
-                            params[2].split("=")[1],
-                            Integer.parseInt(params[3].split("=")[1])
-                    );
-
-                    BankCard card = new BankCard(
-                            params[4].split("=")[1],
-                            Integer.parseInt(params[5].split("=")[1]),
-                            YearMonth.parse(params[6].split("=")[1])
-                    );
-
-
-
                     ticketId = iService.buy(
                                                 iService.getUserByToken(OurHttpServer.token).getId(),
-                                                    productId,
-                                                        adress,
-                                                            card
+                                                    model.productId,
+                                                        model.adress,
+                                                            model.bankCard
                                                 );
 
                     response = GSON.toJson(iService.getTicketById(ticketId, OurHttpServer.token));
 
                 } catch (InvalidInputParameters invalidInputParameters) {
                     invalidInputParameters.printStackTrace();
+                    check = false;
                 } catch (InvalidTokenException e) {
                     e.printStackTrace();
+                    check = false;
                 } catch (NoSuchProductException e) {
                     e.printStackTrace();
+                    check = false;
                 } catch (InvalidIdException e) {
                     e.printStackTrace();
+                    check = false;
                 } catch (UserLoginException e) {
                     e.printStackTrace();
+                    check = false;
                 }
             }
 
@@ -100,6 +83,22 @@ public class BuyContextCreator {
             OutputStream os = httpExchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
+
+            if(model != null && model.adress != null && model.bankCard != null && check) {
+                if (check) try {
+                    MailSender.sendEmail(
+                            iService.getUserByToken(OurHttpServer.token),
+                            iService.getTicketById(ticketId, OurHttpServer.token),
+                            iService.getProductById(model.productId)
+                    );
+                } catch (InvalidTokenException e) {
+                    e.printStackTrace();
+                } catch (InvalidIdException e) {
+                    e.printStackTrace();
+                } catch (UserLoginException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 }
