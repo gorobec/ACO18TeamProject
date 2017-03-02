@@ -28,6 +28,7 @@ public class BestBuy implements IStore {
 
     public BestBuy(IDataBase base) {
         this.base = base;
+        chosenProductId = -1;
     }
 
     public void setCurrentUser(User currentUser) {
