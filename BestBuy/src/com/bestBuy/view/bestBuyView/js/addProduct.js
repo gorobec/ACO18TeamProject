@@ -11,8 +11,11 @@ $(document).ready(function() {
 				imageUrl : $("#imageUrl").val()}),
         	success: function(result) {
 				console.log(result);
-				$("#Result").html(result);
-        	
+				if (result == "true") {
+                    $("#Result").html("Success");
+				} else {
+                    $("#Result").html("Fail");
+				}
 		}
 
     });
