@@ -95,10 +95,9 @@ public class BestBuy implements IStore {
         if (currentUser == null){
             throw new NoCurrentUserException("Login first!");
         }
-        System.out.println();
         Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
-        System.out.println(ticket);
+
 
         MailSender mailSender = MailSender.getInstance();
         mailSender.sendMail(ticket);
