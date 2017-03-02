@@ -34,6 +34,8 @@ public interface IStore {
 
     boolean saveDatabase();
 
+    boolean addProduct(Product product);
+
     // //   create new Ticket with product ID
 //    Ticket addProductByIdToTicket(int productId) throws NoSuchProductException;
 

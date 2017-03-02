@@ -21,11 +21,11 @@
     "isPopular": true
   },
   "4": {
-  "name": "HDD",
-  "id": 4,
-  "price": 1000.0,
-  "imageUrl": "http://i.siteapi.org/zA735sKx_hWgoJOg9hR1aQ9acn4=/fit-in/1024x768/center/top/89db94309797583.ru.s.siteapi.org/img/434040b724484c3e35d3a3fbf6c50da23dd77de4.jpg",
-   "isPopular": false
+    "name": "HDD",
+    "id": 4,
+    "price": 1000.0,
+    "imageUrl": "http://i.siteapi.org/zA735sKx_hWgoJOg9hR1aQ9acn4\u003d/fit-in/1024x768/center/top/89db94309797583.ru.s.siteapi.org/img/434040b724484c3e35d3a3fbf6c50da23dd77de4.jpg",
+    "isPopular": false
   },
   "5": {
     "name": "SSD",
@@ -38,14 +38,14 @@
     "name": "HDD",
     "id": 6,
     "price": 1000.0,
-    "imageUrl": "http://www.irobotweb.com/~/media/MainSite/Images/Home/Products/Roomba/iRobot-Roomba-3Stage-Cleaning.jpg?h=581&la=en&w=1000",
+    "imageUrl": "http://www.irobotweb.com/~/media/MainSite/Images/Home/Products/Roomba/iRobot-Roomba-3Stage-Cleaning.jpg?h\u003d581\u0026la\u003den\u0026w\u003d1000",
     "isPopular": true
   },
   "7": {
     "name": "SSD",
     "id": 7,
     "price": 2000.0,
-    "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQHQht9YI1joN-5WAXGSybs4ONjH05EJ2aUbwIhsDtqNcOfqepIaA",
+    "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q\u003dtbn:ANd9GcQHQht9YI1joN-5WAXGSybs4ONjH05EJ2aUbwIhsDtqNcOfqepIaA",
     "isPopular": false
   },
   "8": {
@@ -53,6 +53,13 @@
     "id": 8,
     "price": 3000.0,
     "imageUrl": "https://ecoelectro.com.ua/image/data/Vehicles/dzhamper-dlya-vesa-30-50-kg-1.jpg",
+    "isPopular": false
+  },
+  "9": {
+    "name": "Drug",
+    "id": 0,
+    "price": 1000.0,
+    "imageUrl": "https://www.google.com.ua/url?sa\u003di\u0026rct\u003dj\u0026q\u003d\u0026esrc\u003ds\u0026source\u003dimages\u0026cd\u003d\u0026cad\u003drja\u0026uact\u003d8\u0026ved\u003d0ahUKEwjPtOOkzLjSAhUGWRQKHXAzD20QjRwIBw\u0026url\u003dhttps%3A%2F%2Fwww.emaze.com%2F%40AZOCZZTL%2FDRUG-ABUSE\u0026psig\u003dAFQjCNFxmqtCVu1m-mREdWnzZaivHUgBMg\u0026ust\u003d1488570736253456",
     "isPopular": false
   }
 }

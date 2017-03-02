@@ -125,6 +125,25 @@ public class Server {
             }
         });
 
+        server.createContext("/addproduct", new HttpHandler() {
+            @Override
+            public void handle(HttpExchange httpExchange) throws IOException {
+                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+
+                Product product = Server.getProduct(httpExchange);
+                boolean added = service.addProduct(product);
+                service.saveDatabase();
+                try (OutputStream outputStream = httpExchange.getResponseBody()) {
+
+                    httpExchange.sendResponseHeaders(200, String.valueOf(added).length());
+
+                    outputStream.write(String.valueOf(added).getBytes());
+                    outputStream.flush();
+
+                }
+            }
+        });
+
         server.setExecutor(null); // creates a default executor
         server.start();
         System.out.println("Server started. Connect com.bestBuy.to localhost:8000/test");
@@ -155,6 +174,23 @@ public class Server {
             input += (char) read;
         }
         return input.split(";");
+    }
+
+    public static Product getProduct(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+
+        Product product = new Product();
+
+
+        String input = "";
+        int read = -1;
+        while ((read = is.read()) != -1) {
+            input += (char) read;
+        }
+
+        Serializer ser = Serializer.getInstance();
+        product = ser.convertJsonToProductType(input);
+        return product;
     }
 
 }

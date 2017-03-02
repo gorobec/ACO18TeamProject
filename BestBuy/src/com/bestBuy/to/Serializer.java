@@ -59,4 +59,10 @@ public class Serializer {
         return new Gson().fromJson(txt, type);
     }
 
+    public Product convertJsonToProductType(String txt) {
+        Type type = new TypeToken<Product>() {
+        }.getType();
+        return new Gson().fromJson(txt, type);
+    }
+
 }

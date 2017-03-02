@@ -110,6 +110,12 @@ public class BestBuy implements IStore {
     }
 
     @Override
+    public boolean addProduct(Product product) {
+        Product product1 = base.addProduct(product);
+        return base.getAllProducts().containsValue(product) && product1 == null;
+    }
+
+    @Override
     public String printTicketById(int id) throws NoSuchTicketException {
         Ticket ticket = base.getTicketById(id);
         if (ticket != null)
