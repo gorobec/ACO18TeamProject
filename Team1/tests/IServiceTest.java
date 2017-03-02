@@ -1,3 +1,4 @@
+/*
 
 import controller.IService;
 import controller.ServiceImpl;
@@ -14,9 +15,11 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by v21k on 19.02.17.
- */
+ *//*
+
 
 public class IServiceTest {
 
@@ -125,3 +128,4 @@ public class IServiceTest {
     }
 }
 
+*/
