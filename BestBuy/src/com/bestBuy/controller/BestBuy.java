@@ -87,12 +87,17 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public String buy() throws TicketIsEmptyException, IOException {
+    public String buy() throws TicketIsEmptyException,NoCurrentUserException, IOException {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
+        if (currentUser == null){
+            throw new NoCurrentUserException("Login first!");
+        }
+        System.out.println();
         Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
+        System.out.println(ticket);
 
         MailSender mailSender = MailSender.getInstance();
         mailSender.sendMail(ticket);

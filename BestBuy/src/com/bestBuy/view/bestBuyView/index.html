@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Luxury Watches | Home</title>
+<title>BestBuy | Home</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
 <script src="js/jquery-1.11.0.min.js"></script>
@@ -33,15 +33,17 @@
     </script>
 	<script id="productTmpl2" type="text/x-jquery-tmpl">
 		{{if $item.data.isPopular == true}}
+		<a href="single.html?id=${id}">
            <div class="col-md-4 about-left"  >
 				<figure class="effect-bubba">
-					<img class="img-responsive" src="${imageUrl}" alt="" />
+					 <img class="img-responsive" src="${imageUrl}" alt="" />
 					<figcaption>
-						<h2>Nulla maximus nunc</h2>
-						<p>In sit amet sapien eros Integer dolore magna aliqua</p>
+						<h2>Recommendations for you</h2>
+						<p>Most popular products</p>
 					</figcaption>
 				</figure>
 			</div>
+		</a>
 		{{/if}}
     </script>
 
@@ -72,7 +74,7 @@
 	<!--top-header-->
 	<!--start-logo-->
 	<div class="logo">
-		<a href="index.html"><h1>Luxury Watches</h1></a>
+		<a href="index.html"><h1>BestBuy</h1></a>
 	</div>
 	<!--start-logo-->
 	<!--bottom-header-->
@@ -131,7 +133,7 @@
 				<div class="col-md-6 footer-left">
 				</div>
 				<div class="col-md-6 footer-right">					
-					<p>© 2017 Luxury Watches. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+					<p>© 2017 BestBuy. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
