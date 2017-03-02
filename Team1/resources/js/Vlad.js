@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.modal').modal();
 
     $holderFroLoginButtons = $('#buttons-login');
     $holderForRegisterPart = $('#registerPart');
@@ -24,11 +25,13 @@ $(document).ready(function () {
                 pass: $('#password').val()
             }),
             success: function (result) {
-                if(result=='OK') {
-                    alert('OK!');
+                if (result == 'OK') {
+                    $('#modalText').html("Welcome to our store!");
+                    $('#modal1').modal('open');
                     $('#container').hide();
-                } else{
-                    alert(result);
+                } else {
+                    $('#modalText').html(result);
+                    $('#modal1').modal('open');
                 }
             }
         });
@@ -44,10 +47,12 @@ $(document).ready(function () {
                 email: $('#email').val()
             }),
             success: function (result) {
-                if(result=='OK') {
-                    alert('OK! Please, back to login page and sign in.');
-                } else{
-                    alert(result);
+                if (result == 'OK') {
+                    $('#modalText').html("OK. Please, back to login page and sign in.");
+                    $('#modal1').modal('open');
+                } else {
+                    $('#modalText').html(result);
+                    $('#modal1').modal('open');
                 }
             }
         });
