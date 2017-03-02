@@ -83,7 +83,7 @@ public class BestBuy implements IStore {
         }
 
         base.addUser(new User(email, password, creditCard, address));
-
+        base.saveDatabase();
         return true;
     }
 
@@ -97,6 +97,7 @@ public class BestBuy implements IStore {
         }
         Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
+        base.saveDatabase();
 
 
         MailSender mailSender = MailSender.getInstance();
