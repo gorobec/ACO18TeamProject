@@ -1,10 +1,7 @@
 package com.bestBuy.server;
 
 import com.bestBuy.controller.IStore;
-import com.bestBuy.exceptions.IncorrectPasswordException;
-import com.bestBuy.exceptions.NoSuchProductException;
-import com.bestBuy.exceptions.NoSuchUserException;
-import com.bestBuy.exceptions.TicketIsEmptyException;
+import com.bestBuy.exceptions.*;
 import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
@@ -82,15 +79,13 @@ public class Server {
             public void handle(HttpExchange httpExchange) throws IOException {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
                 String result = "Thank for you order! You got mail with information";
-                //next need to delete
-                User user = new User("usergmail.com", "123456");
-                service.setCurrentUser(user);
-
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
                     try {
                         service.buy();
                     }catch (TicketIsEmptyException e){
-                        result = "error";
+                        result = e.getMessage();
+                    }catch (NoCurrentUserException e){
+                        result = e.getMessage();
                     }
                     httpExchange.sendResponseHeaders(200, result.length());
                     outputStream.write(result.getBytes());

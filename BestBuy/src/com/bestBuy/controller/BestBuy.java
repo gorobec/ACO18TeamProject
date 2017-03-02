@@ -28,6 +28,7 @@ public class BestBuy implements IStore {
 
     public BestBuy(IDataBase base) {
         this.base = base;
+        chosenProductId = -1;
     }
 
     public void setCurrentUser(User currentUser) {
@@ -82,17 +83,22 @@ public class BestBuy implements IStore {
         }
 
         base.addUser(new User(email, password, creditCard, address));
-
+        base.saveDatabase();
         return true;
     }
 
     @Override
-    public String buy() throws TicketIsEmptyException, IOException {
+    public String buy() throws TicketIsEmptyException,NoCurrentUserException, IOException {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
+        if (currentUser == null){
+            throw new NoCurrentUserException("Login first!");
+        }
         Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
         base.addTicket(ticket);
+        base.saveDatabase();
+
 
         MailSender mailSender = MailSender.getInstance();
         mailSender.sendMail(ticket);

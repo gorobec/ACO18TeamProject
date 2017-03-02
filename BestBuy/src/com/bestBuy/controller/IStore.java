@@ -28,7 +28,7 @@ public interface IStore {
     String printProductById(int id) throws NoSuchProductException;
 
     // send Ticket com.bestBuy.to DB
-    String buy() throws TicketIsEmptyException, IOException;
+    String buy() throws TicketIsEmptyException, IOException, NoCurrentUserException;
 
     boolean loadDatabase();
 
