@@ -35,6 +35,7 @@ public class OurHttpServer {
         RegisterContextCreator.createRegisterContext(httpServer, iService);
         GetAllProductsContextCreator.getAllProductsContext(httpServer, iService);
         HelpContextCreator.createHelpContext(httpServer);
+        GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
         httpServer.start();
 
         System.out.println("Server started!");
