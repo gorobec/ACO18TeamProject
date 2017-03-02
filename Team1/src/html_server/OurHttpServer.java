@@ -4,9 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 import controller.IService;
 import exception.InvalidIdException;
 import exception.InvalidInputParameters;
-import utils.HttpServerUtils;
-import html_server.LoginAndReg.LoginContextCreator;
-import html_server.LoginAndReg.RegisterContextCreator;
 import view.ViewUtils;
 
 import java.io.IOException;
@@ -38,6 +35,7 @@ public class OurHttpServer {
         RegisterContextCreator.createRegisterContext(httpServer, iService);
         GetAllProductsContextCreator.getAllProductsContext(httpServer, iService);
         HelpContextCreator.createHelpContext(httpServer);
+        GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
         httpServer.start();
 
         System.out.println("Server started!");

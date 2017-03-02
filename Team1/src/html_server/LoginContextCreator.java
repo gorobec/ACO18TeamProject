@@ -1,4 +1,4 @@
-package html_server.LoginAndReg;
+package html_server;
 
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;

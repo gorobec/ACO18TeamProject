@@ -6,13 +6,15 @@ package model;
 public class Product {
     private int id;
     private String name;
+    private Coordinates coordinates;
 
     public Product() {
     }
 
-    public Product(int id, String name) {
+    public Product(int id, String name, Coordinates coordinates) {
         this.id = id;
         this.name = name;
+        this.coordinates = coordinates;
     }
 
     public int getId() {
@@ -29,6 +31,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     @Override
