@@ -19,15 +19,6 @@ public class OurHttpServer {
         // load from db
         IService iService = ViewUtils.load();
 
-        try {
-            iService.signUp("username1", "Password1", "42004200zhenia@gmail.com");
-            token = iService.logIn("username1", "Password1");
-        } catch (InvalidInputParameters invalidInputParameters) {
-            invalidInputParameters.printStackTrace();
-        } catch (InvalidIdException e) {
-            e.printStackTrace();
-        }
-
         // create server and various contexts
         HttpServer httpServer = HttpServer.create(new InetSocketAddress(8000), 0);
         BuyContextCreator.createBuyContext(httpServer, iService);
@@ -40,7 +31,7 @@ public class OurHttpServer {
 
         System.out.println("Server started!");
 
-        // save
+        // save - should be moved to handlers
         ViewUtils.save(iService);
 
     }
