@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to our Store!</title>
+    <link rel="stylesheet" href="../css/Zhenia.css" media="screen" title="no title">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/materialize.css" media="screen" title="no title">
+
+</head>
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Search product by ID</a>
+        </div>
+    </nav>
+</header>
+
+<div class="container" id="container">
+    <!--inputs-->
+    <div id="inputs">
+        <!--div class="row">
+            <div class="input-field col s3">
+                <input id="username" type="text" class="validate">
+                <label class="active" for="username">User Name</label>
+            </div>
+        </div-->
+
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="productID" type="text" class="validate">
+                <label class="active" for="productID">Product ID</label>
+            </div>
+        </div>
+    </div>
+
+
+    <!--buttons-login-->
+    <div id="buttons-login">
+        <div class="row">
+            <div class="input-field col s6">
+                <button class="waves-effect waves-light btn" id="search">Search</button>
+                <button class="waves-effect waves-light btn" id="goBack">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!--register part to add-->
+    <div id="registerPart" style="display:none">
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="email" type="text" class="validate">
+                <label class="active" for="email">email</label>
+            </div>
+        </div>
+
+        <!--div class="row">
+            <div class="input-field col s6">
+                <button class="waves-effect waves-light btn" id="submitRegister">Register</button>
+                <button class="waves-effect waves-light btn" id="backToLogin">Back</button>
+            </div>
+        </div-->
+    </div>
+</div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Result:</h4>
+        <p id="modalText"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/GetProductByID.js"></script>
+
+</body>
+</html>
