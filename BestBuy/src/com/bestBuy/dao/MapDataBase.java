@@ -45,7 +45,9 @@ public class MapDataBase implements IDataBase {
 
     @Override
     public Product addProduct(Product product) {
-        return products.put(getMaxProductID() + 1, product);
+        int nextMaxID = getMaxProductID() + 1;
+        product.setId(nextMaxID);
+        return products.put(nextMaxID, product);
     }
 
     @Override
