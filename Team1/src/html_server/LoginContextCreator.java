@@ -18,9 +18,9 @@ public class LoginContextCreator {
             LoginModel lm = HttpServerUtils.getRequestData(httpExchange, LoginModel.class);
             try {
                 OurHttpServer.token = iService.logIn(lm.name, lm.pass);
-                response = OurHttpServer.token.length() > 1 ? "OK" : response;
+                response = OurHttpServer.token.length() > 1 ? lm.name : "";
             } catch (InvalidIdException | InvalidInputParameters e) {
-                response = e.getMessage();
+                System.out.println(e.getMessage());
             }
             // sending a response
             HttpServerUtils.sendingAResponse(httpExchange, response);
