@@ -1,0 +1,44 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id='main'></div>
+
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8000/map',
+        success: function (products) {
+            //get all products and convert to object
+            products = JSON.parse(products);
+
+            // walk through products list
+            for (i = 0; i < products.length; i++) {
+
+                // create a search request on each product
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://www.googleapis.com/customsearch/v1' +
+                    '?key=AIzaSyBmL2YUDB6Le8YAx4_ioEisKzywaTPViCY' +
+                    '&cx=009425647015072695441:myiftguu_bs' +
+                    '&start=3' +
+                    '&q=' + products[i].name + ' image',
+                    success: function (result) {
+
+                        console.log(result);
+                        // url with image (doesnt work properly, 60-70% success)
+                        var imageUrl = result['items'][0]['pagemap']['cse_image'][0]['src'];
+
+                        // your code here to add product with image
+                        // $('#main').append($('<img>',{src: imageUrl}));
+                    }
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
