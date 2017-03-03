@@ -15,15 +15,26 @@
         </div>
       </nav>
     </header>
-    <div class="container input_box" id="input_box">
+
+    <div class="container productList" id="productList">
+      <div class="row" id="row-box">
+
+
+      </div>
+    </div>
+
+    <div class="container input_box" hidden id="input_box">
       <div class="row">
+        <div class="row">
+          <h5 class="center-align" id="productName"></h5>
+        </div>
         <form class="col s12">
-          <div class="row">
+          <!-- <div class="row">
             <div class="input-field col s6">
               <input placeholder="1" value="1" id="product_id" type="number" class="validate">
               <label for="product_id">Product ID</label>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="input-field col s12 m4">
               <input placeholder="Kiev" value="Kiev" id="city" type="text" class="validate">
@@ -54,23 +65,27 @@
           </div>
         </form>
       </div>
-      <button class="btn waves-effect waves-light send_btn" type="submit" onclick="buy()" name="action">Submit
+      <div id="buyBtnBox">
+      </div>
+      <!--
+      <button class="btn waves-effect waves-light send_btn" type="submit" name="action" id="buyBtn">Submit
         <i class="material-icons right">send</i>
-      </button>
+      </button> -->
       <div id="container">
 
       </div>
     </div>
 
     <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Thank you!</h4>
-      <p id="modalText"></p>
+      <div class="modal-content">
+        <h4>Thank you!</h4>
+        <p id="modalText"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="../js/materialize.js"/></script>
     <script src="../js/Zhenia.js"/></script>

@@ -65,17 +65,17 @@ public class BuyContextCreator {
 
             HttpServerUtils.sendingAResponse(httpExchange, response);
 
-            if(model != null && model.adress != null && model.bankCard != null && check) {
-                if (check) try {
-                    MailSender.sendEmail(
-                            iService.getUserByToken(OurHttpServer.token),
-                            iService.getTicketById(ticketId, OurHttpServer.token),
-                            iService.getProductById(model.productId)
-                    );
-                } catch (InvalidTokenException | InvalidIdException | UserLoginException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if(model != null && model.adress != null && model.bankCard != null && check) {
+//                if (check) try {
+//                    MailSender.sendEmail(
+//                            iService.getUserByToken(OurHttpServer.token),
+//                            iService.getTicketById(ticketId, OurHttpServer.token),
+//                            iService.getProductById(model.productId)
+//                    );
+//                } catch (InvalidTokenException | InvalidIdException | UserLoginException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         });
     }
 
