@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Luxury Watches | Register</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
-<script src="js/jquery-1.11.0.min.js"></script>
-<!--Custom Theme files-->
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
-<!--start-menu-->
-<script src="js/simpleCart.min.js"> </script>
-<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+	<title>BestBuy | Home</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/registration.js" type="text/javascript"></script>
+	<!--Custom-Theme-files-->
+	<!--theme-style-->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!--//theme-style-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--start-menu-->
+	<script src="js/simpleCart.min.js"> </script>
+	<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+
 
 </head>
 <body> 
@@ -90,26 +92,17 @@
 				<h2>REGISTER</h2>
 			</div>
 			<div class="register-main">
-				<div class="col-md-6 account-left">
-					<input placeholder="First name" type="text" tabindex="1" required>
-						<input placeholder="Last name" type="text" tabindex="2" required>
-						<input placeholder="Email address" type="text" tabindex="3" required>
-						<input placeholder="Mobile" type="text" tabindex="3" required>
-						<ul>
-							<li><label class="radio left"><input type="radio" name="radio" checked=""><i></i>Male</label></li>
-							<li><label class="radio"><input type="radio" name="radio"><i></i>Female</label></li>
-							<div class="clearfix"></div>
-						</ul>
-				</div>
-				<div class="col-md-6 account-left">
-					<input placeholder="Password" type="password" tabindex="4" required>
-						<input placeholder="Retype password" type="password" tabindex="4" required>
-				</div>
+				<form id="registerForm" method="post" action="http://localhost:8000/registration" class="col-md-6 account-left">
+					<input placeholder="Email" type="email" name="email" tabindex="1" required>
+					<input placeholder="Password" type="password" name="password" tabindex="2" required>
+					<input placeholder="Address" type="text" tabindex="3" name="address" required>
+					<input placeholder="Mobile" type="text" tabindex="4" name="creditCard" required>
+					<input type="submit" value="Submit">
+				</form>
+
 				<div class="clearfix"></div>
 			</div>
-			<div class="address submit">
-							<input type="submit" value="Submit">
-						</div>
+
 		</div>
 	</div>
 	<!--register-end-->
