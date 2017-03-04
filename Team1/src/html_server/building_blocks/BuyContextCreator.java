@@ -9,6 +9,7 @@ import model.Address;
 import model.BankCard;
 import utils.HttpServerUtils;
 import utils.MailSender;
+import view.ViewUtils;
 
 import java.util.Arrays;
 
@@ -65,6 +66,8 @@ public class BuyContextCreator {
             System.out.println(response);
 
             HttpServerUtils.sendingAResponse(httpExchange, response);
+
+            ViewUtils.save(iService);
 
 //            if(model != null && model.adress != null && model.bankCard != null && check) {
 //                if (check) try {

@@ -6,6 +6,7 @@ import exception.InvalidIdException;
 import exception.InvalidInputParameters;
 import model.User;
 import utils.HttpServerUtils;
+import view.ViewUtils;
 
 /**
  * Created by v21k on 25.02.17.
@@ -24,6 +25,7 @@ public class RegisterContextCreator {
             }
             // sending a response
             HttpServerUtils.sendingAResponse(httpExchange, response);
+            ViewUtils.save(iService);
         });
     }
 

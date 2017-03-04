@@ -30,9 +30,5 @@ public class OurHttpServer {
         httpServer.start();
 
         System.out.println("Server started!");
-
-        // save - should be moved to handlers
-        ViewUtils.save(iService);
-
     }
 }
