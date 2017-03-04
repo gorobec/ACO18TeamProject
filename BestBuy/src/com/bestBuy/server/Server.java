@@ -101,18 +101,19 @@ public class Server {
             public void handle(HttpExchange httpExchange) throws IOException {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
 
-                String[] userData = getUserData(httpExchange);
+                User userData = getUserData(httpExchange);
                 String s = "login was successful";
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {
                     try {
-                        service.checkLoginAndPassword(userData[0], userData[1]);
+                        service.checkLoginAndPassword(userData.getEmail(), userData.getPassword());
+
                     } catch (NoSuchUserException e) {
                         s = e.getMessage();
                     } catch (IncorrectPasswordException e) {
                         s = e.getMessage();
                     }
                     httpExchange.sendResponseHeaders(200, s.length());
-
+                    System.out.println(s);
                     outputStream.write(s.getBytes());
                     outputStream.flush();
                     outputStream.close();
@@ -159,7 +160,7 @@ public class Server {
         return Integer.valueOf(map.get("id"));
     }
 
-    public static String[] getUserData(HttpExchange httpExchange) throws IOException {
+    public static User getUserData(HttpExchange httpExchange) throws IOException {
         InputStream is = httpExchange.getRequestBody();
         StringBuilder sb = new StringBuilder();
 
@@ -168,7 +169,10 @@ public class Server {
         while ((read = is.read()) != -1) {
             input += (char) read;
         }
-        return input.split(";");
+        input = input.replace("[","{").replace("]","}").replace("\\","");
+        Serializer ser = Serializer.getInstance();
+        User user = ser.convertJsonToSingleUser(input);
+        return user;
     }
 
     public static Product getProduct(HttpExchange httpExchange) throws IOException {

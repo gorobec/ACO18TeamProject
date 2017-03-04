@@ -65,4 +65,10 @@ public class Serializer {
         return new Gson().fromJson(txt, type);
     }
 
+    public User convertJsonToSingleUser(String txt) {
+        Type type = new TypeToken<User>() {
+        }.getType();
+        return new Gson().fromJson(txt, type);
+    }
+
 }
