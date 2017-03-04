@@ -1,4 +1,4 @@
-package html_server;
+package html_server.building_blocks;
 
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;

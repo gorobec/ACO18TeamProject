@@ -1,9 +1,10 @@
-package html_server;
+package html_server.building_blocks;
 
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;
 import exception.*;
+import html_server.OurHttpServer;
 import model.Address;
 import model.BankCard;
 import utils.HttpServerUtils;
