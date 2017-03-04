@@ -1,7 +1,12 @@
 package view;
 
+import container.ProductDB;
+import container.TicketDB;
+import container.UserDB;
 import controller.IService;
+import controller.ServiceImpl;
 import exception.StoreException;
+import model.Product;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,13 +22,14 @@ public class View {
         try {
             view();
         } catch (IOException | StoreException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }
 
     private static void view() throws IOException, StoreException {
         IService iService = ViewUtils.load();
+
         boolean exit = false;
 
         while (!exit) {
