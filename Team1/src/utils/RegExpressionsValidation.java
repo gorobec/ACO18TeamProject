@@ -3,7 +3,7 @@ package utils;
 /**
  * Created by v21k on 23.02.17.
  */
-public class RegEx {
+public class RegExpressionsValidation {
     public static final String ONLY_ALPHA = "[a-zA-Z]+";
     public static final String ONLY_NUMERIC = "[0-9]+";
     public static final String USERNAME = "^[a-zA-Z0-9]{3,}$";

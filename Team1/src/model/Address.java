@@ -1,7 +1,7 @@
 package model;
 
 import exception.InvalidInputParameters;
-import utils.RegEx;
+import utils.RegExpressionsValidation;
 
 /**
  * Created by v21k on 19.02.17.
@@ -16,8 +16,8 @@ public class Address {
 
     public Address(String city, String street, int number) throws InvalidInputParameters {
         if (city != null && street != null && number > 0
-                && city.trim().matches(RegEx.ONLY_ALPHA)
-                && street.trim().matches(RegEx.ONLY_ALPHA)) {
+                && city.trim().matches(RegExpressionsValidation.ONLY_ALPHA)
+                && street.trim().matches(RegExpressionsValidation.ONLY_ALPHA)) {
             this.city = city;
             this.street = street;
             this.number = number;

@@ -1,7 +1,8 @@
 package model;
 
 import exception.InvalidInputParameters;
-import utils.RegEx;
+import jdk.nashorn.internal.runtime.regexp.RegExp;
+import utils.RegExpressionsValidation;
 
 import java.time.YearMonth;
 
@@ -31,7 +32,7 @@ public class BankCard {
         if (number != null
                 && cvv2 > 99 && cvv2 < 1000
                 && validUntilYear != null
-                && number.matches(RegEx.ONLY_NUMERIC)
+                && number.matches(RegExpressionsValidation.ONLY_NUMERIC)
                 && number.length() == 16) {
             this.number = number;
             this.cvv2 = cvv2;
@@ -46,7 +47,7 @@ public class BankCard {
         if (number != null
                 && cvv2 > 99 && cvv2 < 1000
                 && validUntilYear != null
-                && number.matches(RegEx.ONLY_NUMERIC)
+                && number.matches(RegExpressionsValidation.ONLY_NUMERIC)
                 && number.length() == 16) {
             this.number = number;
             this.cvv2 = cvv2;

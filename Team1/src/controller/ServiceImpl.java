@@ -8,7 +8,7 @@ import container.UserDB;
 import exception.*;
 import model.*;
 import utils.MailSender;
-import utils.RegEx;
+import utils.RegExpressionsValidation;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ServiceImpl implements IService {
     // show product by ID
     @Override
     public Product getProductById(int id) throws InvalidIdException {
-        if(id < 0) throw new InvalidIdException("Id < 0");
+        if (id < 0) throw new InvalidIdException("Id < 0");
 
         return productDB.get(id);
     }
@@ -53,7 +53,7 @@ public class ServiceImpl implements IService {
         if (!userDB.isTokenExisted(token))
             throw new UserLoginException("Token not found");
 
-        if(id < 0) throw new InvalidIdException("Id < 0");
+        if (id < 0) throw new InvalidIdException("Id < 0");
 
         return ticketDB.get(id);
     }
@@ -70,7 +70,7 @@ public class ServiceImpl implements IService {
     @Override
     public int buy(int userID, int productID, Address address, BankCard creditCard) throws NoSuchProductException, InvalidInputParameters {
 
-        if(userID < 0 || productID < 0 || creditCard == null) throw new InvalidInputParameters("Incorrect input");
+        if (userID < 0 || productID < 0 || creditCard == null) throw new InvalidInputParameters("Incorrect input");
 
         Ticket newTicket = new Ticket(ticketDB.getAll().size() + 1, creditCard, address, productID);
         ticketDB.add(newTicket);
@@ -78,9 +78,9 @@ public class ServiceImpl implements IService {
         User user = userDB.get(userID);
         Product product = productDB.get(newTicket.getProductID());
 
-        if(user == null || product == null) throw new InvalidInputParameters("Incorrect input");
+        if (user == null || product == null) throw new InvalidInputParameters("Incorrect input");
 
-//        MailSender.sendEmail(user, newTicket, product);
+        MailSender.sendEmail(user, newTicket, product);
 
         return newTicket.getId();
     }
@@ -89,7 +89,7 @@ public class ServiceImpl implements IService {
     @Override
     public String logIn(String name, String pass) throws InvalidIdException, InvalidInputParameters {
 
-        if (name == null || !name.matches(RegEx.USERNAME))
+        if (name == null || !name.matches(RegExpressionsValidation.USERNAME))
             throw new InvalidInputParameters("Incorrect user name");
 
         if (pass == null || pass.length() < 6)
@@ -102,13 +102,13 @@ public class ServiceImpl implements IService {
     @Override
     public User signUp(String name, String pass, String email) throws InvalidInputParameters, InvalidIdException {
 
-        if (name == null || !name.matches(RegEx.USERNAME))
+        if (name == null || !name.matches(RegExpressionsValidation.USERNAME))
             throw new InvalidInputParameters("Incorrect user name");
 
-        if (pass == null || !pass.matches(RegEx.PASSWORD))
+        if (pass == null || !pass.matches(RegExpressionsValidation.PASSWORD))
             throw new InvalidInputParameters("Incorrect user pass");
 
-        if (email == null || email.length() == 0 || !email.matches(RegEx.EMAIL))
+        if (email == null || email.length() == 0 || !email.matches(RegExpressionsValidation.EMAIL))
             throw new InvalidInputParameters("Incorrect user email");
 
         User u = new User.UserBuilder().setName(name).setPass(pass).setEmail(email).build();
