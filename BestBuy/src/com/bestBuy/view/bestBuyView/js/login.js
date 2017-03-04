@@ -6,15 +6,15 @@ $(document).ready(function() {
         form = $(this);
         var data = form.serializeArray();
         console.log(data);
-         data = $.map(data, function(element){
-           return  element.value;
+        data = $.map(data, function(element){
+           return  element.name + '"' + ":" + '"' +  element.value;
         });
            console.log(data);
             $.ajax({
                 type: form.attr('method'),
                 url: form.attr('action'),
                 dataType: "json",
-                data: JSON.stringify({ data: data }),
+                data: JSON.stringify(data),
                 success: function(result)
                 {
                    loginData = result;
