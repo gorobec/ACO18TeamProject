@@ -149,7 +149,7 @@ function login() {
             pass: $('#password').val()
         }),
         success: function (result) {
-            if (result != "") {
+            if (result != "FAILED") {
                 $('#modalText').html(result + ", welcome to our store!");
                 $('#signBtns').hide();
                 $('#usernameTop').html(result);
