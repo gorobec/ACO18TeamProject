@@ -15,7 +15,6 @@ $(document).ready(function() {
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
-            dataType: "json",
             data: JSON.stringify(data),
             success: function(result)
             {
@@ -26,7 +25,7 @@ $(document).ready(function() {
                 console.log("result login data " + loginData);
             }
         });
-        
+
         e.preventDefault();
 
      });
