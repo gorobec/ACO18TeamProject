@@ -1,1 +1,0 @@
-{"products":[{"id":1,"name":"IPhone","coordinates":{"lat":50.427994,"lng":30.484166}},{"id":2,"name":"Samsung","coordinates":{"lat":50.397031,"lng":30.634899}},{"id":3,"name":"Xaiomi","coordinates":{"lat":50.066428,"lng":31.445213}}]}
