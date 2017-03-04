@@ -24,8 +24,6 @@ public class OurHttpServer {
         BuyContextCreator.createBuyContext(httpServer, iService);
         LoginContextCreator.createLoginContext(httpServer, iService);
         RegisterContextCreator.createRegisterContext(httpServer, iService);
-        GetAllProductsContextCreator.getAllProductsContext(httpServer, iService);
-        HelpContextCreator.createHelpContext(httpServer);
         GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
         httpServer.start();
 

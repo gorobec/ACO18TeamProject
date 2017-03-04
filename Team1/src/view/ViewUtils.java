@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
  */
 public class ViewUtils {
     private static final Scanner sc = new Scanner(System.in);
-    private static final Path productDB = Paths.get("Team1/resources/productsDB.txt");
-    private static final Path ticketDB = Paths.get("Team1/resources/ticketDB.txt");
-    private static final Path userDB = Paths.get("Team1/resources/userDB.txt");
+    private static final Path productDB = Paths.get("Team1/resources/database/productsDB.txt");
+    private static final Path ticketDB = Paths.get("Team1/resources/database/ticketDB.txt");
+    private static final Path userDB = Paths.get("Team1/resources/database/userDB.txt");
     private static String token;
 
     public static void initService(IService iService) {
