@@ -69,8 +69,9 @@ public class ServerUtils {
 
     public static void sendData (HttpExchange httpExchange, String data) throws IOException{
         try (OutputStream outputStream = httpExchange.getResponseBody()) {
-            httpExchange.sendResponseHeaders(200, data.length());
-            outputStream.write(data.getBytes());
+            byte[] dataBytes = data.getBytes();
+            httpExchange.sendResponseHeaders(200, dataBytes.length);
+            outputStream.write(dataBytes);
             outputStream.flush();
         }
     }
@@ -83,4 +84,4 @@ public class ServerUtils {
         }
     }
 
-    }
+}
