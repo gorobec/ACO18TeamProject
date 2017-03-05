@@ -2,10 +2,7 @@ package html_server;
 
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;
-import html_server.building_blocks.BuyContextCreator;
-import html_server.building_blocks.GoogleMapsContextCreator;
-import html_server.building_blocks.LoginContextCreator;
-import html_server.building_blocks.RegisterContextCreator;
+import html_server.building_blocks.*;
 import view.ViewUtils;
 
 import java.io.IOException;
@@ -27,6 +24,7 @@ public class OurHttpServer {
         LoginContextCreator.createLoginContext(httpServer, iService);
         RegisterContextCreator.createRegisterContext(httpServer, iService);
         GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
+        HtmlUtils.getHtmlDirectCreator(httpServer, iService);
         httpServer.start();
 
         System.out.println("Server started!");

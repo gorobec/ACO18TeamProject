@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+        <form id="formId">
+            <input id="file" type="file" name="fileInput" accept="image/*">
+        </form>
+        <button id="buttonId" type="button" name="button">Send</button>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#buttonId").click(function() {
+
+            var ts = $('#file')[0].files[0];
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                var arrayBuffer = this.result;
+                var array = new Uint8Array(arrayBuffer);
+                var base64String = btoa(String.fromCharCode.apply(null, array));
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/html",
+                    contentType: "text/plain",
+                    data: base64String,
+                    success: function(data) {
+                        console.log("data was sent")
+                    }
+                });
+                //     binaryString = String.fromCharCode.apply(null, array);
+                // console.log(binaryString);
+            }
+            reader.readAsArrayBuffer(ts);
+
+        });
+    });
+</script>
+
+
+</html>
