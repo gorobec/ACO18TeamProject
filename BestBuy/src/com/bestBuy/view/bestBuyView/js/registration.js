@@ -28,6 +28,7 @@ $(document).ready(function() {
 
         e.preventDefault();
         this.reset();
+         alert("Registration is successful")
      });
 
 
