@@ -3,7 +3,6 @@ package com.bestBuy.server.contextsList;
 import com.bestBuy.controller.IStore;
 import com.bestBuy.model.Configuration;
 import com.bestBuy.model.Product;
-import com.bestBuy.server.Server;
 import com.bestBuy.utils.ServerUtils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,8 +11,6 @@ import com.sun.net.httpserver.HttpServer;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Properties;
 
 /**
@@ -24,8 +21,7 @@ public class AddProductContext {
         server.createContext("/addproduct", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
-                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
-
+                ServerUtils.getResponse(httpExchange);
                 Properties config = Configuration.getConfig();
                 Product product = ServerUtils.getProduct(httpExchange);
                 String imageSrc = config.getProperty("package_for_images") +"/"+ product.getName() + ".jpg";
@@ -34,14 +30,7 @@ public class AddProductContext {
                 product.setImageSource(imageSrc);
                 boolean added = service.addProduct(product);
                 service.saveDatabase();
-                try (OutputStream outputStream = httpExchange.getResponseBody()) {
-
-                    httpExchange.sendResponseHeaders(200, String.valueOf(added).length());
-
-                    outputStream.write(String.valueOf(added).getBytes());
-                    outputStream.flush();
-
-                }
+                ServerUtils.sendData(httpExchange, String.valueOf(added));
             }
         });
     }

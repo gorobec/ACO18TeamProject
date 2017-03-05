@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -39,8 +40,8 @@ public class ServerUtils {
     }
 
     public static BufferedImage getImage(String src) throws IOException {
-        String Url = src;
-        byte[] imagedata = DatatypeConverter.parseBase64Binary(Url.substring(Url.indexOf(",") + 1));
+        String url = src;
+        byte[] imagedata = DatatypeConverter.parseBase64Binary(url.substring(url.indexOf(",") + 1));
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
         return bufferedImage;
     }
@@ -56,5 +57,21 @@ public class ServerUtils {
         }
         bis.close();
         return sb.toString();
+    }
+
+    public static void sendData (HttpExchange httpExchange, String data) throws IOException{
+            try (OutputStream outputStream = httpExchange.getResponseBody()) {
+                httpExchange.sendResponseHeaders(200, data.length());
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+            }
+    }
+
+    public static void getResponse(HttpExchange httpExchange){
+        try {
+            httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+        } catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 }
