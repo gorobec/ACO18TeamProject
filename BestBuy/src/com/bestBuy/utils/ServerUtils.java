@@ -53,7 +53,7 @@ public class ServerUtils {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
         return bufferedImage;
     }
-
+    
     public static String readData(HttpExchange httpExchange) throws IOException {
         InputStream is = httpExchange.getRequestBody();
         BufferedInputStream bis = new BufferedInputStream(is);
@@ -65,6 +65,22 @@ public class ServerUtils {
         }
         bis.close();
         return sb.toString();
+    }
+
+    public static void sendData (HttpExchange httpExchange, String data) throws IOException{
+        try (OutputStream outputStream = httpExchange.getResponseBody()) {
+            httpExchange.sendResponseHeaders(200, data.length());
+            outputStream.write(data.getBytes());
+            outputStream.flush();
+        }
+    }
+
+    public static void getResponse(HttpExchange httpExchange){
+        try {
+            httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+        } catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 
     }
