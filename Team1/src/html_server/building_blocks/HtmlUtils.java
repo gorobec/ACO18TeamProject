@@ -56,26 +56,11 @@ public class HtmlUtils {
         });
     }
 
-<<<<<<< HEAD
     public static class ProductModel {
         public String name;
         public String location;
         public String image;
 
     }
-=======
-    // how to catch errors
-    public static void test(HttpServer httpServer) {
-        httpServer.createContext("/error", httpExchange -> {
-            try{
-                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
-                String e = null;
-                e.isEmpty();
-            } catch (Throwable e){
-                e.printStackTrace();
-            }
-        });
-    }
-
->>>>>>> 6dac0337ca3b5043b6dc69e81e55c84815b8083b
 }
+
