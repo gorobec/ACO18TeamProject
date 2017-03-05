@@ -27,7 +27,8 @@ $(document).ready(function() {
         });
 
         e.preventDefault();
-
+        this.reset();
+        alert("Login is successful")
      });
 
 
