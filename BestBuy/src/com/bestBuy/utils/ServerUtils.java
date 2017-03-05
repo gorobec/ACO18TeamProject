@@ -4,7 +4,13 @@ import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
+import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -13,13 +19,21 @@ import java.util.Map;
 public class ServerUtils {
     public static int getIdData(HttpExchange httpExchange) throws IOException {
         String input = readData(httpExchange);
+        System.out.println(input);
         Serializer ser = Serializer.getInstance();
         Map<String, Integer> map = ser.convertJsonIDToObject(input);
         return map.get("id");
     }
 
     public static User getUserData(HttpExchange httpExchange) throws IOException {
-        String input = readData(httpExchange);
+        InputStream is = httpExchange.getRequestBody();
+        StringBuilder sb = new StringBuilder();
+
+        String input = "";
+        int read = -1;
+        while ((read = is.read()) != -1) {
+            input += (char) read;
+        }
         input = input.replace("[", "{").replace("]", "}").replace("\\", "");
         Serializer ser = Serializer.getInstance();
         User user = ser.convertJsonToSingleUser(input);
@@ -31,6 +45,13 @@ public class ServerUtils {
         System.out.println(input);
         Serializer ser = Serializer.getInstance();
         return ser.convertJsonToProductType(input);
+    }
+
+    public static BufferedImage getImage(String src) throws IOException {
+        String Url = src;
+        byte[] imagedata = DatatypeConverter.parseBase64Binary(Url.substring(Url.indexOf(",") + 1));
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
+        return bufferedImage;
     }
 
     public static String readData(HttpExchange httpExchange) throws IOException {
@@ -45,4 +66,21 @@ public class ServerUtils {
         bis.close();
         return sb.toString();
     }
-}
+
+    public static void sendData (HttpExchange httpExchange, String data) throws IOException{
+        try (OutputStream outputStream = httpExchange.getResponseBody()) {
+            httpExchange.sendResponseHeaders(200, data.length());
+            outputStream.write(data.getBytes());
+            outputStream.flush();
+        }
+    }
+
+    public static void getResponse(HttpExchange httpExchange){
+        try {
+            httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+        } catch (Throwable e){
+            e.printStackTrace();
+        }
+    }
+
+    }
