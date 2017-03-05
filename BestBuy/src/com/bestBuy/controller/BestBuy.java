@@ -55,8 +55,15 @@ public class BestBuy implements IStore {
     @Override
     public Product getProductById(int id) throws NoSuchProductException {
         Product product = base.getProductById(id);
+
         if (product != null) {
             chosenProductId = id;
+            String[] imageSrc = Arrays.stream(product.getImageSource()).map(productimageSrc ->
+            {
+                return Base64Utils.getBase64URLData(productimageSrc);
+            }).toArray(size -> new String[size]);
+            product.setImageSource(imageSrc);
+            base.loadDatabase();
             return product;
         }
         chosenProductId = -1;
