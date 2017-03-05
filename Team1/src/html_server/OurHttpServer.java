@@ -27,13 +27,11 @@ public class OurHttpServer {
         // create server and various contexts
         HttpServer httpServer = HttpServer.create(new InetSocketAddress(8000), 0);
 
-        System.out.println(httpServer.getExecutor());
         BuyContextCreator.createBuyContext(httpServer, iService);
         LoginContextCreator.createLoginContext(httpServer, iService);
         RegisterContextCreator.createRegisterContext(httpServer, iService);
         GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
         HtmlUtils.getHtmlDirectCreator(httpServer, iService);
-        HtmlUtils.test(httpServer);
         httpServer.start();
 
 
