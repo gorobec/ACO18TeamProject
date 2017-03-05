@@ -88,44 +88,5 @@
       "BestBuy/resources/img/products/Lenovo ThinkPad.jpg"
     ],
     "isPopular": false
-  },
-  "11": {
-    "name": "rt",
-    "id": 11,
-    "price": 1000.0,
-    "imageUrl": [
-      "BestBuy/resources/img/products/0rt.jpg"
-    ],
-    "isPopular": false
-  },
-  "12": {
-    "name": "rtwqeqw",
-    "id": 12,
-    "price": 1000.0,
-    "imageUrl": [
-      "BestBuy/resources/img/products/0rtwqeqw.jpg",
-      "BestBuy/resources/img/products/1rtwqeqw.jpg",
-      "BestBuy/resources/img/products/2rtwqeqw.jpg",
-      "BestBuy/resources/img/products/3rtwqeqw.jpg",
-      "BestBuy/resources/img/products/4rtwqeqw.jpg",
-      "BestBuy/resources/img/products/5rtwqeqw.jpg",
-      "BestBuy/resources/img/products/6rtwqeqw.jpg"
-    ],
-    "isPopular": false
-  },
-  "13": {
-    "name": "product",
-    "id": 13,
-    "price": 1000.0,
-    "imageUrl": [
-      "BestBuy/resources/img/products/0product.jpg",
-      "BestBuy/resources/img/products/1product.jpg",
-      "BestBuy/resources/img/products/2product.jpg",
-      "BestBuy/resources/img/products/3product.jpg",
-      "BestBuy/resources/img/products/4product.jpg",
-      "BestBuy/resources/img/products/5product.jpg",
-      "BestBuy/resources/img/products/6product.jpg"
-    ],
-    "isPopular": false
   }
 }
