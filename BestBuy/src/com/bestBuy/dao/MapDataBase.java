@@ -27,9 +27,9 @@ public class MapDataBase implements IDataBase {
 
     public MapDataBase() throws IOException {
         Properties config = Configuration.getConfig();
-        FILE_FOR_PRODUCTS = config.getProperty("FILE_FOR_PRODUCTS");
-        FILE_FOR_TICKETS = config.getProperty("FILE_FOR_TICKETS");
-        FILE_FOR_USERS = config.getProperty("FILE_FOR_USERS");
+        FILE_FOR_PRODUCTS = config.getProperty("file_for_products");
+        FILE_FOR_TICKETS = config.getProperty("file_for_tickets");
+        FILE_FOR_USERS = config.getProperty("file_for_users");
     }
 
     public MapDataBase(Map<Integer, Product> products, Map<Integer, Ticket> tickets, Map<String, User> users) {

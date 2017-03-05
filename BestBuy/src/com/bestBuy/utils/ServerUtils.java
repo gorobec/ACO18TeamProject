@@ -5,6 +5,10 @@ import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
 
+import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -58,5 +62,12 @@ public class ServerUtils {
         Serializer ser = Serializer.getInstance();
         product = ser.convertJsonToProductType(input);
         return product;
+    }
+
+    public static BufferedImage getImage(String src) throws IOException {
+        String Url = src;
+        byte[] imagedata = DatatypeConverter.parseBase64Binary(Url.substring(Url.indexOf(",") + 1));
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
+        return bufferedImage;
     }
 }

@@ -60,6 +60,8 @@
 							<input id="addProductButton" type="submit" value="SUBMIT">
 						</div>
 					</form>
+					<input type="file" id="files" name="files[]" onchange="handleFileSelect(event);" multiple >
+					<output id="list"></output>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -93,4 +95,11 @@
 	</div>
 	<!--footer-end-->	
 </body>
+<style>
+	.thumb {
+		height: 75px;
+		border: 1px solid #000;
+		margin: 10px 5px 0 0;
+	}
+</style>
 </html>
