@@ -4,11 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Test</title>
-    <link rel="stylesheet" href="../css/Main.css" media="screen" title="no title">
+    <link rel="stylesheet" href="../../css/Main.css" media="screen" title="no title">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../css/materialize.css" media="screen" title="no title">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/materialize.css" media="screen" title="no title">
+
 </head>
 
 <body>
@@ -64,26 +63,16 @@
 
 <div id="googleMap" style="width:100%;height:600px;"></div>
 
-<script>
-    function myMap() {
-        // properties for map
-        var mapProp = {
-            center: new google.maps.LatLng(50.427994, 30.484166),
-            zoom: 8,
-        };
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Result:</h4>
+        <p id="modalText"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 
-        // create a map
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-        google.maps.event.addListener(map, "rightclick", function(event) {
-            var lat = event.latLng.lat();
-            var lng = event.latLng.lng();
-            // populate yor box/field with lat, lng
-            console.log("Lat=" + lat + "; Lng=" + lng);
-            $('#mapLocation').val(lat + "," + lng);
-        });
-    }
-</script>
 
 <footer class="page-footer" style="padding-top:0;margin-top: 100px;">
     <div class="footer-copyright">
@@ -95,33 +84,9 @@
 </footer>
 </body>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#buttonId").click(function () {
-
-            var ts = $('#file')[0].files[0];
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                var arrayBuffer = this.result;
-                var array = new Uint8Array(arrayBuffer);
-                var base64String = btoa(String.fromCharCode.apply(null, array));
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:8000/html",
-                    contentType: "text/plain",
-                    data: base64String,
-                    success: function (data) {
-                        console.log("data was sent")
-                    }
-                });
-            }
-            reader.readAsArrayBuffer(ts);
-
-        });
-    });
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt3T4Fneih9ICsGCxFky6vzIVHHdj93rM&callback=myMap"></script>
-
+<script src="../../js/building_blocks/materialize.js"></script>
+<script src="../../js/building_blocks/AddProduct.js"></script>
 
 </html>

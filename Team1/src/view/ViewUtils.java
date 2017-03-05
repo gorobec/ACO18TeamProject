@@ -28,15 +28,15 @@ public class ViewUtils {
     private static final Path userDB = Paths.get("Team1/resources/database/userDB.txt");
     private static String token;
 
-    public static void initService(IService iService) {
-        Product product = new Product(1, "IPhone", new Coordinates(50.427994, 30.484166));
-        Product product2 = new Product(2, "Samsung", new Coordinates(50.397031, 30.634899));
-        Product product3 = new Product(3, "Xaiomi", new Coordinates(50.066428, 31.445213));
+/*    public static void initService(IService iService) {
+        Product product = new Product("IPhone", new Coordinates(50.427994, 30.484166));
+        Product product2 = new Product("Samsung", new Coordinates(50.397031, 30.634899));
+        Product product3 = new Product("Xaiomi", new Coordinates(50.066428, 31.445213));
 
         iService.addProduct(product);
         iService.addProduct(product2);
         iService.addProduct(product3);
-    }
+    }*/
 
     public static int buy(IService iService) throws NoSuchProductException, InvalidTokenException, InvalidInputParameters {
         if (iService.getUserByToken(token) == null){

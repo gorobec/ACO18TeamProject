@@ -8,7 +8,6 @@
 
 <script>
     function myMap() {
-        // properties for map
         var mapProp = {
             center: new google.maps.LatLng(50.427994, 30.484166),
             zoom: 8,
@@ -16,47 +15,6 @@
 
         // create a map
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-        $(document).ready(requestCoordinatesAndPlaceMarkers());
-
-        // request list of products from server
-        function requestCoordinatesAndPlaceMarkers() {
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8000/map",
-                success: function (result) {
-                    parseAndPlace(result);
-                }
-            });
-        }
-
-        function parseAndPlace(result) {
-            // parse js object from string
-            var productsArray = JSON.parse(result);
-
-            // walk throug array
-            for (var i = 0; i < productsArray.length; i++) {
-                // save latitude and longitude
-                var myLatlng = new google.maps.LatLng(parseFloat((productsArray[i].coordinates.lat).toFixed(6)), parseFloat((productsArray[i].coordinates.lng).toFixed(6)));
-
-                // create a marker
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: productsArray[i].name
-                });
-
-                // place a marker
-                marker.setMap(map);
-
-                // create info window above the marker
-                var infowindow = new google.maps.InfoWindow({
-                    content: productsArray[i].name
-                });
-
-                // place window
-                infowindow.open(map, marker);
-            }
-        }
     }
 </script>
 

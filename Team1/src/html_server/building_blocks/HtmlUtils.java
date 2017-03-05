@@ -1,11 +1,16 @@
 package html_server.building_blocks;
 
+import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;
+import model.Coordinates;
+import model.Product;
 import utils.HttpServerUtils;
+import utils.PropertiesHolder;
+import view.ViewUtils;
 
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 /**
@@ -15,16 +20,46 @@ public class HtmlUtils {
     public static void getHtmlDirectCreator(HttpServer httpServer, IService iService) {
         httpServer.createContext("/html", httpExchange -> {
             httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+            String response = "Done!";
+            try {
+                // type for correct json converting
+                Type type = new TypeToken<ProductModel>() {
+                }.getType();
 
-            ByteArrayOutputStream os = HttpServerUtils.getByteArrayOutputStream(httpExchange);
+                // creating model and other stuff to create Product
+                ProductModel productModel = HttpServerUtils.getModel(httpExchange, type);
+                String[] location = productModel.location.split(",");
+                Coordinates coordinates = new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[0]));
+                Product product = new Product(iService.getProducts().size() + 1, productModel.name, coordinates, null);
 
-            BufferedImage image = HttpServerUtils.getBufferedImage(os);
+                // get buffered image
+                BufferedImage image = HttpServerUtils.getBufferedImage(productModel.image.split(",")[1]);
 
-            HttpServerUtils.saveImage(image, "Team1/resources/images/products");
+                // save image to local folder and set imagePath
+                String path = PropertiesHolder.getProperty("pathForProductImages") + product.getId() + product.getName() + ".png";
+                product.setImagePath(HttpServerUtils.saveImage(image, path));
+
+
+                // add to DB and save DB
+                iService.addProduct(product);
+                ViewUtils.save(iService);
+
+                // check
+                System.out.println(product.getImagePath());
+            } catch (Throwable e) {
+                response = e.getMessage();
+                e.printStackTrace();
+            }
 
             // sending a response
-            HttpServerUtils.sendingAResponse(httpExchange, "OK");
+            HttpServerUtils.sendingAResponse(httpExchange, response);
         });
     }
 
+    public static class ProductModel {
+        public String name;
+        public String location;
+        public String image;
+
+    }
 }

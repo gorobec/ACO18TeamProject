@@ -7,14 +7,15 @@ public class Product {
     private int id;
     private String name;
     private Coordinates coordinates;
-
+    private String imagePath;
     public Product() {
     }
 
-    public Product(int id, String name, Coordinates coordinates) {
+    public Product(int id, String name, Coordinates coordinates, String image) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
+        this.imagePath = image;
     }
 
     public int getId() {
@@ -39,6 +40,14 @@ public class Product {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override
