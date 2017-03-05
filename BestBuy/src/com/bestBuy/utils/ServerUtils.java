@@ -53,7 +53,7 @@ public class ServerUtils {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
         return bufferedImage;
     }
-    
+
     public static String readData(HttpExchange httpExchange) throws IOException {
         InputStream is = httpExchange.getRequestBody();
         BufferedInputStream bis = new BufferedInputStream(is);
