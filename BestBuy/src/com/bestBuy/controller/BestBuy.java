@@ -7,6 +7,7 @@ import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 import com.bestBuy.to.MailSender;
 import com.bestBuy.to.Validator;
+import com.bestBuy.utils.Base64Utils;
 import com.google.gson.internal.Streams;
 
 import java.io.IOException;
@@ -34,9 +35,20 @@ public class BestBuy implements IStore {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
     @Override
     public Product[] showAllProducts() {
-        return base.getAllProducts().values().stream().toArray(size -> new Product[size]);
+        Product[] prodCopy = base.getAllProducts().values().stream()
+                .map(product ->
+                {
+                    String[] base64 = new String[1];
+                    base64[0] = Base64Utils.getBase64URLData(product.getImageSource()[0]);
+                    product.setImageSource(base64);
+                    return product;
+                })
+                .toArray(size -> new Product[size]);
+        base.loadDatabase();
+        return prodCopy;
     }
 
 
@@ -88,14 +100,14 @@ public class BestBuy implements IStore {
     }
 
     @Override
-    public String buy() throws TicketIsEmptyException,NoCurrentUserException, IOException {
+    public String buy() throws TicketIsEmptyException, NoCurrentUserException, IOException {
         if (chosenProductId < 0) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
-        if (currentUser == null){
+        if (currentUser == null) {
             throw new NoCurrentUserException("Login first!");
         }
-        Ticket ticket = new Ticket(base.getMaxTicketID()+1, currentUser, chosenProductId);
+        Ticket ticket = new Ticket(base.getMaxTicketID() + 1, currentUser, chosenProductId);
         base.addTicket(ticket);
         base.saveDatabase();
 

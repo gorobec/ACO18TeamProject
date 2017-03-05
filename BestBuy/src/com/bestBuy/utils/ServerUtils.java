@@ -4,11 +4,6 @@ import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
-import javax.imageio.ImageIO;
-import javax.xml.bind.DatatypeConverter;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Map;
 
@@ -36,13 +31,6 @@ public class ServerUtils {
         System.out.println(input);
         Serializer ser = Serializer.getInstance();
         return ser.convertJsonToProductType(input);
-    }
-
-    public static BufferedImage getImage(String src) throws IOException {
-        String Url = src;
-        byte[] imagedata = DatatypeConverter.parseBase64Binary(Url.substring(Url.indexOf(",") + 1));
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
-        return bufferedImage;
     }
 
     public static String readData(HttpExchange httpExchange) throws IOException {

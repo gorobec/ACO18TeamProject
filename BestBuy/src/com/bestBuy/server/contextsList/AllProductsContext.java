@@ -25,9 +25,11 @@ public class AllProductsContext {
                     Product[] products = service.showAllProducts();
                     Serializer serializer = Serializer.getInstance();
                     String json = serializer.convertObjectToJson(products);
-                    httpExchange.sendResponseHeaders(200, json.length());
 
-                    outputStream.write(json.getBytes());
+                    byte[] bytes = json.getBytes();
+                    httpExchange.sendResponseHeaders(200, bytes.length);
+
+                    outputStream.write(bytes);
                     outputStream.flush();
                     outputStream.close();
                 }
