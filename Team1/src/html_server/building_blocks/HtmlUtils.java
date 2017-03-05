@@ -49,4 +49,16 @@ public class HtmlUtils {
             HttpServerUtils.sendingAResponse(httpExchange, response);
         });
     }
+
+    public static void test(HttpServer httpServer) {
+        httpServer.createContext("/error", httpExchange -> {
+            try{
+                httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
+                String e = null;
+                e.isEmpty();
+            } catch (Throwable e){
+                e.printStackTrace();
+            }
+        });
+    }
 }
