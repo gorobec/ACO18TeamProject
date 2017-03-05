@@ -4,13 +4,12 @@ import com.bestBuy.model.Product;
 import com.bestBuy.model.User;
 import com.bestBuy.to.Serializer;
 import com.sun.net.httpserver.HttpExchange;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -18,29 +17,14 @@ import java.util.Map;
  */
 public class ServerUtils {
     public static int getIdData(HttpExchange httpExchange) throws IOException {
-        InputStream is = httpExchange.getRequestBody();
-        StringBuilder sb = new StringBuilder();
-
-        String input = "";
-        int read = -1;
-        while ((read = is.read()) != -1) {
-            input += (char) read;
-        }
-
+        String input = readData(httpExchange);
         Serializer ser = Serializer.getInstance();
         Map<String, Integer> map = ser.convertJsonIDToObject(input);
-        return Integer.valueOf(map.get("id"));
+        return map.get("id");
     }
 
     public static User getUserData(HttpExchange httpExchange) throws IOException {
-        InputStream is = httpExchange.getRequestBody();
-        StringBuilder sb = new StringBuilder();
-
-        String input = "";
-        int read = -1;
-        while ((read = is.read()) != -1) {
-            input += (char) read;
-        }
+        String input = readData(httpExchange);
         input = input.replace("[", "{").replace("]", "}").replace("\\", "");
         Serializer ser = Serializer.getInstance();
         User user = ser.convertJsonToSingleUser(input);
@@ -48,20 +32,10 @@ public class ServerUtils {
     }
 
     public static Product getProduct(HttpExchange httpExchange) throws IOException {
-        InputStream is = httpExchange.getRequestBody();
-
-        Product product = new Product();
-
-
-        String input = "";
-        int read = -1;
-        while ((read = is.read()) != -1) {
-            input += (char) read;
-        }
-
+        String input = readData(httpExchange);
+        System.out.println(input);
         Serializer ser = Serializer.getInstance();
-        product = ser.convertJsonToProductType(input);
-        return product;
+        return ser.convertJsonToProductType(input);
     }
 
     public static BufferedImage getImage(String src) throws IOException {
@@ -69,5 +43,18 @@ public class ServerUtils {
         byte[] imagedata = DatatypeConverter.parseBase64Binary(Url.substring(Url.indexOf(",") + 1));
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
         return bufferedImage;
+    }
+
+    public static String readData(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+        BufferedInputStream bis = new BufferedInputStream(is);
+        byte[] buff = new byte[1024];
+        int bytesRead = 0;
+        StringBuilder sb = new StringBuilder();
+        while ((bytesRead = bis.read(buff)) != -1) {
+            sb.append(new String (buff, 0, bytesRead));
+        }
+        bis.close();
+        return sb.toString();
     }
 }
