@@ -3,10 +3,11 @@ package utils;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import controller.IService;
+import sun.misc.BASE64Decoder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -47,5 +48,32 @@ public class HttpServerUtils {
             }
         }
         return new Gson().fromJson(request.toString(), model);
+    }
+
+    public static ByteArrayOutputStream getByteArrayOutputStream(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+        int read;
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        while((read = is.read()) != -1){
+            os.write(read);
+        }
+        return os;
+    }
+
+    public static BufferedImage getBufferedImage(ByteArrayOutputStream os) throws IOException {
+        BufferedImage image = null;
+        byte[] imageByte;
+
+        BASE64Decoder decoder = new BASE64Decoder();
+        imageByte = decoder.decodeBuffer(new String(os.toByteArray()));
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+        image = ImageIO.read(bis);
+        bis.close();
+        return image;
+    }
+
+    public static void saveImage(BufferedImage image, String path) throws IOException {
+        File outputfile = new File(path);
+        ImageIO.write(image, "png", outputfile);
     }
 }
