@@ -6,7 +6,8 @@ public class Product {
     private String name;
     private int id;
     private double price;
-    private String imageUrl;
+    private String[] imageUrl;
+    private String description;
     private boolean isPopular;
 
     public Product() {};
@@ -44,12 +45,30 @@ public class Product {
         this.price = price;
     }
 
-    public void setImageSource(String imageSource) {
+    public void setImageSource(String[] imageSource) {
         this.imageUrl = imageSource;
     }
 
-    public String getImageSource() {
+    public void addImageSource(String imageSource) {
+        String[] arrayImages = new String[imageUrl.length+1];
+        arrayImages[arrayImages.length] = imageSource;
+        this.imageUrl = arrayImages;
+    }
+
+    public void replaceImageSource(String imageSource, int index) {
+        this.imageUrl[index] = imageSource;
+    }
+
+    public String[] getImageSource() {
         return imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

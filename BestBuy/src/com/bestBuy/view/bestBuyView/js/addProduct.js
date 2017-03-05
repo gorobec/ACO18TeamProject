@@ -2,13 +2,13 @@ $(document).ready(function() {
     var frm = $('#productForm');
     var reader = new FileReader();
     frm.submit(function(ev) {
-        // var img = new Image;
-        var img = "";
+
+        var img = [];
+
         $('#list').find('img').each(function(){
-            // img.src = $(this).attr('src');
-            img = $(this).attr('src');
+            img.push($(this).attr('src'));
         });
-        // var img2 = reader.readAsBinaryString(img);
+
         $.ajax({
             type: frm.attr('method'),
         	url: "http://localhost:8000/addproduct",
@@ -16,7 +16,6 @@ $(document).ready(function() {
             data: JSON.stringify({name : $("#name").val(),
 				price : $("#price").val(),
                 imageUrl : img}),
-				// imageUrl : $("#imageUrl").val()}),
         	success: function(result) {
 				console.log(result);
 				if (result == "true") {

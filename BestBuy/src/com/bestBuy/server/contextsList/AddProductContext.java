@@ -28,10 +28,15 @@ public class AddProductContext {
 
                 Properties config = Configuration.getConfig();
                 Product product = ServerUtils.getProduct(httpExchange);
-                String imageSrc = config.getProperty("package_for_images") +"/"+ product.getName() + ".jpg";
-                File file = new File(imageSrc);
-                ImageIO.write(ServerUtils.getImage(product.getImageSource()), "jpg", file);
-                product.setImageSource(imageSrc);
+                String[] images = product.getImageSource();
+
+                for (int i = 0; i < images.length; i++) {
+                    String imageSrc = config.getProperty("package_for_images") +"/"+ i + product.getName() + ".jpg";
+                    File file = new File(imageSrc);
+                    ImageIO.write(ServerUtils.getImage(images[i]), "jpg", file);
+                    product.replaceImageSource(imageSrc, i);
+                }
+
                 boolean added = service.addProduct(product);
                 service.saveDatabase();
                 try (OutputStream outputStream = httpExchange.getResponseBody()) {

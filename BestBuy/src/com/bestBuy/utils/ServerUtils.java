@@ -52,7 +52,6 @@ public class ServerUtils {
 
         Product product = new Product();
 
-
         String input = "";
         int read = -1;
         while ((read = is.read()) != -1) {
