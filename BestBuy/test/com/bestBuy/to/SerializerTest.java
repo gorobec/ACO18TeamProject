@@ -2,6 +2,7 @@ package com.bestBuy.to;
 
 import com.bestBuy.model.Product;
 import com.bestBuy.model.Ticket;
+import com.bestBuy.model.User;
 import org.junit.Assert;
 
 import java.util.HashMap;
@@ -57,6 +58,20 @@ public class SerializerTest {
     public void testTicketToObject() throws Exception {
         ticketMap.put(0, ticket);
         String txt = serializer.convertObjectToJson(ticketMap);
+        Assert.assertNotNull(serializer.convertJsonToTicket(txt));
+    }
+
+    @org.junit.Test
+    public void testTicketToObject1() throws Exception {
+        Product product1 = new Product("Iron",300.0);
+        Product product2 = new Product("Fish",400.0);
+        User user = new User ("email", "123", "4444444444444444", "Kiev");
+        Ticket ticket = new Ticket (user,1);
+        ticket.addProduct(product1);
+        ticket.addProduct(product2);
+        ticketMap.put(0, ticket);
+        String txt = serializer.convertObjectToJson(ticketMap);
+        FileHelper.writeToFile(txt, "test.txt");
         Assert.assertNotNull(serializer.convertJsonToTicket(txt));
     }
 

@@ -14,7 +14,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script id="singleTmpl" type="text/x-jquery-tmpl">
 			<div class="col-md-5 single-top-left">
-				<div class="thumb-image"> <img src="${imageUrl}".split(',') data-imagezoom="true" class="img-responsive" alt=""/> </div>
+				<div class="thumb-image"> <img src="${imageUrl}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
 			</div>
 			<div class="col-md-7 single-top-right">
 				<div class="single-para simpleCart_shelfItem">
@@ -39,7 +39,6 @@
 		<script>
 			$(document).ready(function() {
 				var dataItems = [];
-
 				$(window).load(function() {
 					$.ajax({
 						type: "POST",
@@ -52,18 +51,16 @@
 							$('#singleTmpl').tmpl(JSON.parse(dataItems)).appendTo('#product-one');
 						}
 					});
-
 				});
-
-				$("#BUY").click(function() {
+				$("#ADDTOCART").click(function() {
 					$.ajax({
-						url: "http://localhost:8000/buy",
+						type: "POST",
+						url: "http://localhost:8000/addProductToCart",
+						data: JSON.stringify({id : location.search.split("id=")[1]}),
 						success: function(result) {
-							console.log(result);
-							$("#resultBuy").html(result);
-
+						console.log(result);
+						$("#resultAddToCart").html(result);
 						}
-
 					 });
 				});
 			});
@@ -79,7 +76,7 @@
 				</div>
 				<div class="col-md-6 top-header-left">
 					<div class="cart box_1">
-						<a href="#">
+						<a href="basket.html">
 							 <div class="total">
 								<span class="simpleCart_total"></span></div>
 								<img src="images/cart-1.png" alt="" />
@@ -130,8 +127,8 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-		</div><a href="#" id="BUY" class="add-cart item_add">BUY</a>
-		<div id="resultBuy"></div>
+		</div><a href="#" id="ADDTOCART" class="add-cart item_add">ADD TO CART</a>
+		<div id="resultAddToCart"></div>
 	</div>
 	<!--product-end-->
 	<!--footer-starts-->

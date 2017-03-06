@@ -39,8 +39,8 @@ public class Server {
         BuyProductContext.buyProduct(server, service);
         LoginContext.login(server, service);
         RegistrationContext.registration(server, service);
-
-
+        AddProductToCartContext.addProductToCart(server, service);
+        AllCurrentTicketProducts.getAllCurrentTicketProducts(server, service);
 
         server.setExecutor(null); // creates a default executor
         server.start();

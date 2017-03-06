@@ -25,16 +25,37 @@ public class BestBuy implements IStore {
 
     private User currentUser;
 
-    private int chosenProductId;
+    private Ticket currentTicket;
 
     public BestBuy(IDataBase base) {
         this.base = base;
-        chosenProductId = -1;
+        this.currentTicket = null;
     }
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+        this.currentTicket = new Ticket(currentUser);
     }
+
+    @Override
+    public Product addProductToCurrentTicket(int productId) throws NoSuchProductException,NoCurrentUserException {
+        Product product = base.getProductById(productId);
+        if (currentUser == null) {
+            throw new NoCurrentUserException("Login first!");
+        }
+        if (product != null) {
+            currentTicket.addProduct(product);
+            return product;
+        }
+        return null;
+
+    }
+
+    @Override
+    public Ticket getCurrentTicket() {
+        return currentTicket;
+    }
+
 
     @Override
     public Product[] showAllProducts() {
@@ -51,13 +72,26 @@ public class BestBuy implements IStore {
         return prodCopy;
     }
 
+    @Override
+    public Product[] showAllTicketProducts() {
+        Product[] prodCopy = currentTicket.getProducts().values().stream()
+                .map(product ->
+                {
+                    String[] base64 = new String[1];
+                    base64[0] = Base64Utils.getBase64URLData(product.getImageSource()[0]);
+                    product.setImageSource(base64);
+                    return product;
+                })
+                .toArray(size -> new Product[size]);
+        base.loadDatabase();
+        return prodCopy;
+    }
 
     @Override
     public Product getProductById(int id) throws NoSuchProductException {
         Product product = base.getProductById(id);
 
         if (product != null) {
-            chosenProductId = id;
             String[] imageSrc = Arrays.stream(product.getImageSource()).map(productimageSrc ->
             {
                 return Base64Utils.getBase64URLData(productimageSrc);
@@ -66,7 +100,6 @@ public class BestBuy implements IStore {
             base.loadDatabase();
             return product;
         }
-        chosenProductId = -1;
         return null;
     }
 
@@ -81,6 +114,7 @@ public class BestBuy implements IStore {
         }
 
         currentUser = base.getUserByLogin(login);
+        currentTicket = new Ticket(currentUser);
 
         return true;
     }
@@ -108,13 +142,13 @@ public class BestBuy implements IStore {
 
     @Override
     public String buy() throws TicketIsEmptyException, NoCurrentUserException, IOException {
-        if (chosenProductId < 0) {
+        if (currentTicket.getProducts().isEmpty()) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
         if (currentUser == null) {
             throw new NoCurrentUserException("Login first!");
         }
-        Ticket ticket = new Ticket(base.getMaxTicketID() + 1, currentUser, chosenProductId);
+        Ticket ticket = new Ticket(base.getMaxTicketID() + 1, currentTicket.getProducts(), currentUser);
         base.addTicket(ticket);
         base.saveDatabase();
 
@@ -152,10 +186,8 @@ public class BestBuy implements IStore {
     public String printProductById(int id) throws NoSuchProductException {
         Product product = base.getProductById(id);
         if (product != null) {
-            chosenProductId = id;
             return product.toString();
         } else {
-            chosenProductId = -1;
             return "product == null";
         }
 

@@ -1,1 +1,19 @@
-{"0":{"id":0,"productID":1,"user":{"email":"user@gmail.com","password":"123456","creditCard":"Kiev","address":"4444 4444 4444 4444"}},"1":{"id":0,"productID":0,"user":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"}},"2":{"id":2,"productID":5,"user":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"}},"3":{"id":3,"productID":3,"user":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"}},"5":{"id":5,"productID":2,"user":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"}}}
+{
+  "0": {
+    "id": 1,
+    "products": {
+      "0": {
+        "name": "Fish",
+        "id": 0,
+        "price": 400.0,
+        "isPopular": false
+      }
+    },
+    "user": {
+      "email": "email",
+      "password": "123",
+      "creditCard": "4444444444444444",
+      "address": "Kiev"
+    }
+  }
+}
