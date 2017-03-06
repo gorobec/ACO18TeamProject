@@ -1,6 +1,17 @@
 
 $(document).ready(function(){
     $('.modal').modal();
+
+    getProducts();
+
+    document.getElementById('userImage').onmouseover = function() {
+      $('#changeUserPicForm').show();
+    }
+
+    document.getElementById('userImage').onmouseout = function() {
+      $('#changeUserPicForm').hide();
+    }
+
   });
 
 var productList;
@@ -150,12 +161,15 @@ function login() {
         }),
         success: function (result) {
             if (result != "FAILED") {
-                $('#modalText').html(result + ", welcome to our store!");
+              result = JSON.parse(result);
+                $('#modalText').html(result.name + ", welcome to our store!");
                 $('#signBtns').hide();
-                $('#usernameTop').html(result);
+                $('#usernameTop').html(result.name);
                 $('#modal2').modal('open');
                 $('#loginContainer').hide();
                 $('#productList').show();
+                $('#userBoxName').html('Username: ' + result.name);
+                $('#userBoxMail').html('Email: ' + result.email);
             } else {
                 $('#modalText').html("Invalid login or pass");
                 $('#modal2').modal('open');
@@ -186,4 +200,37 @@ function register() {
     });
 }
 
-getProducts();
+function toUserBox(){
+  $('#userBox').show();
+  $('#loginContainer').hide();
+  $('#registerPart').hide();
+  $('#productList').hide();
+  $('#input_box').hide();
+  $.ajax({
+    type: 'GET',
+    url: "http://localhost:8000/tickets",
+    success: function (result) {
+        if (result !== "") {
+            var ticketsArr = JSON.parse(result);
+
+            for(var key in result){
+              $('#ticketList').html($('#ticketList').html() +
+                '<p>Id: ' + result[key].id + '</p>' +
+                '<p>Id: ' + result[key].product + '</p>' +
+                '<hr>'
+              );
+            }
+        } else {
+          $('#ticketList').html('<p>No tickets yet</p>'); 
+        }
+    }
+  });
+}
+
+function toMain(){
+    $('#userBox').hide();
+    $('#loginContainer').hide();
+    $('#registerPart').hide();
+    $('#productList').show();
+    $('#input_box').hide();
+}

@@ -35,8 +35,6 @@ public class BuyContextCreator {
 
             int ticketId = 0;
 
-            boolean check = true;
-
             String response = "NULL";
 
             BuyRequestModel model = HttpServerUtils.getRequestData(httpExchange, BuyRequestModel.class);
@@ -59,7 +57,6 @@ public class BuyContextCreator {
                 } catch (InvalidInputParameters |InvalidTokenException | NoSuchProductException |
                         InvalidIdException | UserLoginException e) {
                     e.printStackTrace();
-                    check = false;
                 }
             }
 
@@ -69,17 +66,6 @@ public class BuyContextCreator {
 
             ViewUtils.save(iService);
 
-//            if(model != null && model.adress != null && model.bankCard != null && check) {
-//                if (check) try {
-//                    MailSender.sendEmail(
-//                            iService.getUserByToken(OurHttpServer.token),
-//                            iService.getTicketById(ticketId, OurHttpServer.token),
-//                            iService.getProductById(model.productId)
-//                    );
-//                } catch (InvalidTokenException | InvalidIdException | UserLoginException e) {
-//                    e.printStackTrace();
-//                }
-//            }
         });
     }
 

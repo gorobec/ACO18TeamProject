@@ -17,7 +17,7 @@
               <li><a class="waves-effect waves-light btn" onclick="toLogin()">Login</a></li>
               <li><a class="waves-effect waves-light btn" onclick="goToRegister()">Register</a></li>
             </ul>
-            <h5 class="right" id="usernameTop"></h5>
+            <h5 class="right" id="usernameTop" onclick="toUserBox()"></h5>
           </div>
         </div>
       </nav>
@@ -131,6 +131,38 @@
 
     </div>
 
+<!-- user box -->
+
+    <div class="container userBox" hidden id="userBox" onfocus="toChangeUserPic()">
+      <div class="row">
+        <div class="col l3 userImage" id="userImage">
+          <form hidden id="changeUserPicForm" action="http://localhost:8000/changeUserPic">
+            <div class="file-field input-field center">
+              <div class="btn">
+                <span>File</span>
+                <input type="file">
+              </div>
+              <div hidden class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+              <input class="waves-effect waves-light btn center" type="submit" name="name" value="Submit">
+            </div>
+          </form>
+        </div>
+        <div class="col l4 offset-l4 fieldsBox">
+          <h5 id="userBoxName"></h5>
+          <h5 id="userBoxMail"></h5>
+          <h5>
+            Tickets:
+          </h5>
+          <div class="col l10 offset-l2" id="ticketList">
+
+          </div>
+          <button class="waves-effect waves-light btn right" id="toMain" onclick="toMain()">Back</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="page-footer" style="padding-top:0;margin-top: 100px;">
       <div class="footer-copyright">
         <div class="container">
@@ -164,6 +196,246 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt3T4Fneih9ICsGCxFky6vzIVHHdj93rM&callback=myMap"></script>
     <script src="../js/building_blocks/materialize.js"></script>
-    <script src="../js/Main.js"/>
+    <!-- <script src="../js/Main.js"/> -->
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.modal').modal();
+
+        getProducts();
+
+        document.getElementById('userImage').onmouseover = function() {
+          $('#changeUserPicForm').show();
+        }
+
+        document.getElementById('userImage').onmouseout = function() {
+          $('#changeUserPicForm').hide();
+        }
+
+      });
+
+    var productList;
+
+    function buy(id){
+      $('#input-box').show();
+
+      var reqStr = "http://localhost:8000/buy";
+
+      $.ajax({
+        type : "POST",
+        url : reqStr,
+
+        data : JSON.stringify({
+          productId : id,
+          adress:{
+            city : $('#city').val(),
+            street : $('#street').val(),
+            number : $('#home').val()
+          },
+          bankCard: {
+            number : $('#cardNumber').val(),
+            cvv2 : $('#cvv2').val(),
+            valid : $('#cardDate').val()
+          }
+        }),
+
+        success: function(result) {
+          if(result === "NULL") confirm("Incorrect data");
+          else{
+            $('#input_box').hide();
+
+            var resultObj = JSON.parse(result);
+
+            var ticketStr = 'Your ticket is: ' + resultObj['id'] + '<br>' + 'Product(id = ' +
+              resultObj['productID'] + ') will be delivered to ' + resultObj.address.city +
+              ', ' + resultObj.address.street + ' ' + resultObj.address.number +
+              '<br>Have nice day!';
+
+              $('#modalText1').html(ticketStr);
+
+             $('#modal1').modal('open');
+
+             $('#input_box').hide();
+             $('#productList').show();
+          }
+        }
+      });
+    }
+
+    function getProducts(){
+      $.ajax({
+        url : "http://localhost:8000/map",
+        type : "GET",
+
+        success : function(result){
+          if(result !== "NULL" && result !== ""){
+            productList = JSON.parse(result);
+
+            var map = myMap("googleMap", 8);
+
+            for(var key in productList){
+
+              $('#row-box').html($('#row-box').html() + '<div class="col l4">' +
+              '<div class=" product-box">' +
+              '<h5 class="product-name">' +
+              productList[key].name +
+              '</h5>' +
+              '<button class="btn waves-effect waves-light send_btn product-btn" type="submit" onclick="buyWnd(' + key + ')" name="action">Buy</button>' +
+              '</div>' +
+              '</div>');
+
+              addMarkerToMap(map, productList[key]);
+            }
+          }
+        }
+      });
+    }
+
+    function buyWnd(index){
+      $('#productList').hide();
+      $('#input_box').show();
+      $('#productName').html(productList[index].name);
+
+      $('#buyBtnBox').html(
+        '<button class="btn waves-effect waves-light send_btn" type="submit" onclick="buy(' + productList[index].id + ')" name="action">Submit' +
+          '<i class="material-icons right">send</i>' +
+        '</button>'
+      );
+
+      addMarkerToMap(myMap("googleMapForBuy", 12), productList[index]);
+    }
+
+    function myMap(mapId, mapZoom){
+      var mapProp = {
+        center: new google.maps.LatLng(50.427994, 30.484166),
+        zoom: mapZoom,
+      };
+
+      return new google.maps.Map(document.getElementById(mapId), mapProp);
+    }
+
+    function addMarkerToMap(map, product){
+      var myLatlng = new google.maps.LatLng(parseFloat((product.coordinates.lat).toFixed(6)), parseFloat((product.coordinates.lng).toFixed(6)));
+
+      // create a marker
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          title: product.name
+      });
+
+      // place a marker
+      marker.setMap(map);
+
+      // create info window above the marker
+      var infowindow = new google.maps.InfoWindow({
+          content: product.name
+      });
+
+      // place window
+      infowindow.open(map, marker);
+    }
+
+    function goToRegister(){
+      $('#loginContainer').show();
+      $('#buttons-login').hide();
+      $('#productList').hide();
+      $('#input_box').hide();
+      $('#registerPart').show();
+    }
+
+    function toLogin(){
+      $('#loginContainer').show();
+      $('#buttons-login').show();
+      $('#registerPart').hide();
+      $('#productList').hide();
+      $('#input_box').hide();
+    }
+
+    function login() {
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8000/login",
+            data: JSON.stringify({
+                name: $('#username').val(),
+                pass: $('#password').val()
+            }),
+            success: function (result) {
+                if (result != "FAILED") {
+                  result = JSON.parse(result);
+                    $('#modalText').html(result.name + ", welcome to our store!");
+                    $('#signBtns').hide();
+                    $('#usernameTop').html(result.name);
+                    $('#modal2').modal('open');
+                    $('#loginContainer').hide();
+                    $('#productList').show();
+                    $('#userBoxName').html('Username: ' + result.name);
+                    $('#userBoxMail').html('Email: ' + result.email);
+                } else {
+                    $('#modalText').html("Invalid login or pass");
+                    $('#modal2').modal('open');
+                }
+            }
+        });
+    }
+
+    function register() {
+      console.log($('#username').val());
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8000/register",
+            data: JSON.stringify({
+                name: $('#username').val(),
+                pass: $('#password').val(),
+                email: $('#email').val()
+            }),
+            success: function (result) {
+                if (result == 'OK') {
+                    $('#modalText').html("OK. Please, back to login page and sign in.");
+                    $('#modal2').modal('open');
+                } else {
+                    $('#modalText').html(result);
+                    $('#modal2').modal('open');
+                }
+            }
+        });
+    }
+
+    function toUserBox(){
+      $('#userBox').show();
+      $('#loginContainer').hide();
+      $('#registerPart').hide();
+      $('#productList').hide();
+      $('#input_box').hide();
+      $.ajax({
+        type: 'GET',
+        url: "http://localhost:8000/tickets",
+        success: function (result) {
+            if (result !== "FAILED") {
+                var ticketsArr = JSON.parse(result);
+
+                for(var key in ticketsArr){
+                  $('#ticketList').html('');
+                  $('#ticketList').html($('#ticketList').html() +
+                    '<hr>' +
+                    '<h5>Id: ' + ticketsArr[key].id + '</h5>' +
+                    '<h5>Id: ' + ticketsArr[key].product + '</h5>'
+                  );
+                }
+            } else {
+              $('#ticketList').html('<p>No tickets yet</p>');
+            }
+        }
+      });
+    }
+
+    function toMain(){
+        $('#userBox').hide();
+        $('#loginContainer').hide();
+        $('#registerPart').hide();
+        $('#productList').show();
+        $('#input_box').hide();
+    }
+
+    </script>
   </body>
 </html>

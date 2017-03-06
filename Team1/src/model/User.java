@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by v21k on 20.02.17.
  */
@@ -9,12 +12,14 @@ public class User {
     private final String email;
     private int id;
     private String pass;
+    private List<Ticket> tickets;
 
     private User(UserBuilder builder) {
         this.id = ++nextID;
         this.name = builder.name;
         this.pass = builder.pass;
         this.email = builder.email;
+        this.tickets = new ArrayList<>();
     }
 
     public String getName() {
@@ -27,6 +32,14 @@ public class User {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public boolean addTicket(Ticket t){
+        return tickets.add(t);
     }
 
     public String getEmail() {
