@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Luxury Watches | Account</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
-<script src="js/jquery-1.11.0.min.js"></script>
-<!--Custom-Theme-files-->
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!--start-menu-->
-<script src="js/simpleCart.min.js"> </script>
-<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+	<title>BestBuy | Login</title>
+	<script src="js/libs/jquery-1.11.0.min.js"></script>
+	<script src="js/libs/simpleCart.min.js"> </script>
+	<script src="js/libs/jquery.tmpl.js"></script>
+	<script src="js/main.js"></script>
 
+	<script src="js/login.js"></script>
+
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body> 
 	<!--top-header-->
@@ -92,14 +92,14 @@
 			<div class="account-main">
 				<div class="col-md-6 account-left">
 					<h3>Existing User</h3>
-					<div class="account-bottom">
-						<input placeholder="Email" type="text" tabindex="3" required>
-						<input placeholder="Password" type="password" tabindex="4" required>
+					<form id="loginForm" name="loginForm" class="account-bottom" method="post" action="http://localhost:8000/login">
+						<input name="email" placeholder="Email" type="text" tabindex="3" required>
+						<input name="password" placeholder="Password" type="password" tabindex="4" required>
 						<div class="address">
 							<a class="forgot" href="#">Forgot Your Password?</a>
-							<input type="submit" value="Login">
+							<input id="loginBtn" type="submit" value="Login">
 						</div>
-					</div>
+					</form>
 				</div>
 				<div class="col-md-6 account-right account-left">
 					<h3>New User? Create an Account</h3>

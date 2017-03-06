@@ -62,6 +62,13 @@ public class Serializer {
     public Product convertJsonToProductType(String txt) {
         Type type = new TypeToken<Product>() {
         }.getType();
+        Product product = new Gson().fromJson(txt, type);
+        return product;
+    }
+
+    public User convertJsonToSingleUser(String txt) {
+        Type type = new TypeToken<User>() {
+        }.getType();
         return new Gson().fromJson(txt, type);
     }
 

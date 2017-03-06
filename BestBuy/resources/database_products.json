@@ -1,1 +1,99 @@
-{"1":{"name":"Iron","id":1,"price":300.0,"imageUrl":"http://mrslamarche.com/wp-content/uploads/2016/08/dell-xps-laptop-620.jpg","isPopular":true},"2":{"name":"Cup","id":2,"price":100.0,"imageUrl":"http://www.publicdomainpictures.net/pictures/160000/velka/ordinateur-de-bureau-pc-1456070535WEH.jpg","isPopular":false},"3":{"name":"Phone","id":3,"price":3000.0,"imageUrl":"http://hyser-40.cdn.pjtsu.com/wp-content/uploads/2015/10/iphone-4.jpg","isPopular":true},"4":{"name":"HDD","id":4,"price":1000.0,"imageUrl":"http://i.siteapi.org/zA735sKx_hWgoJOg9hR1aQ9acn4\u003d/fit-in/1024x768/center/top/89db94309797583.ru.s.siteapi.org/img/434040b724484c3e35d3a3fbf6c50da23dd77de4.jpg","isPopular":false},"5":{"name":"SSD","id":5,"price":2000.0,"imageUrl":"http://www.laboiteacom.be/wp-content/uploads/Phantom3.jpg","isPopular":false},"6":{"name":"HDD","id":6,"price":1000.0,"imageUrl":"http://www.irobotweb.com/~/media/MainSite/Images/Home/Products/Roomba/iRobot-Roomba-3Stage-Cleaning.jpg?h\u003d581\u0026la\u003den\u0026w\u003d1000","isPopular":true},"7":{"name":"SSD","id":7,"price":2000.0,"imageUrl":"https://encrypted-tbn1.gstatic.com/images?q\u003dtbn:ANd9GcQHQht9YI1joN-5WAXGSybs4ONjH05EJ2aUbwIhsDtqNcOfqepIaA","isPopular":false},"8":{"name":"SSD","id":8,"price":3000.0,"imageUrl":"https://ecoelectro.com.ua/image/data/Vehicles/dzhamper-dlya-vesa-30-50-kg-1.jpg","isPopular":false},"9":{"name":"UsbHub","id":0,"price":100.0,"imageUrl":"http://www.jebiga.com/wp-content/uploads/2014/12/SATECHI-10-PORT-USB-HUB.jpg","isPopular":false}}
+{
+  "1": {
+    "name": "Iron Bosch TDA702821I",
+    "id": 1,
+    "price": 250.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_Iron Bosch TDA702821I.jpg",
+      "BestBuy/resources/img/products/1_Iron Bosch TDA702821I.jpg",
+      "BestBuy/resources/img/products/2_Iron Bosch TDA702821I.jpg"
+    ],
+    "isPopular": true
+  },
+  "2": {
+    "name": "Cup Jetboil FluxRing Sol Titanium Companion Cup 800 мл JB CCP080-TI-08L",
+    "id": 2,
+    "price": 100.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_Cup Jetboil FluxRing Sol Titanium Companion Cup 800 мл JB CCP080-TI-08L.jpg",
+      "BestBuy/resources/img/products/1_Cup Jetboil FluxRing Sol Titanium Companion Cup 800 мл JB CCP080-TI-08L.jpg",
+      "BestBuy/resources/img/products/2_Cup Jetboil FluxRing Sol Titanium Companion Cup 800 мл JB CCP080-TI-08L.jpg"
+    ],
+    "isPopular": false
+  },
+  "3": {
+    "name": "Phone Apple iPhone 7 Plus",
+    "id": 3,
+    "price": 1000.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_Phone Apple iPhone 7 Plus.jpg",
+      "BestBuy/resources/img/products/1_Phone Apple iPhone 7 Plus.jpg",
+      "BestBuy/resources/img/products/2_Phone Apple iPhone 7 Plus.png"
+    ],
+    "isPopular": true
+  },
+  "4": {
+    "name": "HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0",
+    "id": 4,
+    "price": 100.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0.jpg",
+      "BestBuy/resources/img/products/1_HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0.jpg"
+    ],
+    "isPopular": false
+  },
+  "5": {
+    "name": "SSD Samsung 850 Pro series 128GB 2.5\" SATAIII MLC",
+    "id": 5,
+    "price": 200.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_SSD Samsung 850 Pro series 128GB 2.5 SATAIII MLC.jpg",
+      "BestBuy/resources/img/products/1_SSD Samsung 850 Pro series 128GB 2.5 SATAIII MLC.jpg"
+    ],
+    "isPopular": false
+  },
+  "6": {
+    "name": "HDD Silicon Power Armor A15 2TB SP020TBPHDA15S3L 2.5 USB 3.0 Red",
+    "id": 6,
+    "price": 100.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_HDD Silicon Power Armor A15 2TB SP020TBPHDA15S3L 2.5 USB 3.0 Red.jpg"
+    ],
+    "isPopular": true
+  },
+  "7": {
+    "name": "SSD Kingston SSDNow KC400 1TB 2.5 SATAIII MLC",
+    "id": 7,
+    "price": 200.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_Kingston SSDNow KC400 1TB 2.5 SATAIII MLC.jpg",
+      "BestBuy/resources/img/products/1_Kingston SSDNow KC400 1TB 2.5 SATAIII MLC.jpg",
+      "BestBuy/resources/img/products/2_Kingston SSDNow KC400 1TB 2.5 SATAIII MLC.jpg"
+    ],
+    "isPopular": false
+  },
+  "9": {
+    "name": "USB-hub Maiwo USB 3.0 4 ports Silver",
+    "id": 9,
+    "price": 20.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_USB-hub Maiwo USB 3.0 4 ports Silver.jpg",
+      "BestBuy/resources/img/products/1_USB-hub Maiwo USB 3.0 4 ports Silver.jpg"
+    ],
+    "isPopular": false
+  },
+  "10": {
+    "name": "Lenovo ThinkPad E560",
+    "id": 10,
+    "price": 1000.0,
+    "imageUrl": [
+      "BestBuy/resources/img/products/0_Lenovo ThinkPad E560.png",
+      "BestBuy/resources/img/products/1_Lenovo ThinkPad E560.jpg",
+      "BestBuy/resources/img/products/2_Lenovo ThinkPad E560.jpg",
+      "BestBuy/resources/img/products/3_Lenovo ThinkPad E560.jpg",
+      "BestBuy/resources/img/products/4_Lenovo ThinkPad E560.jpg",
+      "BestBuy/resources/img/products/5_Lenovo ThinkPad E560.jpg"
+    ],
+    "isPopular": false
+  }
+}
