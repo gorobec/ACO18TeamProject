@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    var registerData;
 
     $('form#registerForm').submit(function(e) {
 
@@ -10,25 +9,26 @@ $(document).ready(function() {
            return  element.name + '"' + ":" + '"' +  element.value;
         });
 
-        console.log(data);
-
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
             data: JSON.stringify(data),
             success: function(result)
             {
-                registerData = result;
-                console.log("login data " + registerData);
+                alert(result);
             },
             complete: function(result){
-                console.log("result login data " + registerData);
+                if(result.responseText == "Registraion was successful"){
+                  form[0].reset();
+                   window.location.href="index.html"
+
+                }
+
             }
         });
 
         e.preventDefault();
-        this.reset();
-         alert("Registration is successful")
+
      });
 
 
