@@ -76,6 +76,9 @@ public class ServiceImpl implements IService {
         ticketDB.add(newTicket);
 
         User user = userDB.get(userID);
+
+        user.addTicket(newTicket);
+
         Product product = productDB.get(newTicket.getProductID());
 
         if (user == null || product == null) throw new InvalidInputParameters("Incorrect input");
