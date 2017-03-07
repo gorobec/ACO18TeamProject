@@ -59,7 +59,9 @@ public class BestBuy implements IStore {
 
     @Override
     public Product[] showAllProducts() {
-        return showProductsWithSingleImage(base.getProductsStream());
+        Product[] products = showProductsWithSingleImage(base.getProductsStream());
+        base.loadDatabase();
+        return products;
     }
 
     @Override
@@ -77,7 +79,6 @@ public class BestBuy implements IStore {
                     return product;
                 })
                 .toArray(size -> new Product[size]);
-        base.loadDatabase();
         return prodCopy;
     }
 
