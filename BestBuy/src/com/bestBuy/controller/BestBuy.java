@@ -56,9 +56,7 @@ public class BestBuy implements IStore {
 
     @Override
     public Product[] showAllProducts() {
-        Product[] products = showProductsWithSingleImage(base.getProductsStream());
-        base.loadDatabase();
-        return products;
+        return showProductsWithSingleImage(base.getProductsStream());
     }
 
     @Override
@@ -72,25 +70,10 @@ public class BestBuy implements IStore {
                 {
                     String[] base64 = new String[1];
                     base64[0] = Base64Utils.getBase64URLData(product.getImageSource()[0]);
-                    product.setImageSource(base64);
+                    product.setImageUrl(base64);
                     return product;
                 })
                 .toArray(size -> new Product[size]);
-        return prodCopy;
-    }
-
-    @Override
-    public Product[] showAllTicketProducts() {
-        Product[] prodCopy = base.getProducts(currentTicket.getProductsID()).stream()
-                .map(product ->
-                {
-                    String[] base64 = new String[1];
-                    base64[0] = Base64Utils.getBase64URLData(product.getImageSource()[0]);
-                    product.setImageSource(base64);
-                    return product;
-                })
-                .toArray(size -> new Product[size]);
-        base.loadDatabase();
         return prodCopy;
     }
 
@@ -103,8 +86,7 @@ public class BestBuy implements IStore {
             {
                 return Base64Utils.getBase64URLData(productimageSrc);
             }).toArray(size -> new String[size]);
-            product.setImageSource(imageSrc);
-            base.loadDatabase();
+            product.setImageUrl(imageSrc);
             return product;
         }
         return null;

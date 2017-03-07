@@ -18,7 +18,7 @@ public class AllCurrentTicketProducts {
         server.createContext("/allCurrentTicketProducts", new HttpHandler() {
             public void handle(HttpExchange httpExchange) throws IOException {
                 ServerUtils.getResponse(httpExchange);
-                Product[] products = service.showAllTicketProducts();
+                Product[] products = service.showAllProductsInTicket(service.getCurrentTicket()); //??
                 Serializer serializer = Serializer.getInstance();
                 String json = serializer.convertObjectToJson(products);
                 ServerUtils.sendData(httpExchange, json);

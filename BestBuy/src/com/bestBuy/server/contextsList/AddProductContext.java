@@ -30,7 +30,7 @@ public class AddProductContext {
                     String imageSrc = config.getProperty("package_for_images") +"/"+ i + product.getName() + ".jpg";
                     File file = new File(imageSrc);
                     ImageIO.write(getImage(images[i]), "jpg", file);
-                    product.replaceImageSource(imageSrc, i);
+                    product.setImageUrl(null);
                 }
 
                 boolean added = service.addProduct(product);

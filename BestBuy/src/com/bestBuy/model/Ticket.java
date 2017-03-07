@@ -26,12 +26,6 @@ public class Ticket {
         productsID = new ArrayList<>();
     }
 
-    public Ticket(int id, List<Integer> products, String email) {
-        this.id = id;
-        this.productsID = products;
-        this.email = email;
-    }
-
     public boolean addProduct(int productID) {
         return productsID.add(productID);
     }

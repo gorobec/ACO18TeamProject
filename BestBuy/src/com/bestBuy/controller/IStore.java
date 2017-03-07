@@ -42,9 +42,4 @@ public interface IStore {
 
     Product[] showAllProductsInTicket(Ticket ticket);
 
-    Product[] showAllTicketProducts();
-    // //   create new Ticket with product ID
-//    Ticket addProductByIdToTicket(int productId) throws NoSuchProductException;
-
-//    boolean removeProductByIdFromTicket(int productId) throws NoSuchProductException;
 }

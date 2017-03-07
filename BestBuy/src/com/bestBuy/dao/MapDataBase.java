@@ -8,6 +8,7 @@ import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 import com.bestBuy.to.FileHelper;
 import com.bestBuy.to.Serializer;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -131,12 +132,19 @@ public class MapDataBase implements IDataBase {
     }
 
     @Override
-    public Stream<Product> getProductsStream(){
+    public Stream<Product> getProductsStream() {
         return products.values().stream();
     }
 
     @Override
     public boolean saveDatabase() {
+
+        products.values().stream()
+                .map(product -> {
+                    product.setImageUrl(null);
+                    return product;
+                })
+                .close();
 
         Serializer serializer = Serializer.getInstance();
 

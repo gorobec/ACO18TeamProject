@@ -7,6 +7,7 @@ public class Product {
     private int id;
     private double price;
     private String[] imageUrl;
+    private String[] imageSrc;
     private String description;
     private boolean isPopular;
 
@@ -55,12 +56,8 @@ public class Product {
         this.imageUrl = arrayImages;
     }
 
-    public void replaceImageSource(String imageSource, int index) {
-        this.imageUrl[index] = imageSource;
-    }
-
     public String[] getImageSource() {
-        return imageUrl;
+        return imageSrc;
     }
 
     public String getDescription() {
@@ -102,4 +99,9 @@ public class Product {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    public void setImageUrl(String[] base64) {
+        this.imageUrl = base64;
+    }
+
 }
