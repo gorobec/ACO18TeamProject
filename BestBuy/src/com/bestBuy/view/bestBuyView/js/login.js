@@ -19,16 +19,16 @@ $(document).ready(function() {
             success: function(result)
             {
                 loginData = result;
-                console.log("login data " + loginData);
+                alert(loginData)
             },
             complete: function(result){
-                console.log("result login data " + loginData);
+                window.location.href="index.html"
             }
         });
 
         e.preventDefault();
         this.reset();
-        alert("Login is successful")
+
      });
 
 
