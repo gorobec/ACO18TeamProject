@@ -1226,8 +1226,8 @@ a.mask {
 .sky-form .radio.state-disabled:hover i,
 .sky-form .checkbox.state-disabled:hover i,
 .sky-form .toggle.state-disabled:hover i {
-	border-color: #e5e5e5;
-}
+	 border-color: #e5e5e5;
+ }
 /*-- start scrollpane --*/
 .jspContainer{
 	overflow: hidden;
@@ -1339,6 +1339,7 @@ a.mask {
 .contact-text{
 	margin-top:4%;
 }
+/*Add product form*/
 .contact-right input[type="text"] {
 	width: 32.51%;
 	margin: 0px;

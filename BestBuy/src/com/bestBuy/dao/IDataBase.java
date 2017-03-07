@@ -7,6 +7,7 @@ import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 
 /**
@@ -39,5 +40,8 @@ public interface IDataBase {
     int getMaxProductID();
 
     boolean loadDatabase();
+
+    Stream<Product> getProductsStream();
+
     boolean saveDatabase();
 }

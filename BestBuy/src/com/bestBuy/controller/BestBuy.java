@@ -59,7 +59,16 @@ public class BestBuy implements IStore {
 
     @Override
     public Product[] showAllProducts() {
-        Product[] prodCopy = base.getAllProducts().values().stream()
+        return showProductsWithSingleImage(base.getProductsStream());
+    }
+
+    @Override
+    public Product[] showAllProductsInTicket(Ticket ticket) {
+        return showProductsWithSingleImage(ticket.getProducts().values().stream());
+    }
+
+    private Product[] showProductsWithSingleImage(Stream<Product> products) {
+        Product[] prodCopy = products
                 .map(product ->
                 {
                     String[] base64 = new String[1];
