@@ -1,5 +1,7 @@
 package com.bestBuy.model;
 
+import java.util.List;
+
 /**
  * Created by Администратор on 21.02.2017.
  */
@@ -9,6 +11,8 @@ public class User {
     private String password;
     private String creditCard;
     private String address;
+    private List<Integer> ticketHystory;
+    private Ticket currentTicket;
 
     public User(String email, String password, String creditCard, String address) {
         this.email = email;
@@ -45,6 +49,22 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+    public void setTicketHystory(List<Integer> ticketHystory) {
+        this.ticketHystory = ticketHystory;
+    }
+
+    public void setCurrentTicket(Ticket currentTicket) {
+        this.currentTicket = currentTicket;
+    }
+
+    public List<Integer> getTicketHystory() {
+        return ticketHystory;
+    }
+
+    public Ticket getCurrentTicket() {
+        return currentTicket;
     }
 
     @Override

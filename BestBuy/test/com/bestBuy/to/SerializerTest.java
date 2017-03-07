@@ -67,8 +67,8 @@ public class SerializerTest {
         Product product2 = new Product("Fish",400.0);
         User user = new User ("email", "123", "4444444444444444", "Kiev");
         Ticket ticket = new Ticket (user.getEmail(),1);
-        ticket.addProduct(product1.getId());
-        ticket.addProduct(product2.getId());
+        ticket.addProductID(product1.getId());
+        ticket.addProductID(product2.getId());
         ticketMap.put(0, ticket);
         String txt = serializer.convertObjectToJson(ticketMap);
         FileHelper.writeToFile(txt, "test.txt");
