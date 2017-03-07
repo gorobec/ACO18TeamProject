@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import controller.IService;
 import html_server.building_blocks.HtmlUtils;
+import model.Coordinates;
+import model.Product;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -37,16 +39,6 @@ public class HttpServerUtils {
         return new Gson().fromJson(request.toString(), model);
     }
 
-    public static ByteArrayOutputStream getByteArrayOutputStream(HttpExchange httpExchange) throws IOException {
-        InputStream is = httpExchange.getRequestBody();
-        int read;
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        while((read = is.read()) != -1){
-            os.write(read);
-        }
-        return os;
-    }
-
     public static String saveImage(BufferedImage image, String path) throws IOException {
         File outputfile = new File(path);
         ImageIO.write(image, "png", outputfile);
@@ -72,5 +64,36 @@ public class HttpServerUtils {
             sb.append((char) temp);
         }
         return new Gson().fromJson(sb.toString(), type);
+    }
+
+    public static Product getProduct(IService iService, HtmlUtils.ProductModel productModel) {
+        Coordinates coordinates = getCoordinates(productModel);
+        return new Product(iService.getProducts().size() + 1, productModel.name, coordinates, null);
+    }
+
+    public static String[] getPathsForProduct(HtmlUtils.ProductModel productModel, Product product) throws IOException {
+        String directory = makeDirectory(product);
+
+        String[] images = productModel.image.split(",");
+        String[] paths = new String[images.length];
+
+        for (int i = 0; i < images.length; ) {
+            BufferedImage image = getBufferedImage(images[i]);
+            paths[i] = saveImage(image, directory + "/" + ++i + ".png");
+        }
+
+        return paths;
+    }
+
+    private static String makeDirectory(Product product) {
+        String path = PropertiesHolder.getProperty("pathForProductImages")
+                + product.getId() + product.getName();
+        new File(path).mkdir();
+        return path;
+    }
+
+    private static Coordinates getCoordinates(HtmlUtils.ProductModel productModel) {
+        String[] location = productModel.location.split(",");
+        return new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[0]));
     }
 }

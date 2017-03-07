@@ -4,33 +4,40 @@ $(document).ready(function () {
     $("#buttonId").click(function () {
 
         // get file from input
-        let file = $('#file')[0].files[0];
-        // create reader instance
-        let reader = new FileReader();
+        let file = $('#file')[0].files;
 
-        // create onload handler
-        reader.onload = function () {
-            // get result from reader (in this case - readAsDataURL)
-            var dataURL = reader.result;
+        let images = [];
 
-            // send
+        // walk through files array and add base64 strings to images array
+        for (i = 0; i < file.length; i++) {
+            let reader = new FileReader();
+
+            reader.onloadend = function () {
+                images.push(reader.result.split(',')[1]);
+
+            }
+            reader.readAsDataURL(file[i]);
+        }
+
+        // send response with timeout because of asynchrony
+        setTimeout(function () {
+            console.log(images);
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8000/html",
                 data: JSON.stringify({
                     name: $('#prodName').val(),
                     location: lat + ',' + lng,
-                    image: dataURL
+                    image: images.join(',')
                 }),
                 success: function (data) {
                     $('#modalText').html("DONE!");
                     $('#modal1').modal('open');
                 }
             });
-        }
-        reader.readAsDataURL(file);
-
+        }, 250);
     });
+
 
     let lat, lng, myLatLng;
 

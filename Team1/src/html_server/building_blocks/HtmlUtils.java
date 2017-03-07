@@ -3,13 +3,10 @@ package html_server.building_blocks;
 import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.HttpServer;
 import controller.IService;
-import model.Coordinates;
 import model.Product;
 import utils.HttpServerUtils;
-import utils.PropertiesHolder;
 import view.ViewUtils;
 
-import java.awt.image.BufferedImage;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
@@ -28,29 +25,24 @@ public class HtmlUtils {
 
                 // creating model and other stuff to create Product
                 ProductModel productModel = HttpServerUtils.getModel(httpExchange, type);
-                String[] location = productModel.location.split(",");
-                Coordinates coordinates = new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[0]));
-                Product product = new Product(iService.getProducts().size() + 1, productModel.name, coordinates, null);
 
-                // get buffered image
-                BufferedImage image = HttpServerUtils.getBufferedImage(productModel.image.split(",")[1]);
+                // get product instance using fields from productModel
+                Product product = HttpServerUtils.getProduct(iService, productModel);
 
-                // save image to local folder and set imagePath
-                String path = PropertiesHolder.getProperty("pathForProductImages") + product.getId() + product.getName() + ".png";
-                product.setImagePath(HttpServerUtils.saveImage(image, path));
+                // save images and get paths array to save in Product's field "imagePaths"
+                String[] paths = HttpServerUtils.getPathsForProduct(productModel, product);
+                product.setImagePath(paths);
 
-
-                // add to DB and save DB
+                // add to db and save
                 iService.addProduct(product);
                 ViewUtils.save(iService);
 
                 // check
-                System.out.println(product.getImagePath());
+                System.out.println(Arrays.toString(paths));
             } catch (Throwable e) {
                 response = e.getMessage();
                 e.printStackTrace();
             }
-
             // sending a response
             HttpServerUtils.sendingAResponse(httpExchange, response);
         });
