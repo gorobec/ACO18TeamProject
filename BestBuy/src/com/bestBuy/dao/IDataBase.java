@@ -6,6 +6,7 @@ import com.bestBuy.model.Product;
 import com.bestBuy.model.Ticket;
 import com.bestBuy.model.User;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -44,4 +45,8 @@ public interface IDataBase {
     Stream<Product> getProductsStream();
 
     boolean saveDatabase();
+
+    boolean containsProductId(int productId);
+
+    List<Product> getProducts(List<Integer> productsID);
 }

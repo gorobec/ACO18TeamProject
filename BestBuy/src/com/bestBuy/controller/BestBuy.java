@@ -34,21 +34,18 @@ public class BestBuy implements IStore {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-        this.currentTicket = new Ticket(currentUser);
+        this.currentTicket = new Ticket(currentUser.getEmail());
     }
 
     @Override
-    public Product addProductToCurrentTicket(int productId) throws NoSuchProductException,NoCurrentUserException {
-        Product product = base.getProductById(productId);
+    public boolean addProductToCurrentTicket(int productId) throws NoSuchProductException,NoCurrentUserException {
         if (currentUser == null) {
             throw new NoCurrentUserException("Login first!");
         }
-        if (product != null) {
-            currentTicket.addProduct(product);
-            return product;
+        if (base.containsProductId(productId)) {
+            return currentTicket.addProduct(productId);
         }
-        return null;
-
+        return false;
     }
 
     @Override
@@ -66,7 +63,7 @@ public class BestBuy implements IStore {
 
     @Override
     public Product[] showAllProductsInTicket(Ticket ticket) {
-        return showProductsWithSingleImage(ticket.getProducts().values().stream());
+        return showProductsWithSingleImage(base.getProducts(ticket.getProductsID()).stream());
     }
 
     private Product[] showProductsWithSingleImage(Stream<Product> products) {
@@ -84,7 +81,7 @@ public class BestBuy implements IStore {
 
     @Override
     public Product[] showAllTicketProducts() {
-        Product[] prodCopy = currentTicket.getProducts().values().stream()
+        Product[] prodCopy = base.getProducts(currentTicket.getProductsID()).stream()
                 .map(product ->
                 {
                     String[] base64 = new String[1];
@@ -124,7 +121,7 @@ public class BestBuy implements IStore {
         }
 
         currentUser = base.getUserByLogin(login);
-        currentTicket = new Ticket(currentUser);
+        currentTicket = new Ticket(currentUser.getEmail());
 
         return true;
     }
@@ -152,20 +149,20 @@ public class BestBuy implements IStore {
 
     @Override
     public String buy() throws TicketIsEmptyException, NoCurrentUserException, IOException {
-        if (currentTicket.getProducts().isEmpty()) {
+        if (base.getProducts(currentTicket.getProductsID()).isEmpty()) {
             throw new TicketIsEmptyException("No product in ticket!");
         }
         if (currentUser == null) {
             throw new NoCurrentUserException("Login first!");
         }
-        Ticket ticket = new Ticket(base.getMaxTicketID() + 1, currentTicket.getProducts(), currentUser);
-        base.addTicket(ticket);
+
+        currentTicket.setId(base.getMaxTicketID() + 1);
+        base.addTicket(currentTicket);
         base.saveDatabase();
 
-
         MailSender mailSender = MailSender.getInstance();
-        mailSender.sendMail(ticket);
-        return ticket.toString();
+        mailSender.sendMail(currentTicket);
+        return currentTicket.toString(); // сделать нормальную стрингу
     }
 
     @Override

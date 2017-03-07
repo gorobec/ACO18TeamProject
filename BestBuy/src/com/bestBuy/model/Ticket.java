@@ -1,9 +1,6 @@
 package com.bestBuy.model;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by fmandryka on 19.02.2017.
@@ -11,38 +8,37 @@ import java.util.Map;
 public class Ticket {
 
     private int id;
-    private Map<Integer, Product> products = new HashMap<>();
-    private User user;
+    private List<Integer> productsID;
+    private String email;
 
     public Ticket() {
+        productsID = new ArrayList<>();
     }
 
-    public Ticket(User user) {
-        this.user = user;
+    public Ticket(String email) {
+        this.email = email;
+        productsID = new ArrayList<>();
     }
 
-    public Ticket(User user, int id) {
+    public Ticket(String email, int id) {
         this.id = id;
-        this.user = user;
+        this.email = email;
+        productsID = new ArrayList<>();
     }
 
-    public Ticket(int id, Map<Integer, Product> products, User user) {
+    public Ticket(int id, List<Integer> products, String email) {
         this.id = id;
-        this.products = products;
-        this.user = user;
+        this.productsID = products;
+        this.email = email;
     }
 
-    public Product addProduct(Product product) {
-        return products.put(getMaxProductID() + 1, product);
+    public boolean addProduct(int productID) {
+        return productsID.add(productID);
     }
 
 
-    public Map<Integer, Product> getProducts() {
-        return products;
-    }
-
-    public int getMaxProductID() {
-        return (int) products.values().stream().count();
+    public List<Integer> getProductsID() {
+        return productsID;
     }
 
     public void setId(int id) {
@@ -53,8 +49,8 @@ public class Ticket {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserEmail() {
+        return email;
     }
 
 
@@ -62,8 +58,8 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", products=" + products +
-                ", user=" + user +
+                ", products=" + productsID +
+                ", user=" + email +
                 '}';
     }
 
@@ -75,16 +71,16 @@ public class Ticket {
         Ticket ticket = (Ticket) object;
 
         if (id != ticket.id) return false;
-        if (products != null ? !products.equals(ticket.products) : ticket.products != null) return false;
-        return user.equals(ticket.user);
+        if (productsID != null ? !productsID.equals(ticket.productsID) : ticket.productsID != null) return false;
+        return email.equals(ticket.email);
 
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (products != null ? products.hashCode() : 0);
-        result = 31 * result + user.hashCode();
+        result = 31 * result + (productsID != null ? productsID.hashCode() : 0);
+        result = 31 * result + email.hashCode();
         return result;
     }
 

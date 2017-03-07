@@ -36,7 +36,7 @@ public interface IStore {
 
     boolean addProduct(Product product);
 
-    Product addProductToCurrentTicket (int productId) throws NoSuchProductException, NoCurrentUserException;
+    boolean addProductToCurrentTicket (int productId) throws NoSuchProductException, NoCurrentUserException;
 
     Ticket getCurrentTicket();
 

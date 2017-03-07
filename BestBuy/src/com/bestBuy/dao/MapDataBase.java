@@ -9,8 +9,10 @@ import com.bestBuy.model.User;
 import com.bestBuy.to.FileHelper;
 import com.bestBuy.to.Serializer;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -147,5 +149,17 @@ public class MapDataBase implements IDataBase {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean containsProductId(int productId) {
+        return products.containsKey(productId);
+    }
+
+    @Override
+    public List<Product> getProducts(List<Integer> productsID) {
+        return productsID.stream()
+                .map(product -> products.get(product))
+                .collect(Collectors.toList());
     }
 }
