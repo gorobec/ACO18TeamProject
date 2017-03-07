@@ -94,6 +94,6 @@ public class HttpServerUtils {
 
     private static Coordinates getCoordinates(HtmlUtils.ProductModel productModel) {
         String[] location = productModel.location.split(",");
-        return new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[0]));
+        return new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[1]));
     }
 }
