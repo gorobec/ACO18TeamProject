@@ -1,1 +1,50 @@
-{"user@gmail.com":{"email":"user@gmail.com","password":"123456","creditCard":"4444 4444 4444 4444","address":"Kiev, Artema str.,40"},"shv.an.vol@gmail.com":{"email":"shv.an.vol@gmail.com","password":"111111","creditCard":"5551294680473262","address":"Ð¡Ð°ÐºÑÐ°Ð³Ð°Ð½ÑÑÐºÐ¾Ð³Ð¾ 54/56"},"korona114@rambler.ru":{"email":"korona114@rambler.ru","password":"222222","creditCard":"5551294680473262","address":"Ð¡Ð°ÐºÑÐ°Ð³Ð°Ð½ÑÑÐºÐ¾Ð³Ð¾ 54/56"},"new@gmail.com":{"email":"new@gmail.com","password":"123456","creditCard":"4929414401217016","address":"adress"},"new1@gmail.com":{"email":"new1@gmail.com","password":"123456","creditCard":"4929414401217016","address":"dsvfd"},"bnew@gmail.com":{"email":"bnew@gmail.com","password":"123456","creditCard":"4532342956365485","address":"edgfv"},"fer@gmail.com":{"email":"fer@gmail.com","password":"123456","creditCard":"4532342956365485","address":"fdv"},"fvddr@gmail.com":{"email":"fvddr@gmail.com","password":"123456","creditCard":"4532342956365485","address":"dgvf"}}
+{
+  "user@gmail.com": {
+    "email": "user@gmail.com",
+    "password": "123456",
+    "creditCard": "4444 4444 4444 4444",
+    "address": "Kiev, Artema str.,40"
+  },
+  "shv.an.vol@gmail.com": {
+    "email": "shv.an.vol@gmail.com",
+    "password": "111111",
+    "creditCard": "5551294680473262",
+    "address": "Ð¡Ð°ÐºÑÐ°Ð³Ð°Ð½ÑÑÐºÐ¾Ð³Ð¾ 54/56"
+  },
+  "korona114@rambler.ru": {
+    "email": "korona114@rambler.ru",
+    "password": "222222",
+    "creditCard": "5551294680473262",
+    "address": "Ð¡Ð°ÐºÑÐ°Ð³Ð°Ð½ÑÑÐºÐ¾Ð³Ð¾ 54/56"
+  },
+  "new@gmail.com": {
+    "email": "new@gmail.com",
+    "password": "123456",
+    "creditCard": "4929414401217016",
+    "address": "adress"
+  },
+  "new1@gmail.com": {
+    "email": "new1@gmail.com",
+    "password": "123456",
+    "creditCard": "4929414401217016",
+    "address": "dsvfd"
+  },
+  "bnew@gmail.com": {
+    "email": "bnew@gmail.com",
+    "password": "123456",
+    "creditCard": "4532342956365485",
+    "address": "edgfv"
+  },
+  "fer@gmail.com": {
+    "email": "fer@gmail.com",
+    "password": "123456",
+    "creditCard": "4532342956365485",
+    "address": "fdv"
+  },
+  "fvddr@gmail.com": {
+    "email": "fvddr@gmail.com",
+    "password": "123456",
+    "creditCard": "4532342956365485",
+    "address": "dgvf"
+  }
+}
