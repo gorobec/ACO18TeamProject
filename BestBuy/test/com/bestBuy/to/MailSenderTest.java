@@ -21,7 +21,7 @@ public class MailSenderTest {
     @Test
     public void sendMailTest(){
         User user = new User("ksyashka19@gmail.com", "123456", "4444", "Kiev");
-        Ticket ticket = new Ticket(user,5);
+        Ticket ticket = new Ticket(user.getEmail(),5);
         assertTrue(mailSender.sendMail(ticket));
     }
 
