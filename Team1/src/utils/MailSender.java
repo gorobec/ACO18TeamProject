@@ -30,6 +30,9 @@ public class MailSender {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.mail.ru");
         props.put("smtp.mail.ru", "465");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.fallback", "false");
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
