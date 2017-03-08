@@ -12,6 +12,7 @@ public class Ticket {
     private int id;
     private List<Integer> productsID;
     private String email;
+    private Calendar dateTimeOfCommit;
 
     public Ticket() {
         productsID = new ArrayList<>();
@@ -28,10 +29,9 @@ public class Ticket {
         productsID = new ArrayList<>();
     }
 
-    public boolean addProduct(int productID) {
+    public boolean addProductID(int productID) {
         return productsID.add(productID);
     }
-
 
     public List<Integer> getProductsID() {
         return productsID;
@@ -49,6 +49,13 @@ public class Ticket {
         return email;
     }
 
+    public Calendar getDateTimeOfCommit() {
+        return dateTimeOfCommit;
+    }
+
+    public void setDateTimeOfCommit(Calendar dateTimeOfCommit) {
+        this.dateTimeOfCommit = dateTimeOfCommit;
+    }
 
     @Override
     public String toString() {

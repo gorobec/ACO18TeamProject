@@ -2,6 +2,8 @@ package com.bestBuy.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Администратор on 21.02.2017.
@@ -13,6 +15,8 @@ public class User {
     private String creditCard;
     private String address;
     private List<Integer> ticketsId;
+    private Ticket currentTicket;
+
 
     public User(String email, String password, String creditCard, String address) {
         this.email = email;
@@ -67,6 +71,16 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+
+    public void setCurrentTicket(Ticket currentTicket) {
+        this.currentTicket = currentTicket;
+    }
+
+
+    public Ticket getCurrentTicket() {
+        return currentTicket;
     }
 
     @Override

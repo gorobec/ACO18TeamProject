@@ -4,9 +4,7 @@
     "password": "123456",
     "creditCard": "4444 4444 4444 4444",
     "address": "Kiev, Artema str.,40",
-    "ticketsId": [
-      2
-    ]
+    "ticketsId": []
   },
   "shv.an.vol@gmail.com": {
     "email": "shv.an.vol@gmail.com",
@@ -62,8 +60,6 @@
     "password": "123456",
     "creditCard": "4532342956365485",
     "address": "kiev",
-    "ticketsId": [
-      7
-    ]
+    "ticketsId": []
   }
 }

@@ -8,11 +8,11 @@ import com.bestBuy.model.User;
 import com.bestBuy.to.MailSender;
 import com.bestBuy.to.Validator;
 import com.bestBuy.utils.Base64Utils;
-import com.google.gson.internal.Streams;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -22,6 +22,8 @@ import java.util.stream.Stream;
 public class BestBuy implements IStore {
 
     private IDataBase base;
+
+    private Map<String,User> currentSessions;
 
     private User currentUser;
 
@@ -43,7 +45,7 @@ public class BestBuy implements IStore {
             throw new NoCurrentUserException("Login first!");
         }
         if (base.containsProductId(productId)) {
-            return currentTicket.addProduct(productId);
+            return currentTicket.addProductID(productId);
         }
         return false;
     }
