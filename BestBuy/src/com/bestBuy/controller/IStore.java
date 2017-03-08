@@ -42,4 +42,5 @@ public interface IStore {
 
     Product[] showAllProductsInTicket(Ticket ticket);
 
+    Product removeProductFromCurrentTicket(int productId) throws NoSuchProductException;
 }

@@ -64,6 +64,12 @@ public class BestBuy implements IStore {
         return showProductsWithSingleImage(base.getProducts(ticket.getProductsID()).stream());
     }
 
+    @Override
+    public Product removeProductFromCurrentTicket(int productId) throws NoSuchProductException{
+        if (!currentTicket.removeProduct(productId));
+        return base.getProductById(productId);
+    }
+
     private Product[] showProductsWithSingleImage(Stream<Product> products) {
         Product[] prodCopy = products
                 .map(product ->
@@ -140,11 +146,14 @@ public class BestBuy implements IStore {
 
         currentTicket.setId(base.getMaxTicketID() + 1);
         base.addTicket(currentTicket);
+        currentUser.addToHistoryTicket(currentTicket.getId());
         base.saveDatabase();
 
         MailSender mailSender = MailSender.getInstance();
         mailSender.sendMail(currentTicket);
-        return currentTicket.toString(); // сделать нормальную стрингу
+        String result = currentTicket.toString();// сделать нормальную стрингу
+        currentTicket = new Ticket(currentUser.getEmail());
+        return result;
     }
 
     @Override

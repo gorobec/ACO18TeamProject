@@ -41,7 +41,7 @@ public class Server {
         RegistrationContext.registration(server, service);
         AddProductToCartContext.addProductToCart(server, service);
         AllCurrentTicketProducts.getAllCurrentTicketProducts(server, service);
-
+        RemoveProductFromCartContext.removeProductFromCart(server, service);
         server.setExecutor(null); // creates a default executor
         server.start();
         System.out.println("Server started. Connect com.bestBuy. http://localhost:8000");

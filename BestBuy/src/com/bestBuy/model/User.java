@@ -1,5 +1,8 @@
 package com.bestBuy.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Администратор on 21.02.2017.
  */
@@ -9,17 +12,36 @@ public class User {
     private String password;
     private String creditCard;
     private String address;
+    private List<Integer> ticketsId;
 
     public User(String email, String password, String creditCard, String address) {
         this.email = email;
         this.password = password;
         this.creditCard = creditCard;
         this.address = address;
+        this.ticketsId = new ArrayList<>();
+    }
+
+    public User(String email, String password, String creditCard, String address, List<Integer> ticketsId) {
+        this.email = email;
+        this.password = password;
+        this.creditCard = creditCard;
+        this.address = address;
+        this.ticketsId = ticketsId;
+    }
+
+    public List<Integer> getTicketsId() {
+        return ticketsId;
+    }
+
+    public void addToHistoryTicket(Integer ticketId){
+        ticketsId.add(ticketId);
     }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.ticketsId = new ArrayList<>();
     }
 
     public void setCreditCard(String creditCard) {

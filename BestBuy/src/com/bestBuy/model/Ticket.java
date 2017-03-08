@@ -1,5 +1,7 @@
 package com.bestBuy.model;
 
+import com.bestBuy.exceptions.NoSuchProductException;
+
 import java.util.*;
 
 /**
@@ -78,4 +80,7 @@ public class Ticket {
         return result;
     }
 
+    public boolean removeProduct(Integer productId) {
+        return productsID.remove(productId);
+    }
 }

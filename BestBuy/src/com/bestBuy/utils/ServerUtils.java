@@ -19,7 +19,6 @@ import java.util.Map;
 public class ServerUtils {
     public static int getIdData(HttpExchange httpExchange) throws IOException {
         String input = readData(httpExchange);
-        System.out.println(input);
         Serializer ser = Serializer.getInstance();
         Map<String, Integer> map = ser.convertJsonIDToObject(input);
         return map.get("id");
