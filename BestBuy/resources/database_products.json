@@ -27,6 +27,7 @@
     "name": "Phone Apple iPhone 7 Plus",
     "id": 3,
     "price": 1000.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_Phone Apple iPhone 7 Plus.jpg",
       "BestBuy/resources/img/products/1_Phone Apple iPhone 7 Plus.jpg",
@@ -39,17 +40,19 @@
     "name": "HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0",
     "id": 4,
     "price": 100.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0.jpg",
       "BestBuy/resources/img/products/1_HDD Transcend StoreJet 25H3P 2TB TS2TSJ25H3B 2.5 USB 3.0.jpg"
     ],
     "isPopular": false,
-    "description" :
+    "description" : "Компания Transcend, мировой лидер среди производителей мультимедиа и накопителей, представила новый портативный жёсткий диск высокой ёмкости StoreJet 25H3, поддерживающий SuperSpeed USB 3.0. Модель имеет огромную ёмкость и поставляются в комплекте с новым улучшенным программным пакетом для работы с данными Transcend Elite, который позволяет современным пользователям удобно организовать хранение и поддерживать в актуальном состоянии их цифровой контент.\nНовый накопитель StoreJet 25H3 имеет надёжный ударопрочный корпус, которые обеспечивают высочайший уровень защиты от случайных падений для того огромного объёма информации, который позволяет хранить их повышенная вместимость. Помимо резинового противоскользящего покрытия, модель имеет усиленный жёсткий каркас, который равномерно распределяет силу удара, а также внутреннюю демпфирующую подвеску для жёсткого диска в качестве последней линии обороны. Оба новых накопителя прошли жёсткое тестирование на устойчивость к падениям по стандартам американской армии, что делает их одними из наиболее прочных портативных жёстких дисков среди представленных на современном рынке.\nПортативный жёсткий диск StoreJet 25H3 — мощное устройство для хранения данных сочетает превосходную производительность интерфейса USB 3.0, колоссальный объём и трёхступенчатую противоударную систему. Благодаря скорости передачи данных, которая достигает 90 МБ/с, накопитель StoreJet 25H3 является идеальным выбором для любителей скорости. Перенос целого фильма в формате DVD занимает меньше минуты! Благодаря обратной совместимости StoreJet 25H3 позволяет пользователям получать доступ к своим файлам практически на любом компьютере.\nStoreJet 25H3 оснащен необычайно удобной кнопкой для запуска автоматического резервного копирования, которая позволяет пользователям моментально синхронизировать свою информацию на внешнем диске и на компьютере."
   },
   "5": {
     "name": "SSD Samsung 850 Pro series 128GB 2.5\" SATAIII MLC",
     "id": 5,
     "price": 200.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_SSD Samsung 850 Pro series 128GB 2.5 SATAIII MLC.jpg",
       "BestBuy/resources/img/products/1_SSD Samsung 850 Pro series 128GB 2.5 SATAIII MLC.jpg"
@@ -61,6 +64,7 @@
     "name": "HDD Silicon Power Armor A15 2TB SP020TBPHDA15S3L 2.5 USB 3.0 Red",
     "id": 6,
     "price": 100.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_HDD Silicon Power Armor A15 2TB SP020TBPHDA15S3L 2.5 USB 3.0 Red.jpg"
     ],
@@ -71,6 +75,7 @@
     "name": "SSD Kingston SSDNow KC400 1TB 2.5 SATAIII MLC",
     "id": 7,
     "price": 200.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_Kingston SSDNow KC400 1TB 2.5 SATAIII MLC.jpg",
       "BestBuy/resources/img/products/1_Kingston SSDNow KC400 1TB 2.5 SATAIII MLC.jpg",
@@ -83,6 +88,7 @@
     "name": "USB-hub Maiwo USB 3.0 4 ports Silver",
     "id": 9,
     "price": 20.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_USB-hub Maiwo USB 3.0 4 ports Silver.jpg",
       "BestBuy/resources/img/products/1_USB-hub Maiwo USB 3.0 4 ports Silver.jpg"
@@ -94,6 +100,7 @@
     "name": "Lenovo ThinkPad E560",
     "id": 10,
     "price": 1000.0,
+    "imageUrl": [],
     "imageSrc": [
       "BestBuy/resources/img/products/0_Lenovo ThinkPad E560.png",
       "BestBuy/resources/img/products/1_Lenovo ThinkPad E560.jpg",
