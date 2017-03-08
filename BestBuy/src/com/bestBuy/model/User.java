@@ -1,5 +1,8 @@
 package com.bestBuy.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,19 +14,38 @@ public class User {
     private String password;
     private String creditCard;
     private String address;
-    private List<Integer> ticketHystory;
+    private List<Integer> ticketsId;
     private Ticket currentTicket;
+
 
     public User(String email, String password, String creditCard, String address) {
         this.email = email;
         this.password = password;
         this.creditCard = creditCard;
         this.address = address;
+        this.ticketsId = new ArrayList<>();
+    }
+
+    public User(String email, String password, String creditCard, String address, List<Integer> ticketsId) {
+        this.email = email;
+        this.password = password;
+        this.creditCard = creditCard;
+        this.address = address;
+        this.ticketsId = ticketsId;
+    }
+
+    public List<Integer> getTicketsId() {
+        return ticketsId;
+    }
+
+    public void addToHistoryTicket(Integer ticketId){
+        ticketsId.add(ticketId);
     }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.ticketsId = new ArrayList<>();
     }
 
     public void setCreditCard(String creditCard) {
@@ -51,17 +73,11 @@ public class User {
         return address;
     }
 
-    public void setTicketHystory(List<Integer> ticketHystory) {
-        this.ticketHystory = ticketHystory;
-    }
 
     public void setCurrentTicket(Ticket currentTicket) {
         this.currentTicket = currentTicket;
     }
 
-    public List<Integer> getTicketHystory() {
-        return ticketHystory;
-    }
 
     public Ticket getCurrentTicket() {
         return currentTicket;

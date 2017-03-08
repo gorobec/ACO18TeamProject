@@ -1,1 +1,0 @@
-{"0":{"id":1,"products":{"1":{"name":"Iron","id":0,"price":300.0,"isPopular":false},"2":{"name":"Fish","id":0,"price":400.0,"isPopular":false}},"user":{"email":"email","password":"123","creditCard":"4444444444444444","address":"Kiev"}}}

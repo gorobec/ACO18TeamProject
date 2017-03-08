@@ -15,19 +15,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script id="basketTmpl" type="text/x-jquery-tmpl">
 	<ul class="cart-header">
-					<div class="close1"> </div>
 						<li class="ring-in"><a href="single.html?id=${id}" ><img src="${imageUrl}" class="img-responsive" alt=""></a>
 						</li>
 						<li><span class="name">${name}</span></li>
 						<li><span class="cost">$ ${price}</span></li>
+						<button  onClick='remove(${id});' class="close">REMOVE FROM CART</button> 
 					<div class="clearfix"> </div>
 	</ul>
-	</script>
+	</script>		
 	<script>
 				$(document).ready(function() {
 				var dataItems = [];
-				$(window).load(function() {
-					$.ajax({
+					$(window).load(function() {
+						$.ajax({
 						type: "POST",
 						url: "http://localhost:8000/allCurrentTicketProducts",
 						data: JSON.stringify({id : location.search.split("id=")[1]}),
@@ -39,7 +39,33 @@
 						}
 					});
 				});
+						$("#BUY").click(function() {
+					$.ajax({
+						type: "POST",
+						url: "http://localhost:8000/buy",
+						success: function(result) {
+						console.log(result);
+						$("#resultbuy").html(result);
+						console.log(result);
+						//location.reload(); 
+						}
+					 });
 				});
+				});
+				
+				var remove = function(idProduct) {
+						$.ajax({
+						type: "POST",
+						url: "http://localhost:8000/removeProductFromCart",
+						data: JSON.stringify({id : idProduct}),
+						complete: function(result){
+							console.log(result);
+							location.reload(); 
+						}
+					 });
+					 }
+				
+		
 	
 	</script>
 </head>
@@ -116,32 +142,7 @@
 			</div>
 			<div class="ckeckout-top">
 			<div class="cart-items">
-			 <h3>My Shopping Bag (3)</h3>
-				<script>$(document).ready(function(c) {
-					$('.close1').on('click', function(c){
-						$('.cart-header').fadeOut('slow', function(c){
-							$('.cart-header').remove();
-						});
-						});	  
-					});
-			   </script>
-			<script>$(document).ready(function(c) {
-					$('.close2').on('click', function(c){
-						$('.cart-header1').fadeOut('slow', function(c){
-							$('.cart-header1').remove();
-						});
-						});	  
-					});
-			   </script>
-			   <script>$(document).ready(function(c) {
-					$('.close3').on('click', function(c){
-						$('.cart-header2').fadeOut('slow', function(c){
-							$('.cart-header2').remove();
-						});
-						});	  
-					});
-			   </script>
-				
+			 <h3>My Shopping Bag</h3>	
 			<div class="in-check" >
 				<ul class="unit">
 					<li><span>Item</span></li>
@@ -157,15 +158,18 @@
 				<div id="product-one">
 					<div class="clearfix"></div>
 				</div>
+				<center><a href="#" id="BUY" class="add-cart item_add">BUY</a>
+				<div id="resultbuy"></div>
+				</center>
 			</div>
 	</div>
-	<!--product-end-->
 			</div>
 			</div>  
 		 </div>
 		</div>
+	
 	</div>
-	<!--end-ckeckout-->
+	</div>
 	<!--information-starts-->
 	<div class="information">
 		<div class="container">
@@ -200,11 +204,11 @@
 				</div>
 				<div class="col-md-3 infor-left">
 					<h3>Store Information</h3>
-					<h4>The company name,
-						<span>Lorem ipsum dolor,</span>
-						Glasglow Dr 40 Fe 72.</h4>
-					<h5>+955 123 4567</h5>	
-					<p><a href="mailto:example@email.com">contact@example.com</a></p>
+					<h4>BEST BUY,
+						<span>Kiev,</span>
+						Starokievskaya st. 10</h4>
+					<h5>Tel:0501111111,</h5>	
+					<p><a href="mailto:BestBuyACO18@gmail.com">BestBuyACO18@gmail.com</a></p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -222,7 +226,7 @@
 					</form>
 				</div>
 				<div class="col-md-6 footer-right">					
-					<p>© 2015 Luxury Watches. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+					<p>© 2017 BestBuy. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
