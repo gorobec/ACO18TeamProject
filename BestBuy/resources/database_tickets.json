@@ -1,7 +1,16 @@
 {
   "0": {
     "id": 1,
-    "productsID": [1],
+    "productsID": [
+      1
+    ],
     "email": "email"
+  },
+  "2": {
+    "id": 2,
+    "productsID": [
+      3
+    ],
+    "email": "ksyashka19@gmail.com"
   }
 }

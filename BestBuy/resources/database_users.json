@@ -60,6 +60,8 @@
     "password": "123456",
     "creditCard": "4532342956365485",
     "address": "kiev",
-    "ticketsId": []
+    "ticketsId": [
+      2
+    ]
   }
 }

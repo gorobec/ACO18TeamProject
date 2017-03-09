@@ -25,14 +25,7 @@ public class ServerUtils {
     }
 
     public static User getUserData(HttpExchange httpExchange) throws IOException {
-        InputStream is = httpExchange.getRequestBody();
-        StringBuilder sb = new StringBuilder();
-
-        String input = "";
-        int read = -1;
-        while ((read = is.read()) != -1) {
-            input += (char) read;
-        }
+        String input = readData(httpExchange);
         input = input.replace("[", "{").replace("]", "}").replace("\\", "");
         Serializer ser = Serializer.getInstance();
         User user = ser.convertJsonToSingleUser(input);
