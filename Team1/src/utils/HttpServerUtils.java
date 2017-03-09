@@ -3,7 +3,7 @@ package utils;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import controller.IService;
-import html_server.building_blocks.HtmlUtils;
+import html_server.building_blocks.AddProductContextCreator;
 import model.Coordinates;
 import model.Product;
 import sun.misc.BASE64Decoder;
@@ -66,12 +66,12 @@ public class HttpServerUtils {
         return new Gson().fromJson(sb.toString(), type);
     }
 
-    public static Product getProduct(IService iService, HtmlUtils.ProductModel productModel) {
+    public static Product getProduct(IService iService, AddProductContextCreator.ProductModel productModel) {
         Coordinates coordinates = getCoordinates(productModel);
         return new Product(iService.getProducts().size() + 1, productModel.name, coordinates, null);
     }
 
-    public static String[] getPathsForProduct(HtmlUtils.ProductModel productModel, Product product) throws IOException {
+    public static String[] getPathsForProduct(AddProductContextCreator.ProductModel productModel, Product product) throws IOException {
         String directory = makeDirectory(product);
 
         String[] images = productModel.image.split(",");
@@ -92,7 +92,7 @@ public class HttpServerUtils {
         return path;
     }
 
-    private static Coordinates getCoordinates(HtmlUtils.ProductModel productModel) {
+    private static Coordinates getCoordinates(AddProductContextCreator.ProductModel productModel) {
         String[] location = productModel.location.split(",");
         return new Coordinates(Double.parseDouble(location[0]), Double.parseDouble(location[1]));
     }

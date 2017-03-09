@@ -1,18 +1,12 @@
 package html_server;
 
 import com.sun.net.httpserver.HttpServer;
-import container.ProductDB;
-import container.TicketDB;
-import container.UserDB;
 import controller.IService;
-import controller.ServiceImpl;
 import html_server.building_blocks.*;
-import view.View;
 import view.ViewUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.concurrent.Executor;
 
 /**
  * Created by v21k on 25.02.17.
@@ -32,7 +26,9 @@ public class OurHttpServer {
         RegisterContextCreator.createRegisterContext(httpServer, iService);
         GoogleMapsContextCreator.googleMapsContextCreator(httpServer, iService);
         GetTicketsContextCreator.createGetTicketsContext(httpServer, iService);
-        HtmlUtils.getHtmlDirectCreator(httpServer, iService);
+        AddProductContextCreator.createAddProductContext(httpServer, iService);
+        LogoutContextCreator.createLogoutContext(httpServer, iService);
+
         //HtmlUtils.test(httpServer);
         httpServer.start();
 

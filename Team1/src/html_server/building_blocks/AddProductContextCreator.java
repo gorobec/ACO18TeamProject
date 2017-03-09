@@ -13,8 +13,8 @@ import java.util.Arrays;
 /**
  * Created by serhii on 04.03.17.
  */
-public class HtmlUtils {
-    public static void getHtmlDirectCreator(HttpServer httpServer, IService iService) {
+public class AddProductContextCreator {
+    public static void createAddProductContext(HttpServer httpServer, IService iService) {
         httpServer.createContext("/html", httpExchange -> {
             httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
             String response = "Done!";
