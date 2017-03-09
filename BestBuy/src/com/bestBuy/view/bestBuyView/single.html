@@ -44,11 +44,6 @@
 			var imgNames;
 			var current = 0;
 			var size;
-			var loadimg = function() {
-			$.each(imgNames, function(i, val) {       
-			$("#imgs").append("<img data-imagezoom='true' class='img-responsive' src='" + val + "'>");
-			});
-			}
 			function frw(){
 			if (current < size-1) {
 			current++;
