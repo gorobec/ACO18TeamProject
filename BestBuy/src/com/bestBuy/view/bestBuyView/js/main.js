@@ -12,4 +12,15 @@ $(document).ready(function() {
 					 });
 				});
 });
+var addToCart = function(idProduct){
+						$.ajax({
+						type: "POST",
+						url: "http://localhost:8000/addProductToCart",
+						data: JSON.stringify({id : idProduct}),
+						success: function(result) {
+						console.log(result);
+						$("#resultAddToCart").html(result);
+						}
+					 });
+}
 

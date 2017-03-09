@@ -76,19 +76,7 @@
 						} 					
 					});
 				});
-			
-				$("#ADDTOCART").click(function() {
-					$.ajax({
-						type: "POST",
-						url: "http://localhost:8000/addProductToCart",
-						data: JSON.stringify({id : location.search.split("id=")[1]}),
-						success: function(result) {
-						console.log(result);
-						$("#resultAddToCart").html(result);
-						}
-					 });
 				});
-			});
 		</script>
 	</head>
 <body> 
@@ -152,7 +140,7 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-		</div><div align="center"><a href="#"  id="ADDTOCART" class="add-cart item_add">ADD TO CART</a>
+		</div><div align="center"><a href="#" onClick='addToCart(location.search.split("id=")[1])' class="add-cart item_add">ADD TO CART</a>
 		<div id="resultAddToCart"></div></div>
 	</div>
 	<!--product-end-->
