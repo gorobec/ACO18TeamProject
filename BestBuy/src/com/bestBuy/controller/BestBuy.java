@@ -71,6 +71,10 @@ public class BestBuy implements IStore {
         if (!currentTicket.removeProduct(productId));
         return base.getProductById(productId);
     }
+    @Override
+    public void clearTicketProducts(){
+        currentTicket.getProductsID().clear();
+    }
 
     private Product[] showProductsWithSingleImage(Stream<Product> products) {
         Product[] prodCopy = products
