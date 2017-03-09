@@ -13,9 +13,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script id="singleTmpl" type="text/x-jquery-tmpl">
-			<div class="col-md-5 single-top-left">
-				<div class="thumb-image"> <img src="${imageUrl}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-			</div>
+					<div class="col-md-5 single-top-left">
+					<img id="productImg" img data-imagezoom='true' class='img-responsive'>
+					<div align="center"><span  onClick="bck()">◄◄</span>
+					<span  onClick="frw()">►►</span></div>  
+					</div>	
 			<div class="col-md-7 single-top-right">
 				<div class="single-para simpleCart_shelfItem">
 				<h2>${name}</h2>
@@ -31,14 +33,36 @@
 					</div>
 
 					<h5 class="item_price">$ ${price}</h5>
-					<p>Description</p>
+					<p>${description}</p>
 				</div>
 			</div>
 			<div class="clearfix"> </div>
 		</script>
 		<script>
+			var dataItems = [];
+			var product;
+			var imgNames;
+			var current = 0;
+			var size;
+			var loadimg = function() {
+			$.each(imgNames, function(i, val) {       
+			$("#imgs").append("<img data-imagezoom='true' class='img-responsive' src='" + val + "'>");
+			});
+			}
+			function frw(){
+			if (current < size-1) {
+			current++;
+			$('#productImg').attr("src",imgNames[current]);
+			}
+			}
+			function bck(){
+			if (current > 0) {
+			current--;
+			$('#productImg').attr("src",imgNames[current]);
+			}
+			}
 			$(document).ready(function() {
-				var dataItems = [];
+				
 				$(window).load(function() {
 					$.ajax({
 						type: "POST",
@@ -49,9 +73,15 @@
 						},
 						complete: function(result){
 							$('#singleTmpl').tmpl(JSON.parse(dataItems)).appendTo('#product-one');
-						}
+						product = JSON.parse(dataItems);
+						imgNames = product.imageUrl;
+						size = imgNames.length;
+						$('#productImg').attr("src",imgNames[0]);
+						console.log(product);
+						} 					
 					});
 				});
+			
 				$("#ADDTOCART").click(function() {
 					$.ajax({
 						type: "POST",
@@ -127,8 +157,8 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-		</div><a href="#" id="ADDTOCART" class="add-cart item_add">ADD TO CART</a>
-		<div id="resultAddToCart"></div>
+		</div><div align="center"><a href="#"  id="ADDTOCART" class="add-cart item_add">ADD TO CART</a>
+		<div id="resultAddToCart"></div></div>
 	</div>
 	<!--product-end-->
 	<!--footer-starts-->
