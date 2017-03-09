@@ -39,6 +39,16 @@ public class HttpServerUtils {
         return new Gson().fromJson(request.toString(), model);
     }
 
+    public static ByteArrayOutputStream getByteArrayOutputStream(HttpExchange httpExchange) throws IOException {
+        InputStream is = httpExchange.getRequestBody();
+        int read;
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        while((read = is.read()) != -1){
+            os.write(read);
+        }
+        return os;
+    }
+
     public static String saveImage(BufferedImage image, String path) throws IOException {
         File outputfile = new File(path);
         ImageIO.write(image, "png", outputfile);
@@ -64,6 +74,25 @@ public class HttpServerUtils {
             sb.append((char) temp);
         }
         return new Gson().fromJson(sb.toString(), type);
+    }
+
+    public static String readFile(String path){
+        StringBuilder sb = new StringBuilder();
+
+        try(FileInputStream is = new FileInputStream(path)){
+
+            int read = -1;
+
+            while ((read = is.read()) != -1){
+                sb.append((char)read);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+        return sb.toString();
     }
 
     public static Product getProduct(IService iService, AddProductContextCreator.ProductModel productModel) {

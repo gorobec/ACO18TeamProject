@@ -1,8 +1,6 @@
-
 $(document).ready(function(){
     $('.modal').modal();
 
-    getProducts();
 
     document.getElementById('userImage').onmouseover = function() {
       $('#changeUserPicForm').show();
@@ -210,18 +208,20 @@ function toUserBox(){
     type: 'GET',
     url: "http://localhost:8000/tickets",
     success: function (result) {
-        if (result !== "") {
+        if (result !== "FAILED") {
             var ticketsArr = JSON.parse(result);
 
-            for(var key in result){
+            $('#ticketList').html('');
+            
+            for(var key in ticketsArr){
               $('#ticketList').html($('#ticketList').html() +
-                '<p>Id: ' + result[key].id + '</p>' +
-                '<p>Id: ' + result[key].product + '</p>' +
-                '<hr>'
+                '<hr>' +
+                '<h5>Id: ' + ticketsArr[key].id + '</h5>' +
+                '<h5>Id: ' + ticketsArr[key].product + '</h5>'
               );
             }
         } else {
-          $('#ticketList').html('<p>No tickets yet</p>'); 
+          $('#ticketList').html('<p>No tickets yet</p>');
         }
     }
   });
@@ -234,3 +234,5 @@ function toMain(){
     $('#productList').show();
     $('#input_box').hide();
 }
+
+getProducts();
