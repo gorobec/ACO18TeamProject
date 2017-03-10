@@ -22,7 +22,7 @@ public class MailSenderTest {
     public void sendMailTest(){
         User user = new User("ksyashka19@gmail.com", "123456", "4444", "Kiev");
         Ticket ticket = new Ticket(user.getEmail(),5);
-        assertTrue(mailSender.sendMail(ticket));
+        assertTrue(mailSender.sendMail(ticket,"hello"));
     }
 
 }

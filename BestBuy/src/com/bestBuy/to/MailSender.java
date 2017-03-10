@@ -33,7 +33,7 @@ public class MailSender {
     }
 
 
-    public boolean sendMail(Ticket ticket) {
+    public boolean sendMail(Ticket ticket, String text) {
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -57,7 +57,7 @@ public class MailSender {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(ticket.getUserEmail()));
             message.setSubject("New Order №" + ticket.getId());
-            message.setText("Dear buyer,\nyour order has been sent, please wait.\nThank you\n" + ticket.toString());
+            message.setText(text);
 
             Transport.send(message);
 

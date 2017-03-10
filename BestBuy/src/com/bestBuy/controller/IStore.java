@@ -45,4 +45,6 @@ public interface IStore {
     Product removeProductFromCurrentTicket(int productId) throws NoSuchProductException;
 
     void clearTicketProducts();
+
+    String textForBuyer() throws NoSuchProductException;
 }

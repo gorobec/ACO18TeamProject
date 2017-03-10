@@ -1,16 +1,1 @@
-{
-  "0": {
-    "id": 1,
-    "productsID": [
-      1
-    ],
-    "email": "email"
-  },
-  "2": {
-    "id": 2,
-    "productsID": [
-      3
-    ],
-    "email": "ksyashka19@gmail.com"
-  }
-}
+{"0":{"id":1,"productsID":[1],"email":"email"},"2":{"id":2,"productsID":[3],"email":"ksyashka19@gmail.com"},"3":{"id":3,"productsID":[1,3,4],"email":"ksyashka19@gmail.com"}}

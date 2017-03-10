@@ -34,10 +34,7 @@ public class BestBuy implements IStore {
         this.currentTicket = null;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-        this.currentTicket = new Ticket(currentUser.getEmail());
-    }
+
 
     @Override
     public boolean addProductToCurrentTicket(int productId) throws NoSuchProductException,NoCurrentUserException {
@@ -156,7 +153,11 @@ public class BestBuy implements IStore {
         base.saveDatabase();
 
         MailSender mailSender = MailSender.getInstance();
-        mailSender.sendMail(currentTicket);
+       try {
+           mailSender.sendMail(currentTicket, this.textForBuyer());
+       } catch (NoSuchProductException e){
+           e.printStackTrace();
+       }
         String result = currentTicket.toString();// сделать нормальную стрингу
         currentTicket = new Ticket(currentUser.getEmail());
         return result;
@@ -195,5 +196,18 @@ public class BestBuy implements IStore {
             return "product == null";
         }
 
+    }
+
+    public String textForBuyer() throws NoSuchProductException{
+        StringBuilder sb = new StringBuilder();
+        sb.append("Dear buyer,\nyour order has been sent, please wait.\nThank you\n");
+        for (int i:currentTicket.getProductsID()) {
+            sb.append(base.getProductById(i).toString()).append("\n");
+        }
+        return sb.toString();
+    }
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        this.currentTicket = new Ticket(currentUser.getEmail());
     }
 }
