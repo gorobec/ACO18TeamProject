@@ -27,41 +27,42 @@
     </nav>
 </header>
 
-<div></div>
+<div id="addProductContainer" hidden>
 
-<div class="row">
-    <form id="formId" action="#" >
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="prodName" type="text" class="validate">
-                <label class="active" for="prodName">Product name</label>
+    <div class="row">
+        <form id="formId" action="#">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="prodName" type="text" class="validate">
+                    <label class="active" for="prodName">Product name</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="mapLocation" type="text" class="validate">
-                <label class="active" for="mapLocation">Location (Right Click on the map)</label>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="mapLocation" type="text" class="validate">
+                    <label class="active" for="mapLocation">Location (Right Click on the map)</label>
+                </div>
             </div>
-        </div>
-        <div class="file-field input-field col s6">
-            <div class="btn">
-                <span>File</span>
-                <input id="file" type="file" name="fileInput" accept="image/*" multiple>
+            <div class="file-field input-field col s6">
+                <div class="btn">
+                    <span>File</span>
+                    <input id="file" type="file" name="fileInput" accept="image/*" multiple>
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
             </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="row col s12 center">
-    <div>
-        <button class="waves-effect waves-light btn" id="buttonId" type="button" name="button">Send</button>
+        </form>
     </div>
-</div>
 
-<div id="googleMap" style="width:100%;height:600px;"></div>
+    <div class="row col s12 center">
+        <div>
+            <button class="waves-effect waves-light btn" id="buttonId" type="button" name="button">Send</button>
+        </div>
+    </div>
+
+    <div id="googleMap" style="width:100%;height:600px;"></div>
+</div>
 
 <div id="modal1" class="modal">
     <div class="modal-content">

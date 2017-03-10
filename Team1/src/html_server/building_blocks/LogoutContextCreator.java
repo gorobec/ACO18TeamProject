@@ -16,7 +16,7 @@ public class LogoutContextCreator {
             String response = "DONE";
             try {
                 httpExchange.getResponseHeaders().put("Access-Control-Allow-Origin", Arrays.asList("*"));
-                System.out.println("HERE");
+                System.out.println("Logout for user " + iService.getUserByToken(OurHttpServer.token));
                 OurHttpServer.token = "";
             } catch (Throwable e) {
                 response = e.getMessage();

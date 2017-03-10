@@ -41,13 +41,13 @@ $(document).ready(function () {
 
     let lat, lng, myLatLng;
 
-    function mapPoperties() {
+    function mapPopertiesForAddProduct() {
         let mapProp = {
             center: new google.maps.LatLng(50.427994, 30.484166),
             zoom: 8,
         };
 
-        let map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        let map = new google.maps.Map(document.getElementById("googleMapAddProduct"), mapProp);
         myLatLng;
         //listener for click
         google.maps.event.addListener(map, "rightclick", function (event) {
@@ -62,5 +62,5 @@ $(document).ready(function () {
         });
     }
 
-    mapPoperties()
+    mapPopertiesForAddProduct();
 });

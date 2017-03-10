@@ -1,202 +1,213 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://localhost:8000/static/Main.css" media="screen" title="no title">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="http://localhost:8000/static/materialize.css" media="screen" title="no title">
     <title>First team</title>
-  </head>
-  <body>
-    <header>
-      <nav>
+</head>
+<body>
+<header>
+    <nav>
         <div class="container">
-          <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Hello</a>
-            <ul class="right" id="signBtns">
-              <li><a class="waves-effect waves-light btn" onclick="toLogin()">Login</a></li>
-              <li><a class="waves-effect waves-light btn" onclick="goToRegister()">Register</a></li>
-            </ul>
-            <h5 class="right" id="usernameTop" onclick="toUserBox()"></h5>
-          </div>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Hello</a>
+                <ul class="right" id="signBtns">
+                    <li><a class="waves-effect waves-light btn" onclick="toLogin()">Login</a></li>
+                    <li><a class="waves-effect waves-light btn" onclick="goToRegister()">Register</a></li>
+                </ul>
+                <ul class="left" id="userButtons" hidden>
+                    <li><a class="waves-effect waves-light btn" onclick="logout()">Logout</a></li>
+                    <li><a class="waves-effect waves-light btn">Add product</a></li>
+                </ul>
+                <h5 class="right" id="usernameTop" onclick="toUserBox()"></h5>
+            </div>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    <div class="container productList" id="productList">
-      <div class="row" id="row-box">
-      </div>
-
-      <div id="googleMap" style="width:100%;height:600px;"></div>
+<div class="container productList" id="productList">
+    <div class="row" id="row-box">
     </div>
 
-    <div class="container input_box" hidden id="input_box">
-      <div class="row">
+    <div id="googleMap" style="width:100%;height:600px;"></div>
+</div>
+
+<div class="container input_box" hidden id="input_box">
+    <div class="row">
 
         <div class="row">
-          <h5 class="center-align" id="productName"></h5>
+            <h5 class="center-align" id="productName"></h5>
         </div>
         <div class="row">
-          <div class="col l4 productImg" style="width:300px;height:300px;background-color:green;"></div>
-          <div class="col l6 offset-l2">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
+            <div class="col l4 productImg" style="width:300px;height:300px;background-color:green;"></div>
+            <div class="col l6 offset-l2">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
         </div>
 
         <div class="row">
-          <div id="googleMapForBuy" style="width:100%;height:600px;margin-top:20px;margin-bottom:30px;" class="col l6 center-align"></div>
+            <div id="googleMapForBuy" style="width:100%;height:600px;margin-top:20px;margin-bottom:30px;"
+                 class="col l6 center-align"></div>
         </div>
 
         <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12 m4">
-              <input placeholder="Kiev" value="Kiev" id="city" type="text" class="validate">
-              <label for="city">City</label>
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <input placeholder="Kiev" value="Kiev" id="city" type="text" class="validate">
+                    <label for="city">City</label>
+                </div>
+                <div class="input-field col s12 m3 offset-m1">
+                    <input placeholder="Kasiyana" value="Kasiyana" id="street" type="text" class="validate">
+                    <label for="street">Street</label>
+                </div>
+                <div class="input-field col s12 m3 offset-m1">
+                    <input placeholder="10" value="10" id="home" type="number" class="validate">
+                    <label for="home">Home</label>
+                </div>
             </div>
-            <div class="input-field col s12 m3 offset-m1">
-              <input placeholder="Kasiyana" value="Kasiyana" id="street" type="text" class="validate">
-              <label for="street">Street</label>
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <input placeholder="1111-1111-1111-1111" value="1111111111111111" id="cardNumber" type="number"
+                           class="validate">
+                    <label for="cardNumber">Card Number</label>
+                </div>
+                <div class="input-field col s12 m3 offset-m1">
+                    <input placeholder="101" value="101" id="cvv2" type="number" class="validate">
+                    <label for="cvv2">cvv2</label>
+                </div>
+                <div class="input-field col s12 m3 offset-m1">
+                    <input placeholder="2030-01" value="2030-01" id="cardDate" type="text" class="validate">
+                    <label for="cardDate">Date</label>
+                </div>
             </div>
-            <div class="input-field col s12 m3 offset-m1">
-              <input placeholder="10" value="10" id="home" type="number" class="validate">
-              <label for="home">Home</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 m4">
-              <input placeholder="1111-1111-1111-1111" value="1111111111111111" id="cardNumber" type="number" class="validate">
-              <label for="cardNumber">Card Number</label>
-            </div>
-            <div class="input-field col s12 m3 offset-m1">
-              <input placeholder="101" value="101" id="cvv2" type="number" class="validate">
-              <label for="cvv2">cvv2</label>
-            </div>
-            <div class="input-field col s12 m3 offset-m1">
-              <input placeholder="2030-01" value="2030-01" id="cardDate" type="text" class="validate">
-              <label for="cardDate">Date</label>
-            </div>
-          </div>
         </form>
-      </div>
-      <div id="buyBtnBox">
-      </div>
-
+    </div>
+    <div id="buyBtnBox">
     </div>
 
-    <!-- login - register  -->
-    <div class="container" id="loginContainer" hidden>
-        <!--inputs-->
-        <div id="inputs">
-            <div class="row">
-                <div class="input-field col l6 offset-l3">
-                    <input id="username" type="text" class="validate">
-                    <label class="active" for="username">User Name</label>
-                </div>
-            </div>
+</div>
 
-            <div class="row">
-                <div class="input-field col l6 offset-l3">
-                    <input id="password" type="password" class="validate">
-                    <label class="active" for="password">Password</label>
-                </div>
+<!-- login - register  -->
+<div class="container" id="loginContainer" hidden>
+    <!--inputs-->
+    <div id="inputs">
+        <div class="row">
+            <div class="input-field col l6 offset-l3">
+                <input id="username" type="text" class="validate">
+                <label class="active" for="username">User Name</label>
             </div>
         </div>
 
-        <div id="registerPart" hidden>
-            <div class="row">
-                <div class="input-field col l6 offset-l3">
-                    <input id="email" type="text" class="validate">
-                    <label class="active" for="email">email</label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="input-field col l6 offset-l3">
-                    <button class="waves-effect waves-light btn" id="submitRegister" onclick="register()">Register</button>
-                    <button class="waves-effect waves-light btn right" id="backToLogin" onclick="toLogin()">Back</button>
-                </div>
+        <div class="row">
+            <div class="input-field col l6 offset-l3">
+                <input id="password" type="password" class="validate">
+                <label class="active" for="password">Password</label>
             </div>
         </div>
-
-        <div id="buttons-login" style="display:block;">
-            <div class="row">
-                <div class="input-field col l6 offset-l3">
-                    <button class="waves-effect waves-light btn" id="submitLogin" onclick="login()">Submit</button>
-                    <button class="waves-effect waves-light btn right" id="toRegister" onclick="goToRegister()">Register</button>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <div id="registerPart" hidden>
+        <div class="row">
+            <div class="input-field col l6 offset-l3">
+                <input id="email" type="text" class="validate">
+                <label class="active" for="email">email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col l6 offset-l3">
+                <button class="waves-effect waves-light btn" id="submitRegister" onclick="register()">Register</button>
+                <button class="waves-effect waves-light btn right" id="backToLogin" onclick="toLogin()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="buttons-login" style="display:block;">
+        <div class="row">
+            <div class="input-field col l6 offset-l3">
+                <button class="waves-effect waves-light btn" id="submitLogin" onclick="login()">Submit</button>
+                <button class="waves-effect waves-light btn right" id="toRegister" onclick="goToRegister()">Register
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <!-- user box -->
 
-    <div class="container userBox" hidden id="userBox" onfocus="toChangeUserPic()">
-      <div class="row">
+<div class="container userBox" hidden id="userBox" onfocus="toChangeUserPic()">
+    <div class="row">
         <div class="col l3 userImage" id="userImage">
-          <form hidden id="changeUserPicForm" action="http://localhost:8000/changeUserPic">
-            <div class="file-field input-field center">
-              <div class="btn">
-                <span>File</span>
-                <input type="file">
-              </div>
-              <div hidden class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
-              <input class="waves-effect waves-light btn center" type="submit" name="name" value="Submit">
-            </div>
-          </form>
+            <form hidden id="changeUserPicForm" action="http://localhost:8000/changeUserPic">
+                <div class="file-field input-field center">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div hidden class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                    <input class="waves-effect waves-light btn center" type="submit" name="name" value="Submit">
+                </div>
+            </form>
         </div>
         <div class="col l4 offset-l4 fieldsBox">
-          <h5 id="userBoxName"></h5>
-          <h5 id="userBoxMail"></h5>
-          <h5>
-            Tickets:
-          </h5>
-          <div class="col l10 offset-l2" id="ticketList">
+            <h5 id="userBoxName"></h5>
+            <h5 id="userBoxMail"></h5>
+            <h5>
+                Tickets:
+            </h5>
+            <div class="col l10 offset-l2" id="ticketList">
 
-          </div>
-          <button class="waves-effect waves-light btn right" id="toMain" onclick="toMain()">Back</button>
+            </div>
+            <button class="waves-effect waves-light btn right" id="toMain" onclick="toMain()">Back</button>
         </div>
-      </div>
     </div>
+</div>
 
-    <footer class="page-footer" style="padding-top:0;margin-top: 100px;">
-      <div class="footer-copyright">
+<footer class="page-footer" style="padding-top:0;margin-top: 100px;">
+    <div class="footer-copyright">
         <div class="container">
-        2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-      </div>
-    </footer>
-
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <h4>Result:</h4>
-            <p id="modalText"></p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </div>
+</footer>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h4>Result:</h4>
+        <p id="modalText"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 
 
-    <div id="modal1" class="modal">
-      <div class="modal-content">
+<div id="modal1" class="modal">
+    <div class="modal-content">
         <h4>Thank you!</h4>
         <p id="modalText1"></p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-      </div>
     </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt3T4Fneih9ICsGCxFky6vzIVHHdj93rM&callback=myMap"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-    <script src="http://localhost:8000/static/Main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt3T4Fneih9ICsGCxFky6vzIVHHdj93rM&callback=myMap"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script src="http://localhost:8000/static/Main.js"></script>
 
-  </body>
+</body>
 </html>

@@ -133,6 +133,8 @@ function addMarkerToMap(map, product){
   infowindow.open(map, marker);
 }
 
+
+
 function goToRegister(){
   $('#loginContainer').show();
   $('#buttons-login').hide();
@@ -162,9 +164,10 @@ function login() {
               result = JSON.parse(result);
                 $('#modalText').html(result.name + ", welcome to our store!");
                 $('#signBtns').hide();
-                $('#usernameTop').html(result.name);
+                $('#usernameTop').html(result.name).show();
                 $('#modal2').modal('open');
                 $('#loginContainer').hide();
+                $('#userButtons').show();
                 $('#productList').show();
                 $('#userBoxName').html('Username: ' + result.name);
                 $('#userBoxMail').html('Email: ' + result.email);
@@ -194,6 +197,22 @@ function register() {
                 $('#modalText').html(result);
                 $('#modal2').modal('open');
             }
+        }
+    });
+}
+
+function logout() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8000/logout",
+        success: function () {
+            $('#modalText').html("Bye!");
+            $('#modal2').modal('open');
+            toMain();
+            $('#usernameTop').hide();
+            $('#signBtns').show();
+            $('#userButtons').hide();
+
         }
     });
 }
