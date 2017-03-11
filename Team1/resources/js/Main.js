@@ -35,7 +35,7 @@ function addProduct() {
         console.log(images);
         $.ajax({
             type: "POST",
-            url: "http://localhost:8000/html",
+            url: "/html",
             data: JSON.stringify({
                 name: $('#prodName').val(),
                 location: lat + ',' + lng,
@@ -56,7 +56,7 @@ var productList;
 function buy(id) {
     $('#input-box').show();
 
-    var reqStr = "http://localhost:8000/buy";
+    var reqStr = "/buy";
 
     $.ajax({
         type: "POST",
@@ -106,7 +106,7 @@ function toAddProduct(){
 
 function getProducts(){
   $.ajax({
-    url : "http://localhost:8000/map",
+    url : "/map",
     type : "GET",
 
         success: function (result) {
@@ -124,7 +124,7 @@ function getProducts(){
           var imageLink = arr.join("/");
 
           $('#row-box').html($('#row-box').html() + '<div class="col l4">' +
-          '<div class=" product-box" style="background-image: url(' + 'http://localhost:8000/static/' + imageLink + ');">' +
+          '<div class=" product-box" style="background-image: url(' + '/static/' + imageLink + ');">' +
           '<h5 class="product-name">' +
           productList[key].name +
           '</h5>' +
@@ -149,7 +149,7 @@ function buyWnd(index) {
   var imageLink = arr.join("/");
 
   $('#productImg').html(
-    '<div class="productImg" style="background-image: url(' + 'http://localhost:8000/static/' + imageLink + ');"></div>'
+    '<div class="productImg" style="background-image: url(' + '/static/' + imageLink + ');"></div>'
   );
 
   $('#buyBtnBox').html(
@@ -212,7 +212,7 @@ function toLogin(){
 function login() {
     $.ajax({
         type: 'POST',
-        url: "http://localhost:8000/login",
+        url: "/login",
         data: JSON.stringify({
             name: $('#username').val(),
             pass: $('#password').val()
@@ -241,7 +241,7 @@ function register() {
     console.log($('#username').val());
     $.ajax({
         type: 'POST',
-        url: "http://localhost:8000/register",
+        url: "/register",
         data: JSON.stringify({
             name: $('#username').val(),
             pass: $('#password').val(),
@@ -262,7 +262,7 @@ function register() {
 function logout() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8000/logout",
+        url: "/logout",
         success: function () {
             $('#modalText').html("Bye!");
             $('#modal2').modal('open');
@@ -283,7 +283,7 @@ function toUserBox() {
     $('#input_box').hide();
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8000/tickets",
+        url: "/tickets",
         success: function (result) {
             if (result !== "FAILED") {
                 var ticketsArr = JSON.parse(result);
