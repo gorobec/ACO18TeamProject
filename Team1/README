@@ -1,4 +1,4 @@
 Hello!
 
 To be able to use our store, please, run main() method in src/html_server/OutHttpServer.java
-Then open Main.html in /resources/html... and enjoy :)
+Then connect to localhost:8000
