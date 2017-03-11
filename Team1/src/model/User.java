@@ -10,6 +10,16 @@ public class User {
     private static int nextID = 0;
     private final String name;
     private final String email;
+    private String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImageName(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     private int id;
     private String pass;
     private List<Ticket> tickets;

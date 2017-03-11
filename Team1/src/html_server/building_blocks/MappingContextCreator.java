@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpServer;
 import utils.HttpServerUtils;
 
 import java.io.File;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 
@@ -33,22 +35,42 @@ public class MappingContextCreator {
                  * ?
                  * */
 
-                if(parseArr[2].indexOf(".") != parseArr[2].lastIndexOf(".") || parseArr[2].indexOf(".") == -1)
+                if(parseArr[parseArr.length - 1].indexOf(".") != parseArr[parseArr.length - 1].lastIndexOf(".") || !parseArr[parseArr.length - 1].contains("."))
                     throw new InvalidParameterException("File name");
 
                 String[] reqFileNameArr = new String[2];
 
-                reqFileNameArr[0] = parseArr[2].substring(0, parseArr[2].indexOf("."));
-                reqFileNameArr[1] = parseArr[2].substring(parseArr[2].indexOf(".") + 1, parseArr[2].length());
+                reqFileNameArr[0] = parseArr[parseArr.length - 1].substring(0, parseArr[parseArr.length - 1].indexOf("."));
+                reqFileNameArr[1] = parseArr[parseArr.length - 1].substring(parseArr[parseArr.length - 1].indexOf(".") + 1, parseArr[parseArr.length - 1].length());
 
                 //String[] reqFileNameArr = parseArr[2].split(".");
 
                 //if(reqFileNameArr.length != 2) throw new InvalidParameterException("File name");
 
-                File file = new File(getValidDir(reqFileNameArr[1]) + parseArr[2]);
+                String pathHolder = getValidDir(reqFileNameArr[1]);
+
+                for(int i = 2; i < parseArr.length - 1; i++) {
+                    pathHolder += parseArr[i] + "/";
+                }
+
+                pathHolder += parseArr[parseArr.length - 1];
+
+                File file = new File(pathHolder);
 
                 if(!file.exists()) throw new InvalidParameterException("File not exists");
 
+                //File file = new File("/root/images/test.gif");
+                if(pathHolder.contains("images")) {
+
+                    httpExchange.sendResponseHeaders(200, file.length());
+                    // TODO set the Content-Type header to image/gif
+
+                    OutputStream outputStream = httpExchange.getResponseBody();
+                    Files.copy(file.toPath(), outputStream);
+                    outputStream.close();
+
+                    return;
+                }
                 response = HttpServerUtils.readFile(file.getPath());
 
             } catch (Throwable e) {
@@ -67,7 +89,7 @@ public class MappingContextCreator {
                 fileType.equals("jpg") ||
                     fileType.equals("png") ||
                         fileType.equals("gif"))
-            return "Team1/resources/img/";
+            return "Team1/resources/";
 
         if(fileType.equals("ttf") ||
                 fileType.equals("woff") ||

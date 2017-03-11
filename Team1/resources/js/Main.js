@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('.modal').modal();
 
+    toMain();
 
     document.getElementById('userImage').onmouseover = function () {
         $('#changeUserPicForm').show();
@@ -98,10 +99,15 @@ function buy(id) {
     });
 }
 
-function getProducts() {
-    $.ajax({
-        url: "http://localhost:8000/map",
-        type: "GET",
+function toAddProduct(){
+  $('#productList').hide();
+  $('#addProduct').show();
+}
+
+function getProducts(){
+  $.ajax({
+    url : "http://localhost:8000/map",
+    type : "GET",
 
         success: function (result) {
             if (result !== "NULL" && result !== "") {
@@ -109,16 +115,22 @@ function getProducts() {
 
                 var map = myMap("googleMap", 8);
 
-                for (var key in productList) {
+        $('#row-box').html("");
 
-                    $('#row-box').html($('#row-box').html() + '<div class="col l4">' +
-                        '<div class=" product-box">' +
-                        '<h5 class="product-name">' +
-                        productList[key].name +
-                        '</h5>' +
-                        '<button class="btn waves-effect waves-light send_btn product-btn" type="submit" onclick="buyWnd(' + key + ')" name="action">Buy</button>' +
-                        '</div>' +
-                        '</div>');
+        for(var key in productList){
+
+          var arr = productList[key].imagePaths[0].split("/");
+          arr.splice(0, 2);
+          var imageLink = arr.join("/");
+
+          $('#row-box').html($('#row-box').html() + '<div class="col l4">' +
+          '<div class=" product-box" style="background-image: url(' + 'http://localhost:8000/static/' + imageLink + ');">' +
+          '<h5 class="product-name">' +
+          productList[key].name +
+          '</h5>' +
+          '<button class="btn waves-effect waves-light send_btn product-btn" type="submit" onclick="buyWnd(' + key + ')" name="action">Buy</button>' +
+          '</div>' +
+          '</div>');
 
                     addMarkerToMap(map, productList[key]);
                 }
@@ -132,11 +144,19 @@ function buyWnd(index) {
     $('#input_box').show();
     $('#productName').html(productList[index].name);
 
-    $('#buyBtnBox').html(
-        '<button class="btn waves-effect waves-light send_btn" type="submit" onclick="buy(' + productList[index].id + ')" name="action">Submit' +
-        '<i class="material-icons right">send</i>' +
-        '</button>'
-    );
+  var arr = productList[index].imagePaths[0].split("/");
+  arr.splice(0, 2);
+  var imageLink = arr.join("/");
+
+  $('#productImg').html(
+    '<div class="productImg" style="background-image: url(' + 'http://localhost:8000/static/' + imageLink + ');"></div>'
+  );
+
+  $('#buyBtnBox').html(
+    '<button class="btn waves-effect waves-light send_btn" type="submit" onclick="buy(' + productList[index].id + ')" name="action">Submit' +
+      '<i class="material-icons right">send</i>' +
+    '</button>'
+  );
 
     addMarkerToMap(myMap("googleMapForBuy", 12), productList[index]);
 }
@@ -171,21 +191,22 @@ function addMarkerToMap(map, product) {
     infowindow.open(map, marker);
 }
 
-
-function goToRegister() {
-    $('#loginContainer').show();
-    $('#buttons-login').hide();
-    $('#productList').hide();
-    $('#input_box').hide();
-    $('#registerPart').show();
+function goToRegister(){
+  $('#addProduct').hide();
+  $('#loginContainer').show();
+  $('#buttons-login').hide();
+  $('#productList').hide();
+  $('#input_box').hide();
+  $('#registerPart').show();
 }
 
-function toLogin() {
-    $('#loginContainer').show();
-    $('#buttons-login').show();
-    $('#registerPart').hide();
-    $('#productList').hide();
-    $('#input_box').hide();
+function toLogin(){
+  $('#addProduct').hide();
+  $('#loginContainer').show();
+  $('#buttons-login').show();
+  $('#registerPart').hide();
+  $('#productList').hide();
+  $('#input_box').hide();
 }
 
 function login() {
@@ -289,6 +310,7 @@ function toMain() {
     $('#registerPart').hide();
     $('#productList').show();
     $('#input_box').hide();
+    $('#addProduct').hide();
     $('#addProductContainer').hide();
 }
 
